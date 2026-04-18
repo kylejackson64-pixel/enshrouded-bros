@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enshrouded Bros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ember:#e8612a; --ember-bright:#ff8c42; --ember-dim:#9c3a12;
+  --gold:#d4a84b;  --gold-light:#f0c96a;
+  --ash:#c8b89a;   --fog:#8a9bb0;
+  --shroud:#2a3547; --deep:#141b26; --abyss:#0a0f18;
+  --surface:#1a2235; --panel:#1e2a3a;
+  --border:rgba(212,168,75,.2); --border-hot:rgba(232,97,42,.4);
+  --text:#d8cfc4;  --text-dim:#7a8fa8;
+  --water:#4a9fd4; --water-dim:#2a6a9a;
+  --green:#5cb85c; --red:#c0392b; --purple:#8e6dbf;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--abyss);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(232,97,42,.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(74,159,212,.06) 0%,transparent 50%),radial-gradient(ellipse 100% 80% at 50% 50%,rgba(20,27,38,.95) 0%,var(--abyss) 100%);pointer-events:none;z-index:0}
+body>*{position:relative;z-index:1}
+
+/* Loading */
+#loading{position:fixed;inset:0;background:var(--abyss);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1000;transition:opacity .8s,visibility .8s}
+#loading.gone{opacity:0;visibility:hidden}
+.loading-flame{font-size:4rem;animation:flamePulse 1s ease-in-out infinite alternate;margin-bottom:1.5rem}
+.loading-text{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.3em;color:var(--ash);animation:loadFade 1.4s ease-in-out infinite alternate}
+@keyframes flamePulse{from{transform:scale(.9) rotate(-3deg);filter:brightness(.8)}to{transform:scale(1.1) rotate(3deg);filter:brightness(1.3)}}
+@keyframes loadFade{from{opacity:.4}to{opacity:1}}
+
+/* Header */
+header{text-align:center;padding:3rem 2rem 2rem;position:relative}
+.header-badge{display:inline-block;background:linear-gradient(135deg,var(--ember-dim),var(--ember));color:#fff;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;padding:.3rem 1rem;border-radius:2px;margin-bottom:1rem;animation:badgePop .6s cubic-bezier(.34,1.56,.64,1) .3s both}
+@keyframes badgePop{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:900;background:linear-gradient(135deg,var(--gold-light) 0%,var(--ember-bright) 40%,var(--gold) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:.5rem;animation:titleRise .8s cubic-bezier(.34,1.56,.64,1) .2s both}
+@keyframes titleRise{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.subtitle{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.25em;color:var(--ash);margin-bottom:.4rem}
+.meta-row{font-size:.85rem;color:var(--text-dim);font-style:italic}
+.meta-row span{color:var(--ember);font-style:normal;font-weight:600}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-right:.4rem;animation:livePulse 2s ease-in-out infinite;vertical-align:middle}
+@keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(92,184,92,.4)}50%{box-shadow:0 0 0 4px rgba(92,184,92,0)}}
+.countdown-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(232,97,42,.2);border:1px solid var(--ember);border-radius:20px;padding:.25rem .8rem;font-family:'Cinzel',serif;font-size:.7rem;color:var(--ember-bright);margin-left:1rem}
+
+/* Divider */
+.divider{display:flex;align-items:center;gap:1rem;max-width:700px;margin:1.5rem auto;padding:0 2rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.divider-icon{color:var(--gold);font-size:1rem}
+
+/* Live Sync Panel */
+.live-panel{max-width:900px;margin:0 auto 2rem;padding:0 1.5rem}
+.live-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.5rem;position:relative;overflow:hidden}
+.live-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--water-dim),var(--water),var(--green))}
+.live-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.conn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:background .5s}
+.conn-dot.active{background:var(--green);animation:livePulse 2s ease infinite}
+.conn-dot.idle{background:var(--gold)}
+.conn-dot.offline,.conn-dot.error{background:var(--text-dim)}
+.conn-label{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.1em;color:var(--text-dim)}
+.poll-time{margin-left:auto;font-size:.72rem;color:var(--text-dim);font-style:italic}
+.live-not-configured{padding:.8rem 0;font-size:.85rem;color:var(--text-dim);font-style:italic}
+.live-not-configured code{color:var(--gold);font-style:normal}
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.8rem;margin-bottom:.8rem}
+.live-stat{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:5px;padding:.7rem .5rem;text-align:center}
+.live-val{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold);margin-bottom:.2rem}
+.live-lbl{font-size:.62rem;font-family:'Cinzel',serif;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase}
+.live-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.pill{font-size:.72rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:.25rem .6rem;color:var(--ash);font-family:'Cinzel',serif;letter-spacing:.05em}
+.pill.built{border-color:var(--green);color:var(--green)}
+.pill.missing{border-color:rgba(192,57,43,.4);color:#e74c3c}
+.save-time{margin-top:.6rem;font-size:.75rem;color:var(--text-dim);font-style:italic;text-align:right}
+
+/* U8 Banner */
+.u8-banner{max-width:900px;margin:0 auto 2rem;padding:0 1.5rem}
+.u8-alert{background:linear-gradient(135deg,rgba(232,97,42,.15),rgba(192,57,43,.1));border:1px solid var(--ember);border-radius:6px;padding:1.2rem 1.5rem;display:flex;align-items:flex-start;gap:1rem}
+.u8-icon{font-size:2rem;flex-shrink:0;line-height:1}
+.u8-text h3{font-family:'Cinzel',serif;font-size:1rem;color:var(--ember-bright);margin-bottom:.3rem}
+.u8-text p{font-size:.9rem;color:var(--ash);line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+.chip{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;padding:.25rem .6rem;border-radius:2px;font-weight:600}
+.chip-ember{background:rgba(232,97,42,.2);border:1px solid var(--ember);color:var(--ember-bright)}
+.chip-gold{background:rgba(212,168,75,.2);border:1px solid var(--gold);color:var(--gold-light)}
+.chip-water{background:rgba(74,159,212,.2);border:1px solid var(--water);color:var(--water)}
+.chip-green{background:rgba(92,184,92,.2);border:1px solid var(--green);color:var(--green)}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.stat-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem;text-align:center;transition:border-color .3s,transform .2s;animation:cardFade .5s ease both}
+.stat-card:hover{border-color:var(--border-hot);transform:translateY(-2px)}
+.stat-val{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--gold);line-height:1;margin-bottom:.25rem}
+.stat-val.fire{color:var(--ember-bright)}
+.stat-lbl{font-size:.7rem;letter-spacing:.12em;color:var(--text-dim);font-family:'Cinzel',serif;text-transform:uppercase}
+.stat-sub{font-size:.75rem;color:var(--text-dim);margin-top:.2rem;font-style:italic}
+.prog-track{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-top:.5rem}
+.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--ember-dim),var(--ember-bright));transition:width .8s cubic-bezier(.34,1.56,.64,1);width:0%}
+@keyframes cardFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.stat-card:nth-child(1){animation-delay:.1s}.stat-card:nth-child(2){animation-delay:.2s}.stat-card:nth-child(3){animation-delay:.3s}.stat-card:nth-child(4){animation-delay:.4s}.stat-card:nth-child(5){animation-delay:.5s}
+
+/* Section title */
+.section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+
+/* Party */
+.party-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.hero-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1.2rem;position:relative;overflow:hidden;transition:all .3s}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.hero-card.ranger::before{background:linear-gradient(90deg,var(--ember),var(--gold))}
+.hero-card.barbarian::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+.hero-card.wizard::before{background:linear-gradient(90deg,var(--purple),#a89bd4)}
+.hero-card.healer::before{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.hero-card:hover{border-color:rgba(212,168,75,.4);transform:translateY(-2px)}
+.hero-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.7rem}
+.hero-card.ranger .hero-avatar{background:rgba(232,97,42,.15);border:2px solid var(--ember)}
+.hero-card.barbarian .hero-avatar{background:rgba(192,57,43,.15);border:2px solid #e74c3c}
+.hero-card.wizard .hero-avatar{background:rgba(142,109,191,.15);border:2px solid var(--purple)}
+.hero-card.healer .hero-avatar{background:rgba(74,159,212,.15);border:2px solid var(--water)}
+.hero-initials{font-family:'Cinzel',serif;font-size:1rem;font-weight:700}
+.hero-card.ranger .hero-initials{color:var(--ember-bright)}.hero-card.barbarian .hero-initials{color:#e74c3c}.hero-card.wizard .hero-initials{color:#a89bd4}.hero-card.healer .hero-initials{color:var(--water)}
+.hero-name{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.1rem}
+.hero-role{font-size:.75rem;color:var(--text-dim);font-style:italic;margin-bottom:.7rem}
+.hero-level{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--text);margin-bottom:.4rem}
+.hero-level span{color:var(--gold)}
+.skill-badge{display:inline-flex;align-items:center;gap:.3rem;background:rgba(232,97,42,.15);border:1px solid rgba(232,97,42,.4);border-radius:3px;padding:.2rem .5rem;font-size:.65rem;font-family:'Cinzel',serif;color:var(--ember);margin-bottom:.6rem;cursor:pointer;transition:all .2s}
+.skill-badge.done{background:rgba(92,184,92,.15);border-color:rgba(92,184,92,.4);color:var(--green)}
+.weapon-bar-label{display:flex;justify-content:space-between;font-size:.68rem;color:var(--text-dim);margin-bottom:.25rem}
+.weapon-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.weapon-bar-fill{height:100%;border-radius:3px;transition:width .6s}
+.hero-card.ranger .weapon-bar-fill{background:linear-gradient(90deg,var(--ember-dim),var(--ember-bright))}
+.hero-card.barbarian .weapon-bar-fill{background:linear-gradient(90deg,#a93226,#e74c3c)}
+.hero-card.wizard .weapon-bar-fill{background:linear-gradient(90deg,#6c3483,#a89bd4)}
+.hero-card.healer .weapon-bar-fill{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.armor-row{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);font-size:.72rem;color:var(--text-dim)}
+.armor-pips{display:flex;gap:3px}
+.armor-pip{width:8px;height:8px;border-radius:1px;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s}
+.armor-pip.filled{border-color:var(--gold);background:var(--gold)}
+.hero-card.barbarian .armor-pip.filled{background:#e74c3c;border-color:#e74c3c}
+.hero-card.wizard .armor-pip.filled{background:var(--purple);border-color:var(--purple)}
+.hero-card.healer .armor-pip.filled{background:var(--water);border-color:var(--water)}
+
+/* Campaign + phase strip */
+.campaign-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;max-width:900px;margin:0 auto 2rem;padding:0 1.5rem}
+.camp-phase{text-align:center;cursor:pointer;padding:.5rem .25rem;border-radius:4px;transition:background .2s}
+.camp-phase:hover{background:rgba(255,255,255,.04)}
+.camp-phase.active-phase .camp-name{color:var(--gold)}
+.camp-name{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.08em;color:var(--text-dim);margin-bottom:.3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.camp-bar-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.camp-bar-fill{height:100%;border-radius:3px;background:var(--ember);transition:width .8s}
+.camp-pct-label{font-size:.65rem;color:var(--text-dim);margin-top:.2rem}
+
+/* Phases */
+.phases-wrap{max-width:900px;margin:0 auto 1.5rem;padding:0 1.5rem}
+.phase-tabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
+.phase-tabs::-webkit-scrollbar{display:none}
+.phase-tab{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;padding:.6rem 1rem;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;border-radius:4px 4px 0 0;user-select:none}
+.phase-tab:hover{color:var(--ash);background:rgba(255,255,255,.03)}
+.phase-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,168,75,.05)}
+.phase-tab.complete{color:var(--green)}
+.phases-progress{display:flex;height:3px}
+.phase-strip{flex:1;transition:background .5s}
+.phase-strip.done{background:var(--green)}.phase-strip.active{background:var(--ember)}.phase-strip.future{background:rgba(255,255,255,.05)}
+.phase-panel{background:var(--panel);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:1.5rem;display:none}
+.phase-panel.active{display:block}
+.phase-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}
+.phase-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold-light)}
+.phase-meta{font-size:.78rem;color:var(--text-dim);font-style:italic}
+.phase-pct{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--ember);line-height:1}
+
+/* Objectives */
+.obj-list{list-style:none}
+.obj-item{display:flex;align-items:flex-start;gap:.8rem;padding:.55rem .6rem;border-radius:4px;cursor:pointer;transition:all .2s;border-bottom:1px solid rgba(255,255,255,.04);user-select:none}
+.obj-item:last-child{border-bottom:none}
+.obj-item:hover{background:rgba(255,255,255,.04)}
+.obj-item.done{opacity:.55}
+.obj-check{width:18px;height:18px;flex-shrink:0;border:1.5px solid var(--border-hot);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:transparent;transition:all .25s;margin-top:2px}
+.obj-item.done .obj-check{background:var(--ember-dim);border-color:var(--ember);color:#fff}
+.obj-body{flex:1}
+.obj-text{font-size:.9rem;line-height:1.4}
+.obj-item.done .obj-text{text-decoration:line-through;color:var(--text-dim)}
+.obj-tags{display:flex;gap:.3rem;margin-top:.25rem;flex-wrap:wrap}
+.tag{font-size:.58rem;font-family:'Cinzel',serif;padding:.15rem .45rem;border-radius:2px;letter-spacing:.08em;text-transform:uppercase}
+.tag-group{background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);color:var(--gold)}
+.tag-ranger{background:rgba(232,97,42,.15);border:1px solid rgba(232,97,42,.3);color:var(--ember-bright)}
+.tag-barb{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e74c3c}
+.tag-wiz{background:rgba(142,109,191,.15);border:1px solid rgba(142,109,191,.3);color:#a89bd4}
+.tag-heal{background:rgba(74,159,212,.15);border:1px solid rgba(74,159,212,.3);color:var(--water)}
+.tag-u8{background:rgba(255,60,60,.2);border:1px solid rgba(255,60,60,.5);color:#ff6060;animation:newPulse 2s ease infinite}
+@keyframes newPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,97,42,.4)}50%{box-shadow:0 0 0 3px rgba(232,97,42,0)}}
+
+/* Loot */
+.loot-section{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.loot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:.8rem}
+.loot-item{background:rgba(255,255,255,.03);border:1px solid rgba(212,168,75,.15);border-radius:5px;padding:.6rem .8rem;position:relative;transition:all .2s}
+.loot-item:hover{border-color:var(--border-hot)}
+.loot-name{font-size:.85rem;color:var(--gold-light);margin-bottom:.2rem}
+.loot-where{font-size:.72rem;color:var(--text-dim);font-style:italic}
+.loot-owner{margin-top:.35rem}
+.loot-del{position:absolute;top:.4rem;right:.5rem;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.8rem;opacity:0;transition:opacity .2s;padding:2px 4px;border-radius:3px}
+.loot-item:hover .loot-del{opacity:1}
+.loot-del:hover{color:#e74c3c}
+.loot-add{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.loot-input{flex:1;min-width:140px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:.5rem .7rem;color:var(--text);font-family:'Crimson Pro',serif;font-size:.85rem;outline:none;transition:border-color .2s}
+.loot-input:focus{border-color:var(--gold)}
+.loot-input::placeholder{color:var(--text-dim)}
+.loot-select{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:.5rem .7rem;color:var(--text);font-family:'Cinzel',serif;font-size:.7rem;outline:none;cursor:pointer;transition:border-color .2s}
+.loot-select:focus{border-color:var(--gold)}
+.loot-select option{background:var(--deep)}
+.btn{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;padding:.5rem 1rem;border-radius:4px;cursor:pointer;border:none;transition:all .2s}
+.btn-ember{background:var(--ember-dim);color:var(--text)}.btn-ember:hover{background:var(--ember);transform:translateY(-1px)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-dim)}.btn-ghost:hover{border-color:var(--ember);color:var(--ember)}
+
+/* Notes */
+.notes-section{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.notes-area{width:100%;min-height:90px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:.7rem .9rem;color:var(--text);font-family:'Crimson Pro',serif;font-size:.9rem;line-height:1.5;resize:vertical;outline:none;transition:border-color .2s;margin-top:.5rem}
+.notes-area:focus{border-color:var(--gold)}
+
+/* U8 cards */
+.u8-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.u8-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.u8-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1.2rem;position:relative;overflow:hidden;transition:all .3s}
+.u8-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.u8-card.combat::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+.u8-card.gear::before{background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+.u8-card.skills::before{background:linear-gradient(90deg,var(--purple),#c3b1e1)}
+.u8-card.share::before{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.u8-card:hover{border-color:rgba(212,168,75,.3);transform:translateY(-2px)}
+.u8-card-icon{font-size:1.6rem;margin-bottom:.5rem}
+.u8-card-title{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.1em;margin-bottom:.6rem}
+.u8-card.combat .u8-card-title{color:#e74c3c}.u8-card.gear .u8-card-title{color:var(--gold-light)}.u8-card.skills .u8-card-title{color:#c3b1e1}.u8-card.share .u8-card-title{color:var(--water)}
+.u8-bullets{list-style:none}
+.u8-bullets li{font-size:.82rem;color:var(--ash);padding:.25rem 0;padding-left:1rem;position:relative;line-height:1.4}
+.u8-bullets li::before{content:'▸';position:absolute;left:0;font-size:.65rem;top:.35rem}
+.u8-card.combat .u8-bullets li::before{color:#e74c3c}.u8-card.gear .u8-bullets li::before{color:var(--gold)}.u8-card.skills .u8-bullets li::before{color:var(--purple)}.u8-card.share .u8-bullets li::before{color:var(--water)}
+
+/* Footer */
+footer{text-align:center;padding:2rem;color:var(--text-dim);font-size:.78rem;font-style:italic;border-top:1px solid var(--border);margin-top:2rem}
+footer a{color:var(--ember);text-decoration:none}
+footer a:hover{color:var(--gold)}
+.reset-btn{background:none;border:1px solid rgba(192,57,43,.3);color:rgba(192,57,43,.6);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;padding:.3rem .8rem;border-radius:3px;cursor:pointer;margin-top:.8rem;transition:all .2s}
+.reset-btn:hover{border-color:#e74c3c;color:#e74c3c}
+
+@media(max-width:600px){h1{font-size:1.8rem}.party-grid{grid-template-columns:repeat(2,1fr)}.campaign-progress{grid-template-columns:repeat(3,1fr)}.u8-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="loading"><div class="loading-flame">🔥</div><div class="loading-text">Forging the Path...</div></div>
+
+<header>
+  <div class="header-badge">⚔️ Update 8 — Forging the Path</div>
+  <h1>Enshrouded Bros</h1>
+  <div class="subtitle">4-Player Campaign Dashboard</div>
+  <div class="meta-row">
+    <span class="live-dot"></span>Live sync active &nbsp;·&nbsp;
+    Level cap <span>45</span> &nbsp;·&nbsp; All biomes incl. Veilwater Basin
+    <span class="countdown-badge" id="countdown">⚒ Update 8: April 21</span>
+  </div>
+</header>
+
+<div class="divider"><span class="divider-icon">⚔</span></div>
+
+<!-- ── LIVE SERVER STATUS ── -->
+<div class="live-panel">
+  <div class="section-title">📡 Live Server Status</div>
+  <div class="live-card">
+    <div class="live-header">
+      <div class="conn-dot offline" id="conn-dot"></div>
+      <span class="conn-label" id="conn-label">NOT CONFIGURED</span>
+      <span class="poll-time" id="poll-time"></span>
+    </div>
+    <div id="live-unconfigured" class="live-not-configured">
+      ⚙️ Add your GitHub username to <code>index.html</code> and have erocko38 run <code>watcher.py</code> on the server to enable live sync.
+    </div>
+    <div id="live-data" style="display:none">
+      <div class="live-grid">
+        <div class="live-stat"><div class="live-val" id="ls-age">—</div><div class="live-lbl">Last Save</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-status">—</div><div class="live-lbl">Server</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-npcs">—</div><div class="live-lbl">NPCs</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-structs">—</div><div class="live-lbl">Structures</div></div>
+      </div>
+      <div class="live-pills">
+        <span class="pill" id="lp-flame">🔥 Flame Altar</span>
+        <span class="pill" id="lp-kiln">⚒ Charcoal Kiln</span>
+        <span class="pill" id="lp-rack">🪵 Drying Rack</span>
+        <span class="pill" id="lp-hash">💾 —</span>
+      </div>
+      <div class="save-time" id="ls-savetime"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── U8 BANNER ── -->
+<div class="u8-banner">
+  <div class="u8-alert">
+    <div class="u8-icon">⚒️</div>
+    <div class="u8-text">
+      <h3>Update 8 "Forging the Path" — April 21, 2026</h3>
+      <p>Major overhaul. <strong>All skill points refunded on patch day</strong> — rebuild your trees before heading out. Gear stats recalculated (smaller numbers ≠ nerf). Armor now upgrades. New Heavy Attacks, Weapon Ultimates, and I-frames on dodge.</p>
+      <div class="chips">
+        <span class="chip chip-ember">Heavy Attacks</span>
+        <span class="chip chip-ember">Weapon Ultimates</span>
+        <span class="chip chip-ember">I-Frames on Dodge</span>
+        <span class="chip chip-gold">Skill Tree Reset</span>
+        <span class="chip chip-gold">Gear Rework</span>
+        <span class="chip chip-gold">Armor Upgrades</span>
+        <span class="chip chip-water">Adventure Sharing V1</span>
+        <span class="chip chip-green">Stealth Revamp</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── STATS ── -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-val fire" id="stat-pct">0%</div><div class="stat-lbl">Overall</div><div class="prog-track"><div class="prog-fill" id="prog-overall"></div></div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-obj">0/56</div><div class="stat-lbl">Objectives</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-lvl">~1</div><div class="stat-lbl">Party Level</div><div class="stat-sub">avg across 4</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-phase">1/5</div><div class="stat-lbl">Current Phase</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-loot">0</div><div class="stat-lbl">Loot Logged</div><div class="stat-sub">party items</div></div>
+</div>
+
+<!-- ── PARTY ── -->
+<div class="party-grid" id="party-grid"></div>
+
+<!-- ── CAMPAIGN PROGRESS ── -->
+<div class="campaign-progress" id="camp-progress"></div>
+
+<!-- ── PHASES ── -->
+<div class="phases-wrap">
+  <div class="phase-tabs" id="phase-tabs"></div>
+  <div class="phases-progress" id="phases-prog"></div>
+  <div id="phase-panels"></div>
+</div>
+
+<!-- ── U8 REFERENCE ── -->
+<div class="u8-section">
+  <div class="section-title">⚒ Update 8 Changes Reference</div>
+  <div class="u8-grid">
+    <div class="u8-card combat">
+      <div class="u8-card-icon">⚔️</div>
+      <div class="u8-card-title">Combat Overhaul</div>
+      <ul class="u8-bullets">
+        <li>Heavy attacks on all weapons</li>
+        <li>Weapon Ultimate system — fill meter for special move (wand AoE orb, 2H 360 cleave, dagger burst)</li>
+        <li>I-frames on dodge (unlock via "Strategic Maneuver" skill node)</li>
+        <li>New melee animations: gap closers, aerial strikes</li>
+        <li>Ledge-push on attack animations fixed</li>
+        <li>Enemy AI now dodges ranged attacks</li>
+        <li>Stealth system reworked — stealth damage improved</li>
+        <li>Aggro changes benefit stealth builds</li>
+      </ul>
+    </div>
+    <div class="u8-card gear">
+      <div class="u8-card-icon">🛡️</div>
+      <div class="u8-card-title">Gear & Itemisation</div>
+      <ul class="u8-bullets">
+        <li>Armor perks return (HP, Mana, Stamina, Regen, Crit)</li>
+        <li>New perk: boost a skill tree node beyond its max level</li>
+        <li>Armor scales via upgrades — common and legendary start equal</li>
+        <li>Archetype focus: tanks get more armor, casters less</li>
+        <li>Damage recalculated — smaller numbers are NOT a nerf</li>
+        <li>Underperforming weapons and gems rebalanced</li>
+      </ul>
+    </div>
+    <div class="u8-card skills">
+      <div class="u8-card-icon">🌟</div>
+      <div class="u8-card-title">Skill Tree Rebuild</div>
+      <ul class="u8-bullets">
+        <li style="color:var(--ember-bright);font-weight:600">All skill points refunded on patch day</li>
+        <li>Full node repositioning, new skills added</li>
+        <li>Zoom-out view of entire tree added</li>
+        <li>Early nodes cheaper — reach builds faster</li>
+        <li>Double jump and key QoL unlocks easier to reach</li>
+        <li>Node levels: invest multiple points per node for deeper bonuses</li>
+      </ul>
+    </div>
+    <div class="u8-card share">
+      <div class="u8-card-icon">🌐</div>
+      <div class="u8-card-title">Adventure Sharing + 1.0</div>
+      <ul class="u8-bullets">
+        <li>Share your world/builds with the community</li>
+        <li>Gallery: browse other players' creations</li>
+        <li>V2 at 1.0: traps, puzzles, player-made challenges</li>
+        <li>Full 1.0 release: Autumn 2026 + console (PS5/Xbox)</li>
+        <li>Floating islands likely accessible at 1.0</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><span class="live-dot"></span>Saves to localStorage · Free forever on GitHub Pages</div>
+  <div style="margin-top:.4rem">Update 8 <em>Forging the Path</em> · April 21 2026 · <a href="https://enshrouded.com" target="_blank">enshrouded.com</a></div>
+  <button class="reset-btn" onclick="confirmReset()">Reset all progress</button>
+</footer>
+
+<script>
+// ══ LIVE SYNC CONFIG ════════════════════════════════════════════════
+// Fill in your GitHub username below, leave everything else as-is
+const GITHUB_USER = "kylejackson64-pixel";  // ← change this
+const GITHUB_REPO = "enshrouded-bros";
+const SYNC_ENABLED = GITHUB_USER !== "YOUR_GITHUB_USERNAME";
+// Uses GitHub Contents API (not raw CDN) — always fresh, no cache delay
+const API_URL = SYNC_ENABLED
+  ? `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/status.json`
+  : null;
+const POLL_MS = 60000;
+// ════════════════════════════════════════════════════════════════════
+
+// ── DATA ─────────────────────────────────────────────────────────────
+const HEROES = [
+  {id:'ranger',   initials:'RG', role:'Mobility & Burst DPS',       cls:'ranger',   emoji:'🏹'},
+  {id:'barbarian',initials:'BB', role:'Frontline Bruiser',           cls:'barbarian',emoji:'⚔️'},
+  {id:'wizard',   initials:'WZ', role:'AoE Pack Clear & Boss Burn',  cls:'wizard',   emoji:'🔮'},
+  {id:'healer',   initials:'HL', role:'Support & Water Aura',        cls:'healer',   emoji:'💧'},
+];
+
+const PHASES = [
+  {id:1,name:'Starting Out',sessions:'1',lvlRange:'1–5',objectives:[
+    {text:'Flame Altar placed and base established',tags:['group']},
+    {text:'Bow + 10 arrows crafted',tags:['ranger']},
+    {text:'Blacksmith (Oswald Anders) rescued',tags:['group']},
+    {text:'Grappling Hook and Glider crafted',tags:['ranger']},
+    {text:'Forge and Charcoal Kiln built',tags:['wizard']},
+    {text:'Fur Armor set crafted',tags:['barbarian']},
+    {text:'Basic Health Potions ×4 distributed',tags:['healer']},
+    {text:'NPC shelter hut built',tags:['healer']},
+  ]},
+  {id:2,name:'Springlands',sessions:'2–3',lvlRange:'5–15',objectives:[
+    {text:'Springlands Ancient Spire reached and activated',tags:['group']},
+    {text:'Farmer (Lisandra) rescued for crops',tags:['group']},
+    {text:'Alchemist (Athalan Skree) rescued',tags:['group']},
+    {text:'Hunter (Kohlwald) rescued',tags:['group']},
+    {text:'Iron Armor set crafted',tags:['group']},
+    {text:'Healing Potion supply established ×8',tags:['healer']},
+    {text:'Grappling Hook + Glider upgrades researched',tags:['ranger']},
+    {text:'First Shroud Root boss defeated',tags:['group']},
+    {text:'Heavy attack technique practiced',tags:['group'],u8:true},
+    {text:'Weapon Ultimate bars — test all 4 roles',tags:['group'],u8:true},
+  ]},
+  {id:3,name:'Revelwood',sessions:'4–5',lvlRange:'15–28',objectives:[
+    {text:'Revelwood Spire activated',tags:['group']},
+    {text:'Sage (Ominira) rescued',tags:['group']},
+    {text:'Revelwood vault cleared',tags:['group']},
+    {text:'Skill trees rebuilt after U8 reset',tags:['group'],u8:true},
+    {text:'Armor upgraded at least once each hero',tags:['group'],u8:true},
+    {text:'I-frame dodge unlocked (Strategic Maneuver)',tags:['ranger','wizard'],u8:true},
+    {text:'Steeple Spire activated',tags:['group']},
+    {text:'Dye Station built + cosmetics sorted',tags:['healer']},
+    {text:'Revelwood boss defeated',tags:['group']},
+  ]},
+  {id:4,name:'Blackmire',sessions:'6–7',lvlRange:'28–38',objectives:[
+    {text:'Blackmire Spire activated',tags:['group']},
+    {text:'Stealth build tested post-U8 rework',tags:['ranger'],u8:true},
+    {text:'Legendary gear archetype upgrades done',tags:['group'],u8:true},
+    {text:'Skill-boosting armor perks equipped on all',tags:['group'],u8:true},
+    {text:'Blackmire vault cleared',tags:['group']},
+    {text:'Blackmire boss defeated',tags:['group']},
+    {text:'Nomad Highlands Spire activated',tags:['group']},
+    {text:'Adventure Sharing V1 — share home base',tags:['group'],u8:true},
+    {text:'Level 38 weapon upgrades for all heroes',tags:['group']},
+  ]},
+  {id:5,name:'Endgame',sessions:'8+',lvlRange:'38–45',objectives:[
+    {text:'Kindlewastes Spire activated',tags:['group']},
+    {text:'Veilwater Basin fully explored',tags:['group']},
+    {text:'All NPC survivors rescued',tags:['group']},
+    {text:'Final weapon ultimates at full power',tags:['group'],u8:true},
+    {text:'Level 45 gear — all slots upgraded',tags:['group'],u8:true},
+    {text:'Final boss of Early Access content defeated',tags:['group']},
+    {text:'Adventure Share — export final base',tags:['group'],u8:true},
+    {text:'Ready for 1.0 floating islands',tags:['group']},
+  ]},
+];
+
+// ── STATE ────────────────────────────────────────────────────────────
+function loadState() {
+  try { return JSON.parse(localStorage.getItem('enshrouded-bros-v3')) || {}; }
+  catch { return {}; }
+}
+function saveState() {
+  localStorage.setItem('enshrouded-bros-v3', JSON.stringify(STATE));
+}
+let STATE = loadState();
+if(!STATE.checked)     STATE.checked = {};
+if(!STATE.heroes)      STATE.heroes  = {};
+if(!STATE.loot)        STATE.loot    = [];
+if(!STATE.notes)       STATE.notes   = {};
+if(!STATE.activePhase) STATE.activePhase = 1;
+HEROES.forEach(h => {
+  if(!STATE.heroes[h.id])
+    STATE.heroes[h.id] = {level:1,weaponBar:0,armorUpgrades:0,skillReset:false};
+});
+
+// ── HELPERS ──────────────────────────────────────────────────────────
+const oKey = (p,i) => `p${p}-o${i}`;
+const totalObjs = () => PHASES.reduce((a,p)=>a+p.objectives.length,0);
+const checkedCount = () => Object.values(STATE.checked).filter(Boolean).length;
+const phasePct = id => {
+  const p=PHASES[id-1], done=p.objectives.filter((_,i)=>STATE.checked[oKey(id,i)]).length;
+  return p.objectives.length ? Math.round(done/p.objectives.length*100) : 0;
+};
+const overallPct = () => Math.round(checkedCount()/totalObjs()*100);
+const currentPhase = () => { for(let i=PHASES.length;i>=1;i--) if(phasePct(i)>0) return i; return 1; };
+const avgLevel = () => { const v=HEROES.map(h=>+STATE.heroes[h.id].level||1); return Math.round(v.reduce((a,b)=>a+b,0)/v.length); };
+const tcls = t=>({group:'tag-group',ranger:'tag-ranger',barbarian:'tag-barb',wizard:'tag-wiz',healer:'tag-heal'}[t]||'tag-group');
+const tlbl = t=>({group:'GROUP',ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'}[t]||t);
+
+// ── RENDER PARTY ─────────────────────────────────────────────────────
+function renderParty() {
+  document.getElementById('party-grid').innerHTML = HEROES.map(h => {
+    const hs=STATE.heroes[h.id];
+    const wBar=Math.min(100,hs.weaponBar||0);
+    const armor=hs.armorUpgrades||0;
+    const pips=Array.from({length:5},(_,i)=>`<div class="armor-pip${i<armor?' filled':''}" onclick="toggleArmor('${h.id}',${i})" title="Armor upgrade ${i+1}/5"></div>`).join('');
+    return `<div class="hero-card ${h.cls}">
+      <div class="hero-avatar"><span class="hero-initials">${h.initials}</span></div>
+      <div class="hero-name">${h.initials} — ${h.id[0].toUpperCase()+h.id.slice(1)}</div>
+      <div class="hero-role">${h.role}</div>
+      <div class="hero-level">Lv <span id="lv-${h.id}">${hs.level}</span></div>
+      <input type="range" min="1" max="45" value="${hs.level}" style="width:100%;accent-color:var(--gold);margin:.3rem 0 .7rem;cursor:pointer" oninput="setLevel('${h.id}',this.value)">
+      <div class="skill-badge${hs.skillReset?' done':''}" onclick="toggleSkillReset('${h.id}')">
+        ${hs.skillReset?'✓':'⚠'} U8 Skill Reset ${hs.skillReset?'Done':'Pending'}
+      </div>
+      <div style="margin-bottom:.3rem">
+        <div class="weapon-bar-label">
+          <span style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;color:var(--text-dim)">WEAPON ULTIMATE</span>
+          <span style="font-family:'Cinzel',serif;font-size:.65rem">${wBar}%</span>
+        </div>
+        <div class="weapon-bar-track"><div class="weapon-bar-fill" style="width:${wBar}%"></div></div>
+        <input type="range" min="0" max="100" value="${wBar}" style="width:100%;accent-color:var(--purple);margin:.2rem 0 0;cursor:pointer" oninput="setWeaponBar('${h.id}',this.value)">
+      </div>
+      <div class="armor-row"><span>Armor upgrades</span><div class="armor-pips">${pips}</div></div>
+    </div>`;
+  }).join('');
+}
+function setLevel(id,v){STATE.heroes[id].level=+v;document.getElementById('lv-'+id).textContent=v;updateStats();saveState();}
+function setWeaponBar(id,v){STATE.heroes[id].weaponBar=+v;saveState();}
+function toggleArmor(id,i){const c=STATE.heroes[id].armorUpgrades||0;STATE.heroes[id].armorUpgrades=c===i+1?i:i+1;saveState();renderParty();}
+function toggleSkillReset(id){STATE.heroes[id].skillReset=!STATE.heroes[id].skillReset;saveState();renderParty();}
+
+// ── RENDER PHASES ─────────────────────────────────────────────────────
+function renderPhaseTabs() {
+  const ap=STATE.activePhase;
+  document.getElementById('phase-tabs').innerHTML = PHASES.map(p=>{
+    const pct=phasePct(p.id),done=pct===100,active=p.id===ap;
+    return `<div class="phase-tab${active?' active':''}${done?' complete':''}" onclick="switchPhase(${p.id})">${done?'✓ ':''}${p.id} — ${p.name}${pct>0&&!done?` · ${pct}%`:''}</div>`;
+  }).join('');
+  document.getElementById('phases-prog').innerHTML = PHASES.map(p=>{
+    const pct=phasePct(p.id),cls=pct===100?'done':(p.id===ap?'active':'future');
+    return `<div class="phase-strip ${cls}"></div>`;
+  }).join('');
+}
+function renderCampaign() {
+  document.getElementById('camp-progress').innerHTML = PHASES.map(p=>{
+    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
+    return `<div class="camp-phase${active?' active-phase':''}" onclick="switchPhase(${p.id})">
+      <div class="camp-name">${p.id}. ${p.name}</div>
+      <div class="camp-bar-track"><div class="camp-bar-fill" style="width:${pct}%"></div></div>
+      <div class="camp-pct-label">${pct}%</div>
+    </div>`;
+  }).join('');
+}
+function switchPhase(id){STATE.activePhase=id;saveState();renderPhaseTabs();renderCampaign();renderPanels();}
+
+function renderPanels() {
+  document.getElementById('phase-panels').innerHTML = PHASES.map(p=>{
+    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
+    const doneCount=p.objectives.filter((_,i)=>STATE.checked[oKey(p.id,i)]).length;
+    const objs=p.objectives.map((o,i)=>{
+      const key=oKey(p.id,i),done=!!STATE.checked[key];
+      const tags=o.tags.map(t=>`<span class="tag ${tcls(t)}">${tlbl(t)}</span>`).join('');
+      const u8tag=o.u8?'<span class="tag tag-u8">U8</span>':'';
+      return `<li class="obj-item${done?' done':''}" onclick="toggleObj('${key}')">
+        <div class="obj-check">${done?'✓':''}</div>
+        <div class="obj-body"><div class="obj-text">${o.text}</div><div class="obj-tags">${tags}${u8tag}</div></div>
+      </li>`;
+    }).join('');
+    // Loot log only in active panel
+    const lootHTML = active ? buildLootHTML() : '';
+    const notes = STATE.notes[p.id]||'';
+    return `<div class="phase-panel${active?' active':''}" id="panel-${p.id}">
+      <div class="phase-header">
+        <div><div class="phase-title">${p.id} — ${p.name}</div><div class="phase-meta">Sessions ${p.sessions} · Lv ${p.lvlRange} · ${doneCount}/${p.objectives.length} complete</div></div>
+        <div class="phase-pct">${pct}%</div>
+      </div>
+      <ul class="obj-list">${objs}</ul>
+      ${lootHTML}
+      <div class="notes-section">
+        <div class="section-title" style="margin-top:0">📝 Session Notes</div>
+        <textarea class="notes-area" placeholder="Shared session notes…" oninput="saveNotes(${p.id},this.value)">${notes}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function buildLootHTML() {
+  const items=STATE.loot.map((item,i)=>`<div class="loot-item">
+    <button class="loot-del" onclick="delLoot(${i})">✕</button>
+    <div class="loot-name">${item.name}</div>
+    <div class="loot-where">${item.where||''}</div>
+    ${item.owner?`<div class="loot-owner"><span class="tag ${tcls(item.owner)}">${tlbl(item.owner)}</span></div>`:''}
+  </div>`).join('');
+  return `<div class="loot-section">
+    <div class="section-title">💎 Loot Log</div>
+    <div class="loot-grid">${items||'<div style="color:var(--text-dim);font-style:italic;font-size:.85rem">No items logged yet.</div>'}</div>
+    <div class="loot-add">
+      <input class="loot-input" id="loot-name" placeholder="Item name…" onkeydown="if(event.key==='Enter')addLoot()">
+      <input class="loot-input" id="loot-where" placeholder="Drop location…" style="max-width:200px">
+      <select class="loot-select" id="loot-owner">
+        <option value="">— Owner —</option>
+        <option value="ranger">Ranger</option><option value="barbarian">Barbarian</option>
+        <option value="wizard">Wizard</option><option value="healer">Healer</option>
+        <option value="group">Group</option>
+      </select>
+      <button class="btn btn-ember" onclick="addLoot()">+ Log</button>
+    </div>
+  </div>`;
+}
+
+function toggleObj(key){STATE.checked[key]=!STATE.checked[key];saveState();renderAll();}
+function addLoot(){
+  const name=document.getElementById('loot-name')?.value?.trim();
+  if(!name) return;
+  STATE.loot.push({name,where:document.getElementById('loot-where')?.value?.trim(),owner:document.getElementById('loot-owner')?.value});
+  saveState();renderAll();
+}
+function delLoot(i){STATE.loot.splice(i,1);saveState();renderAll();}
+function saveNotes(id,v){STATE.notes[id]=v;saveState();}
+
+// ── STATS ────────────────────────────────────────────────────────────
+function updateStats() {
+  const pct=overallPct();
+  document.getElementById('stat-pct').textContent=pct+'%';
+  document.getElementById('prog-overall').style.width=pct+'%';
+  document.getElementById('stat-obj').textContent=checkedCount()+'/'+totalObjs();
+  document.getElementById('stat-phase').textContent=currentPhase()+'/5';
+  document.getElementById('stat-lvl').textContent='~'+avgLevel();
+  document.getElementById('stat-loot').textContent=STATE.loot.length;
+}
+
+// ── COUNTDOWN ────────────────────────────────────────────────────────
+function updateCountdown() {
+  const diff=new Date('2026-04-21T00:00:00')-new Date();
+  const el=document.getElementById('countdown');
+  if(diff<=0){el.textContent='⚒ Update 8 is LIVE!';el.style.cssText='background:rgba(92,184,92,.2);border-color:var(--green);color:var(--green)';return;}
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
+  el.textContent=d>0?`⚒ U8 in ${d}d ${h}h`:h>0?`⚒ U8 in ${h}h ${m}m`:`⚒ U8 in ${m}m — SOON`;
+}
+
+// ── LIVE SYNC (GitHub Contents API — always fresh) ───────────────────
+let liveState = null;
+
+async function fetchLive() {
+  if (!SYNC_ENABLED) return;
+  try {
+    // Contents API returns JSON with base64-encoded content — no CDN cache
+    const res = await fetch(API_URL, {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const meta = await res.json();
+    // Decode base64 content
+    const json = JSON.parse(atob(meta.content.replace(/\n/g,'')));
+    liveState = json;
+    renderLive();
+  } catch(e) {
+    console.warn('Live sync error:', e);
+    setConn('error','SYNC ERROR');
+  }
+  const el=document.getElementById('poll-time');
+  if(el) el.textContent='Polled '+new Date().toLocaleTimeString();
+}
+
+function setConn(state, label) {
+  const dot=document.getElementById('conn-dot'), lbl=document.getElementById('conn-label');
+  if(dot) dot.className='conn-dot '+state;
+  if(lbl) lbl.textContent=label;
+}
+
+function renderLive() {
+  const d=liveState;
+  if(!d||d.file_hash==='none'){setConn('offline','WATCHER NOT RUNNING');return;}
+  document.getElementById('live-unconfigured').style.display='none';
+  document.getElementById('live-data').style.display='block';
+
+  const now=Math.floor(Date.now()/1000);
+  const ts=d.last_save_ts||d.index_time||0;
+  const age=ts>0?now-ts:null;
+  let ageStr='—',state='offline';
+  if(age!==null){
+    if(age<120){ageStr='Just now';state='active';}
+    else if(age<600){ageStr=Math.floor(age/60)+'m ago';state='active';}
+    else if(age<3600){ageStr=Math.floor(age/60)+'m ago';state='idle';}
+    else if(age<86400){ageStr=Math.floor(age/3600)+'h ago';state='idle';}
+    else{ageStr=Math.floor(age/86400)+'d ago';state='offline';}
+  }
+  setConn(state, state==='active'?'SERVER ACTIVE':state==='idle'?'SERVER IDLE':'SERVER OFFLINE');
+
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('ls-age',ageStr);
+  const ageMin=age!==null?Math.floor(age/60):999;
+  set('ls-status',ageMin<15?'🟢 Active':ageMin<60?'🟡 Idle':'🔴 Offline');
+  const s=d.structures||{};
+  set('ls-npcs',s.npc_count!=null?s.npc_count:'—');
+  const tot=(s.flame_altar||0)+(s.charcoal_kiln||0)+(s.drying_rack||0);
+  set('ls-structs',tot||'—');
+
+  const pill=(id,label,built)=>{
+    const el=document.getElementById(id);
+    if(el){el.textContent=label+(built?' ✓':' ✗');el.className='pill '+(built?'built':'missing');}
+  };
+  pill('lp-flame','🔥 Flame Altar',s.flame_altar>0);
+  pill('lp-kiln','⚒ Charcoal Kiln',s.charcoal_kiln>0);
+  pill('lp-rack','🪵 Drying Rack',s.drying_rack>0);
+  set('lp-hash','💾 '+( d.file_hash||'—'));
+  if(d.last_save_iso) set('ls-savetime','World saved: '+new Date(d.last_save_iso).toLocaleString());
+}
+
+function initLiveSync(){
+  if(!SYNC_ENABLED){
+    setConn('offline','NOT CONFIGURED');
+    return;
+  }
+  fetchLive();
+  setInterval(fetchLive, POLL_MS);
+}
+
+// ── RESET ────────────────────────────────────────────────────────────
+function confirmReset(){
+  if(!confirm('Reset ALL campaign progress? Cannot be undone.')) return;
+  localStorage.removeItem('enshrouded-bros-v3');
+  STATE={checked:{},heroes:{},loot:[],notes:{},activePhase:1};
+  HEROES.forEach(h=>{STATE.heroes[h.id]={level:1,weaponBar:0,armorUpgrades:0,skillReset:false};});
+  renderAll();
+}
+
+// ── RENDER ALL ───────────────────────────────────────────────────────
+function renderAll(){renderParty();renderPhaseTabs();renderCampaign();renderPanels();updateStats();}
+
+// ── BOOT ─────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>{
+    document.getElementById('loading').classList.add('gone');
+    renderAll();
+    updateCountdown();
+    setInterval(updateCountdown,30000);
+    initLiveSync();
+  },1200);
+});
+</script>
+</body>
+</html>
