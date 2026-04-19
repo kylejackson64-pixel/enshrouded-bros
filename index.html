@@ -406,6 +406,17 @@ footer a:hover{color:var(--gold)}
 </footer>
 
 <script>
+// ══ PASSPHRASE GATE ═════════════════════════════════════════════════
+(function(){
+  const KEY='enshrouded-bros-auth';
+  if(sessionStorage.getItem(KEY)==='1') return;
+  document.body.style.display='none';
+  const pw=prompt('🔥 Enshrouded Bros — Enter passphrase:');
+  if(pw==='420Blazeit!'){sessionStorage.setItem(KEY,'1');document.body.style.display='';}
+  else{document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0f18;color:#7a8fa8;font-family:serif;font-size:1rem">Access denied.</div>';}
+})();
+// ════════════════════════════════════════════════════════════════════
+
 // ══ LIVE SYNC CONFIG ════════════════════════════════════════════════
 // Fill in your GitHub username below, leave everything else as-is
 const GITHUB_USER = "kylejackson64-pixel";  // ← change this
