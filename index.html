@@ -626,6 +626,12 @@ const PHASES = [
       'Talk to each rescued NPC and assign them to the shelter.',
       'Unlocks NPC services (crafting stations, vendor). Priority: get a roof over their heads first.',
     ]},
+    {text:'Collector (Alden Crowley) rescued — Hollow Halls',tags:['group'],steps:[
+      'Hollow Halls dungeon is in Springlands — find entrance marked on map.',
+      'Clear all rooms to reach the final chamber where Alden is held.',
+      'Rescue and return. He unlocks the Ectoplasm Press.',
+      'Note: This is also where the Hollow Cyclops mini-boss is fought.',
+    ]},
   ]},
   {id:2,name:'Springlands',sessions:'2–3',lvlRange:'5–15',objectives:[
     {text:'Springlands Ancient Spire reached and activated',tags:['group'],steps:[
@@ -634,23 +640,23 @@ const PHASES = [
       'All: Fight up the Spire tower together floor by floor.',
       'All: Interact with the Spire crystal to unlock fast travel.',
     ]},
-    {text:'Farmer (Lisandra) rescued for crops',tags:['group'],steps:[
-      'Follow the Farmer quest marker in Springlands.',
+    {text:'Farmer (Emily Fray) rescued for crops',tags:['group'],steps:[
+      'Follow the Farmer quest marker in Springlands (NE of Springlands Spire).',
       'Clear the area — she is usually inside a ruined building.',
-      'Talk to Lisandra and escort her or fast-travel back together.',
-      'Healer: Build her a bed in the NPC shelter. She unlocks farming crops.',
+      'Talk to Emily and escort her or fast-travel back together.',
+      'Healer: Build her a bed in the NPC shelter. She unlocks Seedbed, Cooking Station, Oven, Beehive, Seafood Grill, Coffee Brewery.',
     ]},
-    {text:'Alchemist (Athalan Skree) rescued',tags:['group'],steps:[
-      'Follow the Alchemist quest marker in Springlands.',
+    {text:'Alchemist (Balthazar) rescued',tags:['group'],steps:[
+      'Follow the Alchemist quest marker in Springlands (west of Springlands Spire).',
       'Combat area — Barbarian tanks, others assist from range.',
-      'Talk to Athalan and bring him back to base.',
-      'Build an Alchemy Lab workbench to unlock his better potion recipes.',
+      'Talk to Balthazar and bring him back to base.',
+      'Build an Alchemy Lab workbench to unlock his potion and lab recipes.',
     ]},
-    {text:'Hunter (Kohlwald) rescued',tags:['group'],steps:[
-      'Follow the Hunter quest marker into the forest area.',
+    {text:'Hunter (Athalan Skree) rescued',tags:['group'],steps:[
+      'Follow the Hunter quest marker east of Springlands Spire.',
       'Clear the enemy camp around him.',
       'Rescue and return to base. Give him a bed.',
-      'Kohlwald unlocks advanced hunting recipes and Ranger bow upgrades.',
+      'Athalan Skree unlocks Drying Rack, Tanning Station, Spinning Wheel, Loom, and Ranger bow upgrades.',
     ]},
     {text:'Iron Armor set crafted',tags:['group'],steps:[
       'All: Mine iron ore from Springlands rocky outcrops (grey ore nodes).',
@@ -689,6 +695,12 @@ const PHASES = [
       'Barbarian: 360° cleave. Healer: AoE water healing aura.',
       'All: Each player deliberately fills and fires their Ultimate once to confirm it works.',
     ]},
+    {text:'Carpenter (Cade Hawthorn) rescued — Low Meadows vault',tags:['group'],steps:[
+      'Carpenter vault is SE of the Hunter vault in Low Meadows.',
+      'Clear enemies around the vault entrance before going in.',
+      'Rescue Cade and return to base.',
+      'Unlocks Kiln, Table Saw, Masonry Tools — enables advanced building and bulk wood planks.',
+    ]},
   ]},
   {id:3,name:'Revelwood',sessions:'4–5',lvlRange:'15–28',objectives:[
     {text:'Revelwood Spire activated',tags:['group'],steps:[
@@ -697,11 +709,11 @@ const PHASES = [
       'Fight to Spire top the same way as Springlands.',
       'Activate crystal to unlock Revelwood fast travel.',
     ]},
-    {text:'Sage (Ominira) rescued',tags:['group'],steps:[
-      'Follow the Sage quest marker in the Revelwood forest.',
-      'Her location is often inside a shroud pocket — watch the shroud meter.',
-      'Rescue and return to base. Build her a bed.',
-      'Wizard: Talk to Ominira specifically — she has wizard-specific upgrade recipes.',
+    {text:'Bard (Valory) rescued — Sunken Ancient City',tags:['group'],steps:[
+      'Triggered via Flame quest at around level 12 — check quest log for the Sunken City marker.',
+      'Sunken Ancient City is in the Revelwood/Blackmire border area.',
+      'Clear the area and talk to Valory to rescue her.',
+      'She unlocks instruments and cosmetic armor recipes at her workbench.',
     ]},
     {text:'Revelwood vault cleared',tags:['group'],steps:[
       'Vault = the dungeon marked on the Revelwood map.',
@@ -855,6 +867,18 @@ const PHASES = [
       'All players at level 45 with final gear in inventory.',
       '1.0 launches Autumn 2026 — floating islands will be a new explorable biome.',
       'Keep save file intact. When 1.0 drops, load your current save and continue.',
+    ]},
+    {text:"Fisher (Capt. Melville Fontane) rescued — Ol' Captain's Rest",tags:['group'],steps:[
+      "Find Ol' Captain's Rest in Veilwater Basin — marked on map.",
+      'Clear the area and rescue Capt. Fontane.',
+      "Required to start the Hydrak'Dal questline — do this before attempting the final boss.",
+      'He unlocks fishing rods, bait, and the Seafood Grill for fish food buffs (+max oxygen).',
+    ]},
+    {text:"Barber (Elio Ricci) rescued — Elder's Night Sanctum",tags:['group'],steps:[
+      "Find Elder's Night Sanctum in Veilwater Basin.",
+      'Clear the sanctum and rescue Elio.',
+      'He unlocks the Coloring Station for character appearance customization.',
+      'Optional but worth doing while exploring Veilwater.',
     ]},
   ]},
 ];
@@ -1085,6 +1109,26 @@ const CRAFTING = [
   {name:'Rooibos Tea',cat:'food',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'+Stamina + stamina regen. Nomad Highlands ingredient. Good liquid slot item.'},
 ];
 
+// ── SYNC MAP — objective key ↔ survivor id ───────────────────────────
+// Phase 1: o0-o7 original + o8 collector
+// Phase 2: o0-o9 original + o10 carpenter
+// Phase 3: o1 = bard
+// Phase 5: o0-o7 original + o8 fisher + o9 barber
+const SURVIVOR_TO_OBJ = {
+  blacksmith: 'p1-o2',
+  collector:  'p1-o8',
+  farmer:     'p2-o1',
+  alchemist:  'p2-o2',
+  hunter:     'p2-o3',
+  carpenter:  'p2-o10',
+  bard:       'p3-o1',
+  fisher:     'p5-o8',
+  barber:     'p5-o9',
+};
+const OBJ_TO_SURVIVOR = Object.fromEntries(Object.entries(SURVIVOR_TO_OBJ).map(([s,o])=>[o,s]));
+const ALL_SURVIVORS_OBJ = 'p5-o2';  // "All NPC survivors rescued"
+const CRAFTSPERSON_IDS  = ['blacksmith','alchemist','farmer','hunter','carpenter','collector','bard','fisher','barber'];
+
 // ── STATE ────────────────────────────────────────────────────────────
 function loadState() {
   try { return JSON.parse(localStorage.getItem('enshrouded-bros-v3')) || {}; }
@@ -1236,8 +1280,21 @@ function buildLootHTML() {
   </div>`;
 }
 
-function toggleObj(key){STATE.checked[key]=!STATE.checked[key];saveState();renderAll();}
+function toggleObj(key){
+  STATE.checked[key]=!STATE.checked[key];
+  const done=STATE.checked[key];
+  // Sync to survivor if this obj maps to one
+  const sid=OBJ_TO_SURVIVOR[key];
+  if(sid){ STATE.survivors[sid]=done; }
+  // "All NPC survivors rescued" — checking it rescues all craftspeople
+  if(key===ALL_SURVIVORS_OBJ && done){
+    CRAFTSPERSON_IDS.forEach(id=>{ STATE.survivors[id]=true; });
+    Object.values(SURVIVOR_TO_OBJ).forEach(k=>{ STATE.checked[k]=true; });
+  }
+  saveState();renderAll();
+}
 function toggleSteps(key){const el=document.getElementById('steps-'+key);if(el)el.classList.toggle('open');}
+
 function addLoot(){
   const name=document.getElementById('loot-name')?.value?.trim();
   if(!name) return;
@@ -1439,7 +1496,17 @@ function renderSurvivors() {
     </div>`;
   }).join('');
 }
-function toggleSurvivor(id) { STATE.survivors[id] = !STATE.survivors[id]; saveState(); renderSurvivors(); }
+function toggleSurvivor(id){
+  STATE.survivors[id]=!STATE.survivors[id];
+  const rescued=STATE.survivors[id];
+  // Sync to matching phase objective if one exists
+  const okey=SURVIVOR_TO_OBJ[id];
+  if(okey){ STATE.checked[okey]=rescued; }
+  // Auto-check "All NPC survivors rescued" if every craftsperson is now rescued
+  const allDone=CRAFTSPERSON_IDS.every(i=>STATE.survivors[i]);
+  STATE.checked[ALL_SURVIVORS_OBJ]=allDone;
+  saveState();renderAll();
+}
 function setSurvivorFilter(f) { STATE.survivorFilter = f; saveState(); renderSurvivors(); }
 
 // ── CRAFTING ─────────────────────────────────────────────────────────
