@@ -242,6 +242,30 @@ footer a:hover{color:var(--gold)}
 
 @media(max-width:600px){h1{font-size:1.8rem}.party-grid{grid-template-columns:repeat(2,1fr)}.campaign-progress{grid-template-columns:repeat(3,1fr)}.u8-grid{grid-template-columns:1fr}}
 
+/* Crafting reference */
+.craft-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.craft-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;align-items:center}
+.craft-filter-row{display:flex;flex-wrap:wrap;gap:.3rem}
+.craft-filter-btn{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.08em;padding:.3rem .7rem;border-radius:3px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .2s}
+.craft-filter-btn:hover{border-color:var(--ember);color:var(--ember)}
+.craft-filter-btn.active{background:rgba(232,97,42,.15);border-color:var(--ember);color:var(--ember-bright)}
+.craft-search{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:.35rem .7rem;color:var(--text);font-family:'Crimson Pro',serif;font-size:.85rem;outline:none;transition:border-color .2s;min-width:160px}
+.craft-search:focus{border-color:var(--gold)}
+.craft-search::placeholder{color:var(--text-dim)}
+.craft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.7rem}
+.craft-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:.9rem;transition:border-color .2s}
+.craft-card:hover{border-color:rgba(212,168,75,.3)}
+.craft-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.4rem;margin-bottom:.3rem}
+.craft-card-name{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold-light);line-height:1.3}
+.craft-level{font-family:'Cinzel',serif;font-size:.58rem;background:rgba(212,168,75,.12);border:1px solid rgba(212,168,75,.3);color:var(--gold);border-radius:2px;padding:.1rem .35rem;white-space:nowrap;flex-shrink:0}
+.craft-card-tags{display:flex;gap:.3rem;margin-bottom:.5rem;flex-wrap:wrap}
+.craft-ingredients{list-style:none;margin-bottom:.5rem}
+.craft-ingredients li{font-size:.78rem;color:var(--text);padding:.1rem 0;padding-left:.9rem;position:relative;line-height:1.4}
+.craft-ingredients li::before{content:'·';position:absolute;left:0;color:var(--ember)}
+.craft-station{font-size:.68rem;color:var(--text-dim);font-style:italic;border-top:1px solid rgba(255,255,255,.05);padding-top:.4rem;margin-top:.3rem}
+.craft-notes{font-size:.7rem;color:var(--ash);margin-top:.3rem;line-height:1.4}
+.craft-disclaimer{margin-top:.8rem;font-size:.7rem;color:var(--text-dim);font-style:italic}
+
 /* Objective steps */
 .obj-info-btn{background:none;border:1px solid rgba(212,168,75,.25);border-radius:3px;color:var(--text-dim);font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.05em;padding:.1rem .4rem;cursor:pointer;margin-left:.5rem;transition:all .2s;vertical-align:middle}
 .obj-info-btn:hover{border-color:var(--gold);color:var(--gold)}
@@ -341,6 +365,18 @@ footer a:hover{color:var(--gold)}
   <div class="phase-tabs" id="phase-tabs"></div>
   <div class="phases-progress" id="phases-prog"></div>
   <div id="phase-panels"></div>
+</div>
+
+<!-- ── CRAFTING REFERENCE ── -->
+<div class="craft-section">
+  <div class="section-title">🔨 Crafting Reference</div>
+  <div class="craft-filters">
+    <div class="craft-filter-row" id="craft-cats"></div>
+    <div class="craft-filter-row" id="craft-roles"></div>
+    <input class="craft-search" id="craft-search" placeholder="Search items or ingredients…" oninput="renderCrafting()">
+  </div>
+  <div class="craft-grid" id="craft-grid"></div>
+  <div class="craft-disclaimer">* Quantities approximate — verify in-game. Most recipes unlock after rescuing the relevant NPC.</div>
 </div>
 
 <!-- ── U8 REFERENCE ── -->
@@ -720,6 +756,88 @@ const PHASES = [
   ]},
 ];
 
+// ── CRAFTING DATA ────────────────────────────────────────────────────
+const CRAFT_CATS = [
+  {id:'all',label:'All'},
+  {id:'potion',label:'Potions'},
+  {id:'weapon',label:'Weapons'},
+  {id:'armor',label:'Armor'},
+  {id:'tool',label:'Tools'},
+  {id:'station',label:'Workstations'},
+];
+const CRAFT_ROLES = [
+  {id:'all',label:'All'},
+  {id:'group',label:'Group'},
+  {id:'ranger',label:'Ranger'},
+  {id:'barbarian',label:'Barb'},
+  {id:'wizard',label:'Wizard'},
+  {id:'healer',label:'Healer'},
+];
+let CRAFT_STATE = {cat:'all', role:'all'};
+
+const CRAFTING = [
+  // ── POTIONS ──────────────────────────────────────────────────────
+  {name:'Basic Health Potion',cat:'potion',role:'healer',level:1,station:'Hand Craft / Alchemist',ingredients:['Berry ×2','Water Vial ×1'],notes:'Craft before every session. Distribute 2 per player.'},
+  {name:'Health Potion',cat:'potion',role:'healer',level:8,station:'Alchemist (Athalan Skree)',ingredients:['Indigo Plant ×2','Water Vial ×1']},
+  {name:'Strong Health Potion',cat:'potion',role:'healer',level:20,station:'Alchemist (Athalan Skree)',ingredients:['Yarrow ×3','Water Vial ×1']},
+  {name:'Mana Potion',cat:'potion',role:'wizard',level:8,station:'Alchemist (Athalan Skree)',ingredients:['Blue Amaranth ×2','Water Vial ×1']},
+  {name:'Strong Mana Potion',cat:'potion',role:'wizard',level:20,station:'Alchemist (Athalan Skree)',ingredients:['Blue Amaranth ×4','Water Vial ×1']},
+  {name:'Stamina Potion',cat:'potion',role:'group',level:8,station:'Alchemist (Athalan Skree)',ingredients:['Shrubberry ×2','Water Vial ×1']},
+  {name:'Antidote',cat:'potion',role:'group',level:28,station:'Alchemist (Athalan Skree)',ingredients:['Swamp Herb ×3','Water Vial ×1'],notes:'Blackmire poison — bring 4 each before entering.'},
+  {name:'Fire Resistance Elixir',cat:'potion',role:'group',level:38,station:'Alchemist (Athalan Skree)',ingredients:['Ember Moss ×2','Water Vial ×1'],notes:'Kindlewastes — craft before endgame biome.'},
+  {name:'Glider Mushroom Elixir',cat:'potion',role:'ranger',level:15,station:'Alchemist (Athalan Skree)',ingredients:['Glider Mushroom ×3','Water Vial ×1'],notes:'Extends glide duration. Good for Ranger scouting runs.'},
+  // ── WEAPONS — RANGER ─────────────────────────────────────────────
+  {name:'Shortbow',cat:'weapon',role:'ranger',level:1,station:'Workbench',ingredients:['Wood Plank ×10','String ×5'],notes:'Starter bow. Craft immediately on spawn.'},
+  {name:'Longbow',cat:'weapon',role:'ranger',level:10,station:'Hunter Workbench (Kohlwald)',ingredients:['Wood Plank ×8','String ×8','Iron Bar ×2'],notes:'Needs Hunter rescued first.'},
+  {name:'Crossbow',cat:'weapon',role:'ranger',level:20,station:'Hunter Workbench (Kohlwald)',ingredients:['Iron Bar ×4','String ×6','Wood ×4']},
+  {name:'Dagger',cat:'weapon',role:'ranger',level:5,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×2','Leather ×1'],notes:'Secondary slot for stealth builds. U8 stealth damage buffed.'},
+  // ── WEAPONS — BARBARIAN ───────────────────────────────────────────
+  {name:'Stone Axe',cat:'weapon',role:'barbarian',level:1,station:'Workbench',ingredients:['Stone ×5','Wood ×3'],notes:'Starter weapon. Replace ASAP with Iron.'},
+  {name:'Iron Sword',cat:'weapon',role:'barbarian',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×3','Wood ×2']},
+  {name:'Iron Axe',cat:'weapon',role:'barbarian',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×2','Wood ×2']},
+  {name:'Two-Handed Sword',cat:'weapon',role:'barbarian',level:15,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×5','Leather ×2'],notes:'U8 heavy attack on 2H = 360° cleave. High value.'},
+  {name:'Warhammer',cat:'weapon',role:'barbarian',level:20,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×6','Wood ×3'],notes:'U8 Ultimate = powerful slam. Best for boss fights.'},
+  // ── WEAPONS — WIZARD ─────────────────────────────────────────────
+  {name:'Wand',cat:'weapon',role:'wizard',level:1,station:'Workbench',ingredients:['Wood ×5','Resin ×3']},
+  {name:'Fire Wand',cat:'weapon',role:'wizard',level:10,station:'Arcane Workbench (Sage)',ingredients:['Wood ×4','Ember Shard ×3'],notes:'Needs Sage (Ominira) rescued. U8 Ultimate = AoE orb.'},
+  {name:'Ice Staff',cat:'weapon',role:'wizard',level:20,station:'Arcane Workbench (Sage)',ingredients:['Wood ×6','Ice Crystal ×3']},
+  // ── WEAPONS — HEALER ─────────────────────────────────────────────
+  {name:'Healing Wand',cat:'weapon',role:'healer',level:5,station:'Workbench',ingredients:['Wood ×4','Resin ×2']},
+  {name:'Water Staff',cat:'weapon',role:'healer',level:10,station:'Arcane Workbench (Sage)',ingredients:['Wood ×6','Water Crystal ×2'],notes:'Needs Sage rescued. U8 Ultimate = AoE water heal aura.'},
+  // ── ARMOR — FUR (LV 1–5) ─────────────────────────────────────────
+  {name:'Fur Hood',cat:'armor',role:'barbarian',level:1,station:'Workbench',ingredients:['Fur ×2','String ×1'],notes:'Fur set — hunt wolves/foxes.'},
+  {name:'Fur Chestpiece',cat:'armor',role:'barbarian',level:1,station:'Workbench',ingredients:['Fur ×4','String ×2']},
+  {name:'Fur Leggings',cat:'armor',role:'barbarian',level:1,station:'Workbench',ingredients:['Fur ×3','String ×1']},
+  {name:'Fur Gloves',cat:'armor',role:'barbarian',level:1,station:'Workbench',ingredients:['Fur ×2']},
+  {name:'Fur Boots',cat:'armor',role:'barbarian',level:1,station:'Workbench',ingredients:['Fur ×2']},
+  // ── ARMOR — IRON (LV 8–15) ───────────────────────────────────────
+  {name:'Iron Helmet',cat:'armor',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×3','Leather ×1'],notes:'Iron set — smelt ore at Forge with charcoal.'},
+  {name:'Iron Chestplate',cat:'armor',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×5','Leather ×2']},
+  {name:'Iron Leggings',cat:'armor',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×4','Leather ×1']},
+  {name:'Iron Gauntlets',cat:'armor',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×2','Leather ×1']},
+  {name:'Iron Boots',cat:'armor',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×2','Leather ×1']},
+  // ── TOOLS ────────────────────────────────────────────────────────
+  {name:'Grappling Hook',cat:'tool',role:'ranger',level:1,station:'Workbench',ingredients:['Rope ×5','Metal Scraps ×3'],notes:'Ranger priority item. Craft session 1.'},
+  {name:'Glider',cat:'tool',role:'ranger',level:1,station:'Workbench',ingredients:['Cloth ×8','Wood Plank ×4'],notes:'Craft alongside Grappling Hook.'},
+  {name:'Grappling Hook Upgrade',cat:'tool',role:'ranger',level:10,station:'Workbench',ingredients:['Iron Bar ×3','Rope ×8'],notes:'Longer range + less stamina drain.'},
+  {name:'Glider Upgrade',cat:'tool',role:'ranger',level:15,station:'Workbench',ingredients:['Silk ×4','Iron Bar ×2','Cloth ×4'],notes:'Extended glide time. Pair with Mushroom Elixir.'},
+  {name:'Torch',cat:'tool',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×1','Resin ×1'],notes:'Blackmire — bring extras.'},
+  {name:'Pickaxe',cat:'tool',role:'group',level:1,station:'Workbench',ingredients:['Stone ×3','Wood ×2']},
+  {name:'Iron Pickaxe',cat:'tool',role:'group',level:8,station:'Forge (Blacksmith)',ingredients:['Iron Bar ×2','Wood ×2'],notes:'Needed for harder ore veins.'},
+  {name:'Rope',cat:'tool',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×5'],notes:'Stock up — used in many recipes.'},
+  {name:'Lockpick',cat:'tool',role:'ranger',level:5,station:'Workbench',ingredients:['Iron Bar ×1','String ×1'],notes:'Opens locked chests in dungeons. Ranger carries stock.'},
+  // ── WORKSTATIONS ─────────────────────────────────────────────────
+  {name:'Crafting Bench',cat:'station',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×20','Stone ×10'],notes:'Build first. Unlocks all other recipes.'},
+  {name:'Flame Altar',cat:'station',role:'group',level:1,station:'Hand Craft',ingredients:['Stone ×20','Wood ×10'],notes:'Place inside base. Defines your respawn + base boundary.'},
+  {name:'Forge',cat:'station',role:'wizard',level:1,station:'Needs: Blacksmith (Oswald)',ingredients:['Stone ×40','Wood ×20'],notes:'Wizard builds and manages. Smelts iron/steel.'},
+  {name:'Charcoal Kiln',cat:'station',role:'wizard',level:1,station:'Needs: Blacksmith (Oswald)',ingredients:['Stone ×20'],notes:'Feeds the Forge. Keep stocked with wood at all times.'},
+  {name:'Alchemy Lab',cat:'station',role:'healer',level:5,station:'Needs: Alchemist (Athalan)',ingredients:['Wood ×15','Stone ×5','Glass ×3'],notes:'Healer builds and manages. Unlocks all mid/high-tier potions.'},
+  {name:'Farming Plot',cat:'station',role:'healer',level:5,station:'Needs: Farmer (Lisandra)',ingredients:['Wood ×10','Soil ×5'],notes:'Grows potion ingredients. Healer maintains supply.'},
+  {name:'Hunter Workbench',cat:'station',role:'ranger',level:10,station:'Needs: Hunter (Kohlwald)',ingredients:['Wood ×15','Bone ×3'],notes:'Ranger priority — unlocks Longbow and Crossbow.'},
+  {name:'Arcane Workbench',cat:'station',role:'wizard',level:15,station:'Needs: Sage (Ominira)',ingredients:['Wood ×15','Crystal ×2'],notes:'Wizard + Healer weapons. Requires Revelwood-tier progression.'},
+  {name:'Dye Station',cat:'station',role:'healer',level:15,station:'Workbench + rare Dye Plants',ingredients:['Wood ×10','Dye Plant ×3'],notes:'Healer builds. Cosmetic armor colors — do during downtime.'},
+];
+
 // ── STATE ────────────────────────────────────────────────────────────
 function loadState() {
   try { return JSON.parse(localStorage.getItem('enshrouded-bros-v3')) || {}; }
@@ -977,6 +1095,40 @@ function initLiveSync(){
   setInterval(fetchLive, POLL_MS);
 }
 
+// ── CRAFTING ─────────────────────────────────────────────────────────
+function renderCrafting() {
+  const search=(document.getElementById('craft-search')?.value||'').toLowerCase();
+  const {cat,role}=CRAFT_STATE;
+  const items=CRAFTING.filter(i=>{
+    if(cat!=='all'&&i.cat!==cat) return false;
+    if(role!=='all'&&i.role!==role&&i.role!=='group') return false;
+    if(search&&!i.name.toLowerCase().includes(search)&&!i.ingredients.join(' ').toLowerCase().includes(search)&&!(i.station||'').toLowerCase().includes(search)) return false;
+    return true;
+  });
+  document.getElementById('craft-cats').innerHTML=CRAFT_CATS.map(c=>
+    `<button class="craft-filter-btn${CRAFT_STATE.cat===c.id?' active':''}" onclick="setCraftCat('${c.id}')">${c.label}</button>`
+  ).join('');
+  document.getElementById('craft-roles').innerHTML=CRAFT_ROLES.map(r=>
+    `<button class="craft-filter-btn${CRAFT_STATE.role===r.id?' active':''}" onclick="setCraftRole('${r.id}')">${r.label}</button>`
+  ).join('');
+  document.getElementById('craft-grid').innerHTML=items.length?items.map(item=>{
+    const ingreds=item.ingredients.map(ing=>`<li>${ing}</li>`).join('');
+    const roleTag=`<span class="tag ${tcls(item.role)}">${tlbl(item.role)}</span>`;
+    return `<div class="craft-card">
+      <div class="craft-card-header">
+        <div class="craft-card-name">${item.name}</div>
+        <span class="craft-level">Lv ${item.level}</span>
+      </div>
+      <div class="craft-card-tags">${roleTag}</div>
+      <ul class="craft-ingredients">${ingreds}</ul>
+      <div class="craft-station">${item.station}</div>
+      ${item.notes?`<div class="craft-notes">${item.notes}</div>`:''}
+    </div>`;
+  }).join(''):'<div style="color:var(--text-dim);font-style:italic;padding:1rem 0">No items match.</div>';
+}
+function setCraftCat(cat){CRAFT_STATE.cat=cat;renderCrafting();}
+function setCraftRole(role){CRAFT_STATE.role=role;renderCrafting();}
+
 // ── RESET ────────────────────────────────────────────────────────────
 function confirmReset(){
   if(!confirm('Reset ALL campaign progress? Cannot be undone.')) return;
@@ -987,7 +1139,7 @@ function confirmReset(){
 }
 
 // ── RENDER ALL ───────────────────────────────────────────────────────
-function renderAll(){renderParty();renderPhaseTabs();renderCampaign();renderPanels();updateStats();}
+function renderAll(){renderParty();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderCrafting();}
 
 // ── BOOT ─────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
