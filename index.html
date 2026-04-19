@@ -241,6 +241,16 @@ footer a:hover{color:var(--gold)}
 .reset-btn:hover{border-color:#e74c3c;color:#e74c3c}
 
 @media(max-width:600px){h1{font-size:1.8rem}.party-grid{grid-template-columns:repeat(2,1fr)}.campaign-progress{grid-template-columns:repeat(3,1fr)}.u8-grid{grid-template-columns:1fr}}
+
+/* Objective steps */
+.obj-info-btn{background:none;border:1px solid rgba(212,168,75,.25);border-radius:3px;color:var(--text-dim);font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.05em;padding:.1rem .4rem;cursor:pointer;margin-left:.5rem;transition:all .2s;vertical-align:middle}
+.obj-info-btn:hover{border-color:var(--gold);color:var(--gold)}
+.obj-item.done .obj-info-btn{opacity:.5}
+.obj-steps{display:none;margin-top:.55rem;padding:.6rem .8rem;background:rgba(212,168,75,.04);border:1px solid rgba(212,168,75,.15);border-radius:4px}
+.obj-steps.open{display:block}
+.obj-steps-who{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.4rem;text-transform:uppercase}
+.obj-steps ol{padding-left:1.3rem;margin:0}
+.obj-steps li{font-size:.8rem;color:var(--ash);line-height:1.55;padding:.1rem 0}
 </style>
 </head>
 <body>
@@ -418,58 +428,284 @@ const HEROES = [
 
 const PHASES = [
   {id:1,name:'Starting Out',sessions:'1',lvlRange:'1–5',objectives:[
-    {text:'Flame Altar placed and base established',tags:['group']},
-    {text:'Bow + 10 arrows crafted',tags:['ranger']},
-    {text:'Blacksmith (Oswald Anders) rescued',tags:['group']},
-    {text:'Grappling Hook and Glider crafted',tags:['ranger']},
-    {text:'Forge and Charcoal Kiln built',tags:['wizard']},
-    {text:'Fur Armor set crafted',tags:['barbarian']},
-    {text:'Basic Health Potions ×4 distributed',tags:['healer']},
-    {text:'NPC shelter hut built',tags:['healer']},
+    {text:'Flame Altar placed and base established',tags:['group'],steps:[
+      'All: Gather 20 wood + 10 stone each before meeting up.',
+      'Ranger: Scout for a flat area near trees and stone — mark it.',
+      'All: Build a 3×3 floor + walls. Ranger places Flame Altar inside.',
+      'All: Add a roof and door. Base is active when the Altar lights up.',
+    ]},
+    {text:'Bow + 10 arrows crafted',tags:['ranger'],steps:[
+      'Ranger: Press C to open the crafting menu.',
+      'Craft Bow: needs 10 wood planks + 5 string (harvest Plant Fiber, then craft String).',
+      'Craft Arrows: 10 sticks (chop wood) + 10 feathers (kill birds near spawn).',
+      'Equip bow in weapon slot 1.',
+    ]},
+    {text:'Blacksmith (Oswald Anders) rescued',tags:['group'],steps:[
+      'All: Follow the "Rescue the Blacksmith" main quest marker.',
+      'Barbarian: Frontline the enemies outside his building. Ranger/Wizard: ranged support.',
+      'Enter building, talk to Oswald, select "Come with me".',
+      'Healer: Build a small hut with a bed near the Flame Altar and assign Oswald to it.',
+    ]},
+    {text:'Grappling Hook and Glider crafted',tags:['ranger'],steps:[
+      'Requires Blacksmith rescued first (see above).',
+      'Ranger: Craft Grappling Hook at workbench (needs metal scraps + rope).',
+      'Craft Glider (needs cloth + wood planks).',
+      'Assign both to quick slots. Test by grappling a cliff and gliding down.',
+    ]},
+    {text:'Forge and Charcoal Kiln built',tags:['wizard'],steps:[
+      'Wizard: Talk to Blacksmith — this unlocks the Forge recipe.',
+      'Gather 40 stone + 20 wood. Place Forge adjacent to base.',
+      'Build Charcoal Kiln next to Forge (needs 20 stone). Feed it wood to produce charcoal.',
+      'Charcoal fuels the Forge for metal smelting — keep it stocked.',
+    ]},
+    {text:'Fur Armor set crafted',tags:['barbarian'],steps:[
+      'Barbarian: Hunt wolves/foxes in the starting area for Fur pelts.',
+      'Need ~15 Fur total for a full set (head/chest/legs/hands/feet).',
+      'Craft all 5 pieces at workbench. Equip everything.',
+      'U8 note: All armor starts equal — upgrade it at the Forge to scale.',
+    ]},
+    {text:'Basic Health Potions ×4 distributed',tags:['healer'],steps:[
+      'Healer: Gather 8 Berries + 4 water vials from the environment.',
+      'Craft 8 Basic Health Potions at the Alchemy workbench (or hand-craft menu).',
+      'Open inventory, right-click 2 potions → "Give to player" for each teammate.',
+      'Each player keeps 2 potions in a quick slot. Restock after fights.',
+    ]},
+    {text:'NPC shelter hut built',tags:['healer'],steps:[
+      'Healer: Build a 3×3 enclosed structure with a roof near the Flame Altar.',
+      'Place 1 bed inside for each NPC you plan to rescue.',
+      'Talk to each rescued NPC and assign them to the shelter.',
+      'Unlocks NPC services (crafting stations, vendor). Priority: get a roof over their heads first.',
+    ]},
   ]},
   {id:2,name:'Springlands',sessions:'2–3',lvlRange:'5–15',objectives:[
-    {text:'Springlands Ancient Spire reached and activated',tags:['group']},
-    {text:'Farmer (Lisandra) rescued for crops',tags:['group']},
-    {text:'Alchemist (Athalan Skree) rescued',tags:['group']},
-    {text:'Hunter (Kohlwald) rescued',tags:['group']},
-    {text:'Iron Armor set crafted',tags:['group']},
-    {text:'Healing Potion supply established ×8',tags:['healer']},
-    {text:'Grappling Hook + Glider upgrades researched',tags:['ranger']},
-    {text:'First Shroud Root boss defeated',tags:['group']},
-    {text:'Heavy attack technique practiced',tags:['group'],u8:true},
-    {text:'Weapon Ultimate bars — test all 4 roles',tags:['group'],u8:true},
+    {text:'Springlands Ancient Spire reached and activated',tags:['group'],steps:[
+      'All: Equip your best gear and bring 4+ health potions each.',
+      'Ranger: Lead the route — use Glider to scout shroud edges safely.',
+      'All: Fight up the Spire tower together floor by floor.',
+      'All: Interact with the Spire crystal to unlock fast travel.',
+    ]},
+    {text:'Farmer (Lisandra) rescued for crops',tags:['group'],steps:[
+      'Follow the Farmer quest marker in Springlands.',
+      'Clear the area — she is usually inside a ruined building.',
+      'Talk to Lisandra and escort her or fast-travel back together.',
+      'Healer: Build her a bed in the NPC shelter. She unlocks farming crops.',
+    ]},
+    {text:'Alchemist (Athalan Skree) rescued',tags:['group'],steps:[
+      'Follow the Alchemist quest marker in Springlands.',
+      'Combat area — Barbarian tanks, others assist from range.',
+      'Talk to Athalan and bring him back to base.',
+      'Build an Alchemy Lab workbench to unlock his better potion recipes.',
+    ]},
+    {text:'Hunter (Kohlwald) rescued',tags:['group'],steps:[
+      'Follow the Hunter quest marker into the forest area.',
+      'Clear the enemy camp around him.',
+      'Rescue and return to base. Give him a bed.',
+      'Kohlwald unlocks advanced hunting recipes and Ranger bow upgrades.',
+    ]},
+    {text:'Iron Armor set crafted',tags:['group'],steps:[
+      'All: Mine iron ore from Springlands rocky outcrops (grey ore nodes).',
+      'Smelt into Iron Bars at the Forge — needs charcoal from the Kiln.',
+      'Each player crafts their own set at the Forge.',
+      'U8: Upgrade armor immediately after crafting — tier matters more than rarity now.',
+    ]},
+    {text:'Healing Potion supply established ×8',tags:['healer'],steps:[
+      'Healer: Farm herbs/berries and plant Farmer Lisandra\'s crops for a steady supply.',
+      'Craft 8+ mid-tier Healing Potions at the Alchemy Lab.',
+      'Distribute 2 per player. Keep 2 in a labeled chest as party reserve.',
+      'Restock the chest every session.',
+    ]},
+    {text:'Grappling Hook + Glider upgrades researched',tags:['ranger'],steps:[
+      'Ranger: Craft upgraded Grappling Hook at workbench (needs iron bars + rope).',
+      'Craft upgraded Glider (needs cloth + iron parts). Increases range and cuts stamina use.',
+      'Test upgraded Glider from Spire height to confirm improvement.',
+      'Share locations of upgrade materials with the party so others can find them.',
+    ]},
+    {text:'First Shroud Root boss defeated',tags:['group'],steps:[
+      'All: Bring 4+ health potions and full iron armor before attempting.',
+      'Find the Shroud Root on the map — yellow marker inside a shroud zone.',
+      'Ranger: Attack root core from range. Wizard: AoE the spawning tendrils.',
+      'Barbarian: Melee the core directly. Healer: Stay back, toss potions when anyone drops low.',
+      'Defeat drops rare crafting materials — split evenly.',
+    ]},
+    {text:'Heavy attack technique practiced',tags:['group'],u8:true,steps:[
+      'U8 NEW: Hold the attack button (instead of tapping) to charge a Heavy Attack.',
+      'Each weapon type differs: swords do a power slam, bows charge a piercing shot.',
+      'All: Spend 10 minutes in a low-risk area practicing charge timing.',
+      'Heavy attacks deal 2–3× damage and stagger enemies — use before every big fight.',
+    ]},
+    {text:'Weapon Ultimate bars — test all 4 roles',tags:['group'],u8:true,steps:[
+      'U8 NEW: Kill enemies to fill the Ultimate meter (shown under your health bar).',
+      'Ranger: Ultimate = multi-shot burst. Wizard: AoE orb explosion.',
+      'Barbarian: 360° cleave. Healer: AoE water healing aura.',
+      'All: Each player deliberately fills and fires their Ultimate once to confirm it works.',
+    ]},
   ]},
   {id:3,name:'Revelwood',sessions:'4–5',lvlRange:'15–28',objectives:[
-    {text:'Revelwood Spire activated',tags:['group']},
-    {text:'Sage (Ominira) rescued',tags:['group']},
-    {text:'Revelwood vault cleared',tags:['group']},
-    {text:'Skill trees rebuilt after U8 reset',tags:['group'],u8:true},
-    {text:'Armor upgraded at least once each hero',tags:['group'],u8:true},
-    {text:'I-frame dodge unlocked (Strategic Maneuver)',tags:['ranger','wizard'],u8:true},
-    {text:'Steeple Spire activated',tags:['group']},
-    {text:'Dye Station built + cosmetics sorted',tags:['healer']},
-    {text:'Revelwood boss defeated',tags:['group']},
+    {text:'Revelwood Spire activated',tags:['group'],steps:[
+      'All: Upgrade to iron or steel gear and bring 6 potions each before entering Revelwood.',
+      'Revelwood has denser shroud and tougher enemies — do not rush in under-geared.',
+      'Fight to Spire top the same way as Springlands.',
+      'Activate crystal to unlock Revelwood fast travel.',
+    ]},
+    {text:'Sage (Ominira) rescued',tags:['group'],steps:[
+      'Follow the Sage quest marker in the Revelwood forest.',
+      'Her location is often inside a shroud pocket — watch the shroud meter.',
+      'Rescue and return to base. Build her a bed.',
+      'Wizard: Talk to Ominira specifically — she has wizard-specific upgrade recipes.',
+    ]},
+    {text:'Revelwood vault cleared',tags:['group'],steps:[
+      'Vault = the dungeon marked on the Revelwood map.',
+      'All: Bring max potions and best gear. Barbarian leads and tanks.',
+      'Multi-room dungeon — stick together, no rushing ahead alone.',
+      'Vault boss drops Revelwood-tier weapon and armor components. Split loot.',
+    ]},
+    {text:'Skill trees rebuilt after U8 reset',tags:['group'],u8:true,steps:[
+      'U8: All skill points are auto-refunded when you log in after the patch.',
+      'Immediately open the Skill Tree (K key) — do not play until trees are rebuilt.',
+      'Ranger: Agility + Ranged Damage first. Barbarian: Strength + Health.',
+      'Wizard: Mana + AoE nodes. Healer: Support + Water tree nodes.',
+      'Spend ALL points before heading into the world.',
+    ]},
+    {text:'Armor upgraded at least once each hero',tags:['group'],u8:true,steps:[
+      'U8 NEW: Armor upgrades at the Forge using crafting materials.',
+      'Open Forge → select armor piece → Upgrade tab.',
+      'All: Upgrade the chest piece first — it gives the biggest stat gain.',
+      'Each upgrade adds base stats. Do this before any hard content.',
+    ]},
+    {text:'I-frame dodge unlocked (Strategic Maneuver)',tags:['ranger','wizard'],u8:true,steps:[
+      'U8 NEW: Invincibility frames during dodge require a skill tree unlock.',
+      'Ranger + Wizard: Open Skill Tree (K), find "Strategic Maneuver" in the Agility branch.',
+      'Costs 2 skill points. Invest immediately after the U8 reset.',
+      'To test: dodge through an enemy attack — you should take 0 damage during the roll.',
+    ]},
+    {text:'Steeple Spire activated',tags:['group'],steps:[
+      'Secondary spire in the Revelwood region — check map for the marker.',
+      'Smaller combat encounter than the main Spire.',
+      'All activate it together for an extra fast travel point.',
+      'Useful as a staging area for vault runs.',
+    ]},
+    {text:'Dye Station built + cosmetics sorted',tags:['healer'],steps:[
+      'Healer: Craft the Dye Station at the workbench (needs rare wood + dye reagents).',
+      'Gather flowers and specific plants from Revelwood for dye reagents.',
+      'Place station in base. Each player can color their armor.',
+      'Optional but good for morale — do it during a low-stress downtime session.',
+    ]},
+    {text:'Revelwood boss defeated',tags:['group'],steps:[
+      'All: Full upgraded iron/Revelwood-tier armor. Maximum potions.',
+      'Barbarian: Take aggro and hold it. Use Ultimate for DPS windows.',
+      'Ranger: Flank attack. Wizard: AoE any adds that spawn.',
+      'Healer: Stay mobile, keep everyone above 50% HP. Use water aura Ultimate during heavy damage phases.',
+      'Drops Blackmire-tier gear recipes.',
+    ]},
   ]},
   {id:4,name:'Blackmire',sessions:'6–7',lvlRange:'28–38',objectives:[
-    {text:'Blackmire Spire activated',tags:['group']},
-    {text:'Stealth build tested post-U8 rework',tags:['ranger'],u8:true},
-    {text:'Legendary gear archetype upgrades done',tags:['group'],u8:true},
-    {text:'Skill-boosting armor perks equipped on all',tags:['group'],u8:true},
-    {text:'Blackmire vault cleared',tags:['group']},
-    {text:'Blackmire boss defeated',tags:['group']},
-    {text:'Nomad Highlands Spire activated',tags:['group']},
-    {text:'Adventure Sharing V1 — share home base',tags:['group'],u8:true},
-    {text:'Level 38 weapon upgrades for all heroes',tags:['group']},
+    {text:'Blackmire Spire activated',tags:['group'],steps:[
+      'Blackmire is a swamp biome — bring torches and antidote potions.',
+      'Shroud is denser here. Upgrade Flame Altar tier before going to extend your protection.',
+      'All: Fight to Spire top. More enemies and harder than Revelwood.',
+      'Activate crystal. Sets up fast travel for all Blackmire runs.',
+    ]},
+    {text:'Stealth build tested post-U8 rework',tags:['ranger'],u8:true,steps:[
+      'U8: Stealth damage buffed and aggro changes favor stealth builds.',
+      'Ranger: Open Skill Tree, invest points in the Stealth branch.',
+      'Crouch behind an enemy, draw bow, release — you should see a large stealth damage number.',
+      'Test aggro: kill one enemy stealthily and check if nearby enemies react. They should be slower to notice.',
+    ]},
+    {text:'Legendary gear archetype upgrades done',tags:['group'],u8:true,steps:[
+      'U8: Legendary and Common armor START at equal stats — upgrading is what separates them.',
+      'All: Identify any Legendary pieces in inventory (gold border).',
+      'Upgrade each at the Forge using high-tier materials (alloys, rare gems).',
+      'Tank (Barbarian) gets more armor per upgrade. Casters (Wizard/Healer) get less armor but more magic stats.',
+    ]},
+    {text:'Skill-boosting armor perks equipped on all',tags:['group'],u8:true,steps:[
+      'U8 NEW perk: Armor pieces can push a skill tree node beyond its natural max level.',
+      'All: Inspect each armor piece — look for "Skill Boost: [Node Name]" in the perk list.',
+      'Prioritize equipping pieces that boost your most important skill nodes.',
+      'Stack these perks across multiple armor slots for compound bonuses.',
+    ]},
+    {text:'Blackmire vault cleared',tags:['group'],steps:[
+      'Blackmire vault is the hardest dungeon so far. Upgrade all armor before entering.',
+      'Bring 8 potions each. Barbarian also needs antidotes for poison.',
+      'Multi-floor dungeon with poison hazards — watch the debuff bar.',
+      'Healer: Use water aura proactively — swamp enemies hit fast and hard.',
+    ]},
+    {text:'Blackmire boss defeated',tags:['group'],steps:[
+      'Blackmire boss is around level 32–35. All must be level 28+ with upgraded gear.',
+      'Barbarian: Main tank. Use Ultimate during exposed damage windows.',
+      'Ranger: Flanking attacks from the sides or rear. Open with stealth hit if possible.',
+      'Wizard: AoE the adds that spawn during the fight. Healer: Keep everyone above 50% at all times.',
+      'Drops Nomad Highlands unlock materials.',
+    ]},
+    {text:'Nomad Highlands Spire activated',tags:['group'],steps:[
+      'Nomad Highlands is a dry/arid biome accessible after Blackmire content.',
+      'Standard Spire procedure — clear enemies, activate crystal.',
+      'All activate for the fast travel point.',
+      'This sets up the endgame staging area for Kindlewastes and Veilwater.',
+    ]},
+    {text:'Adventure Sharing V1 — share home base',tags:['group'],u8:true,steps:[
+      'U8 NEW: In-game menu now has an "Adventure Share" option.',
+      'All: Open main menu → Adventure Sharing tab.',
+      'Host (erocko38): Export the base as a share — generates a code.',
+      'Post the share code in group chat so everyone can view or import it.',
+    ]},
+    {text:'Level 38 weapon upgrades for all heroes',tags:['group'],steps:[
+      'All: Farm Blackmire materials for Tier 4 weapon recipes (check crafting menu).',
+      'Craft at Forge — needs alloy ingots + rare gem components.',
+      'Each player upgrades their main weapon to the max available tier.',
+      'Ranger: Longbow. Barbarian: 2H weapon. Wizard: Wand/staff. Healer: Water staff.',
+    ]},
   ]},
   {id:5,name:'Endgame',sessions:'8+',lvlRange:'38–45',objectives:[
-    {text:'Kindlewastes Spire activated',tags:['group']},
-    {text:'Veilwater Basin fully explored',tags:['group']},
-    {text:'All NPC survivors rescued',tags:['group']},
-    {text:'Final weapon ultimates at full power',tags:['group'],u8:true},
-    {text:'Level 45 gear — all slots upgraded',tags:['group'],u8:true},
-    {text:'Final boss of Early Access content defeated',tags:['group']},
-    {text:'Adventure Share — export final base',tags:['group'],u8:true},
-    {text:'Ready for 1.0 floating islands',tags:['group']},
+    {text:'Kindlewastes Spire activated',tags:['group'],steps:[
+      'Kindlewastes is a fire/volcanic endgame biome. Bring fire resistance potions if available.',
+      'Hardest combat encounter to reach the Spire — have all abilities and potions ready.',
+      'All: Stay together. This is not the place to split up.',
+      'Activate crystal. Final major fast travel point in Early Access.',
+    ]},
+    {text:'Veilwater Basin fully explored',tags:['group'],steps:[
+      'New U8 biome. Clear the fog of war on all map sections.',
+      'Contains Veilwater-specific resources needed for level 45 gear.',
+      'Ranger: Scout ahead with Glider and mark resource nodes on the map.',
+      'All: Clear any Veilwater dungeon or vault found during exploration.',
+    ]},
+    {text:'All NPC survivors rescued',tags:['group'],steps:[
+      'Open NPC tracker — any un-rescued survivors show as markers on the map.',
+      'Commonly missed NPCs: Carpenter, second Farmer variant, second Alchemist.',
+      'Each biome has 2–4 survivors. Sweep each biome systematically.',
+      'Healer: Make sure the base has enough beds for every NPC before the rescue run.',
+    ]},
+    {text:'Final weapon ultimates at full power',tags:['group'],u8:true,steps:[
+      'Weapon Ultimates scale with weapon tier and skill tree investment.',
+      'All: Confirm you have the highest-tier weapon equipped AND ultimate skill nodes are maxed in your tree.',
+      'Test each Ultimate against a boss-tier enemy in Veilwater.',
+      'Confirm damage output matches your build before attempting the final boss.',
+    ]},
+    {text:'Level 45 gear — all slots upgraded',tags:['group'],u8:true,steps:[
+      'Level 45 is the current cap. All gear should be level 45 tier.',
+      'All: Craft level 45 weapons and armor at the endgame Forge tier.',
+      'Upgrade every slot: head / chest / legs / hands / feet / weapon / offhand.',
+      'U8: Upgrade path — fully upgrade all pieces before attempting the final boss.',
+    ]},
+    {text:'Final boss of Early Access content defeated',tags:['group'],steps:[
+      'Full party required. All players at level 45 with max upgraded gear.',
+      'Each player brings 8 health potions + 4 special potions (antidote/fire resist as needed).',
+      'Barbarian: Main tank — use Ultimate during boss exposed phases.',
+      'Ranger: Single-target DPS on weak points. Use stealth opener if possible.',
+      'Wizard: Handle summoned adds with AoE. Save Ultimate for add waves.',
+      'Healer: Keep water aura active throughout. Hold Ultimate for emergency party heal.',
+    ]},
+    {text:'Adventure Share — export final base',tags:['group'],u8:true,steps:[
+      'After the final boss: Open menu → Adventure Sharing.',
+      'Host (erocko38): Export a base snapshot.',
+      'Include base name and total session count in the share description.',
+      'Post the code in group chat. Screenshot the share card as a memento.',
+    ]},
+    {text:'Ready for 1.0 floating islands',tags:['group'],steps:[
+      'Confirm all checklist items above are complete.',
+      'All players at level 45 with final gear in inventory.',
+      '1.0 launches Autumn 2026 — floating islands will be a new explorable biome.',
+      'Keep save file intact. When 1.0 drops, load your current save and continue.',
+    ]},
   ]},
 ];
 
@@ -571,9 +807,12 @@ function renderPanels() {
       const key=oKey(p.id,i),done=!!STATE.checked[key];
       const tags=o.tags.map(t=>`<span class="tag ${tcls(t)}">${tlbl(t)}</span>`).join('');
       const u8tag=o.u8?'<span class="tag tag-u8">U8</span>':'';
+      const whoLabel=o.tags.map(t=>tlbl(t)).join(' · ');
+      const stepsHTML=o.steps?`<div class="obj-steps" id="steps-${key}"><div class="obj-steps-who">${whoLabel}</div><ol>${o.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
+      const infoBtn=o.steps?`<button class="obj-info-btn" onclick="event.stopPropagation();toggleSteps('${key}')">ℹ How</button>`:'';
       return `<li class="obj-item${done?' done':''}" onclick="toggleObj('${key}')">
         <div class="obj-check">${done?'✓':''}</div>
-        <div class="obj-body"><div class="obj-text">${o.text}</div><div class="obj-tags">${tags}${u8tag}</div></div>
+        <div class="obj-body"><div class="obj-text">${o.text}${infoBtn}</div><div class="obj-tags">${tags}${u8tag}</div>${stepsHTML}</div>
       </li>`;
     }).join('');
     // Loot log only in active panel
@@ -619,6 +858,7 @@ function buildLootHTML() {
 }
 
 function toggleObj(key){STATE.checked[key]=!STATE.checked[key];saveState();renderAll();}
+function toggleSteps(key){const el=document.getElementById('steps-'+key);if(el)el.classList.toggle('open');}
 function addLoot(){
   const name=document.getElementById('loot-name')?.value?.trim();
   if(!name) return;
