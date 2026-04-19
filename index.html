@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enshrouded Bros</title>
+<link rel="icon" type="image/svg+xml" href="design-system/Enshrouded Bros Design System/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -16,11 +17,32 @@
   --border:rgba(212,168,75,.2); --border-hot:rgba(232,97,42,.4);
   --text:#d8cfc4;  --text-dim:#7a8fa8;
   --water:#4a9fd4; --water-dim:#2a6a9a;
-  --green:#5cb85c; --red:#c0392b; --purple:#8e6dbf;
+  --green:#5cb85c; --red:#c0392b; --red-bright:#e74c3c; --purple:#8e6dbf; --purple-light:#a89bd4;
+
+  /* ── TYPE TOKENS ── */
+  --font-display:'Cinzel Decorative','Cinzel',serif;
+  --font-serif:'Cinzel',serif;
+  --font-body:'Crimson Pro',Georgia,serif;
+  --tracking-tight:.05em; --tracking:.1em; --tracking-wide:.2em; --tracking-xwide:.3em;
+
+  /* ── RADII ── */
+  --r-sm:3px; --r-md:5px; --r-lg:8px;
+
+  /* ── GRADIENTS ── */
+  --grad-title:linear-gradient(135deg,var(--gold-light) 0%,var(--ember-bright) 40%,var(--gold) 80%);
+  --grad-ember:linear-gradient(135deg,var(--ember-dim),var(--ember));
+  --grad-ember-bar:linear-gradient(90deg,var(--ember-dim),var(--ember-bright));
+  --grad-water:linear-gradient(90deg,var(--water-dim),var(--water));
+
+  /* ── ATMOSPHERE (body::before) ── */
+  --bg-atmosphere:
+    radial-gradient(ellipse 80% 50% at 20% 0%,rgba(232,97,42,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%,rgba(74,159,212,.06) 0%,transparent 50%),
+    radial-gradient(ellipse 100% 80% at 50% 50%,rgba(20,27,38,.95) 0%,var(--abyss) 100%);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Crimson Pro',Georgia,serif;background:var(--abyss);color:var(--text);min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(232,97,42,.08) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(74,159,212,.06) 0%,transparent 50%),radial-gradient(ellipse 100% 80% at 50% 50%,rgba(20,27,38,.95) 0%,var(--abyss) 100%);pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
 body>*{position:relative;z-index:1}
 
 /* Loading */
@@ -99,8 +121,8 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .stat-card:nth-child(1){animation-delay:.1s}.stat-card:nth-child(2){animation-delay:.2s}.stat-card:nth-child(3){animation-delay:.3s}.stat-card:nth-child(4){animation-delay:.4s}.stat-card:nth-child(5){animation-delay:.5s}
 
 /* Section title */
-.section-title{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
-.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.section-title{font-family:var(--font-serif);font-weight:700;font-size:1rem;letter-spacing:.18em;color:var(--gold-light);text-transform:uppercase;white-space:nowrap;margin-bottom:.8rem;display:flex;align-items:center;gap:14px}
+.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 100%);opacity:.5}
 
 /* Party */
 .party-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
@@ -110,7 +132,7 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
 .hero-card.wizard::before{background:linear-gradient(90deg,var(--purple),#a89bd4)}
 .hero-card.healer::before{background:linear-gradient(90deg,var(--water-dim),var(--water))}
-.hero-card:hover{border-color:rgba(212,168,75,.4);transform:translateY(-2px)}
+.hero-card:hover{border-color:rgba(232,97,42,.4);transform:translateY(-2px)}
 .hero-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.7rem}
 .hero-card.ranger .hero-avatar{background:rgba(232,97,42,.15);border:2px solid var(--ember)}
 .hero-card.barbarian .hero-avatar{background:rgba(192,57,43,.15);border:2px solid #e74c3c}
@@ -180,11 +202,11 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .obj-item.done .obj-text{text-decoration:line-through;color:var(--text-dim)}
 .obj-tags{display:flex;gap:.3rem;margin-top:.25rem;flex-wrap:wrap}
 .tag{font-size:.58rem;font-family:'Cinzel',serif;padding:.15rem .45rem;border-radius:2px;letter-spacing:.08em;text-transform:uppercase}
-.tag-group{background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);color:var(--gold)}
-.tag-ranger{background:rgba(232,97,42,.15);border:1px solid rgba(232,97,42,.3);color:var(--ember-bright)}
-.tag-barb{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);color:#e74c3c}
-.tag-wiz{background:rgba(142,109,191,.15);border:1px solid rgba(142,109,191,.3);color:#a89bd4}
-.tag-heal{background:rgba(74,159,212,.15);border:1px solid rgba(74,159,212,.3);color:var(--water)}
+.tag-group{background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.4);color:var(--gold-light)}
+.tag-ranger{background:rgba(232,97,42,.15);border:1px solid rgba(232,97,42,.4);color:var(--ember-bright)}
+.tag-barb{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.4);color:var(--red-bright)}
+.tag-wiz{background:rgba(142,109,191,.15);border:1px solid rgba(142,109,191,.4);color:var(--purple-light)}
+.tag-heal{background:rgba(74,159,212,.15);border:1px solid rgba(74,159,212,.4);color:var(--water)}
 .tag-u8{background:rgba(255,60,60,.2);border:1px solid rgba(255,60,60,.5);color:#ff6060;animation:newPulse 2s ease infinite}
 @keyframes newPulse{0%,100%{box-shadow:0 0 0 0 rgba(232,97,42,.4)}50%{box-shadow:0 0 0 3px rgba(232,97,42,0)}}
 
@@ -206,9 +228,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .loot-select{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:.5rem .7rem;color:var(--text);font-family:'Cinzel',serif;font-size:.7rem;outline:none;cursor:pointer;transition:border-color .2s}
 .loot-select:focus{border-color:var(--gold)}
 .loot-select option{background:var(--deep)}
-.btn{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;padding:.5rem 1rem;border-radius:4px;cursor:pointer;border:none;transition:all .2s}
-.btn-ember{background:var(--ember-dim);color:var(--text)}.btn-ember:hover{background:var(--ember);transform:translateY(-1px)}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-dim)}.btn-ghost:hover{border-color:var(--ember);color:var(--ember)}
+.btn{font-family:var(--font-serif);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1rem;border-radius:var(--r-md);cursor:pointer;border:none;transition:all .2s}
+.btn-ember{background:var(--ember-dim);border:1px solid var(--ember);color:#fff}.btn-ember:hover{background:var(--ember);transform:translateY(-1px)}
+.btn-ghost{background:transparent;border:1px solid rgba(212,168,75,.4);color:var(--gold-light)}.btn-ghost:hover{border-color:var(--ember);color:var(--ember-bright)}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.9em;color:var(--gold);background:rgba(212,168,75,.08);padding:.1em .35em;border-radius:3px}
 
 /* Notes */
 .notes-section{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border)}
