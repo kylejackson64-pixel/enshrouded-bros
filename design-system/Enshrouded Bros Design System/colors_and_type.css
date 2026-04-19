@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Enshrouded Bros — Colors & Type
+   ═══════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+:root {
+  /* ── CORE PALETTE ────────────────────────────────────────────── */
+  /* Ember — the fire of the Flame Altar. Primary brand accent. */
+  --ember:          #e8612a;
+  --ember-bright:   #ff8c42;
+  --ember-dim:      #9c3a12;
+
+  /* Gold — forged metal, rare loot, objectives */
+  --gold:           #d4a84b;
+  --gold-light:     #f0c96a;
+
+  /* Ash — weathered parchment body text */
+  --ash:            #c8b89a;
+  --fog:            #8a9bb0;
+
+  /* Shroud — the dark mists that cover the world */
+  --shroud:         #2a3547;
+  --deep:           #141b26;
+  --abyss:          #0a0f18;   /* page background */
+
+  /* Surfaces */
+  --surface:        #1a2235;
+  --panel:          #1e2a3a;
+
+  /* Borders */
+  --border:         rgba(212,168,75,.2);
+  --border-hot:     rgba(232,97,42,.4);
+
+  /* Text */
+  --text:           #d8cfc4;
+  --text-dim:       #7a8fa8;
+
+  /* Class / semantic */
+  --water:          #4a9fd4;   /* Healer */
+  --water-dim:      #2a6a9a;
+  --green:          #5cb85c;   /* success / rescued */
+  --red:            #c0392b;   /* Barbarian / danger */
+  --red-bright:     #e74c3c;
+  --purple:         #8e6dbf;   /* Wizard */
+  --purple-light:   #a89bd4;
+
+  /* ── TYPE TOKENS ─────────────────────────────────────────────── */
+  --font-display:   'Cinzel Decorative', 'Cinzel', serif;    /* hero titles */
+  --font-serif:     'Cinzel', serif;                         /* labels, caps, chrome */
+  --font-body:      'Crimson Pro', Georgia, serif;           /* body, input */
+
+  /* Letter-spacing tokens — Cinzel is almost always tracked out */
+  --tracking-tight: .05em;
+  --tracking:       .1em;
+  --tracking-wide:  .2em;
+  --tracking-xwide: .3em;
+
+  /* ── SPACING / RADII ─────────────────────────────────────────── */
+  --r-sm: 3px;
+  --r-md: 5px;
+  --r-lg: 8px;
+
+  /* ── BACKGROUNDS ─────────────────────────────────────────────── */
+  --bg-atmosphere:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(232,97,42,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(74,159,212,.06) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(20,27,38,.95) 0%, var(--abyss) 100%);
+
+  /* ── GRADIENTS ───────────────────────────────────────────────── */
+  --grad-title: linear-gradient(135deg, var(--gold-light) 0%, var(--ember-bright) 40%, var(--gold) 80%);
+  --grad-ember: linear-gradient(135deg, var(--ember-dim), var(--ember));
+  --grad-ember-bar: linear-gradient(90deg, var(--ember-dim), var(--ember-bright));
+  --grad-water: linear-gradient(90deg, var(--water-dim), var(--water));
+}
+
+/* ═══════ BASE / SEMANTIC TYPE ═══════════════════════════════════ */
+
+body {
+  font-family: var(--font-body);
+  background: var(--abyss);
+  color: var(--text);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.1;
+  background: var(--grad-title);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2, .h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: var(--tracking);
+  color: var(--gold-light);
+}
+
+h3, .h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: .85rem;
+  letter-spacing: var(--tracking);
+  color: var(--gold-light);
+}
+
+/* Eyebrow / section label — ALL CAPS Cinzel */
+.eyebrow {
+  font-family: var(--font-serif);
+  font-size: .7rem;
+  letter-spacing: var(--tracking-xwide);
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* Body copy — Crimson Pro serif */
+p, .p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.meta, .italic {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: .85rem;
+}
+
+/* Numeric display — Cinzel in gold (stats, levels, percents) */
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-num.fire { color: var(--ember-bright); }
+
+/* Chip / tag — tiny Cinzel caps */
+.chip {
+  font-family: var(--font-serif);
+  font-size: .6rem;
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  padding: .25rem .6rem;
+  border-radius: 2px;
+}
+
+/* Code / mono fallback */
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: .9em;
+  color: var(--gold);
+  background: rgba(212,168,75,.08);
+  padding: .1em .35em;
+  border-radius: 3px;
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Borders & Elevation</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .demo{background:var(--panel);border-radius:8px;padding:16px 14px;height:80px;display:flex;flex-direction:column;justify-content:space-between}
+  .demo .t{font-family:var(--font-serif);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
+  .demo .m{font-family:ui-monospace,monospace;font-size:.65rem;color:var(--text-dim);line-height:1.4}
+  .b1{border:1px solid rgba(212,168,75,.2)}
+  .b2{border:1px solid rgba(232,97,42,.4)}
+  .b3{border:1px solid rgba(212,168,75,.2);box-shadow:0 0 8px rgba(232,97,42,.25)}
+  .b4{border:1px solid transparent;position:relative;overflow:hidden}
+  .b4::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#e8612a,#d4a84b)}
+  .b4{border:1px solid rgba(212,168,75,.2)}
+  .divider{grid-column:1/-1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.4;margin:8px 0}
+  .dlbl{grid-column:1/-1;font-family:var(--font-serif);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);text-align:center}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="demo b1"><div class="t">Default</div><div class="m">border: 1px solid<br>rgba(212,168,75,.2)</div></div>
+  <div class="demo b2"><div class="t">Hot / hover</div><div class="m">border: 1px solid<br>rgba(232,97,42,.4)</div></div>
+  <div class="demo b3"><div class="t">Active glow</div><div class="m">box-shadow: 0 0 8px<br>rgba(232,97,42,.2)</div></div>
+  <div class="demo b4"><div class="t">Top strip</div><div class="m">::before 2px gradient<br>(hero / boss / altar)</div></div>
+  <div class="dlbl">Hairline divider</div>
+  <div class="divider"></div>
+</div>
+</body></html>

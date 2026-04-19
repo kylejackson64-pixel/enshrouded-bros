@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Hero / Party Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:18px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .hero{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px 12px;position:relative;overflow:hidden;text-align:center}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+  .hero.r::before{background:linear-gradient(90deg,#e8612a,#ff8c42)}
+  .hero.b::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
+  .hero.w::before{background:linear-gradient(90deg,#8e6dbf,#a89bd4)}
+  .hero.h::before{background:linear-gradient(90deg,#2a6a9a,#4a9fd4)}
+  .av{width:52px;height:52px;border-radius:50%;margin:6px auto 8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:600;font-size:1rem;letter-spacing:.06em;color:#fff}
+  .hero.r .av{background:rgba(232,97,42,.15);border:2px solid #ff8c42;color:#ff8c42}
+  .hero.b .av{background:rgba(192,57,43,.15);border:2px solid #e74c3c;color:#e74c3c}
+  .hero.w .av{background:rgba(142,109,191,.15);border:2px solid #a89bd4;color:#a89bd4}
+  .hero.h .av{background:rgba(74,159,212,.15);border:2px solid #4a9fd4;color:#4a9fd4}
+  .name{font-family:var(--font-serif);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin-bottom:3px}
+  .role{font-family:var(--font-body);font-style:italic;font-size:.7rem;color:var(--text-dim);margin-bottom:10px}
+  .lv{font-family:var(--font-serif);font-size:1.6rem;color:var(--gold);line-height:1}
+  .lvlbl{font-family:var(--font-serif);font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-top:3px}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="hero r"><div class="av">RG</div><div class="name">Ranger</div><div class="role">Mobility · DPS</div><div class="lv">45</div><div class="lvlbl">Level</div></div>
+  <div class="hero b"><div class="av">BB</div><div class="name">Barbarian</div><div class="role">Frontline Tank</div><div class="lv">42</div><div class="lvlbl">Level</div></div>
+  <div class="hero w"><div class="av">WZ</div><div class="name">Wizard</div><div class="role">AoE · Boss Burn</div><div class="lv">47</div><div class="lvlbl">Level</div></div>
+  <div class="hero h"><div class="av">HL</div><div class="name">Healer</div><div class="role">Water Aura</div><div class="lv">44</div><div class="lvlbl">Level</div></div>
+</div>
+</body></html>

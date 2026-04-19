@@ -1,0 +1,39 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Spacing & Radii</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 28px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .sec .lbl{font-family:var(--font-serif);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px}
+  .row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .bar{background:var(--ember);height:18px;display:block}
+  .name{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--gold);min-width:64px}
+  .px{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim)}
+  .r{width:72px;height:56px;background:var(--panel);border:1px solid var(--border);flex-shrink:0}
+  .rradrow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .rlbl{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--gold)}
+  .rval{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="sec">
+    <div class="lbl">Spacing (rem)</div>
+    <div class="row"><span class="name">xs</span><span class="bar" style="width:8px"></span><span class="px">.25rem · 4px</span></div>
+    <div class="row"><span class="name">sm</span><span class="bar" style="width:16px"></span><span class="px">.5rem · 8px</span></div>
+    <div class="row"><span class="name">md</span><span class="bar" style="width:32px"></span><span class="px">1rem · 16px</span></div>
+    <div class="row"><span class="name">lg</span><span class="bar" style="width:48px"></span><span class="px">1.5rem · 24px</span></div>
+    <div class="row"><span class="name">xl</span><span class="bar" style="width:64px"></span><span class="px">2rem · 32px</span></div>
+    <div class="row"><span class="name">2xl</span><span class="bar" style="width:80px"></span><span class="px">2.5rem · 40px</span></div>
+  </div>
+  <div class="sec">
+    <div class="lbl">Radii</div>
+    <div class="rradrow"><div class="r" style="border-radius:2px"></div><span class="rlbl">chip</span><span class="rval">2px</span></div>
+    <div class="rradrow"><div class="r" style="border-radius:3px"></div><span class="rlbl">--r-sm</span><span class="rval">3px · inputs</span></div>
+    <div class="rradrow"><div class="r" style="border-radius:5px"></div><span class="rlbl">--r-md</span><span class="rval">5px · buttons</span></div>
+    <div class="rradrow"><div class="r" style="border-radius:8px"></div><span class="rlbl">--r-lg</span><span class="rval">8px · cards</span></div>
+    <div class="rradrow"><div class="r" style="border-radius:50%;width:56px;height:56px"></div><span class="rlbl">avatar</span><span class="rval">50% (only circle)</span></div>
+  </div>
+</div>
+</body></html>

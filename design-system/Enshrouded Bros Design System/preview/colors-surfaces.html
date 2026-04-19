@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Colors · Surfaces</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 24px;display:flex;gap:14px;flex-wrap:wrap}
+  .sw{flex:1 1 0;min-width:130px;background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .chip{height:76px;display:block;border-bottom:1px solid var(--border)}
+  .meta{padding:10px 12px}
+  .name{font-family:var(--font-serif);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:3px}
+  .hex{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="sw"><div class="chip" style="background:#0a0f18"></div><div class="meta"><div class="name">Abyss</div><div class="hex">#0a0f18 · --abyss</div></div></div>
+  <div class="sw"><div class="chip" style="background:#141b26"></div><div class="meta"><div class="name">Deep</div><div class="hex">#141b26 · --deep</div></div></div>
+  <div class="sw"><div class="chip" style="background:#1a2235"></div><div class="meta"><div class="name">Surface</div><div class="hex">#1a2235 · --surface</div></div></div>
+  <div class="sw"><div class="chip" style="background:#1e2a3a"></div><div class="meta"><div class="name">Panel</div><div class="hex">#1e2a3a · --panel</div></div></div>
+  <div class="sw"><div class="chip" style="background:#2a3547"></div><div class="meta"><div class="name">Shroud</div><div class="hex">#2a3547 · --shroud</div></div></div>
+</div>
+</body></html>

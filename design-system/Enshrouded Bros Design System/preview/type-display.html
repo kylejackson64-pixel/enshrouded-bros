@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Type · Display</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:26px 28px}
+  .row{display:flex;align-items:baseline;gap:18px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed rgba(212,168,75,.15)}
+  .row:last-child{border:none;margin:0;padding:0}
+  .meta{font-family:var(--font-serif);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);min-width:150px}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="row">
+    <div class="meta">Cinzel Decorative 900 · 56px · hero</div>
+    <div style="font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1;background:var(--grad-title);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Enshrouded Bros</div>
+  </div>
+  <div class="row">
+    <div class="meta">Cinzel 700 · 22px · .1em · section</div>
+    <div style="font-family:var(--font-serif);font-weight:700;font-size:22px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light)">Flame Altar Progression</div>
+  </div>
+  <div class="row">
+    <div class="meta">Cinzel 600 · 14px · .1em · h3</div>
+    <div style="font-family:var(--font-serif);font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light)">Party Level · Overall</div>
+  </div>
+  <div class="row">
+    <div class="meta">Cinzel 400 · 11px · .3em · eyebrow</div>
+    <div style="font-family:var(--font-serif);font-weight:400;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim)">Last Save · 2h Ago</div>
+  </div>
+</div>
+</body></html>

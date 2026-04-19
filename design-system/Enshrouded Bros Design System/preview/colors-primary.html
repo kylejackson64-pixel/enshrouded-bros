@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Colors · Primary</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 24px;display:flex;gap:14px;flex-wrap:wrap}
+  .sw{flex:1 1 0;min-width:120px;background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .chip{height:76px;display:block}
+  .meta{padding:10px 12px}
+  .name{font-family:var(--font-serif);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:3px}
+  .hex{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="sw"><div class="chip" style="background:#e8612a"></div><div class="meta"><div class="name">Ember</div><div class="hex">#e8612a · --ember</div></div></div>
+  <div class="sw"><div class="chip" style="background:#ff8c42"></div><div class="meta"><div class="name">Ember Bright</div><div class="hex">#ff8c42 · --ember-bright</div></div></div>
+  <div class="sw"><div class="chip" style="background:#9c3a12"></div><div class="meta"><div class="name">Ember Dim</div><div class="hex">#9c3a12 · --ember-dim</div></div></div>
+  <div class="sw"><div class="chip" style="background:#d4a84b"></div><div class="meta"><div class="name">Gold</div><div class="hex">#d4a84b · --gold</div></div></div>
+  <div class="sw"><div class="chip" style="background:#f0c96a"></div><div class="meta"><div class="name">Gold Light</div><div class="hex">#f0c96a · --gold-light</div></div></div>
+</div>
+</body></html>

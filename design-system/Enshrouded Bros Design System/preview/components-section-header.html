@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Section Header Pattern</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 28px;display:flex;flex-direction:column;gap:16px}
+  .sec-title{display:flex;align-items:center;gap:14px}
+  .sec-title .txt{font-family:var(--font-serif);font-weight:700;font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);white-space:nowrap}
+  .sec-title .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--gold) 0%,transparent 100%);opacity:.5}
+  .tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-top:6px}
+  .tab{font-family:var(--font-serif);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);padding:9px 18px;cursor:pointer;border-bottom:2px solid transparent}
+  .tab.active{color:var(--gold-light);border-bottom-color:var(--gold);background:rgba(212,168,75,.05)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="sec-title"><span class="txt">🔥 Flame Altar Progression</span><span class="rule"></span></div>
+  <div class="sec-title"><span class="txt">📡 Live Server Status</span><span class="rule"></span></div>
+  <div class="tabs">
+    <div class="tab active">Overview</div>
+    <div class="tab">Bosses</div>
+    <div class="tab">Biomes</div>
+    <div class="tab">Crafting</div>
+  </div>
+</div>
+</body></html>

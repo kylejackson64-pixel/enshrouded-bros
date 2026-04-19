@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Inputs & Forms</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .lbl{font-family:var(--font-serif);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+  input, select, textarea{
+    font-family:var(--font-body); font-size:.95rem; color:var(--text);
+    background:rgba(255,255,255,.03); border:1px solid rgba(212,168,75,.25);
+    border-radius:4px; padding:8px 10px; outline:none;
+  }
+  input:focus, select:focus, textarea:focus{border-color:var(--ember);background:rgba(232,97,42,.06)}
+  input[type=range]{accent-color:var(--gold);padding:0;background:transparent;border:none}
+  .chk{display:flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:.9rem}
+  .chk input{accent-color:var(--ember)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="field"><div class="lbl">Item Name</div><input type="text" value="Iron Bar"></div>
+  <div class="field"><div class="lbl">Biome</div><select><option>Revelwood</option><option>Pikemead's Reach</option></select></div>
+  <div class="field"><div class="lbl">Hero Level (slider)</div><input type="range" min="1" max="60" value="45"></div>
+  <div class="field"><div class="lbl">Status</div>
+    <label class="chk"><input type="checkbox" checked> Rescued Blacksmith</label>
+    <label class="chk"><input type="checkbox"> Unlocked Glider</label>
+  </div>
+  <div class="field" style="grid-column:1/-1"><div class="lbl">Session Notes</div><textarea rows="2">Ranger: Lead the route. Wizard: Fill meter on trash.</textarea></div>
+</div>
+</body></html>

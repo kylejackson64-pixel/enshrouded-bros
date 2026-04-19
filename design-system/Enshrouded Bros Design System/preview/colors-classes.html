@@ -1,0 +1,40 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Colors · Classes</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:0 0 12px;overflow:hidden;position:relative}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bar)}
+  .dual{display:flex;height:74px}
+  .dual>div{flex:1}
+  .ico{display:flex;justify-content:center;padding:14px 0 6px;font-size:1.6rem}
+  .name{text-align:center;font-family:var(--font-serif);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin:0 0 4px}
+  .hex{text-align:center;font-family:ui-monospace,monospace;font-size:.65rem;color:var(--text-dim)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="card" style="--bar:linear-gradient(90deg,#e8612a,#d4a84b)">
+    <div class="dual"><div style="background:#e8612a"></div><div style="background:#ff8c42"></div></div>
+    <div class="ico">🏹</div>
+    <div class="name">Ranger</div><div class="hex">#e8612a / #ff8c42</div>
+  </div>
+  <div class="card" style="--bar:linear-gradient(90deg,#c0392b,#e74c3c)">
+    <div class="dual"><div style="background:#c0392b"></div><div style="background:#e74c3c"></div></div>
+    <div class="ico">⚔️</div>
+    <div class="name">Barbarian</div><div class="hex">#c0392b / #e74c3c</div>
+  </div>
+  <div class="card" style="--bar:linear-gradient(90deg,#8e6dbf,#a89bd4)">
+    <div class="dual"><div style="background:#8e6dbf"></div><div style="background:#a89bd4"></div></div>
+    <div class="ico">🔮</div>
+    <div class="name">Wizard</div><div class="hex">#8e6dbf / #a89bd4</div>
+  </div>
+  <div class="card" style="--bar:linear-gradient(90deg,#2a6a9a,#4a9fd4)">
+    <div class="dual"><div style="background:#2a6a9a"></div><div style="background:#4a9fd4"></div></div>
+    <div class="ico">💧</div>
+    <div class="name">Healer</div><div class="hex">#2a6a9a / #4a9fd4</div>
+  </div>
+</div>
+</body></html>

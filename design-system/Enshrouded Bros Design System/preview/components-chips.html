@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Tags & Chips</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 28px;display:flex;flex-direction:column;gap:14px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .lbl{font-family:var(--font-serif);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);min-width:120px}
+  .chip{font-family:var(--font-serif);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:2px;border-width:1px;border-style:solid}
+  .ranger   { background:rgba(232,97,42,.15); border-color:rgba(232,97,42,.4); color:#ff8c42 }
+  .barb     { background:rgba(192,57,43,.15); border-color:rgba(192,57,43,.4); color:#e74c3c }
+  .wizard   { background:rgba(142,109,191,.15); border-color:rgba(142,109,191,.4); color:#a89bd4 }
+  .healer   { background:rgba(74,159,212,.15); border-color:rgba(74,159,212,.4); color:#4a9fd4 }
+  .gold     { background:rgba(212,168,75,.15); border-color:rgba(212,168,75,.4); color:#f0c96a }
+  .ok       { background:rgba(92,184,92,.15); border-color:rgba(92,184,92,.4); color:#5cb85c }
+  .warn     { background:rgba(212,168,75,.15); border-color:rgba(212,168,75,.4); color:#f0c96a }
+  .off      { background:rgba(122,143,168,.15); border-color:rgba(122,143,168,.35); color:#8a9bb0 }
+  .status{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-serif);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase}
+  .dot{width:8px;height:8px;border-radius:50%}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="row"><span class="lbl">Role</span>
+    <span class="chip ranger">🏹 Ranger</span>
+    <span class="chip barb">⚔️ Barbarian</span>
+    <span class="chip wizard">🔮 Wizard</span>
+    <span class="chip healer">💧 Healer</span>
+    <span class="chip gold">Group</span>
+  </div>
+  <div class="row"><span class="lbl">Status</span>
+    <span class="chip ok">✓ Complete</span>
+    <span class="chip warn">⚠ Pending</span>
+    <span class="chip off">Not Started</span>
+    <span class="chip ranger">U8 NEW</span>
+  </div>
+  <div class="row"><span class="lbl">Server</span>
+    <span class="status" style="color:#5cb85c"><span class="dot" style="background:#5cb85c;box-shadow:0 0 6px #5cb85c"></span>Active</span>
+    <span class="status" style="color:#f0c96a"><span class="dot" style="background:#f0c96a"></span>Idle</span>
+    <span class="status" style="color:#e74c3c"><span class="dot" style="background:#c0392b"></span>Offline</span>
+    <span class="status" style="color:#8a9bb0"><span class="dot" style="background:#8a9bb0"></span>Not Configured</span>
+  </div>
+</div>
+</body></html>

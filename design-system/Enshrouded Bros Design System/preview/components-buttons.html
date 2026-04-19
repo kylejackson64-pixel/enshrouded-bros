@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:24px 28px;display:flex;flex-direction:column;gap:18px}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .lbl{font-family:var(--font-serif);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);min-width:120px}
+  button{font-family:var(--font-serif);letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+  .btn-primary{background:var(--ember-dim);border:1px solid var(--ember);color:#fff;padding:9px 18px;font-size:.72rem;border-radius:5px}
+  .btn-primary:hover{background:var(--ember)}
+  .btn-ghost{background:transparent;border:1px solid rgba(212,168,75,.4);color:var(--gold-light);padding:9px 18px;font-size:.72rem;border-radius:5px}
+  .btn-ghost:hover{border-color:var(--ember);color:var(--ember-bright)}
+  .btn-sm{padding:5px 12px;font-size:.62rem;border-radius:3px;background:rgba(212,168,75,.1);border:1px solid rgba(212,168,75,.3);color:var(--gold-light)}
+  .btn-sm:hover{background:rgba(232,97,42,.15);border-color:var(--ember);color:var(--ember-bright)}
+  .btn-danger{background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.4);color:#e74c3c;padding:7px 14px;font-size:.68rem;border-radius:4px}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="row"><span class="lbl">Primary</span>
+    <button class="btn-primary">+ Log</button>
+    <button class="btn-primary">Save Progress</button>
+    <button class="btn-primary">Fight Boss</button>
+  </div>
+  <div class="row"><span class="lbl">Ghost</span>
+    <button class="btn-ghost">ℹ How</button>
+    <button class="btn-ghost">Reset All</button>
+    <button class="btn-ghost" disabled style="opacity:.4">Disabled</button>
+  </div>
+  <div class="row"><span class="lbl">Small / inline</span>
+    <button class="btn-sm">Edit</button>
+    <button class="btn-sm">Mark Done</button>
+    <button class="btn-danger">Reset all progress</button>
+  </div>
+</div>
+</body></html>

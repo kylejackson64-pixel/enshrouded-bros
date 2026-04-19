@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Type · Scale</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:20px 28px}
+  table{width:100%;border-collapse:collapse;font-family:var(--font-serif)}
+  td{padding:7px 10px;border-bottom:1px dashed rgba(212,168,75,.12);vertical-align:baseline}
+  .tok{font-family:ui-monospace,monospace;font-size:.72rem;color:var(--gold);width:80px}
+  .px{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim);width:70px;text-align:right}
+  .tr{font-family:ui-monospace,monospace;font-size:.7rem;color:var(--text-dim);width:80px;text-align:right}
+  .sp{color:var(--text);font-family:var(--font-serif);letter-spacing:.1em;text-transform:uppercase}
+  .sp.ital{font-family:var(--font-body);text-transform:none;letter-spacing:0;font-style:italic}
+</style>
+</head><body>
+<div class="wrap">
+  <table>
+    <tr><td class="tok">h1</td><td class="px">56 / 1.1</td><td class="tr">0</td><td style="font-family:var(--font-display);font-weight:900;font-size:34px;background:var(--grad-title);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Enshrouded</td></tr>
+    <tr><td class="tok">h2</td><td class="px">22 / 1.2</td><td class="tr">.1em</td><td class="sp" style="font-size:20px;font-weight:700;color:var(--gold-light)">Section Title</td></tr>
+    <tr><td class="tok">h3</td><td class="px">14 / 1.3</td><td class="tr">.1em</td><td class="sp" style="font-size:14px;font-weight:600;color:var(--gold-light)">Card Label</td></tr>
+    <tr><td class="tok">eyebrow</td><td class="px">11 / 1.4</td><td class="tr">.3em</td><td class="sp" style="font-size:11px;color:var(--text-dim)">Last Save</td></tr>
+    <tr><td class="tok">body</td><td class="px">17 / 1.55</td><td class="tr">0</td><td style="font-family:var(--font-body);font-size:16px;color:var(--text)">Ranger: Bread and butter.</td></tr>
+    <tr><td class="tok">meta</td><td class="px">14 / 1.5</td><td class="tr">0</td><td class="sp ital" style="font-size:14px;color:var(--text-dim)">Rebuild your trees before heading out.</td></tr>
+    <tr><td class="tok">chip</td><td class="px">10 / 1</td><td class="tr">.1em</td><td class="sp" style="font-size:10px;color:var(--ember-bright)">Ranger</td></tr>
+  </table>
+</div>
+</body></html>

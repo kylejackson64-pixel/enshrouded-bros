@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Colors · Text & Semantic</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:22px 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .col{display:flex;flex-direction:column;gap:10px}
+  .label{font-family:var(--font-serif);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px}
+  .row{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:8px 12px}
+  .dot{width:22px;height:22px;border-radius:4px;flex-shrink:0}
+  .lbl{font-family:var(--font-serif);font-size:.72rem;letter-spacing:.1em;color:var(--text);flex:1}
+  .hex{font-family:ui-monospace,monospace;font-size:.65rem;color:var(--text-dim)}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="col">
+    <div class="label">Text</div>
+    <div class="row"><span class="dot" style="background:#d8cfc4"></span><span class="lbl" style="color:#d8cfc4">Text — body copy</span><span class="hex">#d8cfc4</span></div>
+    <div class="row"><span class="dot" style="background:#c8b89a"></span><span class="lbl" style="color:#c8b89a">Ash — secondary</span><span class="hex">#c8b89a</span></div>
+    <div class="row"><span class="dot" style="background:#7a8fa8"></span><span class="lbl" style="color:#7a8fa8">Text Dim — meta</span><span class="hex">#7a8fa8</span></div>
+    <div class="row"><span class="dot" style="background:#8a9bb0"></span><span class="lbl" style="color:#8a9bb0">Fog — italic tags</span><span class="hex">#8a9bb0</span></div>
+  </div>
+  <div class="col">
+    <div class="label">Semantic</div>
+    <div class="row"><span class="dot" style="background:#5cb85c"></span><span class="lbl" style="color:#5cb85c">Green — success / rescued</span><span class="hex">#5cb85c</span></div>
+    <div class="row"><span class="dot" style="background:#c0392b"></span><span class="lbl" style="color:#c0392b">Red — danger</span><span class="hex">#c0392b</span></div>
+    <div class="row"><span class="dot" style="background:#4a9fd4"></span><span class="lbl" style="color:#4a9fd4">Water — info / live</span><span class="hex">#4a9fd4</span></div>
+    <div class="row"><span class="dot" style="background:#d4a84b"></span><span class="lbl" style="color:#d4a84b">Gold — default accent</span><span class="hex">#d4a84b</span></div>
+  </div>
+</div>
+</body></html>

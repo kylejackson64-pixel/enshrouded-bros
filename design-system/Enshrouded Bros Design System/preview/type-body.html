@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Type · Body & Mono</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:24px 28px;display:grid;grid-template-columns:180px 1fr;gap:14px 18px;align-items:baseline}
+  .lbl{font-family:var(--font-serif);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim)}
+  .stat-num{font-family:var(--font-serif);font-weight:600;color:var(--gold);font-size:2rem;line-height:1}
+  .stat-num.fire{color:var(--ember-bright)}
+  code{font-family:ui-monospace,monospace;font-size:.85rem;color:var(--gold);background:rgba(212,168,75,.08);padding:.15em .5em;border-radius:3px}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="lbl">Crimson Pro 400 · 17px</div>
+  <div style="font-family:var(--font-body);font-size:17px;line-height:1.55;color:var(--text)">Ranger: Lead the route. Headshot multiplier stacks with Eagle Eye for massive crits.</div>
+
+  <div class="lbl">Crimson Pro italic · 15px</div>
+  <div style="font-family:var(--font-body);font-style:italic;font-size:15px;color:var(--text-dim)">U8 Ultimate = 360° cleave. Fill meter on trash, release on boss.</div>
+
+  <div class="lbl">Stat num · Cinzel 600 32px</div>
+  <div><span class="stat-num">45</span> <span class="stat-num fire" style="margin-left:18px">71%</span></div>
+
+  <div class="lbl">Inline code · mono</div>
+  <div style="font-family:var(--font-body);font-size:15px;color:var(--text)">Input <code>status.json</code> · use <code>×2</code> for quantities.</div>
+</div>
+</body></html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Brand · Wordmark & Flame</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--abyss);color:var(--text);min-height:100%}
+  body::before{content:'';position:fixed;inset:0;background:var(--bg-atmosphere);pointer-events:none;z-index:0}
+  .wrap{position:relative;z-index:1;padding:20px 28px;display:grid;grid-template-columns:1fr 170px;gap:20px;align-items:center}
+  .word{font-family:'Cinzel Decorative',serif;font-weight:900;font-size:44px;line-height:1;background:var(--grad-title);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.02em}
+  .sub{font-family:var(--font-serif);font-weight:600;font-size:.7rem;letter-spacing:.4em;color:var(--ash);margin-top:10px}
+  .flames{display:flex;gap:10px;justify-content:flex-end;align-items:center}
+  .flames img{width:54px;height:54px}
+</style>
+</head><body>
+<div class="wrap">
+  <div>
+    <div class="word">Enshrouded Bros</div>
+    <div class="sub">B · R · O · S &nbsp;·&nbsp; UPDATE 8</div>
+  </div>
+  <div class="flames">
+    <img src="../assets/flame-mark.svg" alt="flame">
+    <img src="../assets/favicon.svg" alt="favicon">
+  </div>
+</div>
+</body></html>
