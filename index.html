@@ -764,6 +764,7 @@ const CRAFT_CATS = [
   {id:'armor',label:'Armor'},
   {id:'tool',label:'Tools'},
   {id:'station',label:'Workstations'},
+  {id:'building',label:'Buildings'},
 ];
 const CRAFT_ROLES = [
   {id:'all',label:'All'},
@@ -836,6 +837,34 @@ const CRAFTING = [
   {name:'Hunter Workbench',cat:'station',role:'ranger',level:10,station:'Needs: Hunter (Kohlwald)',ingredients:['Wood ×15','Bone ×3'],notes:'Ranger priority — unlocks Longbow and Crossbow.'},
   {name:'Arcane Workbench',cat:'station',role:'wizard',level:15,station:'Needs: Sage (Ominira)',ingredients:['Wood ×15','Crystal ×2'],notes:'Wizard + Healer weapons. Requires Revelwood-tier progression.'},
   {name:'Dye Station',cat:'station',role:'healer',level:15,station:'Workbench + rare Dye Plants',ingredients:['Wood ×10','Dye Plant ×3'],notes:'Healer builds. Cosmetic armor colors — do during downtime.'},
+  {name:'Grinding Wheel',cat:'station',role:'group',level:8,station:'Needs: Blacksmith (Oswald)',ingredients:['Stone ×15','Wood ×5'],notes:'Sharpens tools. Unlocks weapon upgrade path at Blacksmith.'},
+  {name:'Smelter',cat:'station',role:'wizard',level:15,station:'Needs: Blacksmith (Oswald)',ingredients:['Stone ×30','Iron Bar ×5'],notes:'Upgraded Forge. Smelts steel and higher-tier alloys.'},
+  {name:'Tanning Rack',cat:'station',role:'group',level:5,station:'Workbench',ingredients:['Wood ×10','Rope ×5'],notes:'Produces Leather from animal hides. Needed for Iron armor set.'},
+  {name:'Spinning Wheel',cat:'station',role:'healer',level:10,station:'Needs: Farmer (Lisandra)',ingredients:['Wood ×15'],notes:'Turns Plant Fiber into Thread/String. Healer manages supply.'},
+  {name:'Loom',cat:'station',role:'healer',level:15,station:'Needs: Farmer (Lisandra)',ingredients:['Wood ×20'],notes:'Turns Thread into Cloth and Fabric. Needed for mid-tier armor.'},
+  {name:'Mortar and Pestle',cat:'station',role:'healer',level:5,station:'Needs: Alchemist (Athalan)',ingredients:['Stone ×5'],notes:'Grinds plants into potion ingredients. Pairs with Alchemy Lab.'},
+  {name:'Salt Works',cat:'station',role:'group',level:20,station:'Workbench',ingredients:['Stone ×20'],notes:'Produces Salt for food preservation and advanced recipes.'},
+  {name:"Carpenter's Workbench",cat:'station',role:'group',level:10,station:'Needs: Carpenter NPC',ingredients:['Wood ×20','Nails ×5'],notes:'Unlocks advanced wooden building pieces and furniture.'},
+  {name:'Saw Mill',cat:'station',role:'group',level:10,station:'Needs: Carpenter NPC',ingredients:['Wood ×20','Stone ×10'],notes:'Converts logs into Wood Planks in bulk. Needed for large builds.'},
+  // ── BUILDINGS — STRUCTURAL ────────────────────────────────────────
+  {name:'Wood Floor Block',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×2'],notes:'Base flooring. Place first when building.'},
+  {name:'Stone Floor Block',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Stone ×3']},
+  {name:'Wood Wall',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×3']},
+  {name:'Stone Wall',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Stone ×4'],notes:'More durable. Use for outer perimeter.'},
+  {name:'Wood Roof',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×2'],notes:'Required for NPC shelters — must be fully enclosed with roof.'},
+  {name:'Wood Stairs',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×4']},
+  {name:'Wood Door',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×5']},
+  {name:'Wood Window',cat:'building',role:'group',level:5,station:'Workbench',ingredients:['Wood ×3','Glass ×1']},
+  {name:'Wood Fence',cat:'building',role:'group',level:1,station:'Hand Craft / Workbench',ingredients:['Wood ×2']},
+  // ── BUILDINGS — FURNITURE & UTILITY ──────────────────────────────
+  {name:'Bed',cat:'building',role:'healer',level:1,station:'Workbench',ingredients:['Wood ×8','Cloth ×4'],notes:'One per NPC. Healer builds and assigns. Required for NPC to function.'},
+  {name:'Chest',cat:'building',role:'group',level:1,station:'Workbench',ingredients:['Wood ×10'],notes:'Label chests by type (Potions, Ore, Food) for easy party access.'},
+  {name:'Campfire',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Stone ×5','Wood ×3'],notes:'Cooking and warmth. Place near base entrance.'},
+  {name:'Cooking Station',cat:'building',role:'healer',level:5,station:'Workbench',ingredients:['Stone ×10','Wood ×5'],notes:'Healer cooks food buffs here. Better than Campfire recipes.'},
+  {name:'Well',cat:'building',role:'healer',level:5,station:'Workbench',ingredients:['Stone ×15'],notes:'Produces Water Vials passively. Healer builds — keeps potion supply running.'},
+  {name:'Torch Sconce',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×1','Resin ×1'],notes:'Wall-mounted light. Place throughout base and dungeon staging areas.'},
+  {name:'Shelf',cat:'building',role:'group',level:5,station:'Workbench',ingredients:['Wood ×6'],notes:'Display and storage. Use to organize crafting materials near stations.'},
+  {name:'Workbench',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×20','Stone ×10'],notes:'Build this first — unlocks all other crafting. Place centrally in base.'},
 ];
 
 // ── STATE ────────────────────────────────────────────────────────────
