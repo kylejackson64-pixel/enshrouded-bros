@@ -338,6 +338,67 @@ footer a:hover{color:var(--gold)}
 .survivor-unlocks b{color:var(--ash);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem}
 .survivor-rescued-mark{font-size:.65rem;font-family:'Cinzel',serif;color:var(--green);margin-top:.35rem}
 .survivor-progress{font-family:'Cinzel',serif;font-size:.72rem;color:var(--text-dim);margin-bottom:.6rem}
+
+/* Campaign Guide */
+.guide-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.guide-main-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.guide-main-tabs::-webkit-scrollbar{display:none}
+.guide-main-tab{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;padding:.6rem 1.2rem;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;user-select:none}
+.guide-main-tab:hover{color:var(--ash);background:rgba(255,255,255,.03)}
+.guide-main-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,168,75,.05)}
+.guide-panel{background:var(--panel);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:1.5rem}
+.guide-class-tabs{display:flex;gap:.4rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.guide-class-tab{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;padding:.35rem .8rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;transition:all .2s}
+.guide-class-tab.ranger.active{background:rgba(232,97,42,.15);border-color:var(--ember);color:var(--ember-bright)}
+.guide-class-tab.barbarian.active{background:rgba(192,57,43,.15);border-color:#e74c3c;color:#e74c3c}
+.guide-class-tab.wizard.active{background:rgba(142,109,191,.15);border-color:var(--purple);color:#a89bd4}
+.guide-class-tab.healer.active{background:rgba(74,159,212,.15);border-color:var(--water);color:var(--water)}
+.guide-accordion{border:1px solid var(--border);border-radius:5px;margin-bottom:.5rem;overflow:hidden}
+.guide-acc-header{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;cursor:pointer;transition:background .2s;user-select:none;font-family:'Cinzel',serif;font-size:.72rem;color:var(--ash)}
+.guide-acc-header:hover{background:rgba(255,255,255,.04)}
+.guide-acc-header.open{background:rgba(212,168,75,.06);color:var(--gold-light)}
+.guide-acc-chevron{font-size:.6rem;transition:transform .2s;color:var(--text-dim)}
+.guide-acc-header.open .guide-acc-chevron{transform:rotate(180deg)}
+.guide-acc-body{display:none;padding:.8rem 1rem 1rem;border-top:1px solid var(--border)}
+.guide-acc-body.open{display:block}
+.guide-summary{font-size:.83rem;color:var(--ash);line-height:1.6;margin-bottom:.8rem;padding:.7rem .9rem;background:rgba(255,255,255,.02);border-radius:4px;border-left:3px solid var(--ember)}
+.skill-list{list-style:none}
+.skill-item{display:flex;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:flex-start}
+.skill-item:last-child{border-bottom:none}
+.skill-num{font-family:'Cinzel',serif;font-size:.65rem;color:var(--ember);min-width:18px;padding-top:.1rem;flex-shrink:0}
+.skill-node{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold-light);margin-bottom:.15rem}
+.skill-meta{font-size:.62rem;color:var(--text-dim)}
+.skill-why{font-size:.76rem;color:var(--ash);line-height:1.4}
+.prog-row{display:grid;grid-template-columns:120px 1fr 1fr;gap:.5rem;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.74rem;align-items:start}
+.prog-row:last-child{border-bottom:none}
+.prog-row-header{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase}
+.prog-biome{color:var(--text-dim);font-style:italic}
+.prog-name{color:var(--gold-light);font-family:'Cinzel',serif;font-size:.68rem}
+.prog-why{color:var(--ash)}
+.bullet-list{list-style:none}
+.bullet-item{font-size:.8rem;color:var(--ash);padding:.3rem 0 .3rem 1.1rem;position:relative;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.04)}
+.bullet-item:last-child{border-bottom:none}
+.bullet-item::before{content:'▸';position:absolute;left:0;color:var(--ember);font-size:.65rem;top:.4rem}
+.u8-bullet::before{color:var(--gold)}
+.duo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.8rem}
+.duo-card{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:6px;padding:1rem}
+.duo-card:hover{border-color:rgba(212,168,75,.3)}
+.duo-title{font-family:'Cinzel',serif;font-size:.82rem;color:var(--gold-light);margin-bottom:.5rem}
+.duo-lbl{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase;margin:.5rem 0 .2rem}
+.duo-text{font-size:.76rem;color:var(--ash);line-height:1.5}
+.duo-combo{font-size:.72rem;color:var(--ember-bright);background:rgba(232,97,42,.08);border:1px solid rgba(232,97,42,.2);border-radius:3px;padding:.35rem .5rem;margin-top:.5rem;line-height:1.5}
+.boss-assign-table{width:100%;border-collapse:collapse;font-size:.72rem}
+.boss-assign-table th{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);padding:.4rem .5rem;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.boss-assign-table td{padding:.45rem .5rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;color:var(--ash);line-height:1.4}
+.boss-assign-table tr:last-child td{border-bottom:none}
+.boss-assign-table td:first-child{color:var(--ember);font-family:'Cinzel',serif;font-size:.65rem;white-space:nowrap;min-width:100px}
+.side-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:.7rem;margin-bottom:1.2rem}
+.side-card{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:6px;padding:.9rem}
+.side-card:hover{border-color:rgba(212,168,75,.3)}
+.side-card-name{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold-light);margin-bottom:.15rem}
+.side-card-biome{font-size:.63rem;color:var(--text-dim);font-style:italic;margin-bottom:.3rem}
+.side-card-reward{font-size:.65rem;color:var(--green);margin-bottom:.35rem;line-height:1.3}
+.side-card-notes{font-size:.74rem;color:var(--ash);line-height:1.45}
 .ing-tip{border-bottom:1px dashed rgba(212,168,75,.35);cursor:help;position:relative}
 .ing-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:0;background:var(--deep);border:1px solid var(--border-hot);border-radius:4px;padding:.35rem .6rem;font-size:.7rem;color:var(--ash);line-height:1.4;white-space:normal;min-width:160px;max-width:230px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200}
 .ing-tip:hover::after{opacity:1}
@@ -480,6 +541,13 @@ footer a:hover{color:var(--gold)}
 <div class="biome-section">
   <div class="section-title">🗺 Biome Reference</div>
   <div class="biome-grid" id="biome-grid"></div>
+</div>
+
+<!-- ── CAMPAIGN GUIDE ── -->
+<div class="guide-section">
+  <div class="section-title">📖 Campaign Guide</div>
+  <div class="guide-main-tabs" id="guide-main-tabs"></div>
+  <div class="guide-panel" id="guide-panel"></div>
 </div>
 
 <!-- ── U8 REFERENCE ── -->
@@ -1547,6 +1615,344 @@ function renderCrafting() {
 function setCraftCat(cat){CRAFT_STATE.cat=cat;renderCrafting();}
 function setCraftRole(role){CRAFT_STATE.role=role;renderCrafting();}
 
+// ── CAMPAIGN GUIDE DATA ──────────────────────────────────────────────
+const GUIDE_STATE = {main:'class', cls:'ranger', acc:{}};
+
+const CLASS_GUIDES = {
+  ranger: {
+    emoji:'🏹', label:'Ranger',
+    summary:'Mobility specialist and single-target burst DPS. Your job: scout routes, thin elites before the group arrives, and melt bosses from range.',
+    skills:[
+      {node:'Double Jump',why:'Reach chest platforms and escape grabs. Take first.',meta:'Mobility tree'},
+      {node:'Grapple Mastery',why:'Faster pull speed, lower cooldown. Enables vertical combat.',meta:'Mobility tree'},
+      {node:'Eagle Eye',why:'+15% bow damage at range. Ranger\'s bread and butter.',meta:'Ranged tree'},
+      {node:'Sneak Attack',why:'x2.5 damage on first hit from stealth. One-shots most elites.',meta:'Stealth tree'},
+      {node:'Strategic Maneuver',why:'I-frames on dodge roll. Critical survival in U8 boss fights.',meta:'Combat tree'},
+      {node:'Shadowstep',why:'Resets cooldown after stealth kill. Chain assassinations.',meta:'Stealth tree'},
+      {node:'Wind Runner',why:'+20% movement speed. Outrun shroud, escape swarms.',meta:'Mobility tree'},
+      {node:'Deadeye',why:'Headshot multiplier. Combined with Eagle Eye = massive crits.',meta:'Ranged tree'},
+    ],
+    weapons:[
+      {name:'Bone Bow',biome:'Springlands',why:'First real upgrade over starter bow. Craft at workbench.'},
+      {name:'Ranger\'s Crossbow',biome:'Revelwood',why:'Higher base damage, slower fire rate. Swap for boss fights.'},
+      {name:'Dagger (offhand)',biome:'Any',why:'For stealth entry — draw aggro, land sneak hit, switch to bow.'},
+      {name:'Fell Longbow',biome:'Nomad Highlands',why:'End-game bow. Pairs with Deadeye for 500+ crits on bosses.'},
+    ],
+    armor:[
+      {name:'Fur Armor',biome:'Springlands',why:'Starter set. Upgrade via Forge for scaling.'},
+      {name:'Huntsman Armor',biome:'Revelwood',why:'Agility + ranged damage perks. Ranger BiS through Phase 3.'},
+      {name:'Shadow Wraith Set',biome:'Kindlewastes',why:'Stealth bonus + crit multiplier. Upgrade ASAP.'},
+    ],
+    tips:[
+      'U8: Weapon Ultimate fills by landing shots. Save burst for boss phase transitions.',
+      'Mark targets with map pin before scout runs — tell Barbarian which elites to skip.',
+      'Stealth opener: crouch + sneak toward target from behind, dagger strike, swap to bow and unload.',
+      'Use grapple aggressively during bosses — verticality avoids most ground AoEs.',
+      'Carry 6+ arrows per stack; you will burn them. Farm feathers during every explore run.',
+    ]
+  },
+  barbarian: {
+    emoji:'⚔️', label:'Barbarian',
+    summary:'Frontline tank and melee DPS. Your job: generate aggro, hold boss attention, and lead dungeon pushes so the squishies don\'t get deleted.',
+    skills:[
+      {node:'Toughened Hide',why:'+8% physical resistance. First node — you are going face-first.',meta:'Defense tree'},
+      {node:'Battle Cry',why:'Taunts nearby enemies to focus you. Group QoL: stops adds from turning on Healer.',meta:'Combat tree'},
+      {node:'Heavy Blow',why:'+20% 2H damage. Pairs with U8 heavy attack system.',meta:'Strength tree'},
+      {node:'Strategic Maneuver',why:'I-frames on dodge. Lets you survive boss one-shots.',meta:'Combat tree'},
+      {node:'Ironclad',why:'+15% armor effectiveness. Scales with U8 upgrade system.',meta:'Defense tree'},
+      {node:'Adrenaline Rush',why:'Kills below 30% HP restore 10% health. Self-sustain in long fights.',meta:'Survival tree'},
+      {node:'Cleave',why:'Swing hits all adjacent enemies. Dungeon corridors = free AoE.',meta:'Strength tree'},
+      {node:'Berserker',why:'Speed + damage when below 50% HP. High-risk high-reward.',meta:'Combat tree'},
+    ],
+    weapons:[
+      {name:'Stone Axe',biome:'Springlands',why:'First 2H weapon. Craft early, upgrade at Forge.'},
+      {name:'Iron Greatsword',biome:'Springlands→Revelwood',why:'Strong AoE swing. Use Cleave node for corridor clears.'},
+      {name:'Fell Hammer',biome:'Kindlewastes',why:'Highest stagger. Locks boss in hit-stun combos.'},
+      {name:'2H Axe (U8 ultimate)',biome:'Nomad Highlands',why:'U8 ultimate = 360° cleave. Fill meter on trash, release on boss.'},
+    ],
+    armor:[
+      {name:'Fur Armor',biome:'Springlands',why:'Starter. Upgrade at Forge — U8 armor scaling favors tanks.'},
+      {name:'Iron Plate',biome:'Springlands',why:'First real tank set. Priority craft after Blacksmith rescue.'},
+      {name:'Heavy Warrior Set',biome:'Kindlewastes',why:'Tank BiS through end-game. Ironclad node + this = wall.'},
+    ],
+    tips:[
+      'U8: Heavy attack combos on greatsword. Cancel into dodge on the 3rd swing for I-frames.',
+      'Volunteer to pull group elites — you have aggro tools, Ranger/Wizard don\'t.',
+      'In dungeons: enter first, Shield Bash (if available) the first pack, stall while team positions.',
+      'Boss tanking: don\'t stand at max range. Stay close to bait melee attacks (predictable and parriable).',
+      'Craft armor early and upgrade constantly — Ironclad only scales if armor is upgraded.',
+    ]
+  },
+  wizard: {
+    emoji:'🔮', label:'Wizard',
+    summary:'AoE pack clearer and boss burn machine. Your job: set up the Forge/Kiln chain, clear trash packs so group can push, and DPS boss health phases fast.',
+    skills:[
+      {node:'Mana Font',why:'+30 mana pool. Wand skills are mana-hungry. First node always.',meta:'Arcane tree'},
+      {node:'Arcane Focus',why:'+12% spell power. Scales all wand abilities.',meta:'Arcane tree'},
+      {node:'Chain Lightning',why:'Bounces between targets. Hallways and packs melt.',meta:'Storm tree'},
+      {node:'Mana Regen',why:'Passive regen between casts. Reduces downtime in long dungeons.',meta:'Arcane tree'},
+      {node:'Strategic Maneuver',why:'I-frames on dodge. Wizard is squishy — need the escape.',meta:'Combat tree'},
+      {node:'Overload',why:'Chance to stun on proc — free CC for the Barbarian.',meta:'Storm tree'},
+      {node:'Spell Surge',why:'Every 5th cast deals 50% extra damage. Track your casts.',meta:'Arcane tree'},
+      {node:'Frostweave',why:'Frost wand slows targets. Synergises with Barbarian staying on boss.',meta:'Frost tree'},
+    ],
+    weapons:[
+      {name:'Apprentice Wand',biome:'Springlands',why:'Base wand. Ultimate = AoE orb. Start here.'},
+      {name:'Storm Staff',biome:'Revelwood',why:'Chain Lightning crits. BiS for pack clearing in Phases 2-3.'},
+      {name:'Frost Wand',biome:'Nomad Highlands',why:'Slows boss moves. Use when Barbarian needs breathing room.'},
+      {name:'Void Staff',biome:'Kindlewastes',why:'Highest burst. Ultimate pierces multiple targets.'},
+    ],
+    armor:[
+      {name:'Fur Armor',biome:'Springlands',why:'Starter. Lighter than plate — mana perks preferred.'},
+      {name:'Archmage Robe',biome:'Revelwood',why:'+Mana and spell power perks. Wizard BiS from Phase 3.'},
+      {name:'Void Cloth Set',biome:'Kindlewastes',why:'Spell Surge interaction. End-game mage kit.'},
+    ],
+    tips:[
+      'U8: Wand ultimate = AoE orb. Save it for boss adds phase — wipe everything in one cast.',
+      'Set up the Forge/Kiln chain early. Your crafting support role frees others to explore.',
+      'In dungeons: let Barbarian pull first, then cast Chain Lightning into the pile.',
+      'Carry multiple wand types. Swap to Frost Wand the moment boss starts a dangerous phase.',
+      'Mana management: use basic attacks to regen between spells. Don\'t go OOM before boss transitions.',
+    ]
+  },
+  healer: {
+    emoji:'💧', label:'Healer',
+    summary:'Party sustain engine and base logistics manager. Your job: keep everyone alive through Water Aura, supply potions, build NPC shelters, and manage the Dye Station.',
+    skills:[
+      {node:'Water Aura',why:'Passive HP regen for nearby allies. Core healer identity. Take immediately.',meta:'Water tree'},
+      {node:'Mending Touch',why:'+25% potion effectiveness. Your potions become double value.',meta:'Support tree'},
+      {node:'Aura Range',why:'Expands Water Aura radius. Take at Lv10 — covers whole group in boss arenas.',meta:'Water tree'},
+      {node:'Strategic Maneuver',why:'I-frames on dodge. Even healers die to telegraphed slams.',meta:'Combat tree'},
+      {node:'Potion Mastery',why:'Potions have no cast delay. Instant heal at full speed.',meta:'Alchemy tree'},
+      {node:'Rejuvenate',why:'Splash heal on use — affects nearby allies too. Group sustain.',meta:'Water tree'},
+      {node:'Fortify',why:'+10% max HP for allies in aura. Scales Barbarian\'s bulk.',meta:'Support tree'},
+      {node:'Clarity',why:'Mana regen for allies in aura. Wizard never runs OOM again.',meta:'Water tree'},
+    ],
+    weapons:[
+      {name:'Healing Staff',biome:'Springlands',why:'Direct heal on-hit. Use when aura alone isn\'t enough.'},
+      {name:'Water Wand',biome:'Revelwood',why:'Ranged heals + light DPS. Stay at range while supporting.'},
+      {name:'Lifedrain Rod',biome:'Kindlewastes',why:'Heals you on hit — self-sustain freeing up potions for others.'},
+    ],
+    armor:[
+      {name:'Cloth Robe',biome:'Springlands',why:'Starter. Focus on mana perks.'},
+      {name:'Healer\'s Vestments',biome:'Revelwood',why:'Aura power bonus. BiS healer kit.'},
+      {name:'Blessed Cloth Set',biome:'Kindlewastes',why:'Rejuvenate CD reduction. End-game healer set.'},
+    ],
+    tips:[
+      'U8: Water Aura now has levels in skill tree. Invest 3+ points for meaningful regen values.',
+      'During boss fights: stand at the edge of your aura range behind the Barbarian. You need LOS.',
+      'Pre-craft 20+ potions before each session. Don\'t leave base without a full stack.',
+      'Build NPC shelter ASAP — each rescued NPC unlocks critical crafting. You control this.',
+      'Dye Station: purely cosmetic but group morale +1. Build it Phase 3 when you have downtime.',
+    ]
+  }
+};
+
+const DUO_GUIDES = [
+  {
+    pair:'Ranger + Barbarian', emoji:'🏹⚔️',
+    summary:'Push pair. Barbarian tanks, Ranger scouts and thins elites before the rest of group arrives.',
+    synergy:'Battle Cry draws aggro to Barbarian → Ranger takes zero damage while free-firing.',
+    combos:[
+      'Barbarian charges in, Ranger pops Sneak Attack from flanking position.',
+      'Barbarian stuns boss with heavy attack chain, Ranger dumps full Ultimate into the window.',
+      'Ranger marks dangerous elites on map before dungeon — Barbarian routes around minor packs.',
+    ],
+    sidequest:'Explore Ancient Ruins while the other duo handles a dungeon. Barbarian forces doors, Ranger loots shelves.',
+  },
+  {
+    pair:'Wizard + Healer', emoji:'🔮💧',
+    summary:'Support pair. Wizard clears packs, Healer keeps Wizard alive through sustain and potions.',
+    synergy:'Clarity node (Healer) restores Wizard mana passively — Wizard never has downtime.',
+    combos:[
+      'Healer pre-pots Wizard (+25% potion effect) before boss pull.',
+      'Wizard drops AoE orb on boss adds, Healer rejuvenates to top up party mid-chaos.',
+      'When Wizard is low on mana, Healer pops Water Aura + Clarity for instant regen.',
+    ],
+    sidequest:'Base logistics pair. Healer builds NPC shelters while Wizard sets up Forge/Kiln chains. Fastest base progression.',
+  },
+  {
+    pair:'Ranger + Wizard', emoji:'🏹🔮',
+    summary:'Burst nuke pair. Ranger opens with Sneak Attack, Wizard follows with Chain Lightning into the wounded pack.',
+    synergy:'Ranger stealth marks a priority target → Wizard AoE clears the rest of the pack simultaneously.',
+    combos:[
+      'Ranger sneak-hits the elite, Wizard chains lightning off it into surrounding mobs.',
+      'During boss: Ranger fills Ultimate on ads phase, Wizard fills Ultimate on boss phase. Both dump simultaneously.',
+      'Ranger grapples to high ground, calls out positioning for Wizard\'s AoE placement.',
+    ],
+    sidequest:'Loot runs in Shroud zones. Ranger scouts safe pathing, Wizard clears any Shroud enemies fast.',
+  },
+  {
+    pair:'Barbarian + Healer', emoji:'⚔️💧',
+    summary:'Sustain pair. Barbarian absorbs all damage, Healer keeps them at full HP indefinitely.',
+    synergy:'Fortify node (Healer) stacks on top of Ironclad (Barbarian) — combined they are near-unkillable.',
+    combos:[
+      'Barbarian stands in boss melee range under Water Aura — just block and regen.',
+      'Healer activates Rejuvenate whenever Barbarian drops below 60% HP.',
+      'Boss enrage phase: Barbarian pops Berserker, Healer spam-pots — burst the boss before it wipes them.',
+    ],
+    sidequest:'Hold the base while others explore. Barbarian guards NPCs, Healer maintains potion supply and builds.',
+  },
+];
+
+const GROUP_GUIDE = {
+  bosses:[
+    {boss:'Elder Elk',assign:'Barbarian tanks (faces boss from south wall). Ranger/Wizard DPS flanks. Healer stays 15m back under cover.',adds:'Barbarian Battle Cry on every add spawn to keep them off Healer.',mechanic:'Charge — all: dodge sideways, NOT backward. I-frames on dodge roll (U8).'},
+    {boss:'Hollow Cyclops',assign:'Barbarian tanks eye level. Ranger targets eye (weak spot). Wizard AoE stomps. Healer pots Barbarian.',adds:'No adds phase.',mechanic:'Ground slam: Barbarian jumps, rest dodge roll. Ranger aims headshots during Cyclops recovery animation.'},
+    {boss:'Fell Thunderbrute',assign:'Barbarian melee. Ranger kites adds. Wizard burns main boss. Healer centrally positioned.',adds:'Ranger priority target — chain adds ignore boss.',mechanic:'Lightning channel: everyone spread 8m+ apart. Barbarian is fine in melee range.'},
+    {boss:'Vukah Warlord',assign:'Barbarian tanks west side. Wizard AoE south. Ranger flanks east. Healer behind pillar.',adds:'Wizard AoE ultimate on minion wave. Ranger falls back to assist if overwhelmed.',mechanic:'Shield phase: Ranger Sneak Attack from behind breaks shield. Everyone unload during 5s window.'},
+    {boss:'Shroud Weaver',assign:'Ranger & Wizard DPS from range. Barbarian intercepts melee tendrils. Healer mobile — keep moving.',adds:'Tendrils spawn periodically. Barbarian Cleave, Wizard Chain Lightning.',mechanic:'Shroud phase: all retreat outside shroud ring. Healer tracks party positions.'},
+    {boss:'Ancient Guardian',assign:'Barbarian east node. Ranger west node. Wizard center DPS. Healer mobile.',adds:'Nodes must be broken simultaneously — Barbarian + Ranger call out readiness.',mechanic:'Energy beam: Barbarian blocks (I-frames), Ranger dodges, Wizard repositions, Healer sustains.'},
+    {boss:'Umber Hollow',assign:'Barbarian close range. Wizard AoE from mid. Ranger snipes from grapple point above. Healer follows Barbarian.',adds:'Ranger switches to ads immediately when they spawn — don\'t let them reach Healer.',mechanic:'Death dive: everyone dodge roll on shadow indicator. Ranger drop from grapple point to trigger I-frames.'},
+    {boss:'Cradle of Dust',assign:'Barbarian south. Ranger north elevation. Wizard left. Healer holds center.',adds:'High priority. Wizard dumps AoE ultimate each wave.',mechanic:'Dust nova: all run perpendicular to the wave (not away). Healer Rejuvenate immediately after.'},
+  ],
+  dungeon:{
+    positions:[
+      {role:'Barbarian',pos:'Front — point position. Opens doors, triggers ambushes, aggroes first pack.'},
+      {role:'Ranger',pos:'Rear — sweep position. Watches for flanking enemies, handles archers on walls.'},
+      {role:'Wizard',pos:'Mid-rear — clear position. Casts through Barbarian\'s position into packed corridors.'},
+      {role:'Healer',pos:'Mid-front — support position. Stays within Water Aura range of Barbarian at all times.'},
+    ],
+    protocol:[
+      'Barbarian calls "room" before entering every new space.',
+      'Wizard holds Chain Lightning until Barbarian has 3+ enemies on him.',
+      'Ranger calls out archers and ranged enemies immediately — these are the threat.',
+      'Healer does not enter a room until Barbarian has cleared the entry ambush.',
+      'Loot after combat ends — no looting during fights.',
+    ]
+  },
+  base:[
+    {area:'Core',role:'All',note:'Flame Altar center. Crafting stations in a ring 4–6 blocks out. Access lanes clear.'},
+    {area:'NPC Shelters',role:'Healer builds',note:'Enclosed building, 1 bed per NPC, separate from crafting ring so NPCs don\'t block flow.'},
+    {area:'Forge + Kiln',role:'Wizard maintains',note:'Kiln feeds charcoal to Forge. Place them adjacent. Wizard keeps both stocked during sessions.'},
+    {area:'Alchemy Lab',role:'Healer maintains',note:'Near NPC shelter. Healer pre-crafts potions here before each push.'},
+    {area:'Potion Reserve',role:'Healer',note:'Chest near Altar — minimum 20 health potions at all times. Restock ritual: start of every session.'},
+    {area:'Storage',role:'All',note:'One chest per class — labeled. Ranger: arrows/ranged gear. Barbarian: ore/plate. Wizard: mana gems/wands. Healer: herbs/potion mats.'},
+  ]
+};
+
+const SIDE_CONTENT = [
+  {name:'Ancient Vaults (Springlands)',biome:'Springlands',reward:'Rare weapons, Arcane blueprints',notes:'3 vaults scattered south of Springlands Spire. Ranger-Wizard recommended. Contains Archmage gear.',classes:['ranger','wizard']},
+  {name:'Hollow Halls Depth Run',biome:'Springlands',reward:'Collector lore + bonus ectoplasm drops',notes:'Go back after rescuing Alden for the lower floors. Barbarian-Healer can solo carry this.',classes:['barbarian','healer']},
+  {name:'Revelwood Canopy Chests',biome:'Revelwood',reward:'Huntsman Armor pieces',notes:'Ranger can grapple to every chest. Bring extra arrows. Worth the detour for Ranger BiS armor.',classes:['ranger']},
+  {name:'Farmer\'s Lost Fields',biome:'Springlands',reward:'Rare seed types + cooking recipes',notes:'Emily Fray gives a follow-up quest after rescue. Unlocks mushroom crops and the Bakehouse Station.',classes:['healer','all']},
+  {name:'Nomad Highlands Towers',biome:'Nomad Highlands',reward:'Fell Longbow / Void Staff',notes:'Dangerous isolated towers — worth the risk. Ranger gets Fell Longbow here, Wizard gets Void Staff.',classes:['ranger','wizard']},
+  {name:'Veilwater Cave System',biome:'Veilwater Basin',reward:'Water Aura upgrade items + Fisher unlock',notes:'Fisher (Niilo Lahti) is found inside. Healer should lead. Bring swim stamina items.',classes:['healer','ranger']},
+  {name:'Shroud Stalker Hunts',biome:'All biomes',reward:'Rare Fur/Scales + Barbarian armor mats',notes:'Hunter (Athalan) assigns bounties after rescue. Barbarian tanks the hunts. Ranger marks targets.',classes:['barbarian','ranger']},
+  {name:'Sundermoor Ruins',biome:'Revelwood',reward:'Bard unlock location',notes:'Bard (Valory) is here. Bring the full group — it\'s a trap-heavy ruin.',classes:['all']},
+  {name:'Dye Ingredient Runs',biome:'Multiple',reward:'Cosmetic dye materials',notes:'Fun optional side activity for Healer downtime. Gather colorful flowers and minerals.',classes:['healer']},
+  {name:'Carpenter Escort',biome:'Springlands→base',reward:'Carpenter (Jack Rankins) unlock',notes:'Escort mission — clear the path first with Barbarian/Ranger. Carpenter unlocks wood upgrades.',classes:['barbarian','ranger']},
+];
+
+// ── CAMPAIGN GUIDE RENDER ─────────────────────────────────────────────
+function renderGuides(){
+  const main=GUIDE_STATE.main;
+  const mainTabs=[
+    {id:'class',label:'Class Walkthroughs'},
+    {id:'duo',label:'Duo Synergies'},
+    {id:'group',label:'Group Tactics'},
+    {id:'side',label:'Side Content'},
+  ];
+  document.getElementById('guide-main-tabs').innerHTML=mainTabs.map(t=>
+    `<button class="guide-main-tab${main===t.id?' active':''}" onclick="setGuideTab('${t.id}')">${t.label}</button>`
+  ).join('');
+  const panel=document.getElementById('guide-panel');
+  if(main==='class') panel.innerHTML=renderClassPanel();
+  else if(main==='duo') panel.innerHTML=renderDuoPanel();
+  else if(main==='group') panel.innerHTML=renderGroupPanel();
+  else panel.innerHTML=renderSidePanel();
+  // Restore accordion open states
+  Object.keys(GUIDE_STATE.acc).forEach(id=>{
+    if(GUIDE_STATE.acc[id]){
+      const h=document.getElementById('acc-h-'+id);
+      const b=document.getElementById('acc-b-'+id);
+      if(h){h.classList.add('open');}
+      if(b){b.classList.add('open');}
+    }
+  });
+}
+function setGuideTab(tab){GUIDE_STATE.main=tab;renderGuides();}
+function setClassTab(cls){GUIDE_STATE.cls=cls;renderGuides();}
+function toggleAcc(id){
+  GUIDE_STATE.acc[id]=!GUIDE_STATE.acc[id];
+  const h=document.getElementById('acc-h-'+id);
+  const b=document.getElementById('acc-b-'+id);
+  if(h){h.classList.toggle('open',GUIDE_STATE.acc[id]);}
+  if(b){b.classList.toggle('open',GUIDE_STATE.acc[id]);}
+}
+function acc(id,title,body){
+  return `<div class="guide-accordion">
+    <div class="guide-acc-header" id="acc-h-${id}" onclick="toggleAcc('${id}')">
+      ${title}<span class="guide-acc-chevron">▼</span>
+    </div>
+    <div class="guide-acc-body" id="acc-b-${id}">${body}</div>
+  </div>`;
+}
+function renderClassPanel(){
+  const cls=GUIDE_STATE.cls;
+  const g=CLASS_GUIDES[cls];
+  const classTabs=Object.entries(CLASS_GUIDES).map(([id,c])=>
+    `<button class="guide-class-tab ${id}${cls===id?' active':''}" onclick="setClassTab('${id}')">${c.emoji} ${c.label}</button>`
+  ).join('');
+  const skills=`<div class="guide-summary">${g.summary}</div>
+    <ul class="skill-list">${g.skills.map((s,i)=>`
+    <li class="skill-item">
+      <span class="skill-num">${i+1}</span>
+      <div><div class="skill-node">${s.node}</div><div class="skill-meta">${s.meta}</div><div class="skill-why">${s.why}</div></div>
+    </li>`).join('')}</ul>`;
+  const wep=`<div class="prog-rows">${
+    [{label:'Phase',key:'biome'},{label:'Weapon',key:'name'},{label:'Why',key:'why'}].map((h,i)=>i===0?
+      `<div class="prog-row"><span class="prog-row-header">Phase / Biome</span><span class="prog-row-header">Weapon</span><span class="prog-row-header">Why</span></div>`:''
+    ).join('')
+  }${g.weapons.map(w=>`<div class="prog-row"><span class="prog-biome">${w.biome}</span><span class="prog-name">${w.name}</span><span class="prog-why">${w.why}</span></div>`).join('')}</div>`;
+  const arm=`<div class="prog-rows">${g.armor.map(a=>`<div class="prog-row"><span class="prog-biome">${a.biome}</span><span class="prog-name">${a.name}</span><span class="prog-why">${a.why}</span></div>`).join('')}</div>`;
+  const tips=`<ul class="bullet-list">${g.tips.map(t=>`<li class="bullet-item u8-bullet">${t}</li>`).join('')}</ul>`;
+  return `<div class="guide-class-tabs">${classTabs}</div>
+    ${acc('skills-'+cls,'🌟 Skill Priority (U8)',skills)}
+    ${acc('wep-'+cls,'⚔️ Weapon Progression',wep)}
+    ${acc('arm-'+cls,'🛡 Armor Progression',arm)}
+    ${acc('tips-'+cls,'💡 U8 Tips & Role Notes',tips)}`;
+}
+function renderDuoPanel(){
+  return `<div class="duo-grid">${DUO_GUIDES.map((d,i)=>`
+    <div class="duo-card">
+      <div class="duo-title">${d.emoji} ${d.pair}</div>
+      <div class="duo-text">${d.summary}</div>
+      <div class="duo-lbl">Synergy</div>
+      <div class="duo-text">${d.synergy}</div>
+      <div class="duo-lbl">Key Combos</div>
+      <ul class="bullet-list">${d.combos.map(c=>`<li class="bullet-item">${c}</li>`).join('')}</ul>
+      <div class="duo-combo">🗺 Side Quest: ${d.sidequest}</div>
+    </div>`).join('')}</div>`;
+}
+function renderGroupPanel(){
+  const g=GROUP_GUIDE;
+  const bossTbl=`<table class="boss-assign-table">
+    <thead><tr><th>Boss</th><th>Assignment</th><th>Key Mechanic</th></tr></thead>
+    <tbody>${g.bosses.map(b=>`<tr>
+      <td>${b.boss}</td>
+      <td>${b.assign}<br><em style="color:var(--text-dim);font-size:.67rem">Adds: ${b.adds}</em></td>
+      <td>${b.mechanic}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+  const dungeonPos=`<div style="margin-bottom:.6rem"><ul class="bullet-list">${g.dungeon.positions.map(p=>`<li class="bullet-item"><b style="color:var(--gold-light)">${p.role}:</b> ${p.pos}</li>`).join('')}</ul></div>
+    <div class="duo-lbl">Protocol</div>
+    <ul class="bullet-list">${g.dungeon.protocol.map(p=>`<li class="bullet-item">${p}</li>`).join('')}</ul>`;
+  const baseLayout=`<div class="prog-rows">${g.base.map(b=>`<div class="prog-row"><span class="prog-biome">${b.area}</span><span class="prog-name">${b.role}</span><span class="prog-why">${b.note}</span></div>`).join('')}</div>`;
+  return acc('boss-assign','💀 Boss Assignments',bossTbl)
+    +acc('dungeon-proto','🏰 Dungeon Positioning & Protocol',dungeonPos)
+    +acc('base-layout','🏠 Recommended Base Layout',baseLayout);
+}
+function renderSidePanel(){
+  return `<div class="side-grid">${SIDE_CONTENT.map(s=>`
+    <div class="side-card">
+      <div class="side-card-name">${s.name}</div>
+      <div class="side-card-biome">${s.biome}</div>
+      <div class="side-card-reward">⭐ ${s.reward}</div>
+      <div class="side-card-notes">${s.notes}</div>
+    </div>`).join('')}</div>`;
+}
+
 // ── RESET ────────────────────────────────────────────────────────────
 function confirmReset(){
   if(!confirm('Reset ALL campaign progress? Cannot be undone.')) return;
@@ -1557,7 +1963,7 @@ function confirmReset(){
 }
 
 // ── RENDER ALL ───────────────────────────────────────────────────────
-function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();}
+function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();renderGuides();}
 
 // ── BOOT ─────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
