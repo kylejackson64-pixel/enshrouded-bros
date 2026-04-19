@@ -265,6 +265,9 @@ footer a:hover{color:var(--gold)}
 .craft-station{font-size:.68rem;color:var(--text-dim);font-style:italic;border-top:1px solid rgba(255,255,255,.05);padding-top:.4rem;margin-top:.3rem}
 .craft-notes{font-size:.7rem;color:var(--ash);margin-top:.3rem;line-height:1.4}
 .craft-disclaimer{margin-top:.8rem;font-size:.7rem;color:var(--text-dim);font-style:italic}
+.ing-tip{border-bottom:1px dashed rgba(212,168,75,.35);cursor:help;position:relative}
+.ing-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:0;background:var(--deep);border:1px solid var(--border-hot);border-radius:4px;padding:.35rem .6rem;font-size:.7rem;color:var(--ash);line-height:1.4;white-space:normal;min-width:160px;max-width:230px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200}
+.ing-tip:hover::after{opacity:1}
 
 /* Objective steps */
 .obj-info-btn{background:none;border:1px solid rgba(212,168,75,.25);border-radius:3px;color:var(--text-dim);font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.05em;padding:.1rem .4rem;cursor:pointer;margin-left:.5rem;transition:all .2s;vertical-align:middle}
@@ -756,6 +759,46 @@ const PHASES = [
   ]},
 ];
 
+// ── INGREDIENT SOURCES ───────────────────────────────────────────────
+const INGREDIENT_SOURCES = {
+  'Berry':              'Harvest berry bushes — meadows near spawn, Springlands',
+  'Water Vial':         'Craft at Well · scoop from rivers/lakes · found in loot',
+  'Indigo Plant':       'Blue flowers on forest floor — Springlands',
+  'Yarrow':             'White/yellow flowers — Revelwood and higher biomes',
+  'Blue Amaranth':      'Blue flowering plants — Springlands meadows and hillsides',
+  'Shrubberry':         'Small berry shrubs — all biomes, common near paths',
+  'Swamp Herb':         'Ground-level plants — Blackmire swamp floor',
+  'Ember Moss':         'Red moss on volcanic rocks — Kindlewastes',
+  'Glider Mushroom':    'Large pale mushrooms — Revelwood forest floor',
+  'Wood Plank':         'Craft: Wood ×2 at Workbench',
+  'String':             'Craft: Plant Fiber ×3 at Workbench',
+  'Iron Bar':           'Smelt: Iron Ore at Forge (needs Charcoal from Kiln)',
+  'Wood':               'Chop any tree — axe required',
+  'Leather':            'Craft: Animal Hide at Tanning Rack',
+  'Animal Hide':        'Hunt wolves, foxes, deer, bears — Springlands+',
+  'Stone':              'Mine grey rock outcrops — common everywhere',
+  'Resin':              'Harvest amber/golden nodes on tree trunks',
+  'Ember Shard':        'Drop from fire enemies · mine red deposits — Kindlewastes',
+  'Ice Crystal':        'Mine blue crystal veins — Nomad Highlands cold areas',
+  'Water Crystal':      'Mine teal deposits — Veilwater Basin',
+  'Fur':                'Hunt wolves, foxes, bears — starting area and Springlands',
+  'Rope':               'Craft: Plant Fiber ×5 at Workbench',
+  'Metal Scraps':       'Loot ruined buildings, enemy camps, wooden crates',
+  'Cloth':              'Craft: Thread ×4 at Loom (needs Farmer Lisandra)',
+  'Silk':               'Kill spiders — Revelwood forest caves and dark areas',
+  'Plant Fiber':        'Harvest grass, ferns, and small plants — anywhere',
+  'Glass':              'Craft: Sand ×3 at Forge · loot ruins in Springlands',
+  'Sand':               'Dig sandy patches — Nomad Highlands desert floors',
+  'Soil':               'Dig ground anywhere with a shovel',
+  'Bone':               'Kill skeleton enemies · hunt animals for bones',
+  'Crystal':            'Mine crystal formations in caves — Revelwood and beyond',
+  'Dye Plant':          'Specific colored flowers — Revelwood biome only',
+  'Nails':              'Craft: Iron Bar ×1 → ×4 Nails at Forge',
+  'Thread':             'Craft: Plant Fiber ×3 at Spinning Wheel (needs Farmer)',
+  'Iron Ore':           'Mine orange-streaked rock outcrops — Springlands hills+',
+  'Charcoal':           'Produce: put Wood in Charcoal Kiln (needs Blacksmith)',
+};
+
 // ── CRAFTING DATA ────────────────────────────────────────────────────
 const CRAFT_CATS = [
   {id:'all',label:'All'},
@@ -1141,7 +1184,11 @@ function renderCrafting() {
     `<button class="craft-filter-btn${CRAFT_STATE.role===r.id?' active':''}" onclick="setCraftRole('${r.id}')">${r.label}</button>`
   ).join('');
   document.getElementById('craft-grid').innerHTML=items.length?items.map(item=>{
-    const ingreds=item.ingredients.map(ing=>`<li>${ing}</li>`).join('');
+    const ingreds=item.ingredients.map(ing=>{
+      const name=ing.replace(/\s*×\d+$/,'').trim();
+      const src=INGREDIENT_SOURCES[name];
+      return src?`<li><span class="ing-tip" data-tip="${src}">${ing}</span></li>`:`<li>${ing}</li>`;
+    }).join('');
     const roleTag=`<span class="tag ${tcls(item.role)}">${tlbl(item.role)}</span>`;
     return `<div class="craft-card">
       <div class="craft-card-header">
