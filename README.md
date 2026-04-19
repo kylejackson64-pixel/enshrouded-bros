@@ -31,19 +31,47 @@ Live at: **[kylejackson64-pixel.github.io/enshrouded-bros](https://kylejackson64
 
 ## Live server sync setup
 
-The dashboard can display real-time server state (last save, NPC count, structures built).
+The dashboard displays real-time server state (last save, NPC count, structures built).
 
-**Requirements:**
-- erocko38 runs `watcher.py` on the game server — it reads the Enshrouded save file and commits `status.json` to this repo
-- The GitHub username in `index.html` must match the repo owner
+`watcher.py` runs on erocko38's server, reads the Enshrouded save file every 60 seconds, and pushes `status.json` to this repo. The dashboard polls the GitHub Contents API every 60 seconds — always fresh, no CDN cache delay.
 
-**How it works:**
-1. `watcher.py` watches the Enshrouded save directory for changes
-2. On save, it parses the save file and writes `status.json` to the repo
-3. The dashboard polls the [GitHub Contents API](https://docs.github.com/en/rest/repos/contents) every 60 seconds — always fresh, no CDN cache delay
-4. Status shows as Active (< 10 min), Idle (< 1 hr), or Offline
+### GitHub token setup (erocko38 does this once)
 
-To disable sync, set `GITHUB_USER = "YOUR_GITHUB_USERNAME"` in `index.html`.
+The token is **never stored in the script** — it lives only as an environment variable on the server.
+
+**1. Create a fine-grained Personal Access Token**
+- Go to: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens
+- Repository access: **Only `enshrouded-bros`**
+- Permissions: **Contents → Read and Write** (nothing else)
+- Set an expiration (90 days recommended — rotate it when it expires)
+
+**2. Set it as an environment variable on the server**
+```
+# Run once in Command Prompt as Administrator, then restart watcher.py
+setx GITHUB_TOKEN "github_pat_YOUR_TOKEN_HERE"
+```
+
+**3. Run the watcher**
+```
+pip install requests zstandard
+python watcher.py
+```
+
+The script will print `Token: github_pat_XXXX... (from env)` on startup to confirm it loaded correctly. If the token is missing it will fail immediately with a clear error rather than silently.
+
+### What gets pushed (status.json)
+
+Only the data the dashboard actually displays — internal game GUIDs and world identifiers are stripped before pushing:
+
+| Field | Description |
+|-------|-------------|
+| `last_save_ts` / `last_save_iso` | When the world was last saved |
+| `file_hash` | 12-char MD5 of save file (change detection) |
+| `player_count` | Number of character slots found |
+| `structures` | Flame altar, kiln, drying rack counts + NPC count |
+| `mother_flame_found` | Boolean |
+
+To disable sync entirely, set `GITHUB_USER = "YOUR_GITHUB_USERNAME"` in `index.html`.
 
 ---
 
