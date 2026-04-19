@@ -265,6 +265,79 @@ footer a:hover{color:var(--gold)}
 .craft-station{font-size:.68rem;color:var(--text-dim);font-style:italic;border-top:1px solid rgba(255,255,255,.05);padding-top:.4rem;margin-top:.3rem}
 .craft-notes{font-size:.7rem;color:var(--ash);margin-top:.3rem;line-height:1.4}
 .craft-disclaimer{margin-top:.8rem;font-size:.7rem;color:var(--text-dim);font-style:italic}
+
+/* Flame Altar Tracker */
+.flame-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.flame-track{display:flex;gap:.4rem;margin-bottom:1rem;overflow-x:auto;padding-bottom:.3rem}
+.flame-node{flex:1;min-width:68px;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:.6rem .3rem;text-align:center;cursor:pointer;transition:all .2s;user-select:none}
+.flame-node:hover{border-color:var(--ember);transform:translateY(-2px)}
+.flame-node.done{background:rgba(92,184,92,.08);border-color:rgba(92,184,92,.4)}
+.flame-node.current{background:rgba(232,97,42,.15);border-color:var(--ember);box-shadow:0 0 8px rgba(232,97,42,.2)}
+.flame-node-lvl{font-family:'Cinzel',serif;font-size:1rem;margin-bottom:.15rem}
+.flame-node.done .flame-node-lvl{color:var(--green)}
+.flame-node.current .flame-node-lvl{color:var(--ember-bright)}
+.flame-node:not(.done):not(.current) .flame-node-lvl{color:var(--text-dim)}
+.flame-node-shroud{font-size:.58rem;font-family:'Cinzel',serif;color:var(--text-dim)}
+.flame-detail{background:var(--panel);border:1px solid var(--border-hot);border-radius:8px;padding:1.2rem 1.5rem}
+.flame-detail-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+.flame-detail-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--ember-bright)}
+.flame-detail-stats{display:flex;gap:1.5rem;flex-wrap:wrap}
+.flame-stat{text-align:center}
+.flame-stat-val{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--gold)}
+.flame-stat-lbl{font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.1em;color:var(--text-dim);text-transform:uppercase}
+.flame-next{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.flame-next-lbl{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.4rem}
+.flame-boss{font-size:.82rem;color:var(--ember);margin-bottom:.5rem}
+.flame-mats{display:flex;flex-wrap:wrap;gap:.35rem}
+.flame-mat{font-size:.72rem;color:var(--ash);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:.2rem .5rem}
+.flame-maxed{font-size:.9rem;color:var(--green);font-family:'Cinzel',serif;font-style:italic}
+
+/* Boss Reference */
+.boss-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.boss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:.8rem}
+.boss-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1.1rem;position:relative;overflow:hidden;transition:all .3s}
+.boss-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7b1a1a,#e74c3c)}
+.boss-card.mini::before{background:linear-gradient(90deg,var(--shroud),#8e6dbf)}
+.boss-card:hover{border-color:rgba(192,57,43,.4);transform:translateY(-2px)}
+.boss-name{font-family:'Cinzel',serif;font-size:.85rem;color:#e74c3c;margin-bottom:.2rem}
+.boss-card.mini .boss-name{color:#a89bd4}
+.boss-meta{font-size:.7rem;color:var(--text-dim);margin-bottom:.4rem;line-height:1.5}
+.boss-meta b{color:var(--ash)}
+.boss-reward{font-size:.68rem;font-family:'Cinzel',serif;color:var(--gold);background:rgba(212,168,75,.08);border:1px solid rgba(212,168,75,.2);border-radius:3px;padding:.2rem .5rem;display:inline-block;margin-bottom:.5rem}
+.boss-tactics{font-size:.76rem;color:var(--ash);line-height:1.5}
+.boss-farmable{font-size:.58rem;font-family:'Cinzel',serif;background:rgba(92,184,92,.15);border:1px solid rgba(92,184,92,.4);color:var(--green);padding:.1rem .4rem;border-radius:2px;margin-left:.4rem;vertical-align:middle}
+
+/* Biomes */
+.biome-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.biome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.8rem}
+.biome-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:1rem;transition:all .3s}
+.biome-card:hover{border-color:rgba(212,168,75,.3);transform:translateY(-2px)}
+.biome-name{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold-light);margin-bottom:.15rem}
+.biome-badges{display:flex;gap:.3rem;margin-bottom:.5rem;flex-wrap:wrap}
+.biome-badge{font-size:.58rem;font-family:'Cinzel',serif;padding:.15rem .45rem;border-radius:2px;letter-spacing:.06em}
+.biome-badge-level{background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);color:var(--gold)}
+.biome-badge-flame{background:rgba(232,97,42,.15);border:1px solid var(--ember);color:var(--ember-bright)}
+.biome-row{font-size:.74rem;color:var(--ash);padding:.2rem 0;line-height:1.4}
+.biome-row b{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.08em;color:var(--text-dim);text-transform:uppercase;display:block}
+
+/* Survivors */
+.survivor-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.survivor-filters{display:flex;gap:.35rem;margin-bottom:.8rem;flex-wrap:wrap}
+.survivor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.65rem}
+.survivor-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:.9rem;cursor:pointer;transition:all .2s;position:relative}
+.survivor-card:hover{border-color:rgba(212,168,75,.35)}
+.survivor-card.rescued{background:rgba(92,184,92,.06);border-color:rgba(92,184,92,.45)}
+.survivor-type{position:absolute;top:.5rem;right:.5rem;font-size:.55rem;font-family:'Cinzel',serif;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text-dim);padding:.1rem .35rem;border-radius:2px;text-transform:uppercase}
+.survivor-name{font-family:'Cinzel',serif;font-size:.8rem;margin-bottom:.1rem}
+.survivor-card:not(.rescued) .survivor-name{color:var(--gold-light)}
+.survivor-card.rescued .survivor-name{color:var(--green)}
+.survivor-role{font-size:.68rem;color:var(--ember);font-family:'Cinzel',serif;letter-spacing:.05em;margin-bottom:.35rem}
+.survivor-biome{font-size:.68rem;color:var(--text-dim);margin-bottom:.2rem;font-style:italic}
+.survivor-loc{font-size:.7rem;color:var(--ash);margin-bottom:.35rem;line-height:1.35}
+.survivor-unlocks{font-size:.66rem;color:var(--text-dim);line-height:1.4;border-top:1px solid rgba(255,255,255,.05);padding-top:.35rem;margin-top:.3rem}
+.survivor-unlocks b{color:var(--ash);font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:.1rem}
+.survivor-rescued-mark{font-size:.65rem;font-family:'Cinzel',serif;color:var(--green);margin-top:.35rem}
+.survivor-progress{font-family:'Cinzel',serif;font-size:.72rem;color:var(--text-dim);margin-bottom:.6rem}
 .ing-tip{border-bottom:1px dashed rgba(212,168,75,.35);cursor:help;position:relative}
 .ing-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 5px);left:0;background:var(--deep);border:1px solid var(--border-hot);border-radius:4px;padding:.35rem .6rem;font-size:.7rem;color:var(--ash);line-height:1.4;white-space:normal;min-width:160px;max-width:230px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200}
 .ing-tip:hover::after{opacity:1}
@@ -348,6 +421,13 @@ footer a:hover{color:var(--gold)}
   </div>
 </div>
 
+<!-- ── FLAME ALTAR TRACKER ── -->
+<div class="flame-section">
+  <div class="section-title">🔥 Flame Altar Progression</div>
+  <div class="flame-track" id="flame-track"></div>
+  <div class="flame-detail" id="flame-detail"></div>
+</div>
+
 <!-- ── STATS ── -->
 <div class="stats-grid">
   <div class="stat-card"><div class="stat-val fire" id="stat-pct">0%</div><div class="stat-lbl">Overall</div><div class="prog-track"><div class="prog-fill" id="prog-overall"></div></div></div>
@@ -359,6 +439,14 @@ footer a:hover{color:var(--gold)}
 
 <!-- ── PARTY ── -->
 <div class="party-grid" id="party-grid"></div>
+
+<!-- ── SURVIVORS ── -->
+<div class="survivor-section">
+  <div class="section-title">🧑‍🤝‍🧑 Survivors Directory</div>
+  <div class="survivor-filters" id="survivor-filters"></div>
+  <div class="survivor-progress" id="survivor-progress"></div>
+  <div class="survivor-grid" id="survivor-grid"></div>
+</div>
 
 <!-- ── CAMPAIGN PROGRESS ── -->
 <div class="campaign-progress" id="camp-progress"></div>
@@ -380,6 +468,18 @@ footer a:hover{color:var(--gold)}
   </div>
   <div class="craft-grid" id="craft-grid"></div>
   <div class="craft-disclaimer">* Quantities approximate — verify in-game. Most recipes unlock after rescuing the relevant NPC.</div>
+</div>
+
+<!-- ── BOSSES ── -->
+<div class="boss-section">
+  <div class="section-title">💀 Boss Guide</div>
+  <div id="boss-grid"></div>
+</div>
+
+<!-- ── BIOMES ── -->
+<div class="biome-section">
+  <div class="section-title">🗺 Biome Reference</div>
+  <div class="biome-grid" id="biome-grid"></div>
 </div>
 
 <!-- ── U8 REFERENCE ── -->
@@ -759,6 +859,66 @@ const PHASES = [
   ]},
 ];
 
+// ── FLAME ALTAR DATA ─────────────────────────────────────────────────
+const FLAME_LEVELS = [
+  {level:1,shroud:5,passage:1,capacity:2,boss:null,materials:null,note:'Starting state.'},
+  {level:2,shroud:6,passage:2,capacity:4,boss:'Fell Thunderbrute Head',materials:['Resin ×5','Red Mushrooms ×5','Bones ×5','Shroud Liquid ×1','Spark ×1','Animal Fur ×5']},
+  {level:3,shroud:7,passage:3,capacity:6,boss:'Scavenger Matron Head',materials:['Wax ×10','Salt ×10','Shroud Wood ×10','Flintstone ×10','Charcoal ×10']},
+  {level:4,shroud:8,passage:4,capacity:7,boss:'Fell Wispwyvern Head',materials:['Goo ×15','Mycelium ×15','Indigo Plant ×15','Amber ×15','Copper Ore ×15']},
+  {level:5,shroud:9,passage:5,capacity:8,boss:'Fell Monstrosity Head',materials:['Mint Mushroom Meat ×20','Fossilized Bones ×20','Ammonia Gland ×20','Tin Ore ×20','Rooibos ×20']},
+  {level:6,shroud:10,passage:6,capacity:null,boss:'Fell Sicklescythe Head',materials:['Sulfur ×40','Saffron ×40','Iron Ore ×40','Lapislazuli ×40','Yucca Fruit ×40']},
+  {level:7,shroud:11,passage:7,capacity:null,boss:'Fell Cyclops Head',materials:['(Albaneve-tier materials — exact list TBC post-launch)']},
+  {level:8,shroud:12,passage:8,capacity:null,boss:'Fell Dragon Youngling Head',materials:['(High-tier Albaneve materials — unlocks Veilwater Basin access)']},
+  {level:9,shroud:13,passage:9,capacity:10,boss:"Hydrak'Dal Head",materials:['Spark ×60','Gold Ore ×60','Green Vitriol Dust ×60','Passionflower ×30','Aquamarine ×60','Pearl ×30'],note:'Requires 14 survivors rescued.'},
+];
+
+// ── BOSS DATA ─────────────────────────────────────────────────────────
+const BOSSES = [
+  {name:'Fell Thunderbrute',biome:'Springlands',level:'5–10',reward:'Flame Altar L2',location:'Elixir Wells · Ring of Rot · Pikemead\'s bridge',tactics:'Guard-type bruiser. Barbarian tanks while others attack from range. First boss — learn dodge timing here.'},
+  {name:'Scavenger Matron',biome:'Springlands / Revelwood',level:'8–12',reward:'Flame Altar L3',location:'Hill of Scavengers · Scavenger Camps',tactics:'Two variants: Gorger (poison bile AoE — dodge sideways) and Grizzler (blows horn to summon minions — kill minions fast or get overwhelmed). Respawns after server reset — farmable.',farmable:true},
+  {name:'Fell Wispwyvern',biome:'Revelwood',level:'12–15',reward:'Flame Altar L4',location:"Pikemead's Reach — The Pike, north of Imperial Gardens",tactics:'Frost breath (dodge roll through it), summons minions constantly. Considered hardest early boss. Fire resistance potion helps. Kill adds first or they overwhelm.'},
+  {name:'Fell Monstrosity',biome:'Nomad Highlands',level:'18–22',reward:'Flame Altar L5',location:'Cradle of Dusk shroud area near Nomad Spire',tactics:'Located inside shroud — extend Flame Altar to L4 first for more shroud time. Bring antidotes and full upgraded Revelwood gear.'},
+  {name:'Fell Sicklescythe',biome:'Kindlewastes',level:'22–28',reward:'Flame Altar L6',location:'Ridgeback Mine, SE of Kindlewastes (shroud)',tactics:'Desert mine environment — terrain is a factor. Fire resistance recommended. Boss is in shroud pocket; manage shroud time carefully.'},
+  {name:'Fell Cyclops',biome:'Albaneve Summits',level:'28–35',reward:'Flame Altar L7',location:'Elixir Well, NE of Albaneve Spire',tactics:'Large melee boss in Elixir Well dungeon. Tank and focused DPS. Bring full Kindlewastes-tier gear. Healer keeps aura active.'},
+  {name:'Fell Dragon Youngling',biome:'Albaneve Summits',level:'35–40',reward:'Flame Altar L8 + Veilwater access',location:'Howling Peak — light all 8 Balefires across Albaneve first',tactics:'Fire breath, strafing fire, wing beat AoE. KEY MECHANIC: fill the stun bar with Stun Arrows (Ranger) or Chain Lightning (Wizard) to knock it down — enters bonus damage phase. Deals reduced damage when not stunned, so stun cycling is everything.',highlight:true},
+  {name:"Hydrak'Dal",biome:'Veilwater Basin',level:'40–45 (Boss L41)',reward:'Flame Altar L9 — MAX',location:"Drak'Dal Temple — requires Flame L8 + Fisher NPC questline",tactics:'Arena: 4 speed pads, mud patches (slows), central pillar. Watch hands: yellow glow = rock barrage incoming, dodge away. Whirlwind AoE — create distance or use pillar. Manage oxygen for underwater sections. Hydrak\'Dal Head + legendary chest on kill.',highlight:true},
+];
+const MINI_BOSSES = [
+  {name:'Vukah Brawler',biome:'Low Meadows',level:'8–12',reward:'Vukah Brawler Head',location:'Vukah Ceremony Hill, SE of Low Meadows Spire',tactics:'Champion gladiator arena fight on hilltop. Heavy melee combos. Ranger kites from range while Barbarian pressures.'},
+  {name:'Hollow Cyclops',biome:'Springlands',level:'8–12',reward:'Dungeon loot',location:'Hollow Halls dungeon — final room',tactics:'Cursed dungeon-boss variant. Clear all dungeon rooms first. Collector NPC (Alden Crowley) is found here.'},
+];
+
+// ── BIOME DATA ────────────────────────────────────────────────────────
+const BIOMES = [
+  {name:'Springlands',level:'1–10',flame:'1',enemies:'Fallen, Scavengers, wildlife',resources:'Plant fiber, resin, mushrooms, fossils (unique to this biome)',boss:'Fell Thunderbrute',notes:'Starting biome. 4 main NPC vaults. Hollow Halls dungeon. Ring of Rot. Most core crafters are here.'},
+  {name:'Low Meadows',level:'5–15',flame:'2',enemies:'Scavengers, Vukah',resources:'Wood, animal products, plant fiber',boss:'Vukah Brawler (optional)',notes:'Carpenter vault here. Vukah Ceremony Hill arena. Unlock Flame L2 before entering deeper Shroud.'},
+  {name:'Revelwood',level:'10–18',flame:'3',enemies:'Fell creatures, Fallen',resources:'Copper ore, clay, hardwood',boss:"Fell Wispwyvern",notes:"Pikemead's Reach ancient capital. Blackmire is a dense jungle sub-zone within. Bard (Valory) found in Sunken Ancient City via Flame quest."},
+  {name:'Nomad Highlands',level:'15–22',flame:'4',enemies:'Vukah camps, Fallen, saber-toothed tigers',resources:'Limestone, tin ore, fossil bones, aloe vera, peppers, rooibos',boss:'Fell Monstrosity',notes:'Massive biome splitting east/west. Cradle of Dusk shroud area. Fell Monstrosity hidden in shroud — need L4 shroud time.'},
+  {name:'Kindlewastes',level:'20–30',flame:'5',enemies:'Scorpions, rats, spiders, vultures',resources:'Saffron, lapislazuli, sulfur, palmwood, iron ore, sand, sandstone',boss:'Fell Sicklescythe',notes:'Desert biome. 3 armor set types per class available here. Ridgeback Mine area. Fire resistance potions recommended.'},
+  {name:'Albaneve Summits',level:'30–40',flame:'6–8',enemies:'Powerful Fell, mountain creatures, goats',resources:'Granite, obsidian, silver ore, snow/ice',boss:'Fell Cyclops + Fell Dragon Youngling',notes:'Mountain/snow biome. Light 8 Balefires to unlock Dragon boss at Howling Peak. Fell Dragon unlocks Veilwater access.'},
+  {name:'Veilwater Basin',level:'35–45',flame:'8',enemies:'Draks, crabs, water reptiles',resources:'Gold ore, aquamarine, pearl, coffee beans, bamboo, banana, coconut, tropical wood',boss:"Hydrak'Dal (L41)",notes:'Added in Update 7. Swim/dive mechanics + oxygen management. Fishing system. Fisher NPC (Capt. Fontane) and Barber (Elio Ricci) here. Final main boss.'},
+];
+
+// ── SURVIVOR DATA ─────────────────────────────────────────────────────
+const SURVIVORS = [
+  {id:'blacksmith',name:'Oswald Anders',role:'Blacksmith',biome:'Springlands',location:'Ancient Vault — Blacksmith (north of starting area)',unlocks:'Charcoal Kiln, Forge, Smelter, Smithing Tools, Blast Furnace',type:'craftsperson'},
+  {id:'alchemist',name:'Balthazar',role:'Alchemist',biome:'Springlands',location:'Ancient Vault — Alchemist (west of Springlands Spire)',unlocks:'Mortar, Grinding Stones, Alchemy Station, Laboratory, Mill',type:'craftsperson'},
+  {id:'farmer',name:'Emily Fray',role:'Farmer',biome:'Springlands',location:'Ancient Vault — Farmer (NE of Springlands Spire)',unlocks:'Seedbed, Cooking Station, Oven, Almanac, Beehive, Seafood Grill, Coffee Brewery',type:'craftsperson'},
+  {id:'hunter',name:'Athalan Skree',role:'Hunter',biome:'Springlands / Low Meadows',location:'Ancient Vault — Hunter (east of Springlands Spire)',unlocks:'Drying Rack, Hand Spindle, Tanning Station, Spinning Wheel, Loom, Spinning Machine',type:'craftsperson'},
+  {id:'carpenter',name:'Cade Hawthorn',role:'Carpenter',biome:'Low Meadows',location:'Ancient Vault — Carpenter (SE of Hunter vault, Low Meadows)',unlocks:'Kiln, Table Saw, Masonry Tools',type:'craftsperson'},
+  {id:'collector',name:'Alden Crowley',role:'Collector',biome:'Springlands',location:'Hollow Halls dungeon — final room',unlocks:'Ectoplasm Press',type:'craftsperson'},
+  {id:'bard',name:'Valory',role:'Bard',biome:'Revelwood / Blackmire',location:'Sunken Ancient City — via Flame quest at level 12',unlocks:'Instruments, cosmetic armor recipes',type:'craftsperson'},
+  {id:'fisher',name:"Capt. Melville Fontane",role:'Fisher',biome:'Veilwater Basin',location:"Ol' Captain's Rest",unlocks:"Fishing rods, bait, fishing gear — required for Hydrak'Dal questline",type:'craftsperson'},
+  {id:'barber',name:'Elio Ricci',role:'Barber',biome:'Veilwater Basin',location:"Elder's Night Sanctum",unlocks:'Coloring Station (character appearance)',type:'craftsperson'},
+  {id:'rochelle',name:'Rochelle Anders',role:'Blacksmith (Asst.)',biome:'Springlands',location:'Fanning Ranch',unlocks:'Extra Blacksmith crafting capacity',type:'assistant'},
+  {id:'leclaire',name:'Lady LeClair',role:'Alchemist (Asst.)',biome:'Springlands',location:"Glennwood's End",unlocks:'Extra Alchemist crafting capacity',type:'assistant'},
+  {id:'braelyn',name:'Aunt Braelyn',role:'Carpenter (Asst.)',biome:'Unknown',location:'Hidden Temple',unlocks:'Extra Carpenter crafting capacity',type:'assistant'},
+  {id:'galen',name:'Galen Yager',role:'Hunter (Asst.)',biome:'Unknown',location:'Draconian Vulture Nest',unlocks:'Extra Hunter crafting capacity',type:'assistant'},
+  {id:'fenrig',name:'Fenrig Mills Jr.',role:'Farmer (Asst.)',biome:'Unknown',location:'Wolf Cave',unlocks:'Extra Farmer crafting capacity',type:'assistant'},
+  {id:'nameless',name:'Nameless One',role:'Collector (Asst.)',biome:'Veilwater Basin',location:"Drak'Dal Temple",unlocks:'Extra Collector crafting capacity',type:'assistant'},
+  {id:'chester',name:'Chester Loft',role:'Bard (Asst.)',biome:'Unknown',location:'Cromville',unlocks:'Extra Bard crafting capacity',type:'assistant'},
+];
+
 // ── INGREDIENT SOURCES ───────────────────────────────────────────────
 const INGREDIENT_SOURCES = {
   'Berry':              'Harvest berry bushes — meadows near spawn, Springlands',
@@ -808,6 +968,7 @@ const CRAFT_CATS = [
   {id:'tool',label:'Tools'},
   {id:'station',label:'Workstations'},
   {id:'building',label:'Buildings'},
+  {id:'food',label:'Food'},
 ];
 const CRAFT_ROLES = [
   {id:'all',label:'All'},
@@ -908,6 +1069,20 @@ const CRAFTING = [
   {name:'Torch Sconce',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×1','Resin ×1'],notes:'Wall-mounted light. Place throughout base and dungeon staging areas.'},
   {name:'Shelf',cat:'building',role:'group',level:5,station:'Workbench',ingredients:['Wood ×6'],notes:'Display and storage. Use to organize crafting materials near stations.'},
   {name:'Workbench',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×20','Stone ×10'],notes:'Build this first — unlocks all other crafting. Place centrally in base.'},
+  // ── FOOD ─────────────────────────────────────────────────────────
+  {name:'Cooked Meat',cat:'food',role:'barbarian',level:1,station:'Campfire',ingredients:['Raw Meat ×1'],notes:'+Bonus HP pool. Hunt any animal. Stack with grain dish for melee builds.'},
+  {name:'Cooked Rice',cat:'food',role:'barbarian',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Rice ×2'],notes:'+21% melee damage, 50 min. Best-in-slot melee food. Grain = Barbarian/Warrior slot.'},
+  {name:'Algae Salad',cat:'food',role:'wizard',level:35,station:'Cooking Station (Emily Fray)',ingredients:['Algae ×3'],notes:'+120 Mana +21% magic damage. Best-in-slot magic food. Veilwater ingredient.'},
+  {name:'Taro Root Curry',cat:'food',role:'ranger',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Taro Root ×2','Spice ×1'],notes:'+21% ranged + dagger damage. Best-in-slot Ranger/Assassin food.'},
+  {name:'Creamy Mushroom Spaetzle',cat:'food',role:'group',level:25,station:'Oven (Emily Fray)',ingredients:['Mushroom ×2','Grain ×1','Egg ×1'],notes:'Melee boost + stamina + frost resistance. Strong all-purpose option for Albaneve Summits.'},
+  {name:'Chicken Soup',cat:'food',role:'healer',level:15,station:'Cooking Station (Emily Fray)',ingredients:['Raw Chicken ×1','Water ×1','Herbs ×1'],notes:'+HP regen. Good healer support food to free up potion slots.'},
+  {name:'Strawberry Milkshake',cat:'food',role:'ranger',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Strawberry ×2','Milk ×1'],notes:'+Stamina regen. Part of optimal Ranger 4-slot combo with Taro Root Curry.'},
+  {name:'Coconana Smoothie',cat:'food',role:'ranger',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coconut ×1','Banana ×1'],notes:'+Stamina. Veilwater ingredient. Final slot in Ranger 4-food combo for max output.'},
+  {name:'Coffee',cat:'food',role:'group',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coffee Bean ×2'],notes:'+Stamina regen. Useful in long dungeon runs. Veilwater Basin crop.'},
+  {name:'Candied Ginger',cat:'food',role:'wizard',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Ginger ×2','Honey ×1'],notes:'+Mana regen. Unusual: sweet type that gives mana instead of stamina. Good Wizard side slot.'},
+  {name:'Fish Dish',cat:'food',role:'group',level:40,station:'Seafood Grill (Emily Fray)',ingredients:['Fish ×1'],notes:'+Max oxygen for underwater exploration. Required for Veilwater Basin deep dives and Hydrak\'Dal arena.'},
+  {name:'Berry Compote',cat:'food',role:'healer',level:1,station:'Cooking Station (Emily Fray)',ingredients:['Berry ×3'],notes:'+Health regen. Easiest to make from session 1. Upgrade to Chicken Soup when possible.'},
+  {name:'Rooibos Tea',cat:'food',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'+Stamina + stamina regen. Nomad Highlands ingredient. Good liquid slot item.'},
 ];
 
 // ── STATE ────────────────────────────────────────────────────────────
@@ -924,6 +1099,9 @@ if(!STATE.heroes)      STATE.heroes  = {};
 if(!STATE.loot)        STATE.loot    = [];
 if(!STATE.notes)       STATE.notes   = {};
 if(!STATE.activePhase) STATE.activePhase = 1;
+if(!STATE.flameLevel)  STATE.flameLevel  = 1;
+if(!STATE.survivors)   STATE.survivors   = {};
+if(!STATE.survivorFilter) STATE.survivorFilter = 'all';
 HEROES.forEach(h => {
   if(!STATE.heroes[h.id])
     STATE.heroes[h.id] = {level:1,weaponBar:0,armorUpgrades:0,skillReset:false};
@@ -1167,6 +1345,103 @@ function initLiveSync(){
   setInterval(fetchLive, POLL_MS);
 }
 
+// ── FLAME ALTAR ───────────────────────────────────────────────────────
+function renderFlameAltar() {
+  const cur = STATE.flameLevel;
+  document.getElementById('flame-track').innerHTML = FLAME_LEVELS.map(f => {
+    const cls = f.level < cur ? 'done' : f.level === cur ? 'current' : '';
+    return `<div class="flame-node ${cls}" onclick="setFlameLevel(${f.level})">
+      <div class="flame-node-lvl">${f.level < cur ? '✓' : f.level === cur ? '🔥' : f.level}</div>
+      <div class="flame-node-shroud">${f.shroud}m</div>
+    </div>`;
+  }).join('');
+  const d = FLAME_LEVELS[cur - 1];
+  const next = FLAME_LEVELS[cur]; // undefined if maxed
+  document.getElementById('flame-detail').innerHTML = `
+    <div class="flame-detail-top">
+      <div><div class="flame-detail-title">🔥 Flame Level ${cur}</div>${d.note ? `<div style="font-size:.75rem;color:var(--ash);margin-top:.3rem">${d.note}</div>` : ''}</div>
+      <div class="flame-detail-stats">
+        <div class="flame-stat"><div class="flame-stat-val">${d.shroud} min</div><div class="flame-stat-lbl">Shroud Time</div></div>
+        <div class="flame-stat"><div class="flame-stat-val">${d.passage}</div><div class="flame-stat-lbl">Passage Lv</div></div>
+        ${d.capacity ? `<div class="flame-stat"><div class="flame-stat-val">${d.capacity}</div><div class="flame-stat-lbl">Capacity</div></div>` : ''}
+      </div>
+    </div>
+    ${next ? `<div class="flame-next">
+      <div class="flame-next-lbl">To reach Level ${next.level}</div>
+      ${next.boss ? `<div class="flame-boss">⚔ Requires: ${next.boss}</div>` : ''}
+      ${next.materials ? `<div class="flame-mats">${next.materials.map(m => `<span class="flame-mat">${m}</span>`).join('')}</div>` : ''}
+      ${next.note ? `<div style="font-size:.72rem;color:var(--text-dim);margin-top:.5rem;font-style:italic">${next.note}</div>` : ''}
+    </div>` : `<div class="flame-next"><div class="flame-maxed">✓ Flame Altar at maximum level — Veilwater Basin unlocked</div></div>`}`;
+}
+function setFlameLevel(lv) { STATE.flameLevel = lv; saveState(); renderFlameAltar(); }
+
+// ── BOSSES ────────────────────────────────────────────────────────────
+function renderBosses() {
+  const mainCards = BOSSES.map(b => `
+    <div class="boss-card${b.highlight ? ' highlight' : ''}">
+      <div class="boss-name">${b.name}</div>
+      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
+      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
+      <div class="boss-reward">${b.reward}</div>
+      <div class="boss-tactics">${b.tactics}${b.farmable ? '<span class="boss-farmable">Farmable</span>' : ''}</div>
+    </div>`).join('');
+  const miniCards = MINI_BOSSES.map(b => `
+    <div class="boss-card mini">
+      <div class="boss-name">${b.name}</div>
+      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
+      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
+      <div class="boss-reward">${b.reward}</div>
+      <div class="boss-tactics">${b.tactics}</div>
+    </div>`).join('');
+  document.getElementById('boss-grid').innerHTML = `
+    <div style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.6rem">Main Bosses — Campaign</div>
+    <div class="boss-grid">${mainCards}</div>
+    <div style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--text-dim);text-transform:uppercase;margin:1.2rem 0 .6rem">Mini Bosses</div>
+    <div class="boss-grid">${miniCards}</div>`;
+}
+
+// ── BIOMES ────────────────────────────────────────────────────────────
+function renderBiomes() {
+  document.getElementById('biome-grid').innerHTML = BIOMES.map(b => `
+    <div class="biome-card">
+      <div class="biome-name">${b.name}</div>
+      <div class="biome-badges">
+        <span class="biome-badge biome-badge-level">Lv ${b.level}</span>
+        <span class="biome-badge biome-badge-flame">🔥 L${b.flame}</span>
+      </div>
+      <div class="biome-row"><b>Enemies</b>${b.enemies}</div>
+      <div class="biome-row"><b>Resources</b>${b.resources}</div>
+      <div class="biome-row"><b>Boss</b>${b.boss}</div>
+      <div class="biome-row"><b>Notes</b>${b.notes}</div>
+    </div>`).join('');
+}
+
+// ── SURVIVORS ────────────────────────────────────────────────────────
+function renderSurvivors() {
+  const f = STATE.survivorFilter;
+  const visible = SURVIVORS.filter(s => f === 'all' || s.type === f);
+  const rescuedCount = SURVIVORS.filter(s => STATE.survivors[s.id]).length;
+  const filterBtns = [{id:'all',label:'All'},{id:'craftsperson',label:'Craftspeople'},{id:'assistant',label:'Assistants'}]
+    .map(b => `<button class="craft-filter-btn${f===b.id?' active':''}" onclick="setSurvivorFilter('${b.id}')">${b.label}</button>`).join('');
+  document.getElementById('survivor-filters').innerHTML = filterBtns;
+  document.getElementById('survivor-progress').innerHTML =
+    `${rescuedCount} / ${SURVIVORS.length} rescued &nbsp;·&nbsp; Flame L9 requires 14 total`;
+  document.getElementById('survivor-grid').innerHTML = visible.map(s => {
+    const rescued = !!STATE.survivors[s.id];
+    return `<div class="survivor-card${rescued ? ' rescued' : ''}" onclick="toggleSurvivor('${s.id}')">
+      <span class="survivor-type">${s.type === 'assistant' ? 'Asst.' : 'Crafter'}</span>
+      <div class="survivor-name">${s.name}</div>
+      <div class="survivor-role">${s.role}</div>
+      <div class="survivor-biome">${s.biome}</div>
+      <div class="survivor-loc">${s.location}</div>
+      <div class="survivor-unlocks"><b>Unlocks</b>${s.unlocks}</div>
+      ${rescued ? '<div class="survivor-rescued-mark">✓ Rescued</div>' : ''}
+    </div>`;
+  }).join('');
+}
+function toggleSurvivor(id) { STATE.survivors[id] = !STATE.survivors[id]; saveState(); renderSurvivors(); }
+function setSurvivorFilter(f) { STATE.survivorFilter = f; saveState(); renderSurvivors(); }
+
 // ── CRAFTING ─────────────────────────────────────────────────────────
 function renderCrafting() {
   const search=(document.getElementById('craft-search')?.value||'').toLowerCase();
@@ -1215,7 +1490,7 @@ function confirmReset(){
 }
 
 // ── RENDER ALL ───────────────────────────────────────────────────────
-function renderAll(){renderParty();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderCrafting();}
+function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();}
 
 // ── BOOT ─────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
