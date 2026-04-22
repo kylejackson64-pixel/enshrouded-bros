@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enshrouded Bros</title>
 <link rel="icon" type="image/svg+xml" href="design-system/Enshrouded Bros Design System/assets/favicon.svg">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0f18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Enshrouded Bros">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -487,6 +493,128 @@ footer a:hover{color:var(--gold)}
 /* ── KBD HINT ── */
 .kbd{display:inline-block;font-family:ui-monospace,monospace;font-size:.55rem;color:var(--text-dim);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:0 .3rem;margin-left:.3rem;vertical-align:middle;line-height:1.6}
 
+/* ── ANIMATED FLAME ── */
+.flame-anim{display:inline-block;animation:flicker 1.3s ease-in-out infinite alternate;transform-origin:bottom center}
+@keyframes flicker{0%{transform:scale(1) rotate(-1deg);filter:hue-rotate(0deg) brightness(1)}33%{transform:scale(1.1) rotate(2deg);filter:hue-rotate(10deg) brightness(1.35)}66%{transform:scale(.95) rotate(-2deg);filter:hue-rotate(-5deg) brightness(.9)}100%{transform:scale(1.08) rotate(1.5deg);filter:hue-rotate(5deg) brightness(1.4)}}
+
+/* ── DOT NAV ── */
+#dot-nav{position:fixed;right:.9rem;top:50%;transform:translateY(-50%);z-index:400;display:flex;flex-direction:column;gap:.5rem}
+.dn-item{width:9px;height:9px;border-radius:50%;background:rgba(212,168,75,.2);border:1px solid rgba(212,168,75,.25);cursor:pointer;transition:all .2s;position:relative}
+.dn-item:hover,.dn-item.active{background:var(--gold);border-color:var(--gold);transform:scale(1.45)}
+.dn-item::before{content:attr(data-label);position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);font-family:var(--font-serif);font-size:.54rem;letter-spacing:.1em;color:var(--gold-light);background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:.15rem .45rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.dn-item:hover::before{opacity:1}
+@media(max-width:720px){#dot-nav{display:none}}
+
+/* ── COMMAND PALETTE ── */
+#cmd-overlay{position:fixed;inset:0;background:rgba(10,15,24,.88);z-index:980;display:none;align-items:flex-start;justify-content:center;padding-top:11vh}
+#cmd-overlay.open{display:flex}
+#cmd-box{background:var(--panel);border:1px solid var(--border-hot);border-radius:var(--r-lg);width:min(560px,92vw);overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.7)}
+#cmd-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:.85rem 1.1rem;color:var(--text);font-family:var(--font-body);font-size:.95rem;outline:none;letter-spacing:.02em}
+#cmd-input::placeholder{color:var(--text-dim)}
+#cmd-results{max-height:320px;overflow-y:auto}
+.cmd-item{display:flex;align-items:center;gap:.7rem;padding:.5rem 1.1rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.03);transition:background .12s}
+.cmd-item:hover,.cmd-item.sel,.cmd-item.active{background:rgba(212,168,75,.07)}
+.cmd-item:last-child{border-bottom:none}
+.cmd-icon{font-size:.95rem;flex-shrink:0;width:22px;text-align:center}
+.cmd-label{font-size:.8rem;color:var(--text);flex:1;line-height:1.3}
+.cmd-sublabel{font-size:.62rem;color:var(--text-dim)}
+.cmd-tag{font-family:var(--font-serif);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:.1rem .35rem;border-radius:2px;border:1px solid rgba(212,168,75,.3);color:var(--gold-light)}
+.cmd-empty{padding:1.2rem;text-align:center;font-size:.82rem;color:var(--text-dim);font-style:italic}
+.cmd-hint{display:flex;align-items:center;justify-content:flex-end;gap:.5rem;padding:.5rem .9rem;border-top:1px solid var(--border);font-size:.6rem;color:var(--text-dim);font-family:var(--font-serif);letter-spacing:.05em}
+
+/* ── ACHIEVEMENTS ── */
+.achieve-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.achieve-grid{display:flex;flex-wrap:wrap;gap:.55rem}
+.badge{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:.5rem .8rem;transition:all .35s;opacity:.28;filter:grayscale(.9);cursor:default}
+.badge.got{opacity:1;filter:none;border-color:rgba(212,168,75,.4);background:rgba(212,168,75,.06)}
+.badge.got.new-badge{animation:badgeUnlock .65s cubic-bezier(.34,1.56,.64,1)}
+@keyframes badgeUnlock{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.badge-icon{font-size:1.2rem;flex-shrink:0}
+.badge-name{font-family:var(--font-serif);font-size:.65rem;color:var(--gold-light);margin-bottom:.08rem}
+.badge-desc{font-size:.58rem;color:var(--text-dim)}
+
+/* ── ACTIVITY FEED ── */
+.activity-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.activity-list{display:flex;flex-direction:column;gap:.25rem;max-height:260px;overflow-y:auto}
+.act-item{display:flex;align-items:flex-start;gap:.6rem;padding:.38rem .6rem;border-radius:4px;font-size:.77rem;border-left:2px solid var(--border)}
+.act-item.act-done{border-left-color:var(--green)}
+.act-item.act-undo{border-left-color:rgba(122,143,168,.4)}
+.act-time{font-family:var(--font-serif);font-size:.57rem;color:var(--text-dim);white-space:nowrap;min-width:52px;padding-top:.12rem}
+.act-text{color:var(--ash);line-height:1.4}
+.activity-empty{font-size:.82rem;color:var(--text-dim);font-style:italic;padding:.5rem 0}
+
+/* ── DEATH TRACKER ── */
+.death-row{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;padding-top:.5rem;border-top:1px solid rgba(255,255,255,.06)}
+.death-count{font-family:var(--font-serif);font-size:.72rem;color:var(--text-dim);transition:color .2s}
+.death-count.bloody{color:#e74c3c}
+.death-btns{display:flex;gap:3px}
+.death-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:3px;color:var(--text-dim);font-size:.65rem;padding:.12rem .42rem;cursor:pointer;transition:all .15s;font-family:var(--font-serif);line-height:1.4}
+.death-btn.kill:hover{background:rgba(192,57,43,.2);border-color:rgba(192,57,43,.5);color:#e74c3c}
+.death-btn.revive:hover{background:rgba(92,184,92,.1);border-color:rgba(92,184,92,.4);color:var(--green)}
+
+/* ── HERO NAME ── */
+.hero-player-name{font-family:var(--font-serif);font-size:.74rem;letter-spacing:.06em;color:var(--gold-light);background:transparent;border:none;border-bottom:1px dashed rgba(212,168,75,.2);outline:none;width:100%;text-align:center;padding:.12rem 0;margin-bottom:.3rem;cursor:text;transition:border-color .2s}
+.hero-player-name:focus{border-bottom-color:var(--gold)}
+.hero-player-name::placeholder{color:var(--text-dim);font-style:italic;font-weight:300}
+
+/* ── LOOT RARITY ── */
+.r-common{color:var(--ash)}.r-rare{color:var(--water)}.r-epic{color:var(--purple-light)}.r-legendary{color:var(--gold-light);animation:legGlow 2s ease-in-out infinite}
+@keyframes legGlow{0%,100%{text-shadow:0 0 5px rgba(212,168,75,.3)}50%{text-shadow:0 0 14px rgba(240,201,106,.9)}}
+.loot-item.r-legendary{border-color:rgba(212,168,75,.45);background:rgba(212,168,75,.05)}
+.loot-item.r-epic{border-color:rgba(142,109,191,.35)}
+.loot-item.r-rare{border-color:rgba(74,159,212,.3)}
+.rarity-badge{display:inline-block;font-family:var(--font-serif);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;padding:.08rem .35rem;border-radius:2px;border:1px solid;margin-bottom:.2rem;vertical-align:middle}
+.rarity-select{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:.5rem .6rem;color:var(--text);font-family:var(--font-serif);font-size:.65rem;outline:none;cursor:pointer;transition:border-color .2s}
+.rarity-select:focus,.rarity-select option{background:var(--deep);color:var(--text)}
+
+/* ── LOOT LEADERBOARD ── */
+.loot-lb{margin-top:.8rem;padding-top:.7rem;border-top:1px solid var(--border)}
+.loot-lb-title{font-family:var(--font-serif);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.5rem}
+.loot-lb-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem}
+.loot-lb-name{font-family:var(--font-serif);font-size:.62rem;min-width:82px;color:var(--ash)}
+.loot-lb-wrap{flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.loot-lb-fill{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.34,1.56,.64,1)}
+.loot-lb-n{font-family:var(--font-serif);font-size:.6rem;color:var(--text-dim);min-width:16px;text-align:right}
+
+/* ── SHROUD TIMER ── */
+.shroud-widget{display:flex;align-items:center;gap:.7rem;margin-top:.8rem;padding:.65rem .9rem;background:rgba(232,97,42,.06);border:1px solid rgba(232,97,42,.2);border-radius:var(--r-md);transition:all .3s}
+.shroud-widget.danger{background:rgba(192,57,43,.12);border-color:rgba(192,57,43,.6);animation:shroudDanger .9s ease-in-out infinite}
+@keyframes shroudDanger{0%,100%{box-shadow:none}50%{box-shadow:0 0 12px rgba(192,57,43,.4)}}
+.shroud-display{font-family:var(--font-serif);font-size:1.5rem;letter-spacing:.04em;color:var(--ember-bright);min-width:58px}
+.shroud-widget.danger .shroud-display{color:#e74c3c}
+.shroud-info{flex:1}
+.shroud-label{font-family:var(--font-serif);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)}
+.shroud-max{font-size:.65rem;color:var(--text-dim);font-style:italic}
+.shroud-btn{font-family:var(--font-serif);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .75rem;border-radius:var(--r-sm);border:1px solid;cursor:pointer;transition:all .2s;white-space:nowrap}
+.shroud-btn.go{background:rgba(232,97,42,.15);border-color:var(--ember);color:var(--ember-bright)}
+.shroud-btn.go:hover{background:rgba(232,97,42,.28)}
+.shroud-btn.off{background:rgba(92,184,92,.1);border-color:var(--green);color:var(--green)}
+.shroud-btn.off:hover{background:rgba(92,184,92,.2)}
+
+/* ── SESSION TIMER (in live card) ── */
+.session-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-serif);font-size:.62rem;letter-spacing:.06em;color:var(--text-dim);margin-top:.4rem}
+
+/* ── KEYBOARD HELP ── */
+#kb-overlay{position:fixed;inset:0;background:rgba(10,15,24,.88);z-index:980;display:none;align-items:center;justify-content:center}
+#kb-overlay.open{display:flex}
+#kb-box{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.4rem 1.6rem;width:min(460px,92vw);max-height:80vh;overflow-y:auto}
+.kb-title{font-family:var(--font-serif);font-size:.8rem;letter-spacing:.18em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.9rem}
+.kb-row{display:flex;align-items:center;justify-content:space-between;padding:.32rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.78rem;color:var(--ash)}
+.kb-row:last-child{border-bottom:none}
+.kb-keys{display:flex;gap:.3rem}
+.kb-key{font-family:ui-monospace,monospace;font-size:.62rem;padding:.1rem .42rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:3px;color:var(--text-dim)}
+
+/* ── PRINT ── */
+@media print{
+  #sticky-bar,#dot-nav,#toast-root,#cmd-overlay,#kb-overlay,.particles,.reset-btn,.craft-section,.boss-section,.biome-section,.guide-section,.u8-section,.activity-section,.achieve-section,.survivor-section,input[type=range],.shroud-widget,.death-btns,.obj-info-btn,.obj-steps,.countdown-badge{display:none!important}
+  body,*{background:#fff!important;color:#111!important;box-shadow:none!important;animation:none!important;transition:none!important;text-shadow:none!important}
+  body::before{display:none!important}
+  h1{font-size:2rem;-webkit-text-fill-color:#111!important}
+  .hero-card,.stat-card,.phase-panel,.flame-detail{border:1px solid #bbb!important;background:#f8f8f8!important;break-inside:avoid}
+  .phase-panel{display:block!important}
+  .section-title{color:#333!important;border-bottom:1px solid #ccc}
+}
+
 /* ── Objective steps */
 .obj-info-btn{background:none;border:1px solid rgba(212,168,75,.25);border-radius:3px;color:var(--text-dim);font-size:.6rem;font-family:'Cinzel',serif;letter-spacing:.05em;padding:.1rem .4rem;cursor:pointer;margin-left:.5rem;transition:all .2s;vertical-align:middle}
 .obj-info-btn:hover{border-color:var(--gold);color:var(--gold)}
@@ -502,6 +630,30 @@ footer a:hover{color:var(--gold)}
 
 <div id="sticky-bar"><div id="sticky-fill"></div></div>
 <div id="toast-root"></div>
+
+<!-- ── DOT NAV ── -->
+<nav id="dot-nav" aria-label="Section navigation"></nav>
+
+<!-- ── COMMAND PALETTE ── -->
+<div id="cmd-overlay" onclick="if(event.target===this)closePalette()">
+  <div id="cmd-box">
+    <input id="cmd-input" placeholder="Search objectives, crafting, survivors, bosses…" oninput="cmdSearch(this.value)" onkeydown="cmdKey(event)" autocomplete="off" spellcheck="false">
+    <div id="cmd-results"></div>
+    <div class="cmd-hint"><span class="kbd">↑↓</span>navigate <span class="kbd">↵</span>go <span class="kbd">Esc</span>close</div>
+  </div>
+</div>
+
+<!-- ── KEYBOARD HELP ── -->
+<div id="kb-overlay" onclick="if(event.target===this)closeKb()">
+  <div id="kb-box">
+    <div class="kb-title">⌨ Keyboard Shortcuts</div>
+    <div class="kb-row"><span>Switch to phase</span><span class="kb-keys"><span class="kb-key">1</span><span class="kb-key">2</span><span class="kb-key">3</span><span class="kb-key">4</span><span class="kb-key">5</span></span></div>
+    <div class="kb-row"><span>Search / command palette</span><span class="kb-keys"><span class="kb-key">/</span></span></div>
+    <div class="kb-row"><span>Keyboard shortcuts</span><span class="kb-keys"><span class="kb-key">?</span></span></div>
+    <div class="kb-row"><span>Close overlay</span><span class="kb-keys"><span class="kb-key">Esc</span></span></div>
+    <div class="kb-row"><span>Print party summary</span><span class="kb-keys"><span class="kb-key">Ctrl</span><span class="kb-key">P</span></span></div>
+  </div>
+</div>
 <div id="loading"><div class="loading-flame">🔥</div><div class="loading-text">Forging the Path...</div></div>
 
 <header>
@@ -553,6 +705,7 @@ footer a:hover{color:var(--gold)}
         <span class="pill" id="lp-hash">💾 —</span>
       </div>
       <div class="save-time" id="ls-savetime"></div>
+      <div class="session-badge">⏱ Session: <span id="session-timer">0m</span></div>
     </div>
   </div>
 </div>
@@ -700,6 +853,18 @@ footer a:hover{color:var(--gold)}
       </ul>
     </div>
   </div>
+</div>
+
+<!-- ── ACHIEVEMENTS ── -->
+<div class="achieve-section reveal">
+  <div class="section-title">🏆 Achievements</div>
+  <div class="achieve-grid" id="achieve-grid"></div>
+</div>
+
+<!-- ── ACTIVITY FEED ── -->
+<div class="activity-section reveal">
+  <div class="section-title">📜 Recent Activity</div>
+  <div class="activity-list" id="activity-list"></div>
 </div>
 
 <footer>
@@ -1310,10 +1475,17 @@ if(!STATE.activePhase) STATE.activePhase = 1;
 if(!STATE.flameLevel)  STATE.flameLevel  = 1;
 if(!STATE.survivors)   STATE.survivors   = {};
 if(!STATE.survivorFilter) STATE.survivorFilter = 'all';
+if(!STATE.achievements) STATE.achievements = {};
+if(!STATE.activity)     STATE.activity    = [];  // [{ts,text,done}]
 HEROES.forEach(h => {
   if(!STATE.heroes[h.id])
-    STATE.heroes[h.id] = {level:1,weaponBar:0,armorUpgrades:0,skillReset:false};
+    STATE.heroes[h.id] = {level:1,weaponBar:0,armorUpgrades:0,skillReset:false,name:'',deaths:0};
+  else {
+    if(!STATE.heroes[h.id].name)   STATE.heroes[h.id].name   = '';
+    if(!STATE.heroes[h.id].deaths) STATE.heroes[h.id].deaths = 0;
+  }
 });
+const SESSION_START = Date.now();
 
 // ── HELPERS ──────────────────────────────────────────────────────────
 const oKey = (p,i) => `p${p}-o${i}`;
@@ -1336,9 +1508,12 @@ function renderParty() {
     const wBar=Math.min(100,hs.weaponBar||0);
     const armor=hs.armorUpgrades||0;
     const pips=Array.from({length:5},(_,i)=>`<div class="armor-pip${i<armor?' filled':''}" onclick="toggleArmor('${h.id}',${i})" title="Armor upgrade ${i+1}/5"></div>`).join('');
+    const deaths=hs.deaths||0;
+    const playerName=hs.name||'';
     return `<div class="hero-card ${h.cls}">
       <div class="hero-avatar"><span class="hero-initials">${h.initials}</span></div>
-      <div class="hero-name">${h.initials} — ${h.id[0].toUpperCase()+h.id.slice(1)}</div>
+      <input class="hero-player-name" value="${playerName}" placeholder="Player name…" oninput="setHeroName('${h.id}',this.value)" onclick="event.stopPropagation()" title="Click to set player name">
+      <div class="hero-name">${h.emoji} ${h.id[0].toUpperCase()+h.id.slice(1)}</div>
       <div class="hero-role">${h.role}</div>
       <div class="hero-level">Lv <span id="lv-${h.id}">${hs.level}</span></div>
       <input type="range" min="1" max="45" value="${hs.level}" style="width:100%;accent-color:var(--gold);margin:.3rem 0 .7rem;cursor:pointer" oninput="setLevel('${h.id}',this.value)">
@@ -1354,6 +1529,13 @@ function renderParty() {
         <input type="range" min="0" max="100" value="${wBar}" style="width:100%;accent-color:var(--purple);margin:.2rem 0 0;cursor:pointer" oninput="setWeaponBar('${h.id}',this.value)">
       </div>
       <div class="armor-row"><span>Armor upgrades</span><div class="armor-pips">${pips}</div></div>
+      <div class="death-row">
+        <span class="death-count${deaths>0?' bloody':''}">💀 ${deaths} death${deaths!==1?'s':''}</span>
+        <div class="death-btns">
+          <button class="death-btn revive" onclick="addDeath('${h.id}',-1)" title="Remove death">−</button>
+          <button class="death-btn kill" onclick="addDeath('${h.id}',1)" title="Add death">+</button>
+        </div>
+      </div>
     </div>`;
   }).join('');
 }
@@ -1361,6 +1543,8 @@ function setLevel(id,v){STATE.heroes[id].level=+v;document.getElementById('lv-'+
 function setWeaponBar(id,v){STATE.heroes[id].weaponBar=+v;saveState();}
 function toggleArmor(id,i){const c=STATE.heroes[id].armorUpgrades||0;STATE.heroes[id].armorUpgrades=c===i+1?i:i+1;saveState();renderParty();}
 function toggleSkillReset(id){STATE.heroes[id].skillReset=!STATE.heroes[id].skillReset;saveState();renderParty();}
+function setHeroName(id,v){STATE.heroes[id].name=v;saveState();}
+function addDeath(id,delta){const h=STATE.heroes[id];h.deaths=Math.max(0,(h.deaths||0)+delta);saveState();renderParty();if(delta>0){const name=h.name||id;showToast('💀 '+name+' died ('+h.deaths+' total)','undo');}}
 
 // ── RENDER PHASES ─────────────────────────────────────────────────────
 function renderPhaseTabs() {
@@ -1420,19 +1604,37 @@ function renderPanels() {
   }).join('');
 }
 
+const RARITIES = [{id:'common',label:'Common'},{id:'rare',label:'Rare'},{id:'epic',label:'Epic'},{id:'legendary',label:'Legendary'}];
+const rarityColors = {common:'var(--ash)',rare:'var(--water)',epic:'var(--purple-light)',legendary:'var(--gold-light)'};
+function lootRarityBadge(r){if(!r||r==='common')return '';const c=rarityColors[r]||'var(--ash)';return `<span class="rarity-badge r-${r}" style="color:${c};border-color:${c}">${r}</span> `;}
 function buildLootHTML() {
-  const items=STATE.loot.map((item,i)=>`<div class="loot-item">
-    <button class="loot-del" onclick="delLoot(${i})">✕</button>
-    <div class="loot-name">${item.name}</div>
-    <div class="loot-where">${item.where||''}</div>
-    ${item.owner?`<div class="loot-owner"><span class="tag ${tcls(item.owner)}">${tlbl(item.owner)}</span></div>`:''}
-  </div>`).join('');
+  const items=STATE.loot.map((item,i)=>{
+    const r=item.rarity||'common';
+    return `<div class="loot-item r-${r}">
+      <button class="loot-del" onclick="delLoot(${i})">✕</button>
+      <div class="loot-name">${lootRarityBadge(r)}${item.name}</div>
+      <div class="loot-where">${item.where||''}</div>
+      ${item.owner?`<div class="loot-owner"><span class="tag ${tcls(item.owner)}">${tlbl(item.owner)}</span></div>`:''}
+    </div>`;}).join('');
+  // Leaderboard
+  const counts={};
+  STATE.loot.forEach(l=>{if(l.owner)counts[l.owner]=(counts[l.owner]||0)+1;});
+  const max=Math.max(1,...Object.values(counts));
+  const lbRows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([owner,n])=>{
+    const cls=({ranger:'var(--ember-bright)',barbarian:'var(--red-bright)',wizard:'var(--purple-light)',healer:'var(--water)',group:'var(--gold)'})[owner]||'var(--gold)';
+    return `<div class="loot-lb-row"><span class="loot-lb-name">${tlbl(owner)}</span><div class="loot-lb-wrap"><div class="loot-lb-fill" style="width:${Math.round(n/max*100)}%;background:${cls}"></div></div><span class="loot-lb-n">${n}</span></div>`;
+  }).join('');
+  const lb=Object.keys(counts).length?`<div class="loot-lb"><div class="loot-lb-title">Loot by player</div>${lbRows}</div>`:'';
   return `<div class="loot-section">
     <div class="section-title">💎 Loot Log</div>
     <div class="loot-grid">${items||'<div style="color:var(--text-dim);font-style:italic;font-size:.85rem">No items logged yet.</div>'}</div>
+    ${lb}
     <div class="loot-add">
       <input class="loot-input" id="loot-name" placeholder="Item name…" onkeydown="if(event.key==='Enter')addLoot()">
-      <input class="loot-input" id="loot-where" placeholder="Drop location…" style="max-width:200px">
+      <input class="loot-input" id="loot-where" placeholder="Drop location…" style="max-width:160px">
+      <select class="rarity-select" id="loot-rarity">
+        ${RARITIES.map(r=>`<option value="${r.id}">${r.label}</option>`).join('')}
+      </select>
       <select class="loot-select" id="loot-owner">
         <option value="">— Owner —</option>
         <option value="ranger">Ranger</option><option value="barbarian">Barbarian</option>
@@ -1459,6 +1661,8 @@ function toggleObj(key){
   const txt=phase&&idx>=0?phase.objectives[idx].text:'Objective';
   if(done) showToast('✓ '+(txt.length>38?txt.slice(0,38)+'…':txt),'done');
   else showToast('↩ Unmarked','undo');
+  logActivity((done?'✓ ':'↩ ')+(txt.length>48?txt.slice(0,48)+'…':txt),done);
+  checkAchievements();
   saveState();renderAll();
   // Phase complete burst
   if(done && phase && phasePct(phase.id)===100){
@@ -1470,7 +1674,12 @@ function toggleSteps(key){const el=document.getElementById('steps-'+key);if(el)e
 function addLoot(){
   const name=document.getElementById('loot-name')?.value?.trim();
   if(!name) return;
-  STATE.loot.push({name,where:document.getElementById('loot-where')?.value?.trim(),owner:document.getElementById('loot-owner')?.value});
+  const rarity=document.getElementById('loot-rarity')?.value||'common';
+  const owner=document.getElementById('loot-owner')?.value;
+  const item={name,where:document.getElementById('loot-where')?.value?.trim(),owner,rarity};
+  STATE.loot.push(item);
+  logActivity(`💎 ${name} looted by ${tlbl(owner)}${rarity!=='common'?' ['+rarity+']':''}`,true);
+  checkAchievements();
   saveState();renderAll();
 }
 function delLoot(i){STATE.loot.splice(i,1);saveState();renderAll();}
@@ -1582,7 +1791,7 @@ function renderFlameAltar() {
   document.getElementById('flame-track').innerHTML = FLAME_LEVELS.map(f => {
     const cls = f.level < cur ? 'done' : f.level === cur ? 'current' : '';
     return `<div class="flame-node ${cls}" onclick="setFlameLevel(${f.level})">
-      <div class="flame-node-lvl">${f.level < cur ? '✓' : f.level === cur ? '🔥' : f.level}</div>
+      <div class="flame-node-lvl">${f.level < cur ? '✓' : f.level === cur ? '<span class="flame-anim">🔥</span>' : f.level}</div>
       <div class="flame-node-shroud">${f.shroud}m</div>
     </div>`;
   }).join('');
@@ -1596,6 +1805,14 @@ function renderFlameAltar() {
         <div class="flame-stat"><div class="flame-stat-val">${d.passage}</div><div class="flame-stat-lbl">Passage Lv</div></div>
         ${d.capacity ? `<div class="flame-stat"><div class="flame-stat-val">${d.capacity}</div><div class="flame-stat-lbl">Capacity</div></div>` : ''}
       </div>
+    </div>
+    <div class="shroud-widget" id="shroud-widget">
+      <div class="shroud-display" id="shroud-display">${d.shroud}:00</div>
+      <div class="shroud-info">
+        <div class="shroud-label">Shroud Timer</div>
+        <div class="shroud-max">Max ${d.shroud} min at Level ${cur}</div>
+      </div>
+      <button class="shroud-btn go" id="shroud-btn" onclick="toggleShroudTimer()">▶ Start</button>
     </div>
     ${next ? `<div class="flame-next">
       <div class="flame-next-lbl">To reach Level ${next.level}</div>
@@ -1735,6 +1952,10 @@ function showToast(msg, type='done') {
 
 // ── PHASE COMPLETE BURST ─────────────────────────────────────────────
 function triggerBurst() {
+  if(typeof confetti==='function'){
+    confetti({particleCount:130,spread:80,origin:{y:.55},colors:['#e8612a','#d4a84b','#ff8c42','#f0c96a','#fff']});
+    setTimeout(()=>confetti({particleCount:70,spread:120,origin:{y:.5},colors:['#e8612a','#d4a84b','#a89bd4']}),320);
+  }
   ['var(--ember)','var(--gold)','var(--ember-bright)'].forEach((color,i)=>{
     const el=document.createElement('div');
     el.className='burst';
@@ -1757,8 +1978,187 @@ function initKeyboard() {
   document.addEventListener('keydown', e=>{
     if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
     const n=parseInt(e.key);
-    if(n>=1&&n<=5){ switchPhase(n); showToast('Phase '+n+' — '+PHASES[n-1].name,'fire'); }
+    if(n>=1&&n<=5){ switchPhase(n); showToast('Phase '+n+' — '+PHASES[n-1].name,'fire'); return; }
+    if(e.key==='/'){ e.preventDefault(); openPalette(); return; }
+    if(e.key==='?'){ openKb(); return; }
+    if(e.key==='Escape'){ closePalette(); closeKb(); return; }
   });
+}
+
+// ── COMMAND PALETTE ──────────────────────────────────────────────────
+let cmdIdx=-1;
+function openPalette(){
+  const ov=document.getElementById('cmd-overlay');
+  if(!ov) return;
+  ov.classList.add('open');
+  const inp=document.getElementById('cmd-input');
+  if(inp){ inp.value=''; inp.focus(); }
+  cmdSearch('');
+}
+function closePalette(){
+  document.getElementById('cmd-overlay')?.classList.remove('open');
+  cmdIdx=-1;
+}
+function cmdSearch(q){
+  cmdIdx=-1;
+  const res=[];
+  const qlo=q.toLowerCase().trim();
+  PHASES.forEach(ph=>ph.objectives.forEach(obj=>{
+    if(!qlo||obj.text.toLowerCase().includes(qlo)||ph.name.toLowerCase().includes(qlo)){
+      res.push({label:obj.text,sub:'Phase '+ph.id+' · '+ph.name,action:()=>{switchPhase(ph.id);closePalette();}});
+    }
+  }));
+  CRAFTING.filter(i=>!qlo||i.name.toLowerCase().includes(qlo)||(i.ingredients||[]).join(' ').toLowerCase().includes(qlo)).slice(0,8).forEach(i=>{
+    res.push({label:i.name,sub:'Craft · '+(i.station||''),action:()=>closePalette()});
+  });
+  SURVIVORS.filter(s=>!qlo||s.name.toLowerCase().includes(qlo)||s.role.toLowerCase().includes(qlo)||s.biome.toLowerCase().includes(qlo)).slice(0,5).forEach(s=>{
+    res.push({label:s.name,sub:'Survivor · '+s.role+' · '+s.biome,action:()=>closePalette()});
+  });
+  BOSSES.concat(MINI_BOSSES).filter(b=>!qlo||b.name.toLowerCase().includes(qlo)||b.biome.toLowerCase().includes(qlo)).slice(0,5).forEach(b=>{
+    res.push({label:b.name,sub:'Boss · '+b.biome+' · Lv '+b.level,action:()=>closePalette()});
+  });
+  window.__cmdResults=res.slice(0,12);
+  const container=document.getElementById('cmd-results');
+  if(!container) return;
+  const items=window.__cmdResults;
+  container.innerHTML=items.length
+    ? items.map((r,i)=>`<div class="cmd-item" data-idx="${i}" onclick="_cmdRun(${i})" onmouseover="cmdHover(${i})"><div class="cmd-label">${r.label}<div class="cmd-sublabel">${r.sub}</div></div></div>`).join('')
+    : (qlo?'<div style="padding:.6rem 1rem;color:var(--text-dim);font-style:italic;font-size:.75rem">No results</div>':'');
+}
+function cmdHover(i){
+  cmdIdx=i;
+  document.querySelectorAll('#cmd-results .cmd-item').forEach((el,j)=>el.classList.toggle('active',j===i));
+}
+function _cmdRun(i){const r=window.__cmdResults;if(r&&r[i])r[i].action();}
+function cmdKey(e){
+  const items=document.querySelectorAll('#cmd-results .cmd-item');
+  if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);cmdHover(cmdIdx);}
+  else if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);cmdHover(cmdIdx);}
+  else if(e.key==='Enter'){e.preventDefault();if(cmdIdx>=0)_cmdRun(cmdIdx);}
+  else if(e.key==='Escape'){closePalette();}
+}
+
+// ── KEYBOARD HELP ────────────────────────────────────────────────────
+function openKb(){document.getElementById('kb-overlay')?.classList.add('open');}
+function closeKb(){document.getElementById('kb-overlay')?.classList.remove('open');}
+
+// ── DOT NAV ──────────────────────────────────────────────────────────
+function initDotNav(){
+  const nav=document.getElementById('dot-nav');
+  if(!nav) return;
+  const labels=['Live','Flame','Stats','Party','Survivors','Progress','Crafting','Bosses','Biomes','Guide','Achievements','Activity'];
+  const secs=[...document.querySelectorAll('.live-panel,.flame-section,.stats-grid,.party-grid,.survivor-section,.phases-wrap,.craft-section,.boss-section,.biome-section,.guide-section,.achieve-section,.activity-section')];
+  nav.innerHTML=secs.map((s,i)=>`<button class="dn-item" aria-label="${labels[i]||''}" data-label="${labels[i]||''}" onclick="scrollToSection(${i})"></button>`).join('');
+  window.__navSecs=secs;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      const i=secs.indexOf(e.target);
+      const btn=nav.querySelectorAll('.dn-item')[i];
+      if(btn) btn.classList.toggle('active',e.isIntersecting);
+    });
+  },{threshold:.25,rootMargin:'-5% 0px -65% 0px'});
+  secs.forEach(s=>obs.observe(s));
+}
+function scrollToSection(i){const s=window.__navSecs;if(s&&s[i])s[i].scrollIntoView({behavior:'smooth',block:'start'});}
+
+// ── SESSION TIMER ─────────────────────────────────────────────────────
+function initSessionTimer(){
+  function tick(){
+    const el=document.getElementById('session-timer');
+    if(!el) return;
+    const elapsed=Math.floor((Date.now()-SESSION_START)/60000);
+    el.textContent=elapsed<60?elapsed+'m':`${Math.floor(elapsed/60)}h ${elapsed%60}m`;
+  }
+  tick();
+  setInterval(tick,60000);
+}
+
+// ── SHROUD TIMER ─────────────────────────────────────────────────────
+let shroudInterval=null, shroudRemain=0;
+const SHROUD_MINS=[0,5,8,12,18,25,35,45]; // index=flame level
+function toggleShroudTimer(){
+  const btn=document.getElementById('shroud-btn');
+  const disp=document.getElementById('shroud-display');
+  const widget=document.getElementById('shroud-widget');
+  if(shroudInterval){
+    clearInterval(shroudInterval);shroudInterval=null;
+    if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}
+    if(widget)widget.classList.remove('danger');
+  } else {
+    shroudRemain=(SHROUD_MINS[STATE.flameLevel]||5)*60;
+    if(btn){btn.textContent='⏹ Stop';btn.className='shroud-btn off';}
+    shroudInterval=setInterval(()=>{
+      shroudRemain--;
+      const m=Math.floor(shroudRemain/60),s=shroudRemain%60;
+      if(disp)disp.textContent=shroudRemain<=0?'0:00':`${m}:${String(s).padStart(2,'0')}`;
+      if(widget)widget.classList.toggle('danger',shroudRemain<=60&&shroudRemain>0);
+      if(shroudRemain<=0){
+        clearInterval(shroudInterval);shroudInterval=null;
+        if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}
+        if(widget)widget.classList.remove('danger');
+        showToast('⚠ Shroud timer expired — get to safety!','undo');
+      }
+    },1000);
+  }
+}
+
+// ── ACHIEVEMENTS ─────────────────────────────────────────────────────
+const ACHIEVEMENTS=[
+  {id:'first_check',label:'First Step',desc:'Complete your first objective',emoji:'🎯',check:()=>Object.values(STATE.checked).some(v=>v)},
+  {id:'phase2',label:'Into the Mist',desc:'Reach Phase 2',emoji:'🌫️',check:()=>STATE.activePhase>=2},
+  {id:'phase3',label:'Deep Dark',desc:'Reach Phase 3',emoji:'🌑',check:()=>STATE.activePhase>=3},
+  {id:'phase4',label:'Fire Keeper',desc:'Reach Phase 4',emoji:'🔥',check:()=>STATE.activePhase>=4},
+  {id:'phase5',label:'Endgame',desc:'Reach Phase 5',emoji:'👑',check:()=>STATE.activePhase>=5},
+  {id:'loot5',label:'Hoarder',desc:'Log 5 loot items',emoji:'💰',check:()=>STATE.loot.length>=5},
+  {id:'loot20',label:'Dragon\'s Vault',desc:'Log 20 loot items',emoji:'🐉',check:()=>STATE.loot.length>=20},
+  {id:'legendary',label:'Legendary Find',desc:'Log a legendary item',emoji:'⭐',check:()=>STATE.loot.some(l=>l.rarity==='legendary')},
+  {id:'all_survivors',label:'Safe Haven',desc:'Rescue all survivors',emoji:'🏠',check:()=>SURVIVORS.every(s=>STATE.survivors[s.id])},
+  {id:'max_flame',label:'Blaze Master',desc:'Reach max Flame Altar level',emoji:'🏯',check:()=>STATE.flameLevel>=7},
+  {id:'death10',label:'Glass Cannon',desc:'Accumulate 10 party deaths',emoji:'💀',check:()=>Object.values(STATE.heroes).reduce((s,h)=>s+(h.deaths||0),0)>=10},
+  {id:'max_level',label:'Apex Predator',desc:'All heroes at level 45',emoji:'🦅',check:()=>HEROES.every(h=>(STATE.heroes[h.id]?.level||1)>=45)},
+];
+function checkAchievements(){
+  let earned=false;
+  ACHIEVEMENTS.forEach(a=>{
+    if(!STATE.achievements[a.id]&&a.check()){
+      STATE.achievements[a.id]=Date.now();
+      earned=true;
+      showToast('🏆 Achievement: '+a.label,'fire');
+    }
+  });
+  if(earned){saveState();renderAchievements();}
+}
+function renderAchievements(){
+  const grid=document.getElementById('achieve-grid');
+  if(!grid) return;
+  grid.innerHTML=ACHIEVEMENTS.map(a=>{
+    const got=!!STATE.achievements[a.id];
+    return `<div class="badge${got?' got':''}"><span class="badge-icon">${a.emoji}</span><div><div class="badge-name">${a.label}</div><div class="badge-desc">${a.desc}</div></div></div>`;
+  }).join('');
+}
+
+// ── ACTIVITY FEED ────────────────────────────────────────────────────
+function logActivity(text,done=true){
+  if(!STATE.activity) STATE.activity=[];
+  STATE.activity.unshift({ts:Date.now(),text,done});
+  if(STATE.activity.length>40) STATE.activity=STATE.activity.slice(0,40);
+  saveState();
+  renderActivity();
+}
+function renderActivity(){
+  const list=document.getElementById('activity-list');
+  if(!list) return;
+  if(!STATE.activity||!STATE.activity.length){
+    list.innerHTML='<div style="color:var(--text-dim);font-style:italic;font-size:.8rem;padding:.5rem 0">No activity yet — start checking objectives!</div>';
+    return;
+  }
+  list.innerHTML=STATE.activity.slice(0,15).map(a=>{
+    const age=Date.now()-a.ts;
+    const mins=Math.floor(age/60000);
+    const hrs=Math.floor(mins/60);
+    const t=hrs>0?hrs+'h ago':mins>0?mins+'m ago':'just now';
+    return `<div class="act-item ${a.done?'act-done':'act-undo'}"><span class="act-time">${t}</span><span class="act-text">${a.text}</span></div>`;
+  }).join('');
 }
 
 // ── CAMPAIGN GUIDE DATA ──────────────────────────────────────────────
@@ -2109,7 +2509,7 @@ function confirmReset(){
 }
 
 // ── RENDER ALL ───────────────────────────────────────────────────────
-function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();renderGuides();}
+function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();renderGuides();renderAchievements();renderActivity();}
 
 // ── BOOT ─────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
@@ -2121,6 +2521,8 @@ window.addEventListener('DOMContentLoaded',()=>{
     initLiveSync();
     initReveal();
     initKeyboard();
+    initDotNav();
+    initSessionTimer();
   },1200);
 });
 </script>

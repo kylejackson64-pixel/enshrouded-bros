@@ -1,0 +1,18 @@
+{
+  "name": "Enshrouded Bros",
+  "short_name": "EnshroudedBros",
+  "description": "4-Player Enshrouded campaign dashboard",
+  "start_url": "/enshrouded-bros/",
+  "display": "standalone",
+  "background_color": "#0a0f18",
+  "theme_color": "#0a0f18",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "design-system/Enshrouded Bros Design System/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
