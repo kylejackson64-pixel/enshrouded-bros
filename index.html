@@ -3003,7 +3003,9 @@ function renderWhatNowPanel(){
 }
 function wnNav(dir){
   WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,WN_PHASE_IDX+dir));
-  setGuideTab('whatnow');
+  // Re-render panel directly — skip setGuideTab to avoid phase-sync reset in renderGuides
+  const panel=document.getElementById('guide-panel');
+  if(panel) panel.innerHTML=renderWhatNowPanel();
 }
 function wnToggle(sid){
   const h=document.getElementById('wnh-'+sid);
