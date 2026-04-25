@@ -3,17 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enshrouded Bros</title>
+<title>Enshrouded — Solo Run</title>
 <link rel="icon" type="image/svg+xml" href="design-system/Enshrouded Bros Design System/assets/favicon.svg">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a0f18">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Enshrouded Bros">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --ember:#e8612a; --ember-bright:#ff8c42; --ember-dim:#9c3a12;
   --gold:#d4a84b;  --gold-light:#f0c96a;
@@ -688,300 +684,30 @@ footer a:hover{color:var(--gold)}
 .obj-steps-who{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.4rem;text-transform:uppercase}
 .obj-steps ol{padding-left:1.3rem;margin:0}
 .obj-steps li{font-size:.8rem;color:var(--ash);line-height:1.55;padding:.1rem 0}
-.page-nav{display:flex;justify-content:center;gap:.6rem;padding:.6rem 1rem;background:rgba(5,8,15,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+
+
+/* ── SOLO-SPECIFIC STYLES ── */
+.page-nav{display:flex;justify-content:center;gap:.6rem;padding:.6rem 1rem;background:rgba(5,8,15,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:900}
 .page-nav-link{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;text-decoration:none;padding:.3rem .9rem;border-radius:3px;border:1px solid var(--border);color:var(--text-dim);transition:all .2s}
 .page-nav-link:hover{border-color:var(--ember);color:var(--ember-bright)}
 .page-nav-link.active{background:rgba(232,97,42,.12);border-color:var(--ember);color:var(--ember-bright)}
+.solo-hero-wrap{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
+.solo-cls-selector{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.2rem;flex-wrap:wrap}
+.solo-cls-card{display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem 1.1rem;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.02);cursor:pointer;transition:all .2s;min-width:70px}
+.solo-cls-card:hover{transform:translateY(-2px)}
+.solo-cls-card.active.ranger{background:rgba(232,97,42,.12);border-color:var(--ember)}
+.solo-cls-card.active.barbarian{background:rgba(192,57,43,.12);border-color:#e74c3c}
+.solo-cls-card.active.wizard{background:rgba(142,109,191,.12);border-color:var(--purple)}
+.solo-cls-card.active.healer{background:rgba(74,159,212,.12);border-color:var(--water)}
+.solo-cls-emoji{font-size:1.5rem;line-height:1}
+.solo-cls-name{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;color:var(--text-dim)}
+.solo-cls-card.active .solo-cls-name{color:var(--gold-light)}
 </style>
 </head>
 <body>
 
-<nav class="page-nav" aria-label="Mode">
-  <a href="index.html" class="page-nav-link active">⚔ Party Mode</a>
-  <a href="solo.html"  class="page-nav-link">🎮 Solo Mode</a>
-</nav>
-<div id="sticky-bar"><div id="sticky-fill"></div></div>
-<div id="toast-root"></div>
-
-<!-- ── CHANGELOG MODAL ── -->
-<div id="cl-overlay">
-  <div id="cl-box">
-    <div class="cl-version">v2.0 · Dashboard Update</div>
-    <div class="cl-title">What's New</div>
-    <div class="cl-date">April 24, 2026 · Enshrouded Bros Dashboard</div>
-
-    <div class="cl-section">
-      <div class="cl-section-head">New Features</div>
-      <div class="cl-item"><span class="cl-tag new">NEW</span><span><b>🔥 What Now? Tab</b> — ELI5 phase guide for all 4 classes. 5 game stages × Ranger, Barbarian, Wizard, Healer. Tells you exactly what to gather, craft, build, and explore right now.</span></div>
-      <div class="cl-item"><span class="cl-tag new">NEW</span><span><b>⭐ Star Map Skill Trees</b> — Skill trees rebuilt as live SVG constellation maps. Hover any node for tooltip. Color-coded by path. Click through class tabs.</span></div>
-    </div>
-
-    <div class="cl-section">
-      <div class="cl-section-head">Data Fixes (U8 Verified)</div>
-      <div class="cl-item"><span class="cl-tag fix">FIX</span><span><b>Skill node names</b> — Removed all hallucinated nodes (Chain Lightning, Cleave, Berserker, Mana Font, Frostweave, etc). Replaced with verified U8 nodes across all class guides.</span></div>
-      <div class="cl-item"><span class="cl-tag fix">FIX</span><span><b>NPC names</b> — Farmer is <b>Emily Fray</b> (not Lisandra). Hunter is <b>Athalan Skree</b> (not Kohlwald). Fixed in all 7+ occurrences.</span></div>
-      <div class="cl-item"><span class="cl-tag fix">FIX</span><span><b>Healer ultimate</b> — Corrected to <b>Divine Surge</b> Focus bar burst. Water Aura is a passive aura, not the ultimate.</span></div>
-      <div class="cl-item"><span class="cl-tag fix">FIX</span><span><b>Sneak Attack</b> — Damage corrected to <b>+900%</b> (was listed as ×2.5).</span></div>
-      <div class="cl-item"><span class="cl-tag data">DATA</span><span><b>Arcane Workbench</b> — Confirmed requires <b>Alchemist (Balthazar)</b>. Updated across all crafting references.</span></div>
-    </div>
-
-    <div class="cl-section">
-      <div class="cl-section-head">UX</div>
-      <div class="cl-item"><span class="cl-tag ux">UX</span><span>Guides section now <b>opens to What Now? by default</b> so you land on the right-now advice immediately.</span></div>
-      <div class="cl-item"><span class="cl-tag ux">UX</span><span>Barbarian star map node index bug fixed — Ironclad and Adrenaline Rush were overlapping the same position.</span></div>
-    </div>
-
-    <div class="cl-footer">
-      <span class="cl-sig">🔥 Built for the bros</span>
-      <button class="cl-dismiss" id="cl-dismiss-btn">Got it — Let's Play</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── DOT NAV ── -->
-<nav id="dot-nav" aria-label="Section navigation"></nav>
-
-<!-- ── COMMAND PALETTE ── -->
-<div id="cmd-overlay" onclick="if(event.target===this)closePalette()">
-  <div id="cmd-box">
-    <input id="cmd-input" placeholder="Search objectives, crafting, survivors, bosses…" oninput="cmdSearch(this.value)" onkeydown="cmdKey(event)" autocomplete="off" spellcheck="false">
-    <div id="cmd-results"></div>
-    <div class="cmd-hint"><span class="kbd">↑↓</span>navigate <span class="kbd">↵</span>go <span class="kbd">Esc</span>close</div>
-  </div>
-</div>
-
-<!-- ── KEYBOARD HELP ── -->
-<div id="kb-overlay" onclick="if(event.target===this)closeKb()">
-  <div id="kb-box">
-    <div class="kb-title">⌨ Keyboard Shortcuts</div>
-    <div class="kb-row"><span>Switch to phase</span><span class="kb-keys"><span class="kb-key">1</span><span class="kb-key">2</span><span class="kb-key">3</span><span class="kb-key">4</span><span class="kb-key">5</span></span></div>
-    <div class="kb-row"><span>Search / command palette</span><span class="kb-keys"><span class="kb-key">/</span></span></div>
-    <div class="kb-row"><span>Keyboard shortcuts</span><span class="kb-keys"><span class="kb-key">?</span></span></div>
-    <div class="kb-row"><span>Close overlay</span><span class="kb-keys"><span class="kb-key">Esc</span></span></div>
-    <div class="kb-row"><span>Print party summary</span><span class="kb-keys"><span class="kb-key">Ctrl</span><span class="kb-key">P</span></span></div>
-  </div>
-</div>
-<div id="loading"><div class="loading-flame">🔥</div><div class="loading-text">Forging the Path...</div></div>
-
-<header>
-  <div class="particles" aria-hidden="true">
-    <div class="p" style="left:8%;width:3px;height:3px;background:var(--ember-bright);--dur:4.2s;--delay:0s;--d:18px"></div>
-    <div class="p" style="left:18%;width:2px;height:2px;background:var(--gold);--dur:5.8s;--delay:.7s;--d:-12px"></div>
-    <div class="p" style="left:30%;width:3px;height:3px;background:var(--ember);--dur:4.8s;--delay:1.4s;--d:22px"></div>
-    <div class="p" style="left:45%;width:2px;height:2px;background:var(--gold-light);--dur:6.1s;--delay:.3s;--d:-18px"></div>
-    <div class="p" style="left:58%;width:3px;height:3px;background:var(--ember-bright);--dur:5.1s;--delay:1.1s;--d:14px"></div>
-    <div class="p" style="left:70%;width:2px;height:2px;background:var(--gold);--dur:4.6s;--delay:2s;--d:-20px"></div>
-    <div class="p" style="left:82%;width:3px;height:3px;background:var(--ember);--dur:5.5s;--delay:.5s;--d:16px"></div>
-    <div class="p" style="left:92%;width:2px;height:2px;background:var(--ember-bright);--dur:4.9s;--delay:1.7s;--d:-14px"></div>
-  </div>
-  <div class="header-badge">⚔️ Update 8 — Forging the Path &nbsp;·&nbsp; v2.0</div>
-  <h1>Enshrouded Bros</h1>
-  <div class="subtitle">4-Player Campaign Dashboard</div>
-  <div class="meta-row">
-    <span class="live-dot"></span>Live sync active &nbsp;·&nbsp;
-    Level cap <span>45</span> &nbsp;·&nbsp; All biomes incl. Veilwater Basin
-    <span class="countdown-badge" id="countdown">⚒ Update 8: April 21</span>
-  </div>
-</header>
-
-<div class="divider"><span class="divider-icon">⚔</span></div>
-
-<!-- ── LIVE SERVER STATUS ── -->
-<div class="live-panel reveal">
-  <div class="section-title">📡 Live Server Status</div>
-  <div class="live-card">
-    <div class="live-header">
-      <div class="conn-dot offline" id="conn-dot"></div>
-      <span class="conn-label" id="conn-label">NOT CONFIGURED</span>
-      <span class="poll-time" id="poll-time"></span>
-    </div>
-    <div id="live-unconfigured" class="live-not-configured">
-      ⚙️ Add your GitHub username to <code>index.html</code> and have erocko38 run <code>watcher.py</code> on the server to enable live sync.
-    </div>
-    <div id="live-data" style="display:none">
-      <div class="live-grid">
-        <div class="live-stat"><div class="live-val" id="ls-age">—</div><div class="live-lbl">Last Save</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-status">—</div><div class="live-lbl">Server</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-npcs">—</div><div class="live-lbl">NPCs</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-structs">—</div><div class="live-lbl">Structures</div></div>
-      </div>
-      <div class="live-pills">
-        <span class="pill" id="lp-flame">🔥 Flame Altar</span>
-        <span class="pill" id="lp-kiln">⚒ Charcoal Kiln</span>
-        <span class="pill" id="lp-rack">🪵 Drying Rack</span>
-        <span class="pill" id="lp-hash">💾 —</span>
-      </div>
-      <div class="save-time" id="ls-savetime"></div>
-      <div class="session-badge">⏱ Session: <span id="session-timer">0m</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ── U8 BANNER ── -->
-<div class="u8-banner reveal">
-  <div class="u8-alert">
-    <div class="u8-icon">⚒️</div>
-    <div class="u8-text">
-      <h3>Update 8 "Forging the Path" — April 21, 2026</h3>
-      <p>Major overhaul. <strong>All skill points refunded on patch day</strong> — rebuild your trees before heading out. Gear stats recalculated (smaller numbers ≠ nerf). Armor now upgrades. New Heavy Attacks, Weapon Ultimates, and I-frames on dodge.</p>
-      <div class="chips">
-        <span class="chip chip-ember">Heavy Attacks</span>
-        <span class="chip chip-ember">Weapon Ultimates</span>
-        <span class="chip chip-ember">I-Frames on Dodge</span>
-        <span class="chip chip-gold">Skill Tree Reset</span>
-        <span class="chip chip-gold">Gear Rework</span>
-        <span class="chip chip-gold">Armor Upgrades</span>
-        <span class="chip chip-water">Adventure Sharing V1</span>
-        <span class="chip chip-green">Stealth Revamp</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── FLAME ALTAR TRACKER ── -->
-<div class="flame-section reveal">
-  <div class="section-title">🔥 Flame Altar Progression</div>
-  <div class="flame-track" id="flame-track"></div>
-  <div class="flame-detail" id="flame-detail"></div>
-</div>
-
-<!-- ── STATS ── -->
-<div class="stats-grid reveal">
-  <div class="stat-card"><div class="stat-val fire" id="stat-pct">0%</div><div class="stat-lbl">Overall</div><div class="prog-track"><div class="prog-fill" id="prog-overall"></div></div></div>
-  <div class="stat-card"><div class="stat-val" id="stat-obj">0/56</div><div class="stat-lbl">Objectives</div></div>
-  <div class="stat-card"><div class="stat-val" id="stat-lvl">~1</div><div class="stat-lbl">Party Level</div><div class="stat-sub">avg across 4</div></div>
-  <div class="stat-card"><div class="stat-val" id="stat-phase">1/5</div><div class="stat-lbl">Current Phase</div></div>
-  <div class="stat-card"><div class="stat-val" id="stat-loot">0</div><div class="stat-lbl">Loot Logged</div><div class="stat-sub">party items</div></div>
-</div>
-
-<!-- ── PARTY ── -->
-<div class="party-grid reveal" id="party-grid"></div>
-
-<!-- ── SURVIVORS ── -->
-<div class="survivor-section reveal">
-  <div class="section-title">🧑‍🤝‍🧑 Survivors Directory</div>
-  <div class="survivor-filters" id="survivor-filters"></div>
-  <div class="survivor-progress" id="survivor-progress"></div>
-  <div class="survivor-grid" id="survivor-grid"></div>
-</div>
-
-<!-- ── CAMPAIGN PROGRESS ── -->
-<div class="campaign-progress" id="camp-progress"></div>
-
-<!-- ── PHASES ── -->
-<div class="phases-wrap reveal">
-  <div class="phase-tabs" id="phase-tabs"></div>
-  <div class="phases-progress" id="phases-prog"></div>
-  <div id="phase-panels"></div>
-</div>
-
-<!-- ── CRAFTING REFERENCE ── -->
-<div class="craft-section reveal">
-  <div class="section-title">🔨 Crafting Reference</div>
-  <div class="craft-filters">
-    <div class="craft-filter-row" id="craft-cats"></div>
-    <div class="craft-filter-row" id="craft-roles"></div>
-    <input class="craft-search" id="craft-search" placeholder="Search items or ingredients…" oninput="renderCrafting()">
-  </div>
-  <div class="craft-grid" id="craft-grid"></div>
-  <div class="craft-disclaimer">* Quantities approximate — verify in-game. Most recipes unlock after rescuing the relevant NPC.</div>
-</div>
-
-<!-- ── BOSSES ── -->
-<div class="boss-section reveal">
-  <div class="section-title">💀 Boss Guide</div>
-  <div id="boss-grid"></div>
-</div>
-
-<!-- ── BIOMES ── -->
-<div class="biome-section reveal">
-  <div class="section-title">🗺 Biome Reference</div>
-  <div class="biome-grid" id="biome-grid"></div>
-</div>
-
-<!-- ── CAMPAIGN GUIDE ── -->
-<div class="guide-section reveal">
-  <div class="section-title">📖 Campaign Guide</div>
-  <div class="guide-main-tabs" id="guide-main-tabs"></div>
-  <div class="guide-panel" id="guide-panel"></div>
-</div>
-
-<!-- ── U8 REFERENCE ── -->
-<div class="u8-section reveal">
-  <div class="section-title">⚒ Update 8 Changes Reference</div>
-  <div class="u8-grid">
-    <div class="u8-card combat">
-      <div class="u8-card-icon">⚔️</div>
-      <div class="u8-card-title">Combat Overhaul</div>
-      <ul class="u8-bullets">
-        <li>Heavy attacks on all weapons</li>
-        <li>Weapon Ultimate system — fill meter for special move (wand AoE orb, 2H 360 cleave, dagger burst)</li>
-        <li>I-frames on dodge (unlock via "Strategic Maneuver" skill node)</li>
-        <li>New melee animations: gap closers, aerial strikes</li>
-        <li>Ledge-push on attack animations fixed</li>
-        <li>Enemy AI now dodges ranged attacks</li>
-        <li>Stealth system reworked — stealth damage improved</li>
-        <li>Aggro changes benefit stealth builds</li>
-      </ul>
-    </div>
-    <div class="u8-card gear">
-      <div class="u8-card-icon">🛡️</div>
-      <div class="u8-card-title">Gear & Itemisation</div>
-      <ul class="u8-bullets">
-        <li>Armor perks return (HP, Mana, Stamina, Regen, Crit)</li>
-        <li>New perk: boost a skill tree node beyond its max level</li>
-        <li>Armor scales via upgrades — common and legendary start equal</li>
-        <li>Archetype focus: tanks get more armor, casters less</li>
-        <li>Damage recalculated — smaller numbers are NOT a nerf</li>
-        <li>Underperforming weapons and gems rebalanced</li>
-      </ul>
-    </div>
-    <div class="u8-card skills">
-      <div class="u8-card-icon">🌟</div>
-      <div class="u8-card-title">Skill Tree Rebuild</div>
-      <ul class="u8-bullets">
-        <li style="color:var(--ember-bright);font-weight:600">All skill points refunded on patch day</li>
-        <li>Full node repositioning, new skills added</li>
-        <li>Zoom-out view of entire tree added</li>
-        <li>Early nodes cheaper — reach builds faster</li>
-        <li>Double jump and key QoL unlocks easier to reach</li>
-        <li>Node levels: invest multiple points per node for deeper bonuses</li>
-      </ul>
-    </div>
-    <div class="u8-card share">
-      <div class="u8-card-icon">🌐</div>
-      <div class="u8-card-title">Adventure Sharing + 1.0</div>
-      <ul class="u8-bullets">
-        <li>Share your world/builds with the community</li>
-        <li>Gallery: browse other players' creations</li>
-        <li>V2 at 1.0: traps, puzzles, player-made challenges</li>
-        <li>Full 1.0 release: Autumn 2026 + console (PS5/Xbox)</li>
-        <li>Floating islands likely accessible at 1.0</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ── ACHIEVEMENTS ── -->
-<div class="achieve-section reveal">
-  <div class="section-title">🏆 Achievements</div>
-  <div class="achieve-grid" id="achieve-grid"></div>
-</div>
-
-<!-- ── ACTIVITY FEED ── -->
-<div class="activity-section reveal">
-  <div class="section-title">📜 Recent Activity</div>
-  <div class="activity-list" id="activity-list"></div>
-</div>
-
-<footer>
-  <div><span class="live-dot"></span>Saves to localStorage · Free forever on GitHub Pages</div>
-  <div style="margin-top:.4rem">Update 8 <em>Forging the Path</em> · April 21 2026 · <a href="https://enshrouded.com" target="_blank">enshrouded.com</a></div>
-  <button class="reset-btn" onclick="confirmReset()">Reset all progress</button>
-</footer>
-
+<!-- AUTH GATE -->
 <script>
-// ══ PASSPHRASE GATE ═════════════════════════════════════════════════
 (function(){
   const KEY='enshrouded-bros-auth';
   if(sessionStorage.getItem(KEY)==='1') return;
@@ -990,46 +716,216 @@ footer a:hover{color:var(--gold)}
   if(pw==='420Blazeit!'){sessionStorage.setItem(KEY,'1');document.body.style.display='';}
   else{document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0f18;color:#7a8fa8;font-family:serif;font-size:1rem">Access denied.</div>';}
 })();
-// ════════════════════════════════════════════════════════════════════
+</script>
 
-// ══ CHANGELOG ═══════════════════════════════════════════════════════
-const CL_VERSION = 'enshrouded-bros-cl-v2.0';
-(function(){
-  const overlay=document.getElementById('cl-overlay');
-  const btn=document.getElementById('cl-dismiss-btn');
-  if(!overlay||!btn) return;
-  function dismissCL(){
-    overlay.classList.remove('in');
-    localStorage.setItem(CL_VERSION,'seen');
-  }
-  btn.addEventListener('click',dismissCL);
-  overlay.addEventListener('click',function(e){ if(e.target===overlay) dismissCL(); });
-  if(!localStorage.getItem(CL_VERSION)){
-    setTimeout(()=>overlay.classList.add('in'), 600);
-  }
-})();
-// ════════════════════════════════════════════════════════════════════
+<div id="sticky-bar"><div id="sticky-fill"></div></div>
+<div id="toast-root"></div>
+<div id="loading"><div class="loading-flame">🔥</div><div class="loading-text">Forging the Path...</div></div>
 
-// ══ LIVE SYNC CONFIG ════════════════════════════════════════════════
-// Fill in your GitHub username below, leave everything else as-is
-const GITHUB_USER = "kylejackson64-pixel";  // ← change this
-const GITHUB_REPO = "enshrouded-bros";
-const SYNC_ENABLED = GITHUB_USER !== "YOUR_GITHUB_USERNAME";
-// Uses GitHub Contents API (not raw CDN) — always fresh, no cache delay
-const API_URL = SYNC_ENABLED
-  ? `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/status.json`
-  : null;
-const POLL_MS = 60000;
-// ════════════════════════════════════════════════════════════════════
+<!-- Page Nav -->
+<nav class="page-nav" aria-label="Mode">
+  <a href="index.html" class="page-nav-link">⚔ Party Mode</a>
+  <a href="solo.html"  class="page-nav-link active">🎮 Solo Mode</a>
+</nav>
 
-// ── DATA ─────────────────────────────────────────────────────────────
-const HEROES = [
-  {id:'ranger',   initials:'RG', role:'Mobility & Burst DPS',       cls:'ranger',   emoji:'🏹'},
-  {id:'barbarian',initials:'BB', role:'Frontline Bruiser',           cls:'barbarian',emoji:'⚔️'},
-  {id:'wizard',   initials:'WZ', role:'AoE Pack Clear & Boss Burn',  cls:'wizard',   emoji:'🔮'},
-  {id:'healer',   initials:'HL', role:'Support & Water Aura',        cls:'healer',   emoji:'💧'},
-];
+<nav id="dot-nav" aria-label="Section navigation"></nav>
 
+<!-- Command Palette -->
+<div id="cmd-overlay" onclick="if(event.target===this)closePalette()">
+  <div id="cmd-box">
+    <input id="cmd-input" placeholder="Search objectives, crafting, survivors, bosses…" oninput="cmdSearch(this.value)" onkeydown="cmdKey(event)" autocomplete="off" spellcheck="false">
+    <div id="cmd-results"></div>
+    <div class="cmd-hint"><span class="kbd">↑↓</span>navigate <span class="kbd">↵</span>go <span class="kbd">Esc</span>close</div>
+  </div>
+</div>
+
+<header>
+  <div class="particles" aria-hidden="true">
+    <div class="p" style="left:8%;width:3px;height:3px;background:var(--ember-bright);--dur:4.2s;--delay:0s;--d:18px"></div>
+    <div class="p" style="left:25%;width:2px;height:2px;background:var(--gold);--dur:5.8s;--delay:.7s;--d:-12px"></div>
+    <div class="p" style="left:50%;width:3px;height:3px;background:var(--ember);--dur:4.8s;--delay:1.4s;--d:22px"></div>
+    <div class="p" style="left:75%;width:2px;height:2px;background:var(--gold-light);--dur:6.1s;--delay:.3s;--d:-18px"></div>
+    <div class="p" style="left:90%;width:3px;height:3px;background:var(--ember-bright);--dur:5.1s;--delay:1.1s;--d:14px"></div>
+  </div>
+  <div class="header-badge">⚔️ Update 8 — Forging the Path &nbsp;·&nbsp; Solo Run</div>
+  <h1>Enshrouded</h1>
+  <div class="subtitle">Solo Campaign Dashboard</div>
+  <div class="meta-row">
+    Level cap <span>45</span> &nbsp;·&nbsp; All biomes incl. Veilwater Basin
+    <span class="countdown-badge" id="countdown">⚒ Update 8: April 21</span>
+  </div>
+</header>
+
+<div class="divider"><span class="divider-icon">⚔</span></div>
+
+<!-- U8 BANNER -->
+<div class="u8-banner reveal">
+  <div class="u8-alert">
+    <div class="u8-icon">⚒️</div>
+    <div class="u8-text">
+      <h3>Update 8 "Forging the Path" — April 21, 2026</h3>
+      <p><strong>All skill points refunded on patch day</strong> — rebuild your tree before heading out. Gear stats recalculated. Armor now upgrades. New Heavy Attacks, Weapon Ultimates, and I-frames on dodge.</p>
+      <div class="chips">
+        <span class="chip chip-ember">Heavy Attacks</span>
+        <span class="chip chip-ember">Weapon Ultimates</span>
+        <span class="chip chip-ember">I-Frames on Dodge</span>
+        <span class="chip chip-gold">Skill Tree Reset</span>
+        <span class="chip chip-gold">Armor Upgrades</span>
+        <span class="chip chip-water">Adventure Sharing V1</span>
+        <span class="chip chip-green">Stealth Revamp</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLAME ALTAR -->
+<div class="flame-section reveal" data-section="Flame Altar">
+  <div class="section-title">🔥 Flame Altar Progression</div>
+  <div class="flame-track" id="flame-track"></div>
+  <div class="flame-detail" id="flame-detail">
+    <div class="shroud-widget" id="shroud-widget">
+      <div class="shroud-display" id="shroud-display">0:00</div>
+      <div class="shroud-info">
+        <div class="shroud-label">Shroud Timer</div>
+        <div class="shroud-max" id="shroud-max"></div>
+      </div>
+      <button class="shroud-btn go" id="shroud-btn" onclick="toggleShroudTimer()">▶ Start</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-grid reveal" data-section="Overview">
+  <div class="stat-card"><div class="stat-val fire" id="stat-pct">0%</div><div class="stat-lbl">Overall</div><div class="prog-track"><div class="prog-fill" id="prog-overall"></div></div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-obj">0/56</div><div class="stat-lbl">Objectives</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-lvl">1</div><div class="stat-lbl">Your Level</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-phase">1/5</div><div class="stat-lbl">Current Phase</div></div>
+  <div class="stat-card"><div class="stat-val" id="stat-loot">0</div><div class="stat-lbl">Loot Logged</div></div>
+</div>
+
+<!-- SOLO HERO -->
+<div id="solo-hero" data-section="Character"></div>
+
+<!-- CAMPAIGN PROGRESS -->
+<div class="campaign-progress" id="camp-progress"></div>
+
+<!-- PHASES -->
+<div class="phases-wrap reveal" data-section="Objectives">
+  <div class="phase-tabs" id="phase-tabs"></div>
+  <div class="phases-progress" id="phases-prog"></div>
+  <div id="phase-panels"></div>
+</div>
+
+<!-- CRAFTING -->
+<div class="craft-section reveal" data-section="Crafting">
+  <div class="section-title">🔨 Crafting Reference</div>
+  <div class="craft-filters">
+    <div class="craft-filter-row" id="craft-cats"></div>
+    <div class="craft-filter-row" id="craft-roles"></div>
+    <input class="craft-search" id="craft-search" placeholder="Search items or ingredients…" oninput="renderCrafting()">
+  </div>
+  <div class="craft-grid" id="craft-grid"></div>
+  <div class="craft-disclaimer">* Quantities approximate — verify in-game.</div>
+</div>
+
+<!-- BOSSES -->
+<div class="boss-section reveal" data-section="Bosses">
+  <div class="section-title">💀 Boss Guide</div>
+  <div id="boss-grid"></div>
+</div>
+
+<!-- BIOMES -->
+<div class="biome-section reveal" data-section="Biomes">
+  <div class="section-title">🗺 Biome Reference</div>
+  <div class="biome-grid" id="biome-grid"></div>
+</div>
+
+<!-- GUIDE -->
+<div class="guide-section reveal" data-section="Guide">
+  <div class="section-title">📖 Solo Guide</div>
+  <div class="guide-main-tabs" id="guide-main-tabs"></div>
+  <div class="guide-panel" id="guide-panel"></div>
+</div>
+
+<!-- SURVIVORS -->
+<div class="survivor-section reveal" data-section="Survivors">
+  <div class="section-title">🧑‍🤝‍🧑 Survivors Directory</div>
+  <div class="survivor-filters" id="survivor-filters"></div>
+  <div class="survivor-progress" id="survivor-progress"></div>
+  <div class="survivor-grid" id="survivor-grid"></div>
+</div>
+
+<!-- U8 REFERENCE -->
+<div class="u8-section reveal">
+  <div class="section-title">⚒ Update 8 Changes Reference</div>
+  <div class="u8-grid">
+    <div class="u8-card combat">
+      <div class="u8-card-icon">⚔️</div>
+      <div class="u8-card-title">Combat Overhaul</div>
+      <ul class="u8-bullets">
+        <li>Heavy attacks on all weapons</li>
+        <li>Weapon Ultimate system — fill meter for special move</li>
+        <li>I-frames on dodge (unlock via "Strategic Maneuver" skill node)</li>
+        <li>Stealth system reworked — stealth damage improved (+900% Sneak Attack)</li>
+        <li>Aggro changes benefit stealth builds</li>
+      </ul>
+    </div>
+    <div class="u8-card gear">
+      <div class="u8-card-icon">🛡️</div>
+      <div class="u8-card-title">Gear Rework</div>
+      <ul class="u8-bullets">
+        <li>Armor upgrades at the Forge</li>
+        <li>Legendary and Common armor start equal — upgrading separates them</li>
+        <li>Armor pieces can push skill nodes beyond natural max</li>
+      </ul>
+    </div>
+    <div class="u8-card skills">
+      <div class="u8-card-icon">⭐</div>
+      <div class="u8-card-title">Skill Trees</div>
+      <ul class="u8-bullets">
+        <li>All skill points auto-refunded on patch day</li>
+        <li>12 skill paths across 3 archetypes + Center tree</li>
+        <li>Node levels: invest multiple points per node for deeper bonuses</li>
+      </ul>
+    </div>
+    <div class="u8-card share">
+      <div class="u8-card-icon">🌐</div>
+      <div class="u8-card-title">Adventure Sharing + 1.0</div>
+      <ul class="u8-bullets">
+        <li>Share your world/builds with the community</li>
+        <li>Full 1.0 release: Autumn 2026 + console (PS5/Xbox)</li>
+        <li>Floating islands likely accessible at 1.0</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ACHIEVEMENTS -->
+<div class="achieve-section reveal" data-section="Achievements">
+  <div class="section-title">🏆 Achievements</div>
+  <div class="achieve-grid" id="achieve-grid"></div>
+</div>
+
+<!-- ACTIVITY -->
+<div class="activity-section reveal">
+  <div class="section-title">📜 Recent Activity</div>
+  <div class="activity-list" id="activity-list"></div>
+</div>
+
+<footer>
+  <div>Solo Run · Saves to localStorage · Free forever on GitHub Pages</div>
+  <div style="margin-top:.4rem">Update 8 <em>Forging the Path</em> · April 21 2026 · <a href="https://enshrouded.com" target="_blank">enshrouded.com</a></div>
+  <button class="reset-btn" onclick="confirmReset()">Reset solo progress</button>
+</footer>
+
+<div class="star-tip" id="star-tip">
+  <div class="star-tip-node" id="star-tip-node"></div>
+  <div class="star-tip-meta" id="star-tip-meta"></div>
+  <div class="star-tip-why"  id="star-tip-why"></div>
+</div>
+
+<script>
+// ══ DATA ════════════════════════════════════════════════════════════
 const PHASES = [
   {id:1,name:'Starting Out',sessions:'1',lvlRange:'1–5',objectives:[
     {text:'Flame Altar placed and base established',tags:['group'],steps:[
@@ -1562,7 +1458,6 @@ const CRAFTING = [
   {name:'Berry Compote',cat:'food',role:'healer',level:1,station:'Cooking Station (Emily Fray)',ingredients:['Berry ×3'],notes:'+Health regen. Easiest to make from session 1. Upgrade to Chicken Soup when possible.'},
   {name:'Rooibos Tea',cat:'food',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'+Stamina + stamina regen. Nomad Highlands ingredient. Good liquid slot item.'},
 ];
-
 // ── SYNC MAP — objective key ↔ survivor id ───────────────────────────
 // Phase 1: o0-o7 original + o8 collector
 // Phase 2: o0-o9 original + o10 carpenter
@@ -1582,712 +1477,6 @@ const SURVIVOR_TO_OBJ = {
 const OBJ_TO_SURVIVOR = Object.fromEntries(Object.entries(SURVIVOR_TO_OBJ).map(([s,o])=>[o,s]));
 const ALL_SURVIVORS_OBJ = 'p5-o2';  // "All NPC survivors rescued"
 const CRAFTSPERSON_IDS  = ['blacksmith','alchemist','farmer','hunter','carpenter','collector','bard','fisher','barber'];
-
-// ── STATE ────────────────────────────────────────────────────────────
-function loadState() {
-  try { return JSON.parse(localStorage.getItem('enshrouded-bros-v3')) || {}; }
-  catch { return {}; }
-}
-function saveState() {
-  localStorage.setItem('enshrouded-bros-v3', JSON.stringify(STATE));
-}
-let STATE = loadState();
-if(!STATE.checked)     STATE.checked = {};
-if(!STATE.heroes)      STATE.heroes  = {};
-if(!STATE.loot)        STATE.loot    = [];
-if(!STATE.notes)       STATE.notes   = {};
-if(!STATE.activePhase) STATE.activePhase = 1;
-if(!STATE.flameLevel)  STATE.flameLevel  = 1;
-if(!STATE.survivors)   STATE.survivors   = {};
-if(!STATE.survivorFilter) STATE.survivorFilter = 'all';
-if(!STATE.achievements) STATE.achievements = {};
-if(!STATE.activity)     STATE.activity    = [];  // [{ts,text,done}]
-HEROES.forEach(h => {
-  if(!STATE.heroes[h.id])
-    STATE.heroes[h.id] = {level:1,weaponBar:0,armorUpgrades:0,skillReset:false,name:'',deaths:0};
-  else {
-    if(!STATE.heroes[h.id].name)   STATE.heroes[h.id].name   = '';
-    if(!STATE.heroes[h.id].deaths) STATE.heroes[h.id].deaths = 0;
-  }
-});
-const SESSION_START = Date.now();
-
-// ── HELPERS ──────────────────────────────────────────────────────────
-const oKey = (p,i) => `p${p}-o${i}`;
-const totalObjs = () => PHASES.reduce((a,p)=>a+p.objectives.length,0);
-const checkedCount = () => Object.values(STATE.checked).filter(Boolean).length;
-const phasePct = id => {
-  const p=PHASES[id-1], done=p.objectives.filter((_,i)=>STATE.checked[oKey(id,i)]).length;
-  return p.objectives.length ? Math.round(done/p.objectives.length*100) : 0;
-};
-const overallPct = () => Math.round(checkedCount()/totalObjs()*100);
-const currentPhase = () => { for(let i=PHASES.length;i>=1;i--) if(phasePct(i)>0) return i; return 1; };
-const avgLevel = () => { const v=HEROES.map(h=>+STATE.heroes[h.id].level||1); return Math.round(v.reduce((a,b)=>a+b,0)/v.length); };
-const tcls = t=>({group:'tag-group',ranger:'tag-ranger',barbarian:'tag-barb',wizard:'tag-wiz',healer:'tag-heal'}[t]||'tag-group');
-const tlbl = t=>({group:'GROUP',ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'}[t]||t);
-
-// ── RENDER PARTY ─────────────────────────────────────────────────────
-function renderParty() {
-  document.getElementById('party-grid').innerHTML = HEROES.map(h => {
-    const hs=STATE.heroes[h.id];
-    const wBar=Math.min(100,hs.weaponBar||0);
-    const armor=hs.armorUpgrades||0;
-    const pips=Array.from({length:5},(_,i)=>`<div class="armor-pip${i<armor?' filled':''}" onclick="toggleArmor('${h.id}',${i})" title="Armor upgrade ${i+1}/5"></div>`).join('');
-    const deaths=hs.deaths||0;
-    const playerName=hs.name||'';
-    return `<div class="hero-card ${h.cls}">
-      <div class="hero-avatar"><span class="hero-initials">${h.initials}</span></div>
-      <input class="hero-player-name" value="${playerName}" placeholder="Player name…" oninput="setHeroName('${h.id}',this.value)" onclick="event.stopPropagation()" title="Click to set player name">
-      <div class="hero-name">${h.emoji} ${h.id[0].toUpperCase()+h.id.slice(1)}</div>
-      <div class="hero-role">${h.role}</div>
-      <div class="hero-level">Lv <span id="lv-${h.id}">${hs.level}</span></div>
-      <input type="range" min="1" max="45" value="${hs.level}" style="width:100%;accent-color:var(--gold);margin:.3rem 0 .7rem;cursor:pointer" oninput="setLevel('${h.id}',this.value)">
-      <div class="skill-badge${hs.skillReset?' done':''}" onclick="toggleSkillReset('${h.id}')">
-        ${hs.skillReset?'✓':'⚠'} U8 Skill Reset ${hs.skillReset?'Done':'Pending'}
-      </div>
-      <div style="margin-bottom:.3rem">
-        <div class="weapon-bar-label">
-          <span style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;color:var(--text-dim)">WEAPON ULTIMATE</span>
-          <span style="font-family:'Cinzel',serif;font-size:.65rem">${wBar}%</span>
-        </div>
-        <div class="weapon-bar-track"><div class="weapon-bar-fill${wBar>=100?' full':''}" style="width:${wBar}%"></div></div>
-        <input type="range" min="0" max="100" value="${wBar}" style="width:100%;accent-color:var(--purple);margin:.2rem 0 0;cursor:pointer" oninput="setWeaponBar('${h.id}',this.value)">
-      </div>
-      <div class="armor-row"><span>Armor upgrades</span><div class="armor-pips">${pips}</div></div>
-      <div class="death-row">
-        <span class="death-count${deaths>0?' bloody':''}">💀 ${deaths} death${deaths!==1?'s':''}</span>
-        <div class="death-btns">
-          <button class="death-btn revive" onclick="addDeath('${h.id}',-1)" title="Remove death">−</button>
-          <button class="death-btn kill" onclick="addDeath('${h.id}',1)" title="Add death">+</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-function setLevel(id,v){STATE.heroes[id].level=+v;document.getElementById('lv-'+id).textContent=v;updateStats();saveState();}
-function setWeaponBar(id,v){STATE.heroes[id].weaponBar=+v;saveState();}
-function toggleArmor(id,i){const c=STATE.heroes[id].armorUpgrades||0;STATE.heroes[id].armorUpgrades=c===i+1?i:i+1;saveState();renderParty();}
-function toggleSkillReset(id){STATE.heroes[id].skillReset=!STATE.heroes[id].skillReset;saveState();renderParty();}
-function setHeroName(id,v){STATE.heroes[id].name=v;saveState();}
-function addDeath(id,delta){const h=STATE.heroes[id];h.deaths=Math.max(0,(h.deaths||0)+delta);saveState();renderParty();if(delta>0){const name=h.name||id;showToast('💀 '+name+' died ('+h.deaths+' total)','undo');}}
-
-// ── RENDER PHASES ─────────────────────────────────────────────────────
-function renderPhaseTabs() {
-  const ap=STATE.activePhase;
-  document.getElementById('phase-tabs').innerHTML = PHASES.map(p=>{
-    const pct=phasePct(p.id),done=pct===100,active=p.id===ap;
-    return `<div class="phase-tab${active?' active':''}${done?' complete':''}" onclick="switchPhase(${p.id})">${done?'✓ ':''}${p.id} — ${p.name}${pct>0&&!done?` · ${pct}%`:''}<span class="kbd">${p.id}</span></div>`;
-  }).join('');
-  document.getElementById('phases-prog').innerHTML = PHASES.map(p=>{
-    const pct=phasePct(p.id),cls=pct===100?'done':(p.id===ap?'active':'future');
-    return `<div class="phase-strip ${cls}"></div>`;
-  }).join('');
-}
-function renderCampaign() {
-  document.getElementById('camp-progress').innerHTML = PHASES.map(p=>{
-    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
-    return `<div class="camp-phase${active?' active-phase':''}" onclick="switchPhase(${p.id})">
-      <div class="camp-name">${p.id}. ${p.name}</div>
-      <div class="camp-bar-track"><div class="camp-bar-fill" style="width:${pct}%"></div></div>
-      <div class="camp-pct-label">${pct}%</div>
-    </div>`;
-  }).join('');
-}
-function switchPhase(id){STATE.activePhase=id;saveState();renderPhaseTabs();renderCampaign();renderPanels();}
-
-function renderPanels() {
-  document.getElementById('phase-panels').innerHTML = PHASES.map(p=>{
-    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
-    const doneCount=p.objectives.filter((_,i)=>STATE.checked[oKey(p.id,i)]).length;
-    const objs=p.objectives.map((o,i)=>{
-      const key=oKey(p.id,i),done=!!STATE.checked[key];
-      const tags=o.tags.map(t=>`<span class="tag ${tcls(t)}">${tlbl(t)}</span>`).join('');
-      const u8tag=o.u8?'<span class="tag tag-u8">U8</span>':'';
-      const whoLabel=o.tags.map(t=>tlbl(t)).join(' · ');
-      const stepsHTML=o.steps?`<div class="obj-steps" id="steps-${key}"><div class="obj-steps-who">${whoLabel}</div><ol>${o.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
-      const infoBtn=o.steps?`<button class="obj-info-btn" onclick="event.stopPropagation();toggleSteps('${key}')">ℹ How</button>`:'';
-      return `<li class="obj-item${done?' done':''}" onclick="toggleObj('${key}')">
-        <div class="obj-check">${done?'✓':''}</div>
-        <div class="obj-body"><div class="obj-text">${o.text}${infoBtn}</div><div class="obj-tags">${tags}${u8tag}</div>${stepsHTML}</div>
-      </li>`;
-    }).join('');
-    // Loot log only in active panel
-    const lootHTML = active ? buildLootHTML() : '';
-    const notes = STATE.notes[p.id]||'';
-    return `<div class="phase-panel${active?' active':''}" id="panel-${p.id}">
-      <div class="phase-header">
-        <div><div class="phase-title">${p.id} — ${p.name}</div><div class="phase-meta">Sessions ${p.sessions} · Lv ${p.lvlRange} · ${doneCount}/${p.objectives.length} complete</div></div>
-        <div class="phase-pct">${pct}%</div>
-      </div>
-      <ul class="obj-list">${objs}</ul>
-      ${lootHTML}
-      <div class="notes-section">
-        <div class="section-title" style="margin-top:0">📝 Session Notes</div>
-        <textarea class="notes-area" placeholder="Shared session notes…" oninput="saveNotes(${p.id},this.value)">${notes}</textarea>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-const RARITIES = [{id:'common',label:'Common'},{id:'rare',label:'Rare'},{id:'epic',label:'Epic'},{id:'legendary',label:'Legendary'}];
-const rarityColors = {common:'var(--ash)',rare:'var(--water)',epic:'var(--purple-light)',legendary:'var(--gold-light)'};
-function lootRarityBadge(r){if(!r||r==='common')return '';const c=rarityColors[r]||'var(--ash)';return `<span class="rarity-badge r-${r}" style="color:${c};border-color:${c}">${r}</span> `;}
-function buildLootHTML() {
-  const items=STATE.loot.map((item,i)=>{
-    const r=item.rarity||'common';
-    return `<div class="loot-item r-${r}">
-      <button class="loot-del" onclick="delLoot(${i})">✕</button>
-      <div class="loot-name">${lootRarityBadge(r)}${item.name}</div>
-      <div class="loot-where">${item.where||''}</div>
-      ${item.owner?`<div class="loot-owner"><span class="tag ${tcls(item.owner)}">${tlbl(item.owner)}</span></div>`:''}
-    </div>`;}).join('');
-  // Leaderboard
-  const counts={};
-  STATE.loot.forEach(l=>{if(l.owner)counts[l.owner]=(counts[l.owner]||0)+1;});
-  const max=Math.max(1,...Object.values(counts));
-  const lbRows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([owner,n])=>{
-    const cls=({ranger:'var(--ember-bright)',barbarian:'var(--red-bright)',wizard:'var(--purple-light)',healer:'var(--water)',group:'var(--gold)'})[owner]||'var(--gold)';
-    return `<div class="loot-lb-row"><span class="loot-lb-name">${tlbl(owner)}</span><div class="loot-lb-wrap"><div class="loot-lb-fill" style="width:${Math.round(n/max*100)}%;background:${cls}"></div></div><span class="loot-lb-n">${n}</span></div>`;
-  }).join('');
-  const lb=Object.keys(counts).length?`<div class="loot-lb"><div class="loot-lb-title">Loot by player</div>${lbRows}</div>`:'';
-  return `<div class="loot-section">
-    <div class="section-title">💎 Loot Log</div>
-    <div class="loot-grid">${items||'<div style="color:var(--text-dim);font-style:italic;font-size:.85rem">No items logged yet.</div>'}</div>
-    ${lb}
-    <div class="loot-add">
-      <input class="loot-input" id="loot-name" placeholder="Item name…" onkeydown="if(event.key==='Enter')addLoot()">
-      <input class="loot-input" id="loot-where" placeholder="Drop location…" style="max-width:160px">
-      <select class="rarity-select" id="loot-rarity">
-        ${RARITIES.map(r=>`<option value="${r.id}">${r.label}</option>`).join('')}
-      </select>
-      <select class="loot-select" id="loot-owner">
-        <option value="">— Owner —</option>
-        <option value="ranger">Ranger</option><option value="barbarian">Barbarian</option>
-        <option value="wizard">Wizard</option><option value="healer">Healer</option>
-        <option value="group">Group</option>
-      </select>
-      <button class="btn btn-ember" onclick="addLoot()">+ Log</button>
-    </div>
-  </div>`;
-}
-
-function toggleObj(key){
-  STATE.checked[key]=!STATE.checked[key];
-  const done=STATE.checked[key];
-  const sid=OBJ_TO_SURVIVOR[key];
-  if(sid){ STATE.survivors[sid]=done; }
-  if(key===ALL_SURVIVORS_OBJ && done){
-    CRAFTSPERSON_IDS.forEach(id=>{ STATE.survivors[id]=true; });
-    Object.values(SURVIVOR_TO_OBJ).forEach(k=>{ STATE.checked[k]=true; });
-  }
-  // Toast feedback
-  const phase=PHASES.find(p=>p.objectives.some((_,i)=>oKey(p.id,i)===key));
-  const idx=phase?phase.objectives.findIndex((_,i)=>oKey(phase.id,i)===key):-1;
-  const txt=phase&&idx>=0?phase.objectives[idx].text:'Objective';
-  if(done) showToast('✓ '+(txt.length>38?txt.slice(0,38)+'…':txt),'done');
-  else showToast('↩ Unmarked','undo');
-  logActivity((done?'✓ ':'↩ ')+(txt.length>48?txt.slice(0,48)+'…':txt),done);
-  checkAchievements();
-  saveState();renderAll();
-  // Phase complete burst
-  if(done && phase && phasePct(phase.id)===100){
-    setTimeout(()=>{triggerBurst();showToast('🔥 Phase '+phase.id+' — '+phase.name+' complete!','gold');},220);
-  }
-}
-function toggleSteps(key){const el=document.getElementById('steps-'+key);if(el)el.classList.toggle('open');}
-
-function addLoot(){
-  const name=document.getElementById('loot-name')?.value?.trim();
-  if(!name) return;
-  const rarity=document.getElementById('loot-rarity')?.value||'common';
-  const owner=document.getElementById('loot-owner')?.value;
-  const item={name,where:document.getElementById('loot-where')?.value?.trim(),owner,rarity};
-  STATE.loot.push(item);
-  logActivity(`💎 ${name} looted by ${tlbl(owner)}${rarity!=='common'?' ['+rarity+']':''}`,true);
-  checkAchievements();
-  saveState();renderAll();
-}
-function delLoot(i){STATE.loot.splice(i,1);saveState();renderAll();}
-function saveNotes(id,v){STATE.notes[id]=v;saveState();}
-
-// ── STATS ────────────────────────────────────────────────────────────
-function updateStats() {
-  const pct=overallPct();
-  document.getElementById('stat-pct').textContent=pct+'%';
-  document.getElementById('prog-overall').style.width=pct+'%';
-  document.getElementById('stat-obj').textContent=checkedCount()+'/'+totalObjs();
-  document.getElementById('stat-phase').textContent=currentPhase()+'/5';
-  document.getElementById('stat-lvl').textContent='~'+avgLevel();
-  document.getElementById('stat-loot').textContent=STATE.loot.length;
-  const sf=document.getElementById('sticky-fill');
-  if(sf) sf.style.width=pct+'%';
-}
-
-// ── COUNTDOWN ────────────────────────────────────────────────────────
-function updateCountdown() {
-  const diff=new Date('2026-04-21T00:00:00')-new Date();
-  const el=document.getElementById('countdown');
-  if(diff<=0){el.textContent='⚒ Update 8 is LIVE!';el.style.cssText='background:rgba(92,184,92,.2);border-color:var(--green);color:var(--green)';return;}
-  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
-  el.textContent=d>0?`⚒ U8 in ${d}d ${h}h`:h>0?`⚒ U8 in ${h}h ${m}m`:`⚒ U8 in ${m}m — SOON`;
-}
-
-// ── LIVE SYNC (GitHub Contents API — always fresh) ───────────────────
-let liveState = null;
-
-async function fetchLive() {
-  if (!SYNC_ENABLED) return;
-  try {
-    // Contents API returns JSON with base64-encoded content — no CDN cache
-    const res = await fetch(API_URL, {
-      headers: { 'Accept': 'application/vnd.github.v3+json' }
-    });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const meta = await res.json();
-    // Decode base64 content
-    const json = JSON.parse(atob(meta.content.replace(/\n/g,'')));
-    liveState = json;
-    renderLive();
-  } catch(e) {
-    console.warn('Live sync error:', e);
-    setConn('error','SYNC ERROR');
-  }
-  const el=document.getElementById('poll-time');
-  if(el) el.textContent='Polled '+new Date().toLocaleTimeString();
-}
-
-function setConn(state, label) {
-  const dot=document.getElementById('conn-dot'), lbl=document.getElementById('conn-label');
-  if(dot) dot.className='conn-dot '+state;
-  if(lbl) lbl.textContent=label;
-}
-
-function renderLive() {
-  const d=liveState;
-  if(!d||d.file_hash==='none'){setConn('offline','WATCHER NOT RUNNING');return;}
-  document.getElementById('live-unconfigured').style.display='none';
-  document.getElementById('live-data').style.display='block';
-
-  const now=Math.floor(Date.now()/1000);
-  const ts=d.last_save_ts||d.index_time||0;
-  const age=ts>0?now-ts:null;
-  let ageStr='—',state='offline';
-  if(age!==null){
-    if(age<120){ageStr='Just now';state='active';}
-    else if(age<600){ageStr=Math.floor(age/60)+'m ago';state='active';}
-    else if(age<3600){ageStr=Math.floor(age/60)+'m ago';state='idle';}
-    else if(age<86400){ageStr=Math.floor(age/3600)+'h ago';state='idle';}
-    else{ageStr=Math.floor(age/86400)+'d ago';state='offline';}
-  }
-  setConn(state, state==='active'?'SERVER ACTIVE':state==='idle'?'SERVER IDLE':'SERVER OFFLINE');
-
-  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
-  set('ls-age',ageStr);
-  const ageMin=age!==null?Math.floor(age/60):999;
-  set('ls-status',ageMin<15?'🟢 Active':ageMin<60?'🟡 Idle':'🔴 Offline');
-  const s=d.structures||{};
-  set('ls-npcs',s.npc_count!=null?s.npc_count:'—');
-  const tot=(s.flame_altar||0)+(s.charcoal_kiln||0)+(s.drying_rack||0);
-  set('ls-structs',tot||'—');
-
-  const pill=(id,label,built)=>{
-    const el=document.getElementById(id);
-    if(el){el.textContent=label+(built?' ✓':' ✗');el.className='pill '+(built?'built':'missing');}
-  };
-  pill('lp-flame','🔥 Flame Altar',s.flame_altar>0);
-  pill('lp-kiln','⚒ Charcoal Kiln',s.charcoal_kiln>0);
-  pill('lp-rack','🪵 Drying Rack',s.drying_rack>0);
-  set('lp-hash','💾 '+( d.file_hash||'—'));
-  if(d.last_save_iso) set('ls-savetime','World saved: '+new Date(d.last_save_iso).toLocaleString());
-}
-
-function initLiveSync(){
-  if(!SYNC_ENABLED){
-    setConn('offline','NOT CONFIGURED');
-    return;
-  }
-  fetchLive();
-  setInterval(fetchLive, POLL_MS);
-}
-
-// ── FLAME ALTAR ───────────────────────────────────────────────────────
-function renderFlameAltar() {
-  const cur = STATE.flameLevel;
-  document.getElementById('flame-track').innerHTML = FLAME_LEVELS.map(f => {
-    const cls = f.level < cur ? 'done' : f.level === cur ? 'current' : '';
-    return `<div class="flame-node ${cls}" onclick="setFlameLevel(${f.level})">
-      <div class="flame-node-lvl">${f.level < cur ? '✓' : f.level === cur ? '<span class="flame-anim">🔥</span>' : f.level}</div>
-      <div class="flame-node-shroud">${f.shroud}m</div>
-    </div>`;
-  }).join('');
-  const d = FLAME_LEVELS[cur - 1];
-  const next = FLAME_LEVELS[cur]; // undefined if maxed
-  document.getElementById('flame-detail').innerHTML = `
-    <div class="flame-detail-top">
-      <div><div class="flame-detail-title">🔥 Flame Level ${cur}</div>${d.note ? `<div style="font-size:.75rem;color:var(--ash);margin-top:.3rem">${d.note}</div>` : ''}</div>
-      <div class="flame-detail-stats">
-        <div class="flame-stat"><div class="flame-stat-val">${d.shroud} min</div><div class="flame-stat-lbl">Shroud Time</div></div>
-        <div class="flame-stat"><div class="flame-stat-val">${d.passage}</div><div class="flame-stat-lbl">Passage Lv</div></div>
-        ${d.capacity ? `<div class="flame-stat"><div class="flame-stat-val">${d.capacity}</div><div class="flame-stat-lbl">Capacity</div></div>` : ''}
-      </div>
-    </div>
-    <div class="shroud-widget" id="shroud-widget">
-      <div class="shroud-display" id="shroud-display">${d.shroud}:00</div>
-      <div class="shroud-info">
-        <div class="shroud-label">Shroud Timer</div>
-        <div class="shroud-max">Max ${d.shroud} min at Level ${cur}</div>
-      </div>
-      <button class="shroud-btn go" id="shroud-btn" onclick="toggleShroudTimer()">▶ Start</button>
-    </div>
-    ${next ? `<div class="flame-next">
-      <div class="flame-next-lbl">To reach Level ${next.level}</div>
-      ${next.boss ? `<div class="flame-boss">⚔ Requires: ${next.boss}</div>` : ''}
-      ${next.materials ? `<div class="flame-mats">${next.materials.map(m => `<span class="flame-mat">${m}</span>`).join('')}</div>` : ''}
-      ${next.note ? `<div style="font-size:.72rem;color:var(--text-dim);margin-top:.5rem;font-style:italic">${next.note}</div>` : ''}
-    </div>` : `<div class="flame-next"><div class="flame-maxed">✓ Flame Altar at maximum level — Veilwater Basin unlocked</div></div>`}`;
-}
-function setFlameLevel(lv) { STATE.flameLevel = lv; saveState(); renderFlameAltar(); }
-
-// ── BOSSES ────────────────────────────────────────────────────────────
-function renderBosses() {
-  const mainCards = BOSSES.map(b => `
-    <div class="boss-card${b.highlight ? ' highlight' : ''}">
-      <div class="boss-name">${b.name}</div>
-      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
-      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
-      <div class="boss-reward">${b.reward}</div>
-      <div class="boss-tactics">${b.tactics}${b.farmable ? '<span class="boss-farmable">Farmable</span>' : ''}</div>
-    </div>`).join('');
-  const miniCards = MINI_BOSSES.map(b => `
-    <div class="boss-card mini">
-      <div class="boss-name">${b.name}</div>
-      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
-      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
-      <div class="boss-reward">${b.reward}</div>
-      <div class="boss-tactics">${b.tactics}</div>
-    </div>`).join('');
-  document.getElementById('boss-grid').innerHTML = `
-    <div style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--text-dim);text-transform:uppercase;margin-bottom:.6rem">Main Bosses — Campaign</div>
-    <div class="boss-grid">${mainCards}</div>
-    <div style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.15em;color:var(--text-dim);text-transform:uppercase;margin:1.2rem 0 .6rem">Mini Bosses</div>
-    <div class="boss-grid">${miniCards}</div>`;
-}
-
-// ── BIOMES ────────────────────────────────────────────────────────────
-function renderBiomes() {
-  document.getElementById('biome-grid').innerHTML = BIOMES.map(b => `
-    <div class="biome-card">
-      <div class="biome-name">${b.name}</div>
-      <div class="biome-badges">
-        <span class="biome-badge biome-badge-level">Lv ${b.level}</span>
-        <span class="biome-badge biome-badge-flame">🔥 L${b.flame}</span>
-      </div>
-      <div class="biome-row"><b>Enemies</b>${b.enemies}</div>
-      <div class="biome-row"><b>Resources</b>${b.resources}</div>
-      <div class="biome-row"><b>Boss</b>${b.boss}</div>
-      <div class="biome-row"><b>Notes</b>${b.notes}</div>
-    </div>`).join('');
-}
-
-// ── SURVIVORS ────────────────────────────────────────────────────────
-function renderSurvivors() {
-  const f = STATE.survivorFilter;
-  const visible = SURVIVORS.filter(s => f === 'all' || s.type === f);
-  const rescuedCount = SURVIVORS.filter(s => STATE.survivors[s.id]).length;
-  const filterBtns = [{id:'all',label:'All'},{id:'craftsperson',label:'Craftspeople'},{id:'assistant',label:'Assistants'}]
-    .map(b => `<button class="craft-filter-btn${f===b.id?' active':''}" onclick="setSurvivorFilter('${b.id}')">${b.label}</button>`).join('');
-  document.getElementById('survivor-filters').innerHTML = filterBtns;
-  document.getElementById('survivor-progress').innerHTML =
-    `${rescuedCount} / ${SURVIVORS.length} rescued &nbsp;·&nbsp; Flame L9 requires 14 total`;
-  document.getElementById('survivor-grid').innerHTML = visible.map(s => {
-    const rescued = !!STATE.survivors[s.id];
-    return `<div class="survivor-card${rescued ? ' rescued' : ''}" onclick="toggleSurvivor('${s.id}')">
-      <span class="survivor-type">${s.type === 'assistant' ? 'Asst.' : 'Crafter'}</span>
-      <div class="survivor-name">${s.name}</div>
-      <div class="survivor-role">${s.role}</div>
-      <div class="survivor-biome">${s.biome}</div>
-      <div class="survivor-loc">${s.location}</div>
-      <div class="survivor-unlocks"><b>Unlocks</b>${s.unlocks}</div>
-      ${rescued ? '<div class="survivor-rescued-mark">✓ Rescued</div>' : ''}
-    </div>`;
-  }).join('');
-}
-function toggleSurvivor(id){
-  STATE.survivors[id]=!STATE.survivors[id];
-  const rescued=STATE.survivors[id];
-  // Sync to matching phase objective if one exists
-  const okey=SURVIVOR_TO_OBJ[id];
-  if(okey){ STATE.checked[okey]=rescued; }
-  // Auto-check "All NPC survivors rescued" if every craftsperson is now rescued
-  const allDone=CRAFTSPERSON_IDS.every(i=>STATE.survivors[i]);
-  STATE.checked[ALL_SURVIVORS_OBJ]=allDone;
-  saveState();renderAll();
-}
-function setSurvivorFilter(f) { STATE.survivorFilter = f; saveState(); renderSurvivors(); }
-
-// ── CRAFTING ─────────────────────────────────────────────────────────
-function renderCrafting() {
-  const search=(document.getElementById('craft-search')?.value||'').toLowerCase();
-  const {cat,role}=CRAFT_STATE;
-  const items=CRAFTING.filter(i=>{
-    if(cat!=='all'&&i.cat!==cat) return false;
-    if(role!=='all'&&i.role!==role&&i.role!=='group') return false;
-    if(search&&!i.name.toLowerCase().includes(search)&&!i.ingredients.join(' ').toLowerCase().includes(search)&&!(i.station||'').toLowerCase().includes(search)) return false;
-    return true;
-  });
-  document.getElementById('craft-cats').innerHTML=CRAFT_CATS.map(c=>
-    `<button class="craft-filter-btn${CRAFT_STATE.cat===c.id?' active':''}" onclick="setCraftCat('${c.id}')">${c.label}</button>`
-  ).join('');
-  document.getElementById('craft-roles').innerHTML=CRAFT_ROLES.map(r=>
-    `<button class="craft-filter-btn${CRAFT_STATE.role===r.id?' active':''}" onclick="setCraftRole('${r.id}')">${r.label}</button>`
-  ).join('');
-  document.getElementById('craft-grid').innerHTML=items.length?items.map(item=>{
-    const ingreds=item.ingredients.map(ing=>{
-      const name=ing.replace(/\s*×\d+$/,'').trim();
-      const src=INGREDIENT_SOURCES[name];
-      return src?`<li><span class="ing-tip" data-tip="${src}">${ing}</span></li>`:`<li>${ing}</li>`;
-    }).join('');
-    const roleTag=`<span class="tag ${tcls(item.role)}">${tlbl(item.role)}</span>`;
-    return `<div class="craft-card">
-      <div class="craft-card-header">
-        <div class="craft-card-name">${item.name}</div>
-        <span class="craft-level">Lv ${item.level}</span>
-      </div>
-      <div class="craft-card-tags">${roleTag}</div>
-      <ul class="craft-ingredients">${ingreds}</ul>
-      <div class="craft-station">${item.station}</div>
-      ${item.notes?`<div class="craft-notes">${item.notes}</div>`:''}
-    </div>`;
-  }).join(''):'<div style="color:var(--text-dim);font-style:italic;padding:1rem 0">No items match.</div>';
-}
-function setCraftCat(cat){CRAFT_STATE.cat=cat;renderCrafting();}
-function setCraftRole(role){CRAFT_STATE.role=role;renderCrafting();}
-
-// ── TOAST ────────────────────────────────────────────────────────────
-function showToast(msg, type='done') {
-  const root=document.getElementById('toast-root');
-  if(!root) return;
-  const el=document.createElement('div');
-  el.className='toast '+type;
-  el.textContent=msg;
-  root.appendChild(el);
-  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ el.classList.add('in'); }); });
-  setTimeout(()=>{ el.classList.remove('in'); setTimeout(()=>el.remove(),300); },2800);
-}
-
-// ── PHASE COMPLETE BURST ─────────────────────────────────────────────
-function triggerBurst() {
-  if(typeof confetti==='function'){
-    confetti({particleCount:130,spread:80,origin:{y:.55},colors:['#e8612a','#d4a84b','#ff8c42','#f0c96a','#fff']});
-    setTimeout(()=>confetti({particleCount:70,spread:120,origin:{y:.5},colors:['#e8612a','#d4a84b','#a89bd4']}),320);
-  }
-  ['var(--ember)','var(--gold)','var(--ember-bright)'].forEach((color,i)=>{
-    const el=document.createElement('div');
-    el.className='burst';
-    el.style.cssText=`border:2px solid ${color};animation-delay:${i*.1}s`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 900+i*100);
-  });
-}
-
-// ── SCROLL REVEAL ────────────────────────────────────────────────────
-function initReveal() {
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
-  },{threshold:0.06});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-}
-
-// ── KEYBOARD SHORTCUTS ───────────────────────────────────────────────
-function initKeyboard() {
-  document.addEventListener('keydown', e=>{
-    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
-    const n=parseInt(e.key);
-    if(n>=1&&n<=5){ switchPhase(n); showToast('Phase '+n+' — '+PHASES[n-1].name,'fire'); return; }
-    if(e.key==='/'){ e.preventDefault(); openPalette(); return; }
-    if(e.key==='?'){ openKb(); return; }
-    if(e.key==='Escape'){ closePalette(); closeKb(); return; }
-  });
-}
-
-// ── COMMAND PALETTE ──────────────────────────────────────────────────
-let cmdIdx=-1;
-function openPalette(){
-  const ov=document.getElementById('cmd-overlay');
-  if(!ov) return;
-  ov.classList.add('open');
-  const inp=document.getElementById('cmd-input');
-  if(inp){ inp.value=''; inp.focus(); }
-  cmdSearch('');
-}
-function closePalette(){
-  document.getElementById('cmd-overlay')?.classList.remove('open');
-  cmdIdx=-1;
-}
-function cmdSearch(q){
-  cmdIdx=-1;
-  const res=[];
-  const qlo=q.toLowerCase().trim();
-  PHASES.forEach(ph=>ph.objectives.forEach(obj=>{
-    if(!qlo||obj.text.toLowerCase().includes(qlo)||ph.name.toLowerCase().includes(qlo)){
-      res.push({label:obj.text,sub:'Phase '+ph.id+' · '+ph.name,action:()=>{switchPhase(ph.id);closePalette();}});
-    }
-  }));
-  CRAFTING.filter(i=>!qlo||i.name.toLowerCase().includes(qlo)||(i.ingredients||[]).join(' ').toLowerCase().includes(qlo)).slice(0,8).forEach(i=>{
-    res.push({label:i.name,sub:'Craft · '+(i.station||''),action:()=>closePalette()});
-  });
-  SURVIVORS.filter(s=>!qlo||s.name.toLowerCase().includes(qlo)||s.role.toLowerCase().includes(qlo)||s.biome.toLowerCase().includes(qlo)).slice(0,5).forEach(s=>{
-    res.push({label:s.name,sub:'Survivor · '+s.role+' · '+s.biome,action:()=>closePalette()});
-  });
-  BOSSES.concat(MINI_BOSSES).filter(b=>!qlo||b.name.toLowerCase().includes(qlo)||b.biome.toLowerCase().includes(qlo)).slice(0,5).forEach(b=>{
-    res.push({label:b.name,sub:'Boss · '+b.biome+' · Lv '+b.level,action:()=>closePalette()});
-  });
-  window.__cmdResults=res.slice(0,12);
-  const container=document.getElementById('cmd-results');
-  if(!container) return;
-  const items=window.__cmdResults;
-  container.innerHTML=items.length
-    ? items.map((r,i)=>`<div class="cmd-item" data-idx="${i}" onclick="_cmdRun(${i})" onmouseover="cmdHover(${i})"><div class="cmd-label">${r.label}<div class="cmd-sublabel">${r.sub}</div></div></div>`).join('')
-    : (qlo?'<div style="padding:.6rem 1rem;color:var(--text-dim);font-style:italic;font-size:.75rem">No results</div>':'');
-}
-function cmdHover(i){
-  cmdIdx=i;
-  document.querySelectorAll('#cmd-results .cmd-item').forEach((el,j)=>el.classList.toggle('active',j===i));
-}
-function _cmdRun(i){const r=window.__cmdResults;if(r&&r[i])r[i].action();}
-function cmdKey(e){
-  const items=document.querySelectorAll('#cmd-results .cmd-item');
-  if(e.key==='ArrowDown'){e.preventDefault();cmdIdx=Math.min(cmdIdx+1,items.length-1);cmdHover(cmdIdx);}
-  else if(e.key==='ArrowUp'){e.preventDefault();cmdIdx=Math.max(cmdIdx-1,0);cmdHover(cmdIdx);}
-  else if(e.key==='Enter'){e.preventDefault();if(cmdIdx>=0)_cmdRun(cmdIdx);}
-  else if(e.key==='Escape'){closePalette();}
-}
-
-// ── KEYBOARD HELP ────────────────────────────────────────────────────
-function openKb(){document.getElementById('kb-overlay')?.classList.add('open');}
-function closeKb(){document.getElementById('kb-overlay')?.classList.remove('open');}
-
-// ── DOT NAV ──────────────────────────────────────────────────────────
-function initDotNav(){
-  const nav=document.getElementById('dot-nav');
-  if(!nav) return;
-  const labels=['Live','Flame','Stats','Party','Survivors','Progress','Crafting','Bosses','Biomes','Guide','Achievements','Activity'];
-  const secs=[...document.querySelectorAll('.live-panel,.flame-section,.stats-grid,.party-grid,.survivor-section,.phases-wrap,.craft-section,.boss-section,.biome-section,.guide-section,.achieve-section,.activity-section')];
-  nav.innerHTML=secs.map((s,i)=>`<button class="dn-item" aria-label="${labels[i]||''}" data-label="${labels[i]||''}" onclick="scrollToSection(${i})"></button>`).join('');
-  window.__navSecs=secs;
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      const i=secs.indexOf(e.target);
-      const btn=nav.querySelectorAll('.dn-item')[i];
-      if(btn) btn.classList.toggle('active',e.isIntersecting);
-    });
-  },{threshold:.25,rootMargin:'-5% 0px -65% 0px'});
-  secs.forEach(s=>obs.observe(s));
-}
-function scrollToSection(i){const s=window.__navSecs;if(s&&s[i])s[i].scrollIntoView({behavior:'smooth',block:'start'});}
-
-// ── SESSION TIMER ─────────────────────────────────────────────────────
-function initSessionTimer(){
-  function tick(){
-    const el=document.getElementById('session-timer');
-    if(!el) return;
-    const elapsed=Math.floor((Date.now()-SESSION_START)/60000);
-    el.textContent=elapsed<60?elapsed+'m':`${Math.floor(elapsed/60)}h ${elapsed%60}m`;
-  }
-  tick();
-  setInterval(tick,60000);
-}
-
-// ── SHROUD TIMER ─────────────────────────────────────────────────────
-let shroudInterval=null, shroudRemain=0;
-const SHROUD_MINS=[0,5,8,12,18,25,35,45]; // index=flame level
-function toggleShroudTimer(){
-  const btn=document.getElementById('shroud-btn');
-  const disp=document.getElementById('shroud-display');
-  const widget=document.getElementById('shroud-widget');
-  if(shroudInterval){
-    clearInterval(shroudInterval);shroudInterval=null;
-    if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}
-    if(widget)widget.classList.remove('danger');
-  } else {
-    shroudRemain=(SHROUD_MINS[STATE.flameLevel]||5)*60;
-    if(btn){btn.textContent='⏹ Stop';btn.className='shroud-btn off';}
-    shroudInterval=setInterval(()=>{
-      shroudRemain--;
-      const m=Math.floor(shroudRemain/60),s=shroudRemain%60;
-      if(disp)disp.textContent=shroudRemain<=0?'0:00':`${m}:${String(s).padStart(2,'0')}`;
-      if(widget)widget.classList.toggle('danger',shroudRemain<=60&&shroudRemain>0);
-      if(shroudRemain<=0){
-        clearInterval(shroudInterval);shroudInterval=null;
-        if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}
-        if(widget)widget.classList.remove('danger');
-        showToast('⚠ Shroud timer expired — get to safety!','undo');
-      }
-    },1000);
-  }
-}
-
-// ── ACHIEVEMENTS ─────────────────────────────────────────────────────
-const ACHIEVEMENTS=[
-  {id:'first_check',label:'First Step',desc:'Complete your first objective',emoji:'🎯',check:()=>Object.values(STATE.checked).some(v=>v)},
-  {id:'phase2',label:'Into the Mist',desc:'Reach Phase 2',emoji:'🌫️',check:()=>STATE.activePhase>=2},
-  {id:'phase3',label:'Deep Dark',desc:'Reach Phase 3',emoji:'🌑',check:()=>STATE.activePhase>=3},
-  {id:'phase4',label:'Fire Keeper',desc:'Reach Phase 4',emoji:'🔥',check:()=>STATE.activePhase>=4},
-  {id:'phase5',label:'Endgame',desc:'Reach Phase 5',emoji:'👑',check:()=>STATE.activePhase>=5},
-  {id:'loot5',label:'Hoarder',desc:'Log 5 loot items',emoji:'💰',check:()=>STATE.loot.length>=5},
-  {id:'loot20',label:'Dragon\'s Vault',desc:'Log 20 loot items',emoji:'🐉',check:()=>STATE.loot.length>=20},
-  {id:'legendary',label:'Legendary Find',desc:'Log a legendary item',emoji:'⭐',check:()=>STATE.loot.some(l=>l.rarity==='legendary')},
-  {id:'all_survivors',label:'Safe Haven',desc:'Rescue all survivors',emoji:'🏠',check:()=>SURVIVORS.every(s=>STATE.survivors[s.id])},
-  {id:'max_flame',label:'Blaze Master',desc:'Reach max Flame Altar level',emoji:'🏯',check:()=>STATE.flameLevel>=7},
-  {id:'death10',label:'Glass Cannon',desc:'Accumulate 10 party deaths',emoji:'💀',check:()=>Object.values(STATE.heroes).reduce((s,h)=>s+(h.deaths||0),0)>=10},
-  {id:'max_level',label:'Apex Predator',desc:'All heroes at level 45',emoji:'🦅',check:()=>HEROES.every(h=>(STATE.heroes[h.id]?.level||1)>=45)},
-];
-function checkAchievements(){
-  let earned=false;
-  ACHIEVEMENTS.forEach(a=>{
-    if(!STATE.achievements[a.id]&&a.check()){
-      STATE.achievements[a.id]=Date.now();
-      earned=true;
-      showToast('🏆 Achievement: '+a.label,'fire');
-    }
-  });
-  if(earned){saveState();renderAchievements();}
-}
-function renderAchievements(){
-  const grid=document.getElementById('achieve-grid');
-  if(!grid) return;
-  grid.innerHTML=ACHIEVEMENTS.map(a=>{
-    const got=!!STATE.achievements[a.id];
-    return `<div class="badge${got?' got':''}"><span class="badge-icon">${a.emoji}</span><div><div class="badge-name">${a.label}</div><div class="badge-desc">${a.desc}</div></div></div>`;
-  }).join('');
-}
-
-// ── ACTIVITY FEED ────────────────────────────────────────────────────
-function logActivity(text,done=true){
-  if(!STATE.activity) STATE.activity=[];
-  STATE.activity.unshift({ts:Date.now(),text,done});
-  if(STATE.activity.length>40) STATE.activity=STATE.activity.slice(0,40);
-  saveState();
-  renderActivity();
-}
-function renderActivity(){
-  const list=document.getElementById('activity-list');
-  if(!list) return;
-  if(!STATE.activity||!STATE.activity.length){
-    list.innerHTML='<div style="color:var(--text-dim);font-style:italic;font-size:.8rem;padding:.5rem 0">No activity yet — start checking objectives!</div>';
-    return;
-  }
-  list.innerHTML=STATE.activity.slice(0,15).map(a=>{
-    const age=Date.now()-a.ts;
-    const mins=Math.floor(age/60000);
-    const hrs=Math.floor(mins/60);
-    const t=hrs>0?hrs+'h ago':mins>0?mins+'m ago':'just now';
-    return `<div class="act-item ${a.done?'act-done':'act-undo'}"><span class="act-time">${t}</span><span class="act-text">${a.text}</span></div>`;
-  }).join('');
-}
-
-// ── CAMPAIGN GUIDE DATA ──────────────────────────────────────────────
-const GUIDE_STATE = {main:'whatnow', cls:'ranger', acc:{}};
 
 const CLASS_GUIDES = {
   ranger: {
@@ -2501,162 +1690,6 @@ const SKILL_MAPS = {
     edges:[[0,1],[0,2],[2,3],[2,4],[0,5],[5,6],[1,6],[5,7]]
   }
 };
-
-const SM_TIP = document.createElement('div');
-SM_TIP.className='star-tip';
-SM_TIP.innerHTML='<div class="star-tip-node"></div><div class="star-tip-meta"></div><div class="star-tip-why"></div>';
-document.body.appendChild(SM_TIP);
-
-function renderStarMap(cls){
-  const map=SKILL_MAPS[cls];
-  if(!map) return '';
-  const W=500, H=280;
-  const clsColor={ranger:'var(--ember)',barbarian:'#e74c3c',wizard:'#a89bd4',healer:'var(--water)'}[cls]||'var(--gold)';
-  // Lines
-  const lines=map.edges.map(([a,b])=>{
-    const na=map.nodes[a], nb=map.nodes[b];
-    return `<line x1="${na.x}" y1="${na.y}" x2="${nb.x}" y2="${nb.y}" stroke="rgba(255,255,255,.13)" stroke-width="1.2" stroke-dasharray="3 4"/>`;
-  }).join('');
-  // Nodes
-  const circles=map.nodes.map((n,i)=>{
-    const col=treeColor(n.meta);
-    const safe=s=>s.replace(/'/g,'&apos;').replace(/"/g,'&quot;');
-    return `<g class="sm-node" data-i="${i}" data-cls="${cls}" style="cursor:pointer">
-      <circle cx="${n.x}" cy="${n.y}" r="11" fill="${col}22" stroke="${col}" stroke-width="1.5"/>
-      <circle cx="${n.x}" cy="${n.y}" r="4"  fill="${col}"/>
-      <text x="${n.x}" y="${n.y+22}" text-anchor="middle" font-family="Cinzel,serif" font-size="7" fill="${col}cc" style="pointer-events:none">${n.node.replace(/ /g,'\u00A0')}</text>
-    </g>`;
-  }).join('');
-  // Defs for glow
-  const defs=`<defs>
-    <filter id="smglow${cls}"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <radialGradient id="smsky${cls}" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="${clsColor.replace('var(--ember)','#e8612a').replace('var(--water)','#4a9fd4')}" stop-opacity=".07"/>
-      <stop offset="100%" stop-color="#0a0f18" stop-opacity="1"/>
-    </radialGradient>
-  </defs>`;
-  // Tiny bg stars
-  const bgStars=Array.from({length:25},(_,i)=>{
-    const bx=(i*137+31)%490+5, by=(i*97+17)%270+5, br=Math.random()<.3?.6:.3;
-    return `<circle cx="${bx}" cy="${by}" r="${br}" fill="white" opacity="${.15+((i%3)*.1)}"/>`;
-  }).join('');
-
-  const svgId=`sm-${cls}`;
-  return `<div class="star-map-wrap">
-    <svg id="${svgId}" class="star-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-      ${defs}
-      <rect width="${W}" height="${H}" fill="url(#smsky${cls})"/>
-      ${bgStars}
-      ${lines}
-      ${circles}
-    </svg>
-  </div>`;
-}
-
-function initStarMapEvents(){
-  document.addEventListener('mouseover', e=>{
-    const g=e.target.closest('.sm-node');
-    if(!g) return;
-    const i=+g.dataset.i, cls=g.dataset.cls;
-    const n=SKILL_MAPS[cls]?.nodes[i];
-    if(!n) return;
-    SM_TIP.querySelector('.star-tip-node').textContent=n.node;
-    SM_TIP.querySelector('.star-tip-meta').textContent=n.meta;
-    SM_TIP.querySelector('.star-tip-why').textContent=n.why;
-    SM_TIP.classList.add('show');
-  });
-  document.addEventListener('mousemove', e=>{
-    SM_TIP.style.left=(e.clientX+14)+'px';
-    SM_TIP.style.top=(e.clientY-30)+'px';
-  });
-  document.addEventListener('mouseout', e=>{
-    if(!e.target.closest('.sm-node')) SM_TIP.classList.remove('show');
-  });
-}
-
-const DUO_GUIDES = [
-  {
-    pair:'Ranger + Barbarian', emoji:'🏹⚔️',
-    summary:'Push pair. Barbarian tanks, Ranger scouts and thins elites before the rest of group arrives.',
-    synergy:'Barbarian leads and draws aggro through damage/proximity → Ranger free-fires with zero threat.',
-    combos:[
-      'Barbarian charges in, Ranger pops Sneak Attack from flanking position.',
-      'Barbarian stuns boss with heavy attack chain, Ranger dumps full Ultimate into the window.',
-      'Ranger marks dangerous elites on map before dungeon — Barbarian routes around minor packs.',
-    ],
-    sidequest:'Explore Ancient Ruins while the other duo handles a dungeon. Barbarian forces doors, Ranger loots shelves.',
-  },
-  {
-    pair:'Wizard + Healer', emoji:'🔮💧',
-    summary:'Support pair. Wizard clears packs, Healer keeps Wizard alive through sustain and potions.',
-    synergy:'Arcane Deflection (Battlemage path) restores 20 mana per parry — Wizard self-manages mana, freeing Healer to focus on HP.',
-    combos:[
-      'Healer pre-pots Wizard (+25% potion effect) before boss pull.',
-      'Wizard drops AoE orb on boss adds, Healer rejuvenates to top up party mid-chaos.',
-      'When Wizard is low on mana, combo: Wizard parries to trigger Arcane Deflection (20 mana/parry) while Healer sustains HP.',
-    ],
-    sidequest:'Base logistics pair. Healer builds NPC shelters while Wizard sets up Forge/Kiln chains. Fastest base progression.',
-  },
-  {
-    pair:'Ranger + Wizard', emoji:'🏹🔮',
-    summary:'Burst nuke pair. Ranger opens with Sneak Attack (+900% damage), Wizard follows with Chain Hit into the wounded pack.',
-    synergy:'Ranger stealth marks a priority target → Wizard AoE clears the rest of the pack simultaneously.',
-    combos:[
-      'Ranger sneak-hits the elite, Wizard chains lightning off it into surrounding mobs.',
-      'During boss: Ranger fills Ultimate on ads phase, Wizard fills Ultimate on boss phase. Both dump simultaneously.',
-      'Ranger grapples to high ground, calls out positioning for Wizard\'s AoE placement.',
-    ],
-    sidequest:'Loot runs in Shroud zones. Ranger scouts safe pathing, Wizard clears any Shroud enemies fast.',
-  },
-  {
-    pair:'Barbarian + Healer', emoji:'⚔️💧',
-    summary:'Sustain pair. Barbarian absorbs all damage, Healer keeps them at full HP indefinitely.',
-    synergy:'Water Aura (Healer) heals Barbarian passively — Blood Rage damage spike at low HP is safe when the Healer is keeping them topped.',
-    combos:[
-      'Barbarian stands in boss melee range under Water Aura — just block and regen.',
-      'Healer activates Divine Surge whenever Barbarian drops below 40% HP.',
-      'Boss enrage phase: Barbarian lets Blood Rage spike their damage at low HP while Healer spam-pots to keep them alive.',
-    ],
-    sidequest:'Hold the base while others explore. Barbarian guards NPCs, Healer maintains potion supply and builds.',
-  },
-];
-
-const GROUP_GUIDE = {
-  bosses:[
-    {boss:'Elder Elk',assign:'Barbarian tanks (faces boss from south wall). Ranger/Wizard DPS flanks. Healer stays 15m back under cover.',adds:'Barbarian heavy attacks adds to hold threat and keep them off Healer.',mechanic:'Charge — all: dodge sideways, NOT backward. I-frames on dodge roll (U8).'},
-    {boss:'Hollow Cyclops',assign:'Barbarian tanks eye level. Ranger targets eye (weak spot). Wizard AoE stomps. Healer pots Barbarian.',adds:'No adds phase.',mechanic:'Ground slam: Barbarian jumps, rest dodge roll. Ranger aims headshots during Cyclops recovery animation.'},
-    {boss:'Fell Thunderbrute',assign:'Barbarian melee. Ranger kites adds. Wizard burns main boss. Healer centrally positioned.',adds:'Ranger priority target — chain adds ignore boss.',mechanic:'Lightning channel: everyone spread 8m+ apart. Barbarian is fine in melee range.'},
-    {boss:'Vukah Warlord',assign:'Barbarian tanks west side. Wizard AoE south. Ranger flanks east. Healer behind pillar.',adds:'Wizard AoE ultimate on minion wave. Ranger falls back to assist if overwhelmed.',mechanic:'Shield phase: Ranger Sneak Attack from behind breaks shield. Everyone unload during 5s window.'},
-    {boss:'Shroud Weaver',assign:'Ranger & Wizard DPS from range. Barbarian intercepts melee tendrils. Healer mobile — keep moving.',adds:'Tendrils spawn periodically. Barbarian heavy attacks, Wizard Chain Hit.',mechanic:'Shroud phase: all retreat outside shroud ring. Healer tracks party positions.'},
-    {boss:'Ancient Guardian',assign:'Barbarian east node. Ranger west node. Wizard center DPS. Healer mobile.',adds:'Nodes must be broken simultaneously — Barbarian + Ranger call out readiness.',mechanic:'Energy beam: Barbarian blocks (I-frames), Ranger dodges, Wizard repositions, Healer sustains.'},
-    {boss:'Umber Hollow',assign:'Barbarian close range. Wizard AoE from mid. Ranger snipes from grapple point above. Healer follows Barbarian.',adds:'Ranger switches to ads immediately when they spawn — don\'t let them reach Healer.',mechanic:'Death dive: everyone dodge roll on shadow indicator. Ranger drop from grapple point to trigger I-frames.'},
-    {boss:'Cradle of Dust',assign:'Barbarian south. Ranger north elevation. Wizard left. Healer holds center.',adds:'High priority. Wizard dumps Focus bar (AoE orb) each wave.',mechanic:'Dust nova: all run perpendicular to the wave (not away). Healer Water Aura active throughout.'},
-  ],
-  dungeon:{
-    positions:[
-      {role:'Barbarian',pos:'Front — point position. Opens doors, triggers ambushes, aggroes first pack.'},
-      {role:'Ranger',pos:'Rear — sweep position. Watches for flanking enemies, handles archers on walls.'},
-      {role:'Wizard',pos:'Mid-rear — clear position. Casts through Barbarian\'s position into packed corridors.'},
-      {role:'Healer',pos:'Mid-front — support position. Stays within Water Aura range of Barbarian at all times.'},
-    ],
-    protocol:[
-      'Barbarian calls "room" before entering every new space.',
-      'Wizard holds Chain Hit cast until Barbarian has 3+ enemies on him — chain procs off all of them.',
-      'Ranger calls out archers and ranged enemies immediately — these are the threat.',
-      'Healer does not enter a room until Barbarian has cleared the entry ambush.',
-      'Loot after combat ends — no looting during fights.',
-    ]
-  },
-  base:[
-    {area:'Core',role:'All',note:'Flame Altar center. Crafting stations in a ring 4–6 blocks out. Access lanes clear.'},
-    {area:'NPC Shelters',role:'Healer builds',note:'Enclosed building, 1 bed per NPC, separate from crafting ring so NPCs don\'t block flow.'},
-    {area:'Forge + Kiln',role:'Wizard maintains',note:'Kiln feeds charcoal to Forge. Place them adjacent. Wizard keeps both stocked during sessions.'},
-    {area:'Alchemy Lab',role:'Healer maintains',note:'Near NPC shelter. Healer pre-crafts potions here before each push.'},
-    {area:'Potion Reserve',role:'Healer',note:'Chest near Altar — minimum 20 health potions at all times. Restock ritual: start of every session.'},
-    {area:'Storage',role:'All',note:'One chest per class — labeled. Ranger: arrows/ranged gear. Barbarian: ore/plate. Wizard: mana gems/wands. Healer: herbs/potion mats.'},
-  ]
-};
-
 const SIDE_CONTENT = [
   {name:'Ancient Vaults (Springlands)',biome:'Springlands',reward:'Rare weapons, Arcane blueprints',notes:'3 vaults scattered south of Springlands Spire. Ranger-Wizard recommended. Contains Archmage gear.',classes:['ranger','wizard']},
   {name:'Hollow Halls Depth Run',biome:'Springlands',reward:'Collector lore + bonus ectoplasm drops',notes:'Go back after rescuing Alden for the lower floors. Barbarian-Healer can solo carry this.',classes:['barbarian','healer']},
@@ -2669,11 +1702,6 @@ const SIDE_CONTENT = [
   {name:'Dye Ingredient Runs',biome:'Multiple',reward:'Cosmetic dye materials',notes:'Fun optional side activity for Healer downtime. Gather colorful flowers and minerals.',classes:['healer']},
   {name:'Carpenter Escort',biome:'Springlands→base',reward:'Carpenter (Jack Rankins) unlock',notes:'Escort mission — clear the path first with Barbarian/Ranger. Carpenter unlocks wood upgrades.',classes:['barbarian','ranger']},
 ];
-
-// ── CAMPAIGN GUIDE RENDER ─────────────────────────────────────────────
-// ── WHAT NOW DATA ────────────────────────────────────────────────────
-// ELI5 per-phase, per-class "I don't know what to do" guide
-// sections: priority, gather, craft, npcs, explore, side
 const WN_PHASES = [
   // ── PHASE 1 ─────────────────────────────────────────────────────
   { phase:1, label:'Starting Out', sub:'Levels 1–5 · First Session',
@@ -2964,10 +1992,524 @@ const WN_PHASES = [
   },
 ];
 
-let WN_PHASE_IDX = 0;  // 0-based index into WN_PHASES
+// ── SOLO TIPS DATA ───────────────────────────────────────────────────
+const SOLO_TIPS = {
+  ranger: {
+    tldr: 'Most forgiving solo class. Disengage from anything. Stealth opener wrecks elites before they fight back.',
+    survival: [
+      '<b>Never tank hits.</b> You have no healer. If enemies reach you, Updraft out.',
+      'Sneak Attack (+900% damage) from behind = most elites die before they notice you.',
+      '<b>Distance is your health.</b> Stay 20m+ from everything. The bow is your safety margin.',
+      'Grapple to high ground at the start of every fight — elevated angles = free damage.',
+      'Double Jump + Updraft = vertical escape. Use it the moment a fight goes wrong.',
+    ],
+    bosses: [
+      '<b>Opening:</b> Always start with a Sneak Attack. Even on bosses — free massive damage before aggro.',
+      '<b>Pattern:</b> Shoot from max range → dodge the retaliation → reposition to high ground → shoot again.',
+      'On Fell Dragon, use Stun Arrows to fill the stun bar alone. Slower than a party but fully doable.',
+      "Hydrak'Dal solo: Use speed pads to reposition constantly. Mud patches = slow = death. Central pillar = safe.",
+      '<b>Potions:</b> Drink aggressively. You have no healer. 60% HP = drink now.',
+    ],
+    build: [
+      '<b>Priority 1:</b> Sneak Attack (Center, 3pts) — your solo kill button.',
+      '<b>Priority 2:</b> Double Jump (Center, 4pts) — vertical mobility = survival.',
+      '<b>Priority 3:</b> Updraft (Assassin path, 4pts) — escape tool and altitude gain.',
+      '<b>Priority 4:</b> Eagle Eye (Ranger path, 3pts) — zoom and weak point accuracy.',
+      '<b>Priority 5:</b> Multi Shot (Ranger path, 3pts) — 20% free burst proc.',
+      '<b>Priority 6:</b> Airborne (Assassin path, 2pts) — longer glides for scouting.',
+    ],
+    resources: [
+      'Feathers = ammo supply. Kill every bird, every time. Never have under 40 arrows.',
+      'Pre-craft <b>8 Health Potions</b> before any dungeon. You are your own healer.',
+      'Label chests: Potions / Ore / Food. Solo base management is fully your responsibility.',
+      'NPC rescues alone: clear the area with stealth before pulling guards.',
+    ],
+  },
+  barbarian: {
+    tldr: 'Hardest solo class. No healer. Aggressive play and Battle Heal are your survival plan.',
+    survival: [
+      '<b>Battle Heal (Warrior path, 3pts) is mandatory.</b> 5% max HP on melee crits = your healer.',
+      '<b>Never overextend.</b> Enter a room, kill what you can, retreat if overwhelmed. Repeat.',
+      'Blood Rage is paradoxically <em>good</em> solo — always near low HP = near-constant damage spike.',
+      "<b>Heavy attack = stagger.</b> Staggered enemies can't hit you. Heavy attack on cooldown.",
+      'Learn dodge timing early. No healer means every hit counts.',
+    ],
+    bosses: [
+      '<b>Breach before every boss pull</b> — then heavy attack chain to build stun.',
+      'Fell Dragon solo: no Ranger to fill stun bar. Build stun with heavy attacks alone — slower but doable.',
+      "Hydrak'Dal solo: Central pillar is your friend. Dodge Whirlwind around it. Drink potions aggressively.",
+      "<b>Potion discipline:</b> drink at 50% HP, not 20%. Solo means you can't gamble.",
+      'Whirlwind Crescendo on dungeon rooms clears adds before they overwhelm you.',
+    ],
+    build: [
+      '<b>Priority 1:</b> Heavy Handed (Barbarian path, 3pts) — stun bar fuel.',
+      '<b>Priority 2:</b> Battle Heal (Warrior path, 3pts) — your self-sustain.',
+      '<b>Priority 3:</b> Breach (Barbarian path, 3pts) — DPS multiplier before boss.',
+      '<b>Priority 4:</b> Whirlwind Crescendo (Barbarian path, 5pts) — room clear.',
+      '<b>Priority 5:</b> Blood Rage (Barbarian path, 5pts) — damage at low HP.',
+      '<b>Priority 6:</b> Thick Skin (Barbarian path) — raw HP for solo survival.',
+    ],
+    resources: [
+      'Carry <b>12 potions minimum</b> into every dungeon. You will use all of them.',
+      'Antidotes in Blackmire — craft 8 per session. Poison kills fast without a healer.',
+      'Keep Forge fueled. Constant weapon and armor upgrades are survival, not optional.',
+      "NPC rescues alone: rush in fast, grab the NPC, run out. Don't try to clear everything.",
+    ],
+  },
+  wizard: {
+    tldr: 'Great solo class. Delete rooms before enemies reach you. Chain Hit in doorways = free dungeon clears.',
+    survival: [
+      '<b>Doorways are your chokepoint.</b> Stand in the hall, cast Chain Hit at the entrance — chain jumps to all.',
+      "Arcane Deflection (Battlemage path): every parry = 20 mana back. In long dungeons you're mana-positive.",
+      '<b>Never stand still.</b> Fire → reposition → fire. Stationary wizards die.',
+      'If enemies close in, kite backward while casting. Movement speed is your defense.',
+      'Blink is available from Healer tree if you want a teleport escape option.',
+    ],
+    bosses: [
+      '<b>Chain Hit into boss adds</b> = chain clears the group, then finish the boss.',
+      'Focus bar (AoE orb): save it for add waves. One orb = entire wave cleared instantly.',
+      '<b>Mass Destruction</b>: magic crits trigger 20m AoE shock. Crit → everything near boss takes damage.',
+      'Mana management solo: Arcane Deflection parries + Strong Mana Potions. Carry 6 per dungeon.',
+      'Fell Dragon: fill the stun bar with Chain Hit (slower than Ranger stun arrows, but works).',
+    ],
+    build: [
+      '<b>Priority 1:</b> Chain Hit (Wizard path, 3pts) — room-clearing core.',
+      '<b>Priority 2:</b> Wand Master (Battlemage path, 3pts) — 30% extra projectile, passive DPS.',
+      '<b>Priority 3:</b> Arcane Deflection (Battlemage path, 3pts) — mana from parries.',
+      '<b>Priority 4:</b> Dark Arts (Wizard path, 3pts) — +10% shroud damage. All endgame is shroud.',
+      '<b>Priority 5:</b> Mass Destruction (Wizard path, 4pts) — crit AoE chain.',
+      '<b>Priority 6:</b> Necromancer (Wizard path, 3pts) — free undead companions in dungeons.',
+    ],
+    resources: [
+      'Carry 6 Mana Potions and 6 Health Potions per dungeon. Both drain fast solo.',
+      'Farm Blue Amaranth constantly — your mana potion ingredient.',
+      'Build the Alchemy Station early. Balthazar is your most important NPC.',
+      'Plant crops immediately after rescuing Emily Fray — passive ingredient supply.',
+    ],
+  },
+  healer: {
+    tldr: 'Best solo sustain. Water Aura heals you too. Blink makes you nearly immortal if timed right.',
+    survival: [
+      '<b>Water Aura heals YOU</b> — keep it on at all times. You are self-healing constantly.',
+      '<b>Blink</b> (Healer path, 4pts) has I-frames. Teleport through every dangerous attack.',
+      '<b>Emergency Blink</b> (2pts) breaks stun states. Mandatory solo — stuns without backup = death.',
+      'Divine Surge (Focus bar burst) is your panic button. Save it for when overwhelmed.',
+      'You are the most durable solo class. Slow and patient is your gameplan.',
+    ],
+    bosses: [
+      "<b>Outlast strategy:</b> keep Water Aura on, Blink attacks, drink pots when needed. You won't kill fast but you won't die.",
+      'Divine Surge during boss enrage: AoE heal that saves you from spike damage windows.',
+      'Fell Dragon solo: no stun from allies. Kite fire breath. Blink through wing beats. Slow kill.',
+      "Hydrak'Dal solo: Fish Dish required. Speed pads for positioning. Blink the Whirlwind.",
+      'Your weakness: DPS is lower solo. Fights take longer. Bring extra potions.',
+    ],
+    build: [
+      '<b>Priority 1:</b> Water Aura (Healer path, 3pts) — passive self-heal.',
+      '<b>Priority 2:</b> Blink (Healer path, 4pts) — I-frame teleport.',
+      '<b>Priority 3:</b> Waters of Life (Healer path, 2pts) — double Water Aura output.',
+      '<b>Priority 4:</b> Emergency Blink (Healer path, 2pts) — break stun.',
+      '<b>Priority 5:</b> Divine Surge (Healer path, 5pts) — AoE panic heal.',
+      '<b>Priority 6:</b> Shroud Filter (Healer path) — shroud damage reduction for endgame.',
+    ],
+    resources: [
+      'You craft ALL potions yourself. Pre-craft 20 at the start of every session.',
+      'Build a Well near base for passive Water Vials. Potion supply = survival.',
+      'Plant Indigo Plants and Yarrow in Farming Plot as soon as Emily Fray is rescued.',
+      'NPC rescues solo: use Water Aura defensively while kiting enemies.',
+    ],
+  },
+};
 
-function renderWhatNowPanel(){
-  const p=WN_PHASES[WN_PHASE_IDX];
+// ══ SOLO STATE ═══════════════════════════════════════════════════════
+const STATE_KEY = 'enshrouded-solo-v1';
+const CLASSES = [
+  {id:'ranger',   emoji:'🏹', initials:'RG', role:'Mobility & Burst DPS'},
+  {id:'barbarian',emoji:'⚔️', initials:'BB', role:'Frontline Bruiser'},
+  {id:'wizard',   emoji:'🔮', initials:'WZ', role:'AoE Pack Clear & Boss Burn'},
+  {id:'healer',   emoji:'💧', initials:'HL', role:'Support & Sustain'},
+];
+function loadState(){try{return JSON.parse(localStorage.getItem(STATE_KEY))||{};}catch{return {};}}
+function saveState(){localStorage.setItem(STATE_KEY,JSON.stringify(STATE));}
+let STATE = loadState();
+if(!STATE.cls)          STATE.cls='ranger';
+if(!STATE.checked)      STATE.checked={};
+if(!STATE.hero)         STATE.hero={level:1,weaponBar:0,armorUpgrades:0,skillReset:false,name:'',deaths:0};
+if(!STATE.loot)         STATE.loot=[];
+if(!STATE.notes)        STATE.notes={};
+if(!STATE.activePhase)  STATE.activePhase=1;
+if(!STATE.flameLevel)   STATE.flameLevel=1;
+if(!STATE.survivors)    STATE.survivors={};
+if(!STATE.survivorFilter) STATE.survivorFilter='all';
+if(!STATE.achievements) STATE.achievements={};
+if(!STATE.activity)     STATE.activity=[];
+const SESSION_START = Date.now();
+
+// ── HELPERS ──────────────────────────────────────────────────────────
+const oKey=(p,i)=>`p${p}-o${i}`;
+const totalObjs=()=>PHASES.reduce((a,p)=>a+p.objectives.length,0);
+const checkedCount=()=>Object.values(STATE.checked).filter(Boolean).length;
+const phasePct=id=>{const p=PHASES[id-1],done=p.objectives.filter((_,i)=>STATE.checked[oKey(id,i)]).length;return p.objectives.length?Math.round(done/p.objectives.length*100):0;};
+const overallPct=()=>Math.round(checkedCount()/totalObjs()*100);
+const currentPhase=()=>{for(let i=PHASES.length;i>=1;i--)if(phasePct(i)>0)return i;return 1;};
+const tcls=t=>({group:'tag-group',ranger:'tag-ranger',barbarian:'tag-barb',wizard:'tag-wiz',healer:'tag-heal'}[t]||'tag-group');
+const tlbl=t=>({group:'All Roles',ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'}[t]||t);
+// CRAFT_STATE declared in craft_cats data block above
+
+// ── CLASS SELECTOR ───────────────────────────────────────────────────
+function selectClass(id){STATE.cls=id;saveState();renderAll();}
+
+// ── SOLO HERO ─────────────────────────────────────────────────────────
+function renderSoloHero(){
+  const cls=STATE.cls, c=CLASSES.find(x=>x.id===cls), h=STATE.hero;
+  const wBar=Math.min(100,h.weaponBar||0);
+  const armor=h.armorUpgrades||0;
+  const pips=Array.from({length:5},(_,i)=>`<div class="armor-pip${i<armor?' filled':''}" onclick="toggleSoloArmor(${i})" title="Armor upgrade ${i+1}/5"></div>`).join('');
+  const deaths=h.deaths||0;
+  const classCards=CLASSES.map(cl=>`
+    <div class="solo-cls-card ${cl.id}${STATE.cls===cl.id?' active':''}" onclick="selectClass('${cl.id}')">
+      <span class="solo-cls-emoji">${cl.emoji}</span>
+      <span class="solo-cls-name">${cl.id[0].toUpperCase()+cl.id.slice(1)}</span>
+    </div>`).join('');
+  return `<div class="solo-cls-selector">${classCards}</div>
+  <div class="hero-card ${cls}" style="max-width:380px;margin:0 auto">
+    <div class="hero-avatar"><span class="hero-initials">${c.initials}</span></div>
+    <input class="hero-player-name" value="${h.name||''}" placeholder="Your name…" oninput="setSoloName(this.value)">
+    <div class="hero-name">${c.emoji} ${cls[0].toUpperCase()+cls.slice(1)}</div>
+    <div class="hero-role">${c.role}</div>
+    <div class="hero-level">Lv <span id="solo-lv">${h.level}</span></div>
+    <input type="range" min="1" max="45" value="${h.level}" style="width:100%;accent-color:var(--gold);margin:.3rem 0 .7rem;cursor:pointer" oninput="setSoloLevel(this.value)">
+    <div class="skill-badge${h.skillReset?' done':''}" onclick="toggleSoloSkillReset()">
+      ${h.skillReset?'✓':'⚠'} U8 Skill Reset ${h.skillReset?'Done':'Pending'}
+    </div>
+    <div style="margin-bottom:.3rem">
+      <div class="weapon-bar-label">
+        <span style="font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;color:var(--text-dim)">WEAPON ULTIMATE</span>
+        <span style="font-family:'Cinzel',serif;font-size:.65rem">${wBar}%</span>
+      </div>
+      <div class="weapon-bar-track"><div class="weapon-bar-fill${wBar>=100?' full':''}" style="width:${wBar}%"></div></div>
+      <input type="range" min="0" max="100" value="${wBar}" style="width:100%;accent-color:var(--purple);margin:.2rem 0 0;cursor:pointer" oninput="setSoloWeaponBar(this.value)">
+    </div>
+    <div class="armor-row"><span>Armor upgrades</span><div class="armor-pips">${pips}</div></div>
+    <div class="death-row">
+      <span class="death-count${deaths>0?' bloody':''}">💀 ${deaths} death${deaths!==1?'s':''}</span>
+      <div class="death-btns">
+        <button class="death-btn revive" onclick="addSoloDeath(-1)">−</button>
+        <button class="death-btn kill"   onclick="addSoloDeath(1)">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+function setSoloLevel(v){STATE.hero.level=+v;const el=document.getElementById('solo-lv');if(el)el.textContent=v;updateStats();saveState();}
+function setSoloWeaponBar(v){STATE.hero.weaponBar=+v;saveState();}
+function toggleSoloArmor(i){const c=STATE.hero.armorUpgrades||0;STATE.hero.armorUpgrades=c===i+1?i:i+1;saveState();document.getElementById('solo-hero').innerHTML=renderSoloHero();}
+function toggleSoloSkillReset(){STATE.hero.skillReset=!STATE.hero.skillReset;saveState();document.getElementById('solo-hero').innerHTML=renderSoloHero();}
+function setSoloName(v){STATE.hero.name=v;saveState();}
+function addSoloDeath(d){STATE.hero.deaths=Math.max(0,(STATE.hero.deaths||0)+d);saveState();document.getElementById('solo-hero').innerHTML=renderSoloHero();if(d>0)showToast('💀 You died ('+(STATE.hero.deaths)+' total)','undo');}
+
+// ── STATS ────────────────────────────────────────────────────────────
+function updateStats(){
+  const pct=overallPct();
+  const g=id=>document.getElementById(id);
+  if(g('stat-pct'))g('stat-pct').textContent=pct+'%';
+  if(g('prog-overall'))g('prog-overall').style.width=pct+'%';
+  if(g('stat-obj'))g('stat-obj').textContent=checkedCount()+'/'+totalObjs();
+  if(g('stat-phase'))g('stat-phase').textContent=currentPhase()+'/5';
+  if(g('stat-lvl'))g('stat-lvl').textContent=STATE.hero.level||1;
+  if(g('stat-loot'))g('stat-loot').textContent=STATE.loot.length;
+  const sf=document.getElementById('sticky-fill');if(sf)sf.style.width=pct+'%';
+}
+
+// ── FLAME ALTAR ───────────────────────────────────────────────────────
+function setFlameLevel(l){STATE.flameLevel=l;saveState();renderFlameAltar();}
+function renderFlameAltar(){
+  const track=document.getElementById('flame-track'),detail=document.getElementById('flame-detail');
+  if(!track||!detail)return;
+  track.innerHTML=FLAME_LEVELS.map(fl=>{
+    const done=STATE.flameLevel>fl.level,current=STATE.flameLevel===fl.level;
+    return `<div class="flame-node${done?' done':''}${current?' current':''}" onclick="setFlameLevel(${fl.level})">
+      <div class="flame-node-lvl">L${fl.level}</div>
+      <div class="flame-node-shroud">${fl.shroud}min</div>
+    </div>`;
+  }).join('');
+  const fl=FLAME_LEVELS[STATE.flameLevel-1], next=FLAME_LEVELS[STATE.flameLevel], maxed=!next;
+  const shroudMax=document.getElementById('shroud-max');if(shroudMax)shroudMax.textContent=`Max: ${fl.shroud} min at L${fl.level}`;
+  detail.innerHTML=`<div class="flame-detail-top">
+    <div><div class="flame-detail-title">🔥 Flame Level ${fl.level}</div></div>
+    <div class="flame-detail-stats">
+      <div class="flame-stat"><div class="flame-stat-val">${fl.shroud}m</div><div class="flame-stat-lbl">Shroud Time</div></div>
+      <div class="flame-stat"><div class="flame-stat-val">${fl.passage}</div><div class="flame-stat-lbl">Passage</div></div>
+    </div>
+  </div>
+  <div class="shroud-widget" id="shroud-widget">
+    <div class="shroud-display" id="shroud-display">0:00</div>
+    <div class="shroud-info">
+      <div class="shroud-label">Shroud Timer</div>
+      <div class="shroud-max">Max: ${fl.shroud} min</div>
+    </div>
+    <button class="shroud-btn go" id="shroud-btn" onclick="toggleShroudTimer()">▶ Start</button>
+  </div>
+  ${maxed?'<div class="flame-maxed">Max Flame Altar level reached!</div>':`<div class="flame-next">
+    <div class="flame-next-lbl">Next: L${next.level}</div>
+    ${next.boss?`<div class="flame-boss">Boss Required: ${next.boss}</div>`:''}
+    <div class="flame-mats">${(next.materials||[]).map(m=>`<span class="flame-mat">${m}</span>`).join('')}</div>
+  </div>`}`;
+}
+
+// ── SHROUD TIMER ──────────────────────────────────────────────────────
+let shroudInterval=null,shroudRemain=0;
+const SHROUD_MINS=[0,5,8,12,18,25,35,45];
+function toggleShroudTimer(){
+  const btn=document.getElementById('shroud-btn'),disp=document.getElementById('shroud-display'),widget=document.getElementById('shroud-widget');
+  if(shroudInterval){clearInterval(shroudInterval);shroudInterval=null;if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}if(widget)widget.classList.remove('danger');}
+  else{
+    shroudRemain=(SHROUD_MINS[STATE.flameLevel]||5)*60;
+    if(btn){btn.textContent='⏹ Stop';btn.className='shroud-btn off';}
+    shroudInterval=setInterval(()=>{
+      shroudRemain--;
+      const m=Math.floor(shroudRemain/60),s=shroudRemain%60;
+      if(disp)disp.textContent=shroudRemain<=0?'0:00':`${m}:${String(s).padStart(2,'0')}`;
+      if(widget)widget.classList.toggle('danger',shroudRemain<=60&&shroudRemain>0);
+      if(shroudRemain<=0){clearInterval(shroudInterval);shroudInterval=null;if(btn){btn.textContent='▶ Start';btn.className='shroud-btn go';}if(widget)widget.classList.remove('danger');showToast('⚠ Shroud timer expired!','undo');}
+    },1000);
+  }
+}
+
+// ── CAMPAIGN ─────────────────────────────────────────────────────────
+function renderPhaseTabs(){
+  const ap=STATE.activePhase;
+  document.getElementById('phase-tabs').innerHTML=PHASES.map(p=>{
+    const pct=phasePct(p.id),done=pct===100,active=p.id===ap;
+    return `<div class="phase-tab${active?' active':''}${done?' complete':''}" onclick="switchPhase(${p.id})">${done?'✓ ':''}${p.id} — ${p.name}${pct>0&&!done?` · ${pct}%`:''}<span class="kbd">${p.id}</span></div>`;
+  }).join('');
+  document.getElementById('phases-prog').innerHTML=PHASES.map(p=>{
+    const pct=phasePct(p.id),cls=pct===100?'done':(p.id===ap?'active':'future');
+    return `<div class="phase-strip ${cls}"></div>`;
+  }).join('');
+}
+function renderCampaign(){
+  document.getElementById('camp-progress').innerHTML=PHASES.map(p=>{
+    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
+    return `<div class="camp-phase${active?' active-phase':''}" onclick="switchPhase(${p.id})">
+      <div class="camp-name">${p.id}. ${p.name}</div>
+      <div class="camp-bar-track"><div class="camp-bar-fill" style="width:${pct}%"></div></div>
+      <div class="camp-pct-label">${pct}%</div>
+    </div>`;
+  }).join('');
+}
+function switchPhase(id){STATE.activePhase=id;saveState();renderPhaseTabs();renderCampaign();renderPanels();}
+
+function renderPanels(){
+  document.getElementById('phase-panels').innerHTML=PHASES.map(p=>{
+    const pct=phasePct(p.id),active=p.id===STATE.activePhase;
+    const doneCount=p.objectives.filter((_,i)=>STATE.checked[oKey(p.id,i)]).length;
+    const objs=p.objectives.map((o,i)=>{
+      const key=oKey(p.id,i),done=!!STATE.checked[key];
+      const tags=o.tags.map(t=>`<span class="tag ${tcls(t)}">${tlbl(t)}</span>`).join('');
+      const u8tag=o.u8?'<span class="tag tag-u8">U8</span>':'';
+      const stepsHTML=o.steps?`<div class="obj-steps" id="steps-${key}"><ol>${o.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:'';
+      const infoBtn=o.steps?`<button class="obj-info-btn" onclick="event.stopPropagation();toggleSteps('${key}')">ℹ How</button>`:'';
+      return `<li class="obj-item${done?' done':''}" onclick="toggleObj('${key}')">
+        <div class="obj-check">${done?'✓':''}</div>
+        <div class="obj-body"><div class="obj-text">${o.text}${infoBtn}</div><div class="obj-tags">${tags}${u8tag}</div>${stepsHTML}</div>
+      </li>`;
+    }).join('');
+    const lootHTML=active?buildLootHTML():'';
+    const notes=STATE.notes[p.id]||'';
+    return `<div class="phase-panel${active?' active':''}" id="panel-${p.id}">
+      <div class="phase-header">
+        <div><div class="phase-title">${p.id} — ${p.name}</div><div class="phase-meta">Sessions ${p.sessions} · Lv ${p.lvlRange} · ${doneCount}/${p.objectives.length} complete</div></div>
+        <div class="phase-pct">${pct}%</div>
+      </div>
+      <ul class="obj-list">${objs}</ul>
+      ${lootHTML}
+      <div class="notes-section">
+        <div class="section-title" style="margin-top:0">📝 Session Notes</div>
+        <textarea class="notes-area" placeholder="Solo session notes…" oninput="saveNotes(${p.id},this.value)">${notes}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleSteps(key){const el=document.getElementById('steps-'+key);if(el)el.classList.toggle('open');}
+function toggleObj(key){
+  STATE.checked[key]=!STATE.checked[key];
+  const done=STATE.checked[key];
+  const allObjs=PHASES.flatMap(p=>p.objectives.map((o,i)=>({key:oKey(p.id,i),text:o.text,phase:p})));
+  const found=allObjs.find(x=>x.key===key);
+  if(done)showToast('✓ '+(found?.text.slice(0,38)||key),'done');
+  else showToast('↩ Unmarked','undo');
+  logActivity((done?'✓ ':'↩ ')+(found?.text.slice(0,48)||key),done);
+  checkAchievements();
+  saveState();renderAll();
+  if(done&&found&&phasePct(found.phase.id)===100){
+    setTimeout(()=>{triggerBurst();showToast('🔥 Phase '+found.phase.id+' complete!','gold');},220);
+  }
+}
+
+// ── LOOT ────────────────────────────────────────────────────────────
+const RARITIES=[{id:'common',label:'Common'},{id:'rare',label:'Rare'},{id:'epic',label:'Epic'},{id:'legendary',label:'Legendary'}];
+const rarityColors={common:'var(--ash)',rare:'var(--water)',epic:'var(--purple-light)',legendary:'var(--gold-light)'};
+function lootRarityBadge(r){if(!r||r==='common')return '';const c=rarityColors[r]||'var(--ash)';return `<span class="rarity-badge r-${r}" style="color:${c};border-color:${c}">${r}</span> `;}
+function buildLootHTML(){
+  const items=STATE.loot.map((item,i)=>`<div class="loot-item${item.rarity?' r-'+item.rarity:''}">
+    <div class="loot-name">${lootRarityBadge(item.rarity)}${item.name}</div>
+    ${item.where?`<div class="loot-where">📍 ${item.where}</div>`:''}
+    <button class="loot-del" onclick="delLoot(${i})">✕</button>
+  </div>`).join('');
+  const rOpts=RARITIES.map(r=>`<option value="${r.id}">${r.label}</option>`).join('');
+  return `<div class="loot-section">
+    <div class="section-title" style="margin-top:0">💎 Loot Log</div>
+    <div class="loot-grid">${items||'<div style="color:var(--text-dim);font-size:.8rem;font-style:italic">No loot yet.</div>'}</div>
+    <div class="loot-add">
+      <input class="loot-input" id="loot-name" placeholder="Item name…">
+      <input class="loot-input" id="loot-where" placeholder="Found at…" style="flex:.7">
+      <select class="loot-select rarity-select" id="loot-rarity">${rOpts}</select>
+      <button class="btn btn-ember" onclick="addLoot()">+ Log</button>
+    </div>
+  </div>`;
+}
+function addLoot(){
+  const name=document.getElementById('loot-name')?.value?.trim();if(!name)return;
+  const rarity=document.getElementById('loot-rarity')?.value||'common';
+  const item={name,where:document.getElementById('loot-where')?.value?.trim()||'',rarity};
+  STATE.loot.push(item);logActivity(`💎 ${name} looted${rarity!=='common'?' [${rarity}]':''}`,true);
+  checkAchievements();saveState();renderAll();
+}
+function delLoot(i){STATE.loot.splice(i,1);saveState();renderAll();}
+function saveNotes(id,v){STATE.notes[id]=v;saveState();}
+
+// ── CRAFTING ──────────────────────────────────────────────────────────
+function renderCrafting(){
+  const cats=document.getElementById('craft-cats'),roles=document.getElementById('craft-roles');
+  const grid=document.getElementById('craft-grid');if(!grid)return;
+  if(cats)cats.innerHTML=CRAFT_CATS.map(c=>`<button class="craft-filter-btn${CRAFT_STATE.cat===c.id?' active':''}" onclick="setCraftCat('${c.id}')">${c.label}</button>`).join('');
+  if(roles)roles.innerHTML=CRAFT_ROLES.map(r=>`<button class="craft-filter-btn${CRAFT_STATE.role===r.id?' active':''}" onclick="setCraftRole('${r.id}')">${r.label}</button>`).join('');
+  const q=(document.getElementById('craft-search')?.value||'').toLowerCase();
+  const items=CRAFTING.filter(c=>{
+    if(CRAFT_STATE.cat!=='all'&&c.cat!==CRAFT_STATE.cat)return false;
+    if(CRAFT_STATE.role!=='all'&&c.role!==CRAFT_STATE.role&&c.role!=='group')return false;
+    if(q&&!c.name.toLowerCase().includes(q)&&!(c.ingredients||[]).some(i=>i.toLowerCase().includes(q)))return false;
+    return true;
+  });
+  grid.innerHTML=items.map(c=>{
+    const roleTag=`<span class="tag ${tcls(c.role)}">${tlbl(c.role)}</span>`;
+    const catTag=`<span class="tag tag-group" style="font-size:.55rem">${c.cat}</span>`;
+    const ings=(c.ingredients||[]).map(ing=>{const tip=INGREDIENT_SOURCES[ing.split(' ×')[0]];return `<li>${tip?`<span class="ing-tip" data-tip="${tip}">${ing}</span>`:ing}</li>`;}).join('');
+    return `<div class="craft-card">
+      <div class="craft-card-header"><div class="craft-card-name">${c.name}</div><span class="craft-level">Lv ${c.level}</span></div>
+      <div class="craft-card-tags">${roleTag}${catTag}</div>
+      <ul class="craft-ingredients">${ings}</ul>
+      <div class="craft-station">📍 ${c.station}</div>
+      ${c.notes?`<div class="craft-notes">${c.notes}</div>`:''}
+    </div>`;
+  }).join('')||'<div style="color:var(--text-dim);font-style:italic;font-size:.85rem">No items match.</div>';
+}
+function setCraftCat(v){CRAFT_STATE.cat=v;renderCrafting();}
+function setCraftRole(v){CRAFT_STATE.role=v;renderCrafting();}
+
+// ── BOSSES ────────────────────────────────────────────────────────────
+function renderBosses(){
+  const grid=document.getElementById('boss-grid');if(!grid)return;
+  grid.innerHTML='<div class="boss-grid">'+
+    BOSSES.map(b=>`<div class="boss-card${b.highlight?' highlight':''}">
+      <div class="boss-name">${b.name}${b.farmable?'<span class="boss-farmable">Farmable</span>':''}</div>
+      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
+      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
+      <div class="boss-reward">${b.reward}</div>
+      <div class="boss-tactics">${b.tactics}</div>
+    </div>`).join('')+
+    '<div style="grid-column:1/-1;font-family:Cinzel,serif;font-size:.62rem;letter-spacing:.12em;color:var(--text-dim);margin-top:.3rem">MINI-BOSSES</div>'+
+    MINI_BOSSES.map(b=>`<div class="boss-card mini">
+      <div class="boss-name">${b.name}</div>
+      <div class="boss-meta"><b>Biome:</b> ${b.biome} &nbsp;·&nbsp; <b>Level:</b> ${b.level}</div>
+      <div class="boss-meta"><b>Location:</b> ${b.location}</div>
+      <div class="boss-reward">${b.reward}</div>
+      <div class="boss-tactics">${b.tactics}</div>
+    </div>`).join('')+'</div>';
+}
+
+// ── BIOMES ────────────────────────────────────────────────────────────
+function renderBiomes(){
+  const grid=document.getElementById('biome-grid');if(!grid)return;
+  grid.innerHTML=BIOMES.map(b=>`<div class="biome-card">
+    <div class="biome-name">${b.name}</div>
+    <div class="biome-badges">
+      <span class="biome-badge biome-badge-level">${b.level}</span>
+      <span class="biome-badge biome-badge-flame">Flame L${b.flame}</span>
+    </div>
+    <div class="biome-row"><b>Enemies</b>${b.enemies}</div>
+    <div class="biome-row"><b>Resources</b>${b.resources}</div>
+    <div class="biome-row"><b>Boss</b>${b.boss}</div>
+    ${b.notes?`<div class="biome-row" style="color:var(--text-dim);font-size:.7rem;font-style:italic">${b.notes}</div>`:''}
+  </div>`).join('');
+}
+
+// ── SURVIVORS ────────────────────────────────────────────────────────
+function renderSurvivors(){
+  const grid=document.getElementById('survivor-grid'),prog=document.getElementById('survivor-progress'),filts=document.getElementById('survivor-filters');
+  if(!grid)return;
+  const rescued=SURVIVORS.filter(s=>STATE.survivors[s.id]).length;
+  if(prog)prog.innerHTML=`Rescued: ${rescued}/${SURVIVORS.length}`;
+  const types=['all','craftsperson','assistant'];
+  if(filts)filts.innerHTML=types.map(t=>`<button class="craft-filter-btn${STATE.survivorFilter===t?' active':''}" onclick="setSurvFilter('${t}')">${t[0].toUpperCase()+t.slice(1)}</button>`).join('');
+  grid.innerHTML=SURVIVORS.filter(s=>STATE.survivorFilter==='all'||s.type===STATE.survivorFilter).map(s=>`
+    <div class="survivor-card${STATE.survivors[s.id]?' rescued':''}" onclick="toggleSurvivor('${s.id}')">
+      <div class="survivor-type">${s.type}</div>
+      <div class="survivor-name">${s.name}</div>
+      <div class="survivor-role">${s.role}</div>
+      <div class="survivor-biome">${s.biome}</div>
+      <div class="survivor-loc">${s.location}</div>
+      <div class="survivor-unlocks"><b>Unlocks</b>${s.unlocks}</div>
+      ${STATE.survivors[s.id]?`<div class="survivor-rescued-mark">✓ Rescued</div>`:''}
+    </div>`).join('');
+}
+function setSurvFilter(t){STATE.survivorFilter=t;saveState();renderSurvivors();}
+function toggleSurvivor(id){
+  STATE.survivors[id]=!STATE.survivors[id];
+  const s=SURVIVORS.find(x=>x.id===id);
+  showToast((STATE.survivors[id]?'✓ Rescued ':'↩ ')+(s?.name||id),'done');
+  logActivity((STATE.survivors[id]?'✓ Rescued: ':'↩ ')+(s?.name||id),STATE.survivors[id]);
+  const objKey=SURVIVOR_TO_OBJ[id];if(objKey)STATE.checked[objKey]=STATE.survivors[id];
+  if(STATE.survivors[id]&&CRAFTSPERSON_IDS.includes(id)){if(CRAFTSPERSON_IDS.every(x=>STATE.survivors[x]))STATE.checked[ALL_SURVIVORS_OBJ]=true;}
+  checkAchievements();saveState();renderAll();
+}
+
+// ── GUIDE ─────────────────────────────────────────────────────────────
+const GUIDE_STATE={main:'whatnow',cls:STATE.cls,acc:{}};
+let WN_PHASE_IDX=0;
+
+function renderGuides(){
+  const main=GUIDE_STATE.main;
+  GUIDE_STATE.cls=STATE.cls;
+  if(main==='whatnow') WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,(STATE.activePhase||1)-1));
+  const tabs=[
+    {id:'whatnow',label:'🔥 What Now?'},
+    {id:'class',  label:'Class Guide'},
+    {id:'solo',   label:'⚔ Solo Tips'},
+    {id:'side',   label:'Side Content'},
+  ];
+  document.getElementById('guide-main-tabs').innerHTML=tabs.map(t=>
+    `<button class="guide-main-tab${main===t.id?' active':''}" onclick="setGuideTab('${t.id}')">${t.label}</button>`
+  ).join('');
+  const panel=document.getElementById('guide-panel');
+  if(main==='whatnow')      panel.innerHTML=renderSoloWhatNowPanel();
+  else if(main==='class')   panel.innerHTML=renderClassPanel();
+  else if(main==='solo')    panel.innerHTML=renderSoloTipsPanel();
+  else                      panel.innerHTML=renderSidePanel();
+  Object.keys(GUIDE_STATE.acc).forEach(id=>{
+    if(GUIDE_STATE.acc[id]){
+      const h=document.getElementById('acc-h-'+id),b=document.getElementById('acc-b-'+id);
+      if(h)h.classList.add('open');if(b)b.classList.add('open');
+    }
+  });
+}
+function setGuideTab(tab){GUIDE_STATE.main=tab;renderGuides();}
+function accToggle(id){
+  const h=document.getElementById('acc-h-'+id),b=document.getElementById('acc-b-'+id);if(!h||!b)return;
+  const open=b.classList.toggle('open');h.classList.toggle('open',open);GUIDE_STATE.acc[id]=open;
+}
+
+function renderSoloWhatNowPanel(){
+  const p=WN_PHASES[WN_PHASE_IDX], cls=STATE.cls;
   const icons={ranger:'🏹',barbarian:'⚔️',wizard:'🔮',healer:'💧'};
   const labels={ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'};
   const sections=[
@@ -2983,93 +2525,61 @@ function renderWhatNowPanel(){
     <div><div class="wn-phase-label">Phase ${p.phase} — ${p.label}</div><div class="wn-phase-sub">${p.sub}</div></div>
     <button class="wn-phase-btn" onclick="wnNav(1)" ${WN_PHASE_IDX===WN_PHASES.length-1?'disabled':''}>Next ▶</button>
   </div>`;
-  const cards=['ranger','barbarian','wizard','healer'].map(cls=>{
-    const d=p[cls];
-    const secs=sections.map(s=>{
-      const items=d[s.key]||[];
-      const sid=`wn-${cls}-${s.key}-${p.phase}`;
-      const body=items.map(i=>`<div class="wn-step">${i}</div>`).join('');
-      return `<div class="wn-sec">
-        <div class="wn-sec-head" id="wnh-${sid}" onclick="wnToggle('${sid}')">
-          <span class="wn-sec-icon">${s.icon}</span>
-          <span class="wn-sec-label">${s.label}</span>
-          <span class="wn-sec-chev">▼</span>
-        </div>
-        <div class="wn-sec-body" id="wnb-${sid}">${body}</div>
-      </div>`;
-    }).join('');
-    return `<div class="wn-card ${cls}">
-      <div class="wn-card-head">
-        <span class="wn-card-emoji">${icons[cls]}</span>
-        <span class="wn-card-title">${labels[cls]}</span>
+  const d=p[cls];
+  const secs=sections.map(s=>{
+    const items=d[s.key]||[];
+    const sid=`wnx-${cls}-${s.key}-${p.phase}`;
+    const body=items.map(i=>`<div class="wn-step">${i}</div>`).join('');
+    return `<div class="wn-sec">
+      <div class="wn-sec-head" id="wnh-${sid}" onclick="wnToggle('${sid}')">
+        <span class="wn-sec-icon">${s.icon}</span>
+        <span class="wn-sec-label">${s.label}</span>
+        <span class="wn-sec-chev">▼</span>
       </div>
-      <div class="wn-tldr">${d.tldr}</div>
-      <div class="wn-sections">${secs}</div>
+      <div class="wn-sec-body" id="wnb-${sid}">${body}</div>
     </div>`;
   }).join('');
-  return nav+`<div class="wn-grid">${cards}</div>`;
+  const soloNote=`<div style="background:rgba(212,168,75,.08);border:1px solid rgba(212,168,75,.2);border-radius:5px;padding:.6rem .9rem;font-size:.78rem;color:var(--ash);margin-bottom:1rem;line-height:1.5">
+    ⚔ <b>Solo run</b> — you handle all roles. NPCs, crafting, tanking, healing — it's all you.
+    <b>Switch class</b> using the hero selector above.
+  </div>`;
+  return nav+soloNote+`<div class="wn-card ${cls}" style="max-width:600px;margin:0 auto">
+    <div class="wn-card-head"><span class="wn-card-emoji">${icons[cls]}</span><span class="wn-card-title">${labels[cls]}</span></div>
+    <div class="wn-tldr">${d.tldr}</div>
+    <div class="wn-sections">${secs}</div>
+  </div>`;
 }
 function wnNav(dir){
   WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,WN_PHASE_IDX+dir));
-  // Re-render panel directly — skip setGuideTab to avoid phase-sync reset in renderGuides
   const panel=document.getElementById('guide-panel');
-  if(panel) panel.innerHTML=renderWhatNowPanel();
+  if(panel)panel.innerHTML=renderSoloWhatNowPanel();
 }
 function wnToggle(sid){
-  const h=document.getElementById('wnh-'+sid);
-  const b=document.getElementById('wnb-'+sid);
-  if(!h||!b) return;
-  const open=b.classList.toggle('open');
-  h.classList.toggle('open',open);
+  const h=document.getElementById('wnh-'+sid),b=document.getElementById('wnb-'+sid);if(!h||!b)return;
+  const open=b.classList.toggle('open');h.classList.toggle('open',open);
 }
 
-function renderGuides(){
-  const main=GUIDE_STATE.main;
-  // Sync WN phase index to active game phase when tab opens
-  if(main==='whatnow') WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,(STATE.activePhase||1)-1));
-  const mainTabs=[
-    {id:'whatnow', label:'🔥 What Now?'},
-    {id:'class',label:'Class Walkthroughs'},
-    {id:'duo',label:'Duo Synergies'},
-    {id:'group',label:'Group Tactics'},
-    {id:'side',label:'Side Content'},
-  ];
-  document.getElementById('guide-main-tabs').innerHTML=mainTabs.map(t=>
-    `<button class="guide-main-tab${main===t.id?' active':''}" onclick="setGuideTab('${t.id}')">${t.label}</button>`
-  ).join('');
-  const panel=document.getElementById('guide-panel');
-  if(main==='whatnow') panel.innerHTML=renderWhatNowPanel();
-  else if(main==='class') panel.innerHTML=renderClassPanel();
-  else if(main==='duo') panel.innerHTML=renderDuoPanel();
-  else if(main==='group') panel.innerHTML=renderGroupPanel();
-  else panel.innerHTML=renderSidePanel();
-  // Restore accordion open states
-  Object.keys(GUIDE_STATE.acc).forEach(id=>{
-    if(GUIDE_STATE.acc[id]){
-      const h=document.getElementById('acc-h-'+id);
-      const b=document.getElementById('acc-b-'+id);
-      if(h){h.classList.add('open');}
-      if(b){b.classList.add('open');}
-    }
-  });
-}
-function setGuideTab(tab){GUIDE_STATE.main=tab;renderGuides();}
-function setClassTab(cls){GUIDE_STATE.cls=cls;renderGuides();}
-function toggleAcc(id){
-  GUIDE_STATE.acc[id]=!GUIDE_STATE.acc[id];
-  const h=document.getElementById('acc-h-'+id);
-  const b=document.getElementById('acc-b-'+id);
-  if(h){h.classList.toggle('open',GUIDE_STATE.acc[id]);}
-  if(b){b.classList.toggle('open',GUIDE_STATE.acc[id]);}
-}
-function acc(id,title,body){
-  return `<div class="guide-accordion">
-    <div class="guide-acc-header" id="acc-h-${id}" onclick="toggleAcc('${id}')">
-      ${title}<span class="guide-acc-chevron">▼</span>
+function renderSoloTipsPanel(){
+  const cls=STATE.cls, t=SOLO_TIPS[cls];
+  const icons={ranger:'🏹',barbarian:'⚔️',wizard:'🔮',healer:'💧'};
+  const label=cls[0].toUpperCase()+cls.slice(1);
+  const sec=(title,icon,items)=>`<div class="guide-accordion" style="margin-bottom:.5rem">
+    <div class="guide-acc-header" id="acc-h-solo-${title.replace(/ /g,'-')}" onclick="accToggle('solo-${title.replace(/ /g,'-')}')">
+      ${icon} ${title}<span class="guide-acc-chevron">▼</span>
     </div>
-    <div class="guide-acc-body" id="acc-b-${id}">${body}</div>
+    <div class="guide-acc-body" id="acc-b-solo-${title.replace(/ /g,'-')}">
+      <ul class="bullet-list">${items.map(i=>`<li class="bullet-item">${i}</li>`).join('')}</ul>
+    </div>
+  </div>`;
+  return `<div style="max-width:600px;margin:0 auto">
+    <div class="guide-summary" style="margin-bottom:1rem">${icons[cls]} ${label} Solo — ${t.tldr}</div>
+    ${sec('Survival Tips','🛡',t.survival)}
+    ${sec('Boss Strategies','💀',t.bosses)}
+    ${sec('Skill Build Priority','⭐',t.build)}
+    ${sec('Resource Management','🪨',t.resources)}
   </div>`;
 }
+
 function renderClassPanel(){
   const cls=GUIDE_STATE.cls;
   const g=CLASS_GUIDES[cls];
@@ -3097,36 +2607,7 @@ function renderClassPanel(){
     ${acc('arm-'+cls,'🛡 Armor Progression',arm)}
     ${acc('tips-'+cls,'💡 U8 Tips & Role Notes',tips)}`;
 }
-function renderDuoPanel(){
-  return `<div class="duo-grid">${DUO_GUIDES.map((d,i)=>`
-    <div class="duo-card">
-      <div class="duo-title">${d.emoji} ${d.pair}</div>
-      <div class="duo-text">${d.summary}</div>
-      <div class="duo-lbl">Synergy</div>
-      <div class="duo-text">${d.synergy}</div>
-      <div class="duo-lbl">Key Combos</div>
-      <ul class="bullet-list">${d.combos.map(c=>`<li class="bullet-item">${c}</li>`).join('')}</ul>
-      <div class="duo-combo">🗺 Side Quest: ${d.sidequest}</div>
-    </div>`).join('')}</div>`;
-}
-function renderGroupPanel(){
-  const g=GROUP_GUIDE;
-  const bossTbl=`<table class="boss-assign-table">
-    <thead><tr><th>Boss</th><th>Assignment</th><th>Key Mechanic</th></tr></thead>
-    <tbody>${g.bosses.map(b=>`<tr>
-      <td>${b.boss}</td>
-      <td>${b.assign}<br><em style="color:var(--text-dim);font-size:.67rem">Adds: ${b.adds}</em></td>
-      <td>${b.mechanic}</td>
-    </tr>`).join('')}</tbody>
-  </table>`;
-  const dungeonPos=`<div style="margin-bottom:.6rem"><ul class="bullet-list">${g.dungeon.positions.map(p=>`<li class="bullet-item"><b style="color:var(--gold-light)">${p.role}:</b> ${p.pos}</li>`).join('')}</ul></div>
-    <div class="duo-lbl">Protocol</div>
-    <ul class="bullet-list">${g.dungeon.protocol.map(p=>`<li class="bullet-item">${p}</li>`).join('')}</ul>`;
-  const baseLayout=`<div class="prog-rows">${g.base.map(b=>`<div class="prog-row"><span class="prog-biome">${b.area}</span><span class="prog-name">${b.role}</span><span class="prog-why">${b.note}</span></div>`).join('')}</div>`;
-  return acc('boss-assign','💀 Boss Assignments',bossTbl)
-    +acc('dungeon-proto','🏰 Dungeon Positioning & Protocol',dungeonPos)
-    +acc('base-layout','🏠 Recommended Base Layout',baseLayout);
-}
+
 function renderSidePanel(){
   return `<div class="side-grid">${SIDE_CONTENT.map(s=>`
     <div class="side-card">
@@ -3147,23 +2628,114 @@ function confirmReset(){
 }
 
 // ── RENDER ALL ───────────────────────────────────────────────────────
-function renderAll(){renderFlameAltar();renderParty();renderSurvivors();renderPhaseTabs();renderCampaign();renderPanels();updateStats();renderBosses();renderBiomes();renderCrafting();renderGuides();renderAchievements();renderActivity();}
 
-// ── BOOT ─────────────────────────────────────────────────────────────
+// ── ACHIEVEMENTS ──────────────────────────────────────────────────────
+const ACHIEVEMENTS=[
+  {id:'first_check',label:'First Step',desc:'Complete your first objective',emoji:'🎯',check:()=>Object.values(STATE.checked).some(v=>v)},
+  {id:'phase2',label:'Into the Mist',desc:'Reach Phase 2',emoji:'🌫️',check:()=>STATE.activePhase>=2},
+  {id:'phase3',label:'Deep Dark',desc:'Reach Phase 3',emoji:'🌑',check:()=>STATE.activePhase>=3},
+  {id:'phase4',label:'Fire Keeper',desc:'Reach Phase 4',emoji:'🔥',check:()=>STATE.activePhase>=4},
+  {id:'phase5',label:'Endgame',desc:'Reach Phase 5',emoji:'👑',check:()=>STATE.activePhase>=5},
+  {id:'loot5',label:'Hoarder',desc:'Log 5 loot items',emoji:'💰',check:()=>STATE.loot.length>=5},
+  {id:'legendary',label:'Legendary Find',desc:'Log a legendary item',emoji:'⭐',check:()=>STATE.loot.some(l=>l.rarity==='legendary')},
+  {id:'all_survivors',label:'Safe Haven',desc:'Rescue all survivors',emoji:'🏠',check:()=>SURVIVORS.every(s=>STATE.survivors[s.id])},
+  {id:'max_flame',label:'Blaze Master',desc:'Reach max Flame Altar level',emoji:'🏯',check:()=>STATE.flameLevel>=7},
+  {id:'solo_death10',label:'Scar Bearer',desc:'Accumulate 10 deaths alone',emoji:'💀',check:()=>(STATE.hero.deaths||0)>=10},
+  {id:'max_level',label:'Apex Predator',desc:'Reach level 45 solo',emoji:'🦅',check:()=>(STATE.hero.level||1)>=45},
+  {id:'all_phases',label:'Solo Champion',desc:'Complete all 5 phases',emoji:'🏆',check:()=>PHASES.every(p=>phasePct(p.id)===100)},
+];
+function checkAchievements(){
+  let earned=false;
+  ACHIEVEMENTS.forEach(a=>{if(!STATE.achievements[a.id]&&a.check()){STATE.achievements[a.id]=Date.now();earned=true;showToast('🏆 Achievement: '+a.label,'fire');}});
+  if(earned){saveState();renderAchievements();}
+}
+function renderAchievements(){
+  const grid=document.getElementById('achieve-grid');if(!grid)return;
+  grid.innerHTML=ACHIEVEMENTS.map(a=>{const got=!!STATE.achievements[a.id];return `<div class="badge${got?' got':''}"><span class="badge-icon">${a.emoji}</span><div><div class="badge-name">${a.label}</div><div class="badge-desc">${a.desc}</div></div></div>`;}).join('');
+}
+
+// ── ACTIVITY ─────────────────────────────────────────────────────────
+function logActivity(text,done=true){
+  if(!STATE.activity)STATE.activity=[];
+  STATE.activity.unshift({ts:Date.now(),text,done});
+  if(STATE.activity.length>40)STATE.activity=STATE.activity.slice(0,40);
+  saveState();renderActivity();
+}
+function renderActivity(){
+  const list=document.getElementById('activity-list');if(!list)return;
+  if(!STATE.activity||!STATE.activity.length){list.innerHTML='<div class="activity-empty">No activity yet.</div>';return;}
+  list.innerHTML=STATE.activity.map(a=>{const t=new Date(a.ts);return `<div class="act-item ${a.done?'act-done':'act-undo'}"><span class="act-time">${t.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span><span class="act-text">${a.text}</span></div>`;}).join('');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────
+function showToast(msg,type='done'){
+  const root=document.getElementById('toast-root');if(!root)return;
+  const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;root.appendChild(el);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('in')));
+  setTimeout(()=>{el.classList.remove('in');setTimeout(()=>el.remove(),300);},2800);
+}
+
+// ── BURST ─────────────────────────────────────────────────────────────
+function triggerBurst(){
+  if(typeof confetti==='function'){confetti({particleCount:130,spread:80,origin:{y:.55},colors:['#e8612a','#d4a84b','#ff8c42']});}
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────────────────────
+function updateCountdown(){
+  const diff=new Date('2026-04-21T00:00:00')-new Date();
+  const el=document.getElementById('countdown');if(!el)return;
+  if(diff<=0){el.textContent='⚒ Update 8 is LIVE!';el.style.cssText='background:rgba(92,184,92,.2);border-color:var(--green);color:var(--green)';return;}
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000);
+  el.textContent=d>0?`⚒ U8 in ${d}d ${h}h`:h>0?`⚒ U8 in ${h}h ${m}m`:`⚒ U8 in ${m}m`;
+}
+
+// ── RENDER ALL ────────────────────────────────────────────────────────
+function renderAll(){
+  document.getElementById('solo-hero').innerHTML=renderSoloHero();
+  renderFlameAltar();updateStats();renderCampaign();renderPhaseTabs();renderPanels();
+  renderCrafting();renderBosses();renderBiomes();renderSurvivors();
+  renderGuides();renderAchievements();renderActivity();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>{
-    document.getElementById('loading').classList.add('gone');
-    renderAll();
-    updateCountdown();
-    setInterval(updateCountdown,30000);
-    initLiveSync();
-    initReveal();
-    initKeyboard();
-    initDotNav();
-    initSessionTimer();
-    initStarMapEvents();
-  },1200);
+  document.getElementById('loading').classList.add('gone');
+  renderAll();updateCountdown();initDotNav();initSessionTimer();initReveal();
 });
+function initReveal(){const els=document.querySelectorAll('.reveal');const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.08});els.forEach(el=>obs.observe(el));}
+function initDotNav(){
+  const nav=document.getElementById('dot-nav');if(!nav)return;
+  const secs=Array.from(document.querySelectorAll('[data-section]'));window.__navSecs=secs;
+  nav.innerHTML=secs.map((s,i)=>`<div class="dn-item" data-label="${s.dataset.section}" onclick="scrollToSection(${i})"></div>`).join('');
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{const i=secs.indexOf(x.target);const b=nav.querySelectorAll('.dn-item')[i];if(b)b.classList.toggle('active',x.isIntersecting);});},{threshold:.25,rootMargin:'-5% 0px -65% 0px'});
+  secs.forEach(s=>obs.observe(s));
+}
+function scrollToSection(i){const s=window.__navSecs;if(s&&s[i])s[i].scrollIntoView({behavior:'smooth',block:'start'});}
+function initSessionTimer(){function tick(){const el=document.getElementById('session-timer');if(!el)return;const e=Math.floor((Date.now()-SESSION_START)/60000);el.textContent=e<60?e+'m':`${Math.floor(e/60)}h ${e%60}m`;}tick();setInterval(tick,60000);}
+
+// ── KEYBOARD ─────────────────────────────────────────────────────────
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key>='1'&&e.key<='5')switchPhase(+e.key);
+  if(e.key==='/')openPalette();
+  if(e.key==='Escape')closePalette();
+});
+let cmdIdx=-1;
+function openPalette(){const o=document.getElementById('cmd-overlay');if(o){o.classList.add('open');document.getElementById('cmd-input')?.focus();cmdSearch('');}}
+function closePalette(){document.getElementById('cmd-overlay')?.classList.remove('open');}
+function cmdSearch(q){
+  const r=document.getElementById('cmd-results');if(!r)return;
+  const results=[];
+  PHASES.forEach(p=>p.objectives.forEach((o)=>{if(!q||o.text.toLowerCase().includes(q.toLowerCase()))results.push({icon:'☑',label:o.text,sub:'Phase '+p.id,action:()=>{switchPhase(p.id);closePalette();}});}));
+  SURVIVORS.forEach(s=>{if(!q||s.name.toLowerCase().includes(q.toLowerCase()))results.push({icon:'🧑',label:s.name,sub:s.role,action:()=>closePalette()});});
+  CRAFTING.forEach(c=>{if(!q||c.name.toLowerCase().includes(q.toLowerCase()))results.push({icon:'⚒',label:c.name,sub:'Lv '+c.level,action:()=>closePalette()});});
+  const shown=results.slice(0,12);
+  r.innerHTML=shown.length?shown.map((x,i)=>`<div class="cmd-item" onclick="cx_${i}()"><span class="cmd-icon">${x.icon}</span><div><div class="cmd-label">${x.label}</div><div class="cmd-sublabel">${x.sub}</div></div></div>`).join(''):'<div class="cmd-empty">No results</div>';
+  shown.forEach((x,i)=>{window['cx_'+i]=x.action;});cmdIdx=-1;
+}
+function cmdKey(e){const items=document.querySelectorAll('.cmd-item');if(e.key==='ArrowDown')cmdIdx=Math.min(cmdIdx+1,items.length-1);else if(e.key==='ArrowUp')cmdIdx=Math.max(cmdIdx-1,-1);else if(e.key==='Enter'){if(cmdIdx>=0&&window['cx_'+cmdIdx])window['cx_'+cmdIdx]();}items.forEach((el,i)=>el.classList.toggle('sel',i===cmdIdx));}
+
+function confirmReset(){if(confirm('Reset all solo progress? This cannot be undone.')){localStorage.removeItem(STATE_KEY);location.reload();}}
 </script>
 </body>
 </html>
