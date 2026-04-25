@@ -3303,7 +3303,7 @@ function renderWhatNowPanel(){
     const d = p[base] || p['ranger'];
     const clsMeta = ALL_CLASSES.find(c=>c.id===cls) || ALL_CLASSES.find(c=>c.id===base) || ALL_CLASSES[0];
     const isSelected = (base === selectedBase);
-    const isDimmed = cardClasses.length > 1 && !isSelected;
+    const isDimmed = false;
     const isHybrid = (cls !== base);
     const badge = isHybrid ? `<span class="wn-card-badge">${clsMeta.label} (${ALL_CLASSES.find(c=>c.id===base)?.label||base} guide)</span>` : '';
     const selectedBadge = isSelected ? `<span class="wn-card-badge">▶ Selected</span>` : '';
