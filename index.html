@@ -807,36 +807,6 @@ footer a:hover{color:var(--gold)}
 <div class="divider"><span class="divider-icon">⚔</span></div>
 
 <!-- ── LIVE SERVER STATUS ── -->
-<div class="live-panel reveal">
-  <div class="section-title">📡 Live Server Status</div>
-  <div class="live-card">
-    <div class="live-header">
-      <div class="conn-dot offline" id="conn-dot"></div>
-      <span class="conn-label" id="conn-label">NOT CONFIGURED</span>
-      <span class="poll-time" id="poll-time"></span>
-    </div>
-    <div id="live-unconfigured" class="live-not-configured">
-      ⚙️ Add your GitHub username to <code>index.html</code> and have erocko38 run <code>watcher.py</code> on the server to enable live sync.
-    </div>
-    <div id="live-data" style="display:none">
-      <div class="live-grid">
-        <div class="live-stat"><div class="live-val" id="ls-age">—</div><div class="live-lbl">Last Save</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-status">—</div><div class="live-lbl">Server</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-npcs">—</div><div class="live-lbl">NPCs</div></div>
-        <div class="live-stat"><div class="live-val" id="ls-structs">—</div><div class="live-lbl">Structures</div></div>
-      </div>
-      <div class="live-pills">
-        <span class="pill" id="lp-flame">🔥 Flame Altar</span>
-        <span class="pill" id="lp-kiln">⚒ Charcoal Kiln</span>
-        <span class="pill" id="lp-rack">🪵 Drying Rack</span>
-        <span class="pill" id="lp-hash">💾 —</span>
-      </div>
-      <div class="save-time" id="ls-savetime"></div>
-      <div class="session-badge">⏱ Session: <span id="session-timer">0m</span></div>
-    </div>
-  </div>
-</div>
-
 <!-- ── U8 BANNER ── -->
 <div class="u8-banner reveal">
   <div class="u8-alert">
@@ -858,6 +828,9 @@ footer a:hover{color:var(--gold)}
   </div>
 </div>
 
+<!-- ── PARTY ── -->
+<div class="party-grid reveal" id="party-grid"></div>
+
 <!-- ── FLAME ALTAR TRACKER ── -->
 <div class="flame-section reveal">
   <div class="section-title">🔥 Flame Altar Progression</div>
@@ -874,8 +847,28 @@ footer a:hover{color:var(--gold)}
   <div class="stat-card"><div class="stat-val" id="stat-loot">0</div><div class="stat-lbl">Loot Logged</div><div class="stat-sub">party items</div></div>
 </div>
 
-<!-- ── PARTY ── -->
-<div class="party-grid reveal" id="party-grid"></div>
+<!-- ── CAMPAIGN PROGRESS ── -->
+<div class="campaign-progress" id="camp-progress"></div>
+
+<!-- ── CAMPAIGN GUIDE ── -->
+<div class="guide-section reveal">
+  <div class="section-title">📖 Campaign Guide</div>
+  <div class="guide-main-tabs" id="guide-main-tabs"></div>
+  <div class="guide-panel" id="guide-panel"></div>
+</div>
+
+<!-- ── PHASES ── -->
+<div class="phases-wrap reveal">
+  <div class="phase-tabs" id="phase-tabs"></div>
+  <div class="phases-progress" id="phases-prog"></div>
+  <div id="phase-panels"></div>
+</div>
+
+<!-- ── BOSSES ── -->
+<div class="boss-section reveal">
+  <div class="section-title">💀 Boss Guide</div>
+  <div id="boss-grid"></div>
+</div>
 
 <!-- ── SURVIVORS ── -->
 <div class="survivor-section reveal">
@@ -885,45 +878,22 @@ footer a:hover{color:var(--gold)}
   <div class="survivor-grid" id="survivor-grid"></div>
 </div>
 
-<!-- ── CAMPAIGN PROGRESS ── -->
-<div class="campaign-progress" id="camp-progress"></div>
-
-<!-- ── PHASES ── -->
-<div class="phases-wrap reveal">
-  <div class="phase-tabs" id="phase-tabs"></div>
-  <div class="phases-progress" id="phases-prog"></div>
-  <div id="phase-panels"></div>
+<!-- ── ACHIEVEMENTS ── -->
+<div class="achieve-section reveal">
+  <div class="section-title">🏆 Achievements</div>
+  <div class="achieve-grid" id="achieve-grid"></div>
 </div>
 
-<!-- ── CRAFTING REFERENCE ── -->
-<div class="craft-section reveal">
-  <div class="section-title">🔨 Crafting Reference</div>
-  <div class="craft-filters">
-    <div class="craft-filter-row" id="craft-cats"></div>
-    <div class="craft-filter-row" id="craft-roles"></div>
-    <input class="craft-search" id="craft-search" placeholder="Search items or ingredients…" oninput="renderCrafting()">
-  </div>
-  <div class="craft-grid" id="craft-grid"></div>
-  <div class="craft-disclaimer">* Quantities approximate — verify in-game. Most recipes unlock after rescuing the relevant NPC.</div>
-</div>
-
-<!-- ── BOSSES ── -->
-<div class="boss-section reveal">
-  <div class="section-title">💀 Boss Guide</div>
-  <div id="boss-grid"></div>
+<!-- ── ACTIVITY FEED ── -->
+<div class="activity-section reveal">
+  <div class="section-title">📜 Recent Activity</div>
+  <div class="activity-list" id="activity-list"></div>
 </div>
 
 <!-- ── BIOMES ── -->
 <div class="biome-section reveal">
   <div class="section-title">🗺 Biome Reference</div>
   <div class="biome-grid" id="biome-grid"></div>
-</div>
-
-<!-- ── CAMPAIGN GUIDE ── -->
-<div class="guide-section reveal">
-  <div class="section-title">📖 Campaign Guide</div>
-  <div class="guide-main-tabs" id="guide-main-tabs"></div>
-  <div class="guide-panel" id="guide-panel"></div>
 </div>
 
 <!-- ── U8 REFERENCE ── -->
@@ -982,16 +952,47 @@ footer a:hover{color:var(--gold)}
   </div>
 </div>
 
-<!-- ── ACHIEVEMENTS ── -->
-<div class="achieve-section reveal">
-  <div class="section-title">🏆 Achievements</div>
-  <div class="achieve-grid" id="achieve-grid"></div>
+<!-- ── CRAFTING REFERENCE ── -->
+<div class="craft-section reveal">
+  <div class="section-title">🔨 Crafting Reference</div>
+  <div class="craft-filters">
+    <div class="craft-filter-row" id="craft-cats"></div>
+    <div class="craft-filter-row" id="craft-roles"></div>
+    <input class="craft-search" id="craft-search" placeholder="Search items or ingredients…" oninput="renderCrafting()">
+  </div>
+  <div class="craft-grid" id="craft-grid"></div>
+  <div class="craft-disclaimer">* Quantities approximate — verify in-game. Most recipes unlock after rescuing the relevant NPC.</div>
 </div>
 
-<!-- ── ACTIVITY FEED ── -->
-<div class="activity-section reveal">
-  <div class="section-title">📜 Recent Activity</div>
-  <div class="activity-list" id="activity-list"></div>
+<!-- ── LIVE SERVER STATUS ── -->
+<div class="live-panel reveal">
+  <div class="section-title">📡 Live Server Status</div>
+  <div class="live-card">
+    <div class="live-header">
+      <div class="conn-dot offline" id="conn-dot"></div>
+      <span class="conn-label" id="conn-label">NOT CONFIGURED</span>
+      <span class="poll-time" id="poll-time"></span>
+    </div>
+    <div id="live-unconfigured" class="live-not-configured">
+      ⚙️ Add your GitHub username to <code>index.html</code> and have erocko38 run <code>watcher.py</code> on the server to enable live sync.
+    </div>
+    <div id="live-data" style="display:none">
+      <div class="live-grid">
+        <div class="live-stat"><div class="live-val" id="ls-age">—</div><div class="live-lbl">Last Save</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-status">—</div><div class="live-lbl">Server</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-npcs">—</div><div class="live-lbl">NPCs</div></div>
+        <div class="live-stat"><div class="live-val" id="ls-structs">—</div><div class="live-lbl">Structures</div></div>
+      </div>
+      <div class="live-pills">
+        <span class="pill" id="lp-flame">🔥 Flame Altar</span>
+        <span class="pill" id="lp-kiln">⚒ Charcoal Kiln</span>
+        <span class="pill" id="lp-rack">🪵 Drying Rack</span>
+        <span class="pill" id="lp-hash">💾 —</span>
+      </div>
+      <div class="save-time" id="ls-savetime"></div>
+      <div class="session-badge">⏱ Session: <span id="session-timer">0m</span></div>
+    </div>
+  </div>
 </div>
 
 <footer>
