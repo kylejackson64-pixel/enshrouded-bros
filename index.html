@@ -3352,6 +3352,7 @@ function renderGuides(){
   if(main==='whatnow') WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,(STATE.activePhase||1)-1));
   const mainTabs=[
     {id:'whatnow', label:'🔥 What Now?'},
+    {id:'tips',    label:'💡 Tips & Tricks'},
     {id:'overview',label:'⚔️ Classes'},
     {id:'class',label:'Class Walkthroughs'},
     {id:'duo',label:'Duo Synergies'},
@@ -3363,6 +3364,7 @@ function renderGuides(){
   ).join('');
   const panel=document.getElementById('guide-panel');
   if(main==='whatnow') panel.innerHTML=renderWhatNowPanel();
+  else if(main==='tips') panel.innerHTML=renderTipsPanel();
   else if(main==='overview') panel.innerHTML=renderOverviewPanel();
   else if(main==='class') panel.innerHTML=renderClassPanel();
   else if(main==='duo') panel.innerHTML=renderDuoPanel();
@@ -3488,6 +3490,70 @@ function renderSidePanel(){
       <div class="side-card-reward">⭐ ${s.reward}</div>
       <div class="side-card-notes">${s.notes}</div>
     </div>`).join('')}</div>`;
+}
+
+const TIPS_TRICKS = [
+  {id:'combat',icon:'⚔️',title:'Combat Basics',tips:[
+    '<b>Dodge i-frames</b> — you\'re invincible mid-roll. Roll INTO attacks for zero damage.',
+    '<b>Parry just before impact</b> to stagger the enemy and instantly refill Focus Bar.',
+    '<b>Heavy attacks</b> spend Focus but deal ~50% bonus damage and always stagger enemies.',
+    'Enemies telegraph with a red glow before big hits — that\'s your dodge cue.',
+    '<b>Jump attacks</b> deal bonus damage. Open fights with jump → heavy for burst.',
+    'Status effects stack: wet + lightning = stun; oil + fire = persistent burn.',
+    'Holding block takes chip damage. Parry or dodge instead of blocking continuously.',
+  ]},
+  {id:'shroud',icon:'🌫️',title:'Shroud & Survival',tips:[
+    '<b>Flame amulet duration</b> = your safe time in shroud. Upgrade it before every biome push.',
+    'Shroud Towers inside fog extend amulet reach. Clear them to expand safe zones.',
+    '<b>Shroud Roots</b> die in one hit. Break all in a room before engaging enemies.',
+    'Food buffs persist through death — always eat before a boss attempt.',
+    'Campfires heal passively. Build one at dungeon entrances as a quick heal checkpoint.',
+    'Shroud fog ticks damage every 2s. Don\'t linger without a plan to exit.',
+  ]},
+  {id:'progress',icon:'📈',title:'Progression Tips',tips:[
+    '<b>Rescue Blacksmith first</b> — unlocks crafting station upgrades needed for everything else.',
+    'Flame Altar level caps your gear tier. Upgrade it before pushing into each new biome.',
+    'Cinder Vault chests respawn on server restart — farm them for blue gear early.',
+    '<b>Grappling Hook</b> is required for most secrets and shortcuts. Get it early, use it always.',
+    'Kill Ancient Spirits (shroud wanderers) for guaranteed rare loot drops.',
+    'Loot all dungeon chests before killing the boss — loot doesn\'t require boss kill.',
+    '<b>Forge crafting station</b> (T4) unlocks late-game armor. Build it before Kindlewastes.',
+  ]},
+  {id:'u8',icon:'🔥',title:'U8 Mechanics',tips:[
+    '<b>Focus Bar</b> fills on light hits, drains on heavy attacks. Never empty it entering a boss phase.',
+    '<b>Hybrid classes</b> need 20 skill pts in BOTH parent trees before hybrid skills unlock.',
+    'New biome <b>Kindlewastes</b> unlocks after clearing Nomad Highlands.',
+    '<b>Ember Cores</b> drop from Forge Wraiths — required for hybrid class skill unlocks.',
+    'Boss HP is ~30% higher in U8. Over-level gear by one tier before each boss attempt.',
+    'Light × 3 → heavy = max damage per Focus spent. Learn the rhythm.',
+  ]},
+  {id:'building',icon:'🏗️',title:'Base Building',tips:[
+    'Flame Altar radius shown on map. Keep all crafting stations inside it.',
+    '<b>Roof coverage</b> stops weather durability drain on equipment. Always roof your crafting area.',
+    'Crafting stations placed close together give a <b>proximity bonus</b> — faster craft times.',
+    'Mark Vaults and enemy camps on the map immediately — easy to forget locations later.',
+    'Torches inside base perimeter prevent mob spawns at night.',
+    '<b>Stone walls</b> required for enemy-proof base — wood walls can be broken by enemies.',
+  ]},
+  {id:'party',icon:'👥',title:'Multiplayer Coordination',tips:[
+    '<b>Role coverage</b>: bring at least one Healer or Wizard for off-healing in dungeons.',
+    'Barbarian and Paladin generate natural aggro — let them pull, ranged DPS follows up.',
+    'Share Flame Altar: group settings → "Allow allies to use altar."',
+    '<b>Revive > damage</b>. A dead teammate is more dangerous than pausing to rez.',
+    'Call dungeon rooms on comms — "clear left" before others push.',
+    'Loot priority: whoever\'s class needs the item gets it. Agree before dungeons.',
+    'Keep one player back during boss fights for revive duty — don\'t all-in phase one.',
+  ]},
+];
+function renderTipsPanel(){
+  return `<div style="max-width:700px;margin:0 auto">
+    <div style="background:rgba(212,168,75,.08);border:1px solid rgba(212,168,75,.2);border-radius:5px;padding:.6rem .9rem;font-size:.78rem;color:var(--ash);margin-bottom:1.2rem;line-height:1.5">
+      💡 <b>Universal tips</b> — applies to all classes and playstyles.
+    </div>
+    ${TIPS_TRICKS.map(cat=>acc('tc-'+cat.id,cat.icon+' '+cat.title,
+      `<ul class="bullet-list">${cat.tips.map(t=>`<li class="bullet-item">${t}</li>`).join('')}</ul>`
+    )).join('')}
+  </div>`;
 }
 
 // ── RESET ────────────────────────────────────────────────────────────
