@@ -740,7 +740,6 @@ footer a:hover{color:var(--gold)}
 
 <nav class="page-nav" aria-label="Mode">
   <a href="index.html" class="page-nav-link active">⚔ Party Mode</a>
-  <a href="solo.html"  class="page-nav-link">🎮 Solo Mode</a>
 </nav>
 <div id="sticky-bar"><div id="sticky-fill"></div></div>
 <div id="toast-root"></div>
@@ -2569,7 +2568,7 @@ const CLASS_GUIDES = {
       {node:'Sneak Attack',      why:'3pts — Center. +900% damage from stealth. This is the entire build identity. Every fight starts crouched.',                                            meta:'Center'},
       {node:'Blink',             why:'4pts — Healer path. Teleport with i-frames. Reposition behind enemies to set up stealth openers. Also breaks boss tracking.',                         meta:'Healer path'},
       {node:'Updraft',           why:'4pts — Assassin path. Gain altitude during a glide by pressing jump. Opens vertical angles for crossbow shots mid-air.',                              meta:'Assassin path'},
-      {node:'Double Jump',       why:'4pts — Center. Second jump to reach elevated stealth positions. Core mobility for solo play where no grapple partner exists.',                        meta:'Center'},
+      {node:'Double Jump',       why:'4pts — Center. Second jump to reach elevated stealth positions. Core vertical mobility for reaching high ground quickly.',                           meta:'Center'},
       {node:'Emergency Blink',   why:'2pts — Healer path. Blink while stunned breaks the stun. Assassination attempts go wrong — this is your escape hatch.',                              meta:'Healer path'},
       {node:'Multi Shot',        why:'3pts — Ranger path. 20% chance crossbow shot fires 3 bolts. Combines with stealth opener for explosive burst round.',                                 meta:'Ranger path'},
       {node:'Airborne',          why:'2pts — Assassin path. 30% reduced glide stamina drain. Extends aerial angles for crossbow positioning without landing.',                              meta:'Assassin path'},
@@ -2596,12 +2595,12 @@ const CLASS_GUIDES = {
 
   paladin:{
     emoji:'🛡', label:'Paladin',
-    summary:'Frontline tank with built-in self-sustain. Water Aura heals you and nearby allies passively. Waters of Life doubles that output. Battle Heal + Blink fill the gaps. Endgame: near-unkillable solo. Best class for first-time players hitting hard content.',
+    summary:'Frontline tank with built-in self-sustain. Water Aura heals you and nearby allies passively. Waters of Life doubles that output. Battle Heal + Blink fill the gaps. Endgame: near-unkillable. Best class for first-time players hitting hard content.',
     skills:[
       {node:'Water Aura',        why:'3pts × 3 levels — Healer path. Passive HP regen aura. 1 HP per 2 Intelligence per tick. Stack 3 levels. This is your heal engine.',                  meta:'Healer path'},
       {node:'Battle Heal',       why:'3pts — Warrior path. 5% max HP on every melee crit. Paired with Water Aura = near-continuous healing during combat.',                                 meta:'Warrior path'},
       {node:'Blink',             why:'4pts — Healer path. i-frame teleport. Escape 1-shot attacks and reposition behind tanks. Also resets aggro at range.',                               meta:'Healer path'},
-      {node:'Emergency Blink',   why:'2pts — Healer path. Break stun with Blink. Boss CC chains are dangerous solo — this ends them.',                                                      meta:'Healer path'},
+      {node:'Emergency Blink',   why:'2pts — Healer path. Break stun with Blink. Boss CC chains are dangerous — this ends them.',                                                          meta:'Healer path'},
       {node:'Heavy Handed',      why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stun enemies before they land combos. Reduces incoming damage.',                              meta:'Barbarian path'},
       {node:'Waters of Life',    why:'2pts — Healer path. Doubles Water Aura healing output. After maxing 3 levels of Water Aura this effectively doubles your HPS.',                       meta:'Healer path'},
       {node:'Divine Surge',      why:'5pts — Healer path. Emergency burst heal. Use when Water Aura regen cannot keep up with burst damage windows.',                                       meta:'Healer path'},
@@ -2947,7 +2946,7 @@ const GROUP_GUIDE = {
 
 const SIDE_CONTENT = [
   {name:'Ancient Vaults (Springlands)',biome:'Springlands',reward:'Rare weapons, Arcane blueprints',notes:'3 vaults scattered south of Springlands Spire. Ranger-Wizard recommended. Contains Archmage gear.',classes:['ranger','wizard']},
-  {name:'Hollow Halls Depth Run',biome:'Springlands',reward:'Collector lore + bonus ectoplasm drops',notes:'Go back after rescuing Alden for the lower floors. Barbarian-Healer can solo carry this.',classes:['barbarian','healer']},
+  {name:'Hollow Halls Depth Run',biome:'Springlands',reward:'Collector lore + bonus ectoplasm drops',notes:'Go back after rescuing Alden for the lower floors. Barbarian-Healer duo dominates this run.',classes:['barbarian','healer']},
   {name:'Revelwood Canopy Chests',biome:'Revelwood',reward:'Huntsman Armor pieces',notes:'Ranger can grapple to every chest. Bring extra arrows. Worth the detour for Ranger BiS armor.',classes:['ranger']},
   {name:'Farmer\'s Lost Fields',biome:'Springlands',reward:'Rare seed types + cooking recipes',notes:'Emily Fray gives a follow-up quest after rescue. Unlocks mushroom crops and the Bakehouse Station.',classes:['healer','all']},
   {name:'Nomad Highlands Towers',biome:'Nomad Highlands',reward:'Fell Longbow / Void Staff',notes:'Dangerous isolated towers — worth the risk. Ranger gets Fell Longbow here, Wizard gets Void Staff.',classes:['ranger','wizard']},
@@ -3174,7 +3173,7 @@ const WN_PHASES = [
       side:['Blood Rage strategy: signal the Healer when you\'re at <30% HP and feeling good. That\'s your DPS spike window.','Breach → heavy attack → stun → group nukes → Breach again. Drill this loop with the Wizard.','Farm Sulfur in Kindlewastes border area — you\'ll need 40× for Flame Altar L6.'],
     },
     wizard:{
-      tldr:'Dark Arts + Chain Hit in shroud zones = you solo-clear entire rooms while others watch.',
+      tldr:'Dark Arts + Chain Hit in shroud zones = you clear entire rooms before enemies reach the party.',
       priority:[
         '<b>First:</b> Invest <b>Dark Arts</b> (Wizard path, 3pts) — +10% Shroud damage. All endgame content is shroud-dense. Invest now.',
         '<b>Second:</b> Invest <b>Mass Destruction</b> (Wizard path, 4pts) — magic crits AoE shock everything within 20m.',
