@@ -134,14 +134,22 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
 .hero-card.wizard::before{background:linear-gradient(90deg,var(--purple),#a89bd4)}
 .hero-card.healer::before{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.hero-card.battlemage::before{background:linear-gradient(90deg,#6c3483,#f39c12)}
+.hero-card.assassin::before{background:linear-gradient(90deg,#1a252f,#95a5a6)}
+.hero-card.paladin::before{background:linear-gradient(90deg,#2980b9,#f1c40f)}
+.hero-card.berserker::before{background:linear-gradient(90deg,#922b21,#e74c3c)}
 .hero-card:hover{border-color:rgba(232,97,42,.4);transform:translateY(-2px)}
 .hero-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.7rem}
 .hero-card.ranger .hero-avatar{background:rgba(232,97,42,.15);border:2px solid var(--ember)}
 .hero-card.barbarian .hero-avatar{background:rgba(192,57,43,.15);border:2px solid #e74c3c}
 .hero-card.wizard .hero-avatar{background:rgba(142,109,191,.15);border:2px solid var(--purple)}
 .hero-card.healer .hero-avatar{background:rgba(74,159,212,.15);border:2px solid var(--water)}
+.hero-card.battlemage .hero-avatar{background:rgba(108,52,131,.15);border:2px solid #9b59b6}
+.hero-card.assassin .hero-avatar{background:rgba(26,37,47,.3);border:2px solid #95a5a6}
+.hero-card.paladin .hero-avatar{background:rgba(41,128,185,.15);border:2px solid #3498db}
+.hero-card.berserker .hero-avatar{background:rgba(146,43,33,.15);border:2px solid #e74c3c}
 .hero-initials{font-family:'Cinzel',serif;font-size:1rem;font-weight:700}
-.hero-card.ranger .hero-initials{color:var(--ember-bright)}.hero-card.barbarian .hero-initials{color:#e74c3c}.hero-card.wizard .hero-initials{color:#a89bd4}.hero-card.healer .hero-initials{color:var(--water)}
+.hero-card.ranger .hero-initials{color:var(--ember-bright)}.hero-card.barbarian .hero-initials{color:#e74c3c}.hero-card.wizard .hero-initials{color:#a89bd4}.hero-card.healer .hero-initials{color:var(--water)}.hero-card.battlemage .hero-initials{color:#9b59b6}.hero-card.assassin .hero-initials{color:#95a5a6}.hero-card.paladin .hero-initials{color:#3498db}.hero-card.berserker .hero-initials{color:#e74c3c}
 .hero-name{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.1rem}
 .hero-role{font-size:.75rem;color:var(--text-dim);font-style:italic;margin-bottom:.7rem}
 .hero-level{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--text);margin-bottom:.4rem}
@@ -155,6 +163,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian .weapon-bar-fill{background:linear-gradient(90deg,#a93226,#e74c3c)}
 .hero-card.wizard .weapon-bar-fill{background:linear-gradient(90deg,#6c3483,#a89bd4)}
 .hero-card.healer .weapon-bar-fill{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.hero-card.battlemage .weapon-bar-fill{background:linear-gradient(90deg,#6c3483,#f39c12)}
+.hero-card.assassin .weapon-bar-fill{background:linear-gradient(90deg,#1a252f,#95a5a6)}
+.hero-card.paladin .weapon-bar-fill{background:linear-gradient(90deg,#2471a3,#f1c40f)}
+.hero-card.berserker .weapon-bar-fill{background:linear-gradient(90deg,#922b21,#e74c3c)}
 .armor-row{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);font-size:.72rem;color:var(--text-dim)}
 .armor-pips{display:flex;gap:3px}
 .armor-pip{width:8px;height:8px;border-radius:1px;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s}
@@ -162,6 +174,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian .armor-pip.filled{background:#e74c3c;border-color:#e74c3c}
 .hero-card.wizard .armor-pip.filled{background:var(--purple);border-color:var(--purple)}
 .hero-card.healer .armor-pip.filled{background:var(--water);border-color:var(--water)}
+.hero-card.battlemage .armor-pip.filled{background:#9b59b6;border-color:#9b59b6}
+.hero-card.assassin .armor-pip.filled{background:#7f8c8d;border-color:#95a5a6}
+.hero-card.paladin .armor-pip.filled{background:#3498db;border-color:#3498db}
+.hero-card.berserker .armor-pip.filled{background:#e74c3c;border-color:#922b21}
 
 /* Campaign + phase strip */
 .campaign-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;max-width:900px;margin:0 auto 2rem;padding:0 1.5rem}
@@ -421,12 +437,12 @@ footer a:hover{color:var(--gold)}
 .wn-phase-sub{font-size:.7rem;color:var(--text-dim);font-style:italic}
 .wn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem}
 .wn-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.wn-card.ranger{border-top:2px solid var(--ember)}.wn-card.barbarian{border-top:2px solid #e74c3c}.wn-card.wizard{border-top:2px solid #a89bd4}.wn-card.healer{border-top:2px solid var(--water)}
+.wn-card.ranger{border-top:2px solid var(--ember)}.wn-card.barbarian{border-top:2px solid #e74c3c}.wn-card.wizard{border-top:2px solid #a89bd4}.wn-card.healer{border-top:2px solid var(--water)}.wn-card.battlemage{border-top:2px solid #9b59b6}.wn-card.assassin{border-top:2px solid #95a5a6}.wn-card.paladin{border-top:2px solid #3498db}.wn-card.berserker{border-top:2px solid #c0392b}
 .wn-card-head{padding:.75rem 1rem .5rem;display:flex;align-items:center;gap:.5rem}
 .wn-card-emoji{font-size:1.3rem;line-height:1}
 .wn-card-title{font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-light);letter-spacing:.08em}
 .wn-tldr{margin:.1rem 1rem .6rem;font-size:.8rem;line-height:1.5;color:var(--ash);background:rgba(255,255,255,.03);border-radius:4px;padding:.5rem .65rem;border-left:2px solid var(--ember)}
-.wn-card.barbarian .wn-tldr{border-color:#e74c3c}.wn-card.wizard .wn-tldr{border-color:#a89bd4}.wn-card.healer .wn-tldr{border-color:var(--water)}
+.wn-card.barbarian .wn-tldr{border-color:#e74c3c}.wn-card.wizard .wn-tldr{border-color:#a89bd4}.wn-card.healer .wn-tldr{border-color:var(--water)}.wn-card.battlemage .wn-tldr{border-color:#9b59b6}.wn-card.assassin .wn-tldr{border-color:#95a5a6}.wn-card.paladin .wn-tldr{border-color:#3498db}.wn-card.berserker .wn-tldr{border-color:#c0392b}
 .wn-sections{padding:0 .6rem .6rem}
 .wn-sec{border:1px solid var(--border);border-radius:4px;margin-bottom:.35rem;overflow:hidden}
 .wn-sec-head{display:flex;align-items:center;gap:.45rem;padding:.45rem .7rem;cursor:pointer;transition:background .2s;user-select:none}
@@ -442,7 +458,7 @@ footer a:hover{color:var(--gold)}
 .wn-step{font-size:.77rem;color:var(--ash);line-height:1.5;padding:.2rem 0 .2rem 1rem;position:relative;border-bottom:1px solid rgba(255,255,255,.04)}
 .wn-step:last-child{border-bottom:none}
 .wn-step::before{content:'›';position:absolute;left:0;color:var(--ember);font-size:.9rem}
-.wn-card.barbarian .wn-step::before{color:#e74c3c}.wn-card.wizard .wn-step::before{color:#a89bd4}.wn-card.healer .wn-step::before{color:var(--water)}
+.wn-card.barbarian .wn-step::before{color:#e74c3c}.wn-card.wizard .wn-step::before{color:#a89bd4}.wn-card.healer .wn-step::before{color:var(--water)}.wn-card.battlemage .wn-step::before{color:#9b59b6}.wn-card.assassin .wn-step::before{color:#95a5a6}.wn-card.paladin .wn-step::before{color:#3498db}.wn-card.berserker .wn-step::before{color:#c0392b}
 .wn-step b{color:var(--gold-light);font-weight:600}
 .wn-step em{color:var(--text-dim);font-style:italic}
 .bullet-item::before{content:'▸';position:absolute;left:0;color:var(--ember);font-size:.65rem;top:.4rem}
@@ -495,6 +511,10 @@ footer a:hover{color:var(--gold)}
 .hero-card.barbarian:hover{border-color:rgba(192,57,43,.5);box-shadow:0 6px 28px rgba(192,57,43,.2)}
 .hero-card.wizard:hover{border-color:rgba(142,109,191,.5);box-shadow:0 6px 28px rgba(142,109,191,.2)}
 .hero-card.healer:hover{border-color:rgba(74,159,212,.5);box-shadow:0 6px 28px rgba(74,159,212,.2)}
+.hero-card.battlemage:hover{border-color:rgba(155,89,182,.5);box-shadow:0 6px 28px rgba(155,89,182,.2)}
+.hero-card.assassin:hover{border-color:rgba(149,165,166,.5);box-shadow:0 6px 28px rgba(149,165,166,.2)}
+.hero-card.paladin:hover{border-color:rgba(52,152,219,.5);box-shadow:0 6px 28px rgba(52,152,219,.2)}
+.hero-card.berserker:hover{border-color:rgba(192,57,43,.5);box-shadow:0 6px 28px rgba(146,43,33,.25)}
 
 /* ── WEAPON ULTIMATE FULL PULSE ── */
 .weapon-bar-fill.full{animation:ultPulse 1.4s ease-in-out infinite}
@@ -702,6 +722,10 @@ footer a:hover{color:var(--gold)}
 .solo-cls-card.active.barbarian{background:rgba(192,57,43,.12);border-color:#e74c3c}
 .solo-cls-card.active.wizard{background:rgba(142,109,191,.12);border-color:var(--purple)}
 .solo-cls-card.active.healer{background:rgba(74,159,212,.12);border-color:var(--water)}
+.solo-cls-card.active.battlemage{background:rgba(155,89,182,.12);border-color:#9b59b6}
+.solo-cls-card.active.assassin{background:rgba(149,165,166,.12);border-color:#95a5a6}
+.solo-cls-card.active.paladin{background:rgba(52,152,219,.12);border-color:#3498db}
+.solo-cls-card.active.berserker{background:rgba(146,43,33,.12);border-color:#e74c3c}
 .solo-cls-emoji{font-size:1.5rem;line-height:1}
 .solo-cls-name{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;color:var(--text-dim)}
 .solo-cls-card.active .solo-cls-name{color:var(--gold-light)}
@@ -1710,31 +1734,31 @@ const WN_PHASES = [
   // ── PHASE 1 ─────────────────────────────────────────────────────
   { phase:1, label:'Starting Out', sub:'Levels 1–5 · First Session',
     ranger:{
-      tldr:'You\'re the scout. Go fast, find resources, and get a bow in your hands within the first 5 minutes.',
+      tldr:'Scout first, fight second. Get a bow and grapple hook within the first 5 minutes — mobility is your entire defense.',
       priority:[
         '<b>First:</b> Open crafting (C) → make Rope × 10 → craft <b>Grappling Hook</b> and <b>Glider</b>. These are your identity.',
         '<b>Second:</b> Make a <b>Shortbow</b> (Wood Plank × 10 + String × 5) and <b>20 Arrows</b> (Sticks + Feathers). Kill birds for feathers.',
-        '<b>Third:</b> Scout a flat base location near trees and stone. Mark it with a map pin. Tell the group.',
+        '<b>Third:</b> Scout a flat base location near trees and stone. Mark it on your map.',
         '<b>Fourth:</b> Practice grappling cliffs and gliding down. You will be doing this every session.',
       ],
       gather:['<b>Wood</b> — chop any tree with your starting axe','<b>Plant Fiber</b> — harvest grass and small plants (make String)','<b>Feathers</b> — kill birds near spawn. <em>Every bird. Every time.</em>','<b>Stone</b> — mine grey rock outcrops','<b>Metal Scraps</b> — loot ruined buildings and crates (for Grappling Hook)'],
       craft:['<b>Shortbow</b> → Wood Plank × 10 + String × 5','<b>Arrows × 20</b> → Sticks × 10 + Feathers × 10','<b>Rope × 10</b> → Plant Fiber × 5 each','<b>Grappling Hook</b> → Rope × 5 + Metal Scraps × 3','<b>Glider</b> → Cloth × 8 + Wood Plank × 4'],
-      npcs:['<b>Blacksmith (Oswald Anders)</b> — follow the quest marker. Show up, shoot enemies. Ranger\'s job: ranged support while Barbarian tanks.','After Oswald: look for <b>Collector (Alden Crowley)</b> in Hollow Halls dungeon — Ranger is perfect for clearing it.'],
-      explore:['Circle spawn area with Glider — map the whole starting biome in one run','Find the <b>Hollow Halls dungeon</b> entrance (Springlands) — mark it for the group','Mark all cliff edges with map pins — Grapple routes for later','Look for stone chimneys of ruined buildings = Metal Scraps inside'],
+      npcs:['<b>Blacksmith (Oswald Anders)</b> — follow the quest marker. Pick off enemies from range before they reach you. If they close in, Grapple up and reposition.','After Oswald: look for <b>Collector (Alden Crowley)</b> in Hollow Halls dungeon — Ranger is perfect for clearing it.'],
+      explore:['Circle spawn area with Glider — map the whole starting biome in one run','Find the <b>Hollow Halls dungeon</b> entrance (Springlands) — mark it for later','Mark all cliff edges with map pins — Grapple routes for later','Look for stone chimneys of ruined buildings = Metal Scraps inside'],
       side:['Kill every bird you see. 20 feathers = 20 arrows = 1 fight\'s worth of ammo','Crouch (default: C or equivalent) → sneak up behind a wolf → hit it. That\'s your stealth opener. Practice it now when stakes are low.','Loot every wooden crate you find — Metal Scraps and rope drop here'],
     },
     barbarian:{
-      tldr:'You\'re the door. Walk in first, hit things, don\'t die. Let the others shoot from behind you.',
+      tldr:'You hit things in the face. Aggressive play is survival — standing still is death. No healer means every dodge matters.',
       priority:[
         '<b>First:</b> Craft a <b>Stone Axe</b> (Stone × 5 + Wood × 3). That\'s your weapon until iron.',
         '<b>Second:</b> Hunt wolves and foxes near spawn for <b>Fur Pelts × 15</b> — craft a full <b>Fur Armor set</b> (5 pieces).',
-        '<b>Third:</b> Help place the <b>Flame Altar</b> inside the base. Stand near it while Healer sets up.',
-        '<b>Fourth:</b> Lead the Blacksmith rescue. You walk in first. Everyone follows.',
+        '<b>Third:</b> Place the <b>Flame Altar</b> inside the base and interact with it to set your spawn.',
+        '<b>Fourth:</b> Execute the Blacksmith rescue. Walk in aggressively, aggro enemies, cut them down. Kite when overwhelmed.',
       ],
       gather:['<b>Fur</b> — hunt wolves and foxes. Need ~15 total for full armor set','<b>Stone × 30</b> — mine rock outcrops','<b>Wood × 20</b> — chop trees','<b>Animal Hide</b> — drops from deer/foxes, make Leather at Tanning Rack later','<b>Bones</b> — from skeleton enemies or animal kills'],
       craft:['<b>Stone Axe</b> → Stone × 5 + Wood × 3','<b>Fur Hood</b> → Fur × 2 + String × 1','<b>Fur Chestpiece</b> → Fur × 4 + String × 2','<b>Fur Leggings</b> → Fur × 3 + String × 1','<b>Fur Gloves + Boots</b> → Fur × 2 each. Wear all 5 pieces.'],
-      npcs:['<b>Blacksmith (Oswald Anders)</b> — YOU lead the approach. Barbarian walks into the enemy camp, aggros everything, Ranger/Wizard attack from behind you.','Talk to Oswald, select Come with me. Healer has a bed waiting back at base.'],
-      explore:['Stay close to the group this phase — you\'re the anchor, not the scout','Find iron ore nodes (orange-streaked rocks on hillsides) and mark them. You\'ll need these next phase.','Kill any humanoid enemies you see — they drop Metal Scraps and loot'],
+      npcs:['<b>Blacksmith (Oswald Anders)</b> — lead the approach. Walk into the camp, aggro enemies, cut them down one by one. Kite backward if overwhelmed.','Talk to Oswald, select Come with me. Have a bed ready at base for him.'],
+      explore:['Stay near base this phase — focus on building, farming, and learning the terrain before venturing far','Find iron ore nodes (orange-streaked rocks on hillsides) and mark them. You\'ll need these next phase.','Kill any humanoid enemies you see — they drop Metal Scraps and loot'],
       side:['Hunt animals aggressively — Fur + Hide feeds crafting for the next 2 phases','Punch or axe-swing through wooden barricades in ruins — loot is usually inside','Pick up every chest you see — Barbarian has no specialty loot but group supplies matter'],
     },
     wizard:{
@@ -1751,19 +1775,61 @@ const WN_PHASES = [
       explore:['Find iron ore deposits and mark them on the map (orange-streaked rocks on hillsides/cliffs)','Find ruined buildings — Metal Scraps inside help bootstrap the Forge','Stay near base this session — your job is building, not exploring'],
       side:['Put Wood in the Charcoal Kiln before you log off — it produces Charcoal passively while offline','Label chest storage near Forge: one for Ore, one for Charcoal, one for Ingots. Future you will thank you.','Shoot your wand at training enemies near base to learn its behavior. It\'s going to get much better.'],
     },
-    healer:{
-      tldr:'You\'re mom. Make potions, build beds, feed everyone. Nobody dies if you do your job.',
+    battlemage:{
+      tldr:'Start building your mana sustain loop from day one. Get a wand and practice parrying — every parry is mana back once Arcane Deflection is online.',
       priority:[
-        '<b>First:</b> Gather <b>Berries × 16</b> and <b>Water Vials × 8</b>. Craft <b>Basic Health Potions × 8</b>. Give 2 to each teammate right now.',
+        '<b>First:</b> Craft a <b>Wand</b> (Wood × 5 + Resin × 3) at the Workbench. That\'s your primary weapon until you reach Balthazar.',
+        '<b>Second:</b> Make a <b>Stone Axe</b> (Stone × 5 + Wood × 3) for melee backup. Battlemage fights at both ranges.',
+        '<b>Third:</b> Place the <b>Flame Altar</b> inside the base and set your spawn.',
+        '<b>Fourth:</b> Execute the Blacksmith rescue. Alternate wand shots and melee swings — get used to the hybrid range.',
+      ],
+      gather:['<b>Wood × 30+</b> — for Workbench and wand crafting','<b>Resin</b> — amber deposits on tree trunks (wand ingredient)','<b>Stone × 50</b> — Workbench + Forge + Charcoal Kiln','<b>Metal Scraps</b> — ruins and crates (Grappling Hook)','<b>Plant Fiber × 20</b> — String for Glider'],
+      craft:['<b>Workbench</b> → Wood × 20 + Stone × 10','<b>Wand</b> → Wood × 5 + Resin × 3 at Workbench','<b>Stone Axe</b> → Stone × 5 + Wood × 3','<b>Glider</b> → Cloth × 8 + Wood Plank × 4','<b>Grappling Hook</b> → Rope × 5 + Metal Scraps × 3'],
+      npcs:['<b>Blacksmith (Oswald Anders)</b> — alternate wand shots at approaching enemies and axe swings when they reach you. Get comfortable with range-switching.','After Oswald: <b>Collector (Alden Crowley)</b> — Hollow Halls dungeon. Wand AoE handles multiple enemies at once.'],
+      explore:['Circle spawn area — map iron ore deposits and resin nodes on trees','Find the <b>Hollow Halls dungeon</b> entrance and mark it','Look for Resin (amber deposits on tree bark) — wand ingredient','Mark base location near stone and trees for easy resource access'],
+      side:['Practice the parry timing on weak enemies now — it becomes your mana battery once Arcane Deflection unlocks.','Every enemy that closes in is practice. Shoot → melee → shoot rotation.','Loot all crates: Metal Scraps bootstrap the Forge next phase.'],
+    },
+    assassin:{
+      tldr:'Stealth from the start. Practice the sneak opener on every enemy. You should never take a fair fight.',
+      priority:[
+        '<b>First:</b> Craft <b>Grappling Hook</b> and <b>Glider</b> — vertical movement lets you reset stealth and repeat openers.',
+        '<b>Second:</b> Hunt wolves near spawn for <b>Fur Pelts × 10</b> — craft at least <b>Fur Chest + Legs</b> (for when stealth breaks).',
+        '<b>Third:</b> Place the <b>Flame Altar</b> inside the base and set your spawn.',
+        '<b>Fourth:</b> Execute the Blacksmith rescue. Practice: approach from behind → attack before they spot you.',
+      ],
+      gather:['<b>Feathers × 20</b> — kill birds. Backup bow ammo when stealth fails.','<b>Metal Scraps</b> — for Grappling Hook','<b>Fur Pelts × 10</b> — light armor for when stealth breaks','<b>Stone × 30</b> + <b>Wood × 25</b> — Workbench + base foundations'],
+      craft:['<b>Rope × 10</b> → Plant Fiber × 5 each','<b>Grappling Hook</b> → Rope × 5 + Metal Scraps × 3','<b>Glider</b> → Cloth × 8 + Wood × 4','<b>Shortbow × 1</b> (backup) → Wood × 10 + String × 5','<b>Fur Chest + Legs</b> → Fur × 4 + String × 2 each'],
+      npcs:['<b>Blacksmith (Oswald)</b> — clear the camp from stealth. Pick off isolated guards before pulling the main group. Perfect assassin practice.','<b>Collector (Alden Crowley)</b> — Hollow Halls. Stealth-clear every room before entering.'],
+      explore:['Explore wide — Grapple and Glider cover more ground than foot travel','Find the <b>Hollow Halls dungeon</b> entrance and mark it','Look for ruined buildings with guards — free stealth practice targets','Map every cliff edge — future Grapple routes for repositioning mid-fight'],
+      side:['Crouch behind any enemy and attack — that\'s the opener. Do this 10 times this session until it\'s reflex.','If spotted mid-sneak, Grapple up to a roof and wait. Enemies lose interest. Re-approach.','Never fight more than 2 enemies at once this early. Pick them off one by one.'],
+    },
+    paladin:{
+      tldr:'Heavy armor + self-healing hybrid. You can take hits others can\'t. Walk into camps confidently — your armor is your edge.',
+      priority:[
+        '<b>First:</b> Hunt wolves and foxes near spawn for <b>Fur Pelts × 15</b> — craft a full <b>Fur Armor set</b> (5 pieces). Paladin needs armor.',
+        '<b>Second:</b> Craft a <b>Stone Axe</b> (Stone × 5 + Wood × 3). Your melee weapon until iron.',
+        '<b>Third:</b> Place the <b>Flame Altar</b> inside the base and set your spawn.',
+        '<b>Fourth:</b> Execute the Blacksmith rescue with aggressive melee. Your armor lets you take hits lighter classes can\'t.',
+      ],
+      gather:['<b>Fur × 15</b> — hunt wolves and foxes for full armor set','<b>Stone × 30</b> — for weapons and Workbench','<b>Wood × 20</b> — building foundation','<b>Plant Fiber × 20</b> — String and Cloth for armor','<b>Animal Hide</b> — Leather for iron-tier armor next phase'],
+      craft:['<b>Stone Axe</b> → Stone × 5 + Wood × 3','<b>Full Fur Armor set</b> → Fur × 2–4 per piece + String × 1–2 per piece','<b>Workbench</b> → Wood × 20 + Stone × 10','<b>Basic Health Potion × 8</b> → Berry × 2 + Water Vial × 1 each','<b>Bed × 2</b> → Wood × 8 + Cloth × 4 each (for yourself + incoming NPCs)'],
+      npcs:['<b>Blacksmith (Oswald)</b> — walk into the camp and aggro everything. Your armor is the difference. Whittle them down.','<b>Collector (Alden Crowley)</b> — Hollow Halls. Clear every room, escort him safely.'],
+      explore:['Stay near base this phase — building and farming are the priority','Find iron ore nodes and mark them (orange-streaked rock outcrops)','Kill every enemy encounter — gear drops and early confidence building'],
+      side:['Learn block and parry timing on weak enemies — Paladin lives in melee and a timed parry prevents big damage.','Hunt aggressively: Fur + Hide feeds armor crafting for multiple phases.','Pre-craft 8 Health Potions before the first dungeon. Even Paladin needs pots.'],
+    },
+    healer:{
+      tldr:'Self-sustain machine. Water Aura heals you passively, Blink makes you nearly unkillable. Best solo survivability of any class.',
+      priority:[
+        '<b>First:</b> Gather <b>Berries × 16</b> and <b>Water Vials × 8</b>. Craft <b>Basic Health Potions × 8</b>. Bank these — you\'ll burn through them before your first dungeon.',
         '<b>Second:</b> Build an <b>NPC shelter</b> — a 3×3 room with walls, roof, and a door near the Flame Altar. Put <b>1 Bed</b> inside.',
         '<b>Third:</b> Once Blacksmith (Oswald) is rescued, assign him a bed in the shelter. Talk to him. He now works.',
         '<b>Fourth:</b> Build a <b>Well</b> (Stone × 15) near the base. It produces Water Vials passively. This is your potion supply chain.',
       ],
       gather:['<b>Berries × 20+</b> — berry bushes in meadows near spawn','<b>Plant Fiber × 30</b> — grass, ferns, small plants','<b>Stone × 40</b> — for NPC shelter walls, Well, and Workbench','<b>Wood × 30</b> — for floors, walls, roof, beds, doors','<b>Water Vials</b> — scoop from rivers/lakes or craft at the Well'],
       craft:['<b>Basic Health Potion × 8</b> → Berry × 2 + Water Vial × 1 each. Hand 2 to everyone.','<b>Bed × 2</b> → Wood × 8 + Cloth × 4 each','<b>Well</b> → Stone × 15','<b>Chest × 3</b> → Wood × 10 each. Label: Potions / Ore / Food'],
-      npcs:['<b>Blacksmith (Oswald)</b> — build his bed BEFORE the rescue so you can assign him immediately','<b>Collector (Alden Crowley)</b> — Hollow Halls dungeon. YOU escort him home and assign his bed.','Every rescued NPC needs their own bed or they won\'t give you their crafting services.'],
+      npcs:['<b>Blacksmith (Oswald)</b> — build his bed BEFORE the rescue so you can assign him immediately','<b>Collector (Alden Crowley)</b> — Hollow Halls dungeon. Clear it with Water Aura active and escort him home.','Every rescued NPC needs their own bed or they won\'t give you their crafting services.'],
       explore:['Map all berry bush clusters near base — you\'ll farm these every session','Find the river/lake nearest to base — mark it. Easy Water Vial source.','Look for flowers near spawn — some are potion ingredients. Pick everything and learn what\'s useful.'],
-      side:['Build a labeled chest system near the Flame Altar: Potions / Ore / Food / Building Mats. Group morale +10.','Restock potions at the START of every session before the group heads out. Make it a ritual.','Craft a Campfire (Stone × 5 + Wood × 3) near the base entrance — cooking station upgrade comes later'],
+      side:['Build a labeled chest system near the Flame Altar: Potions / Ore / Food / Building Mats. Your future self will thank you.','Restock potions at the START of every session before heading out. Make it a ritual.','Craft a Campfire (Stone × 5 + Wood × 3) near the base entrance — cooking station upgrade comes later'],
     },
   },
 
@@ -1775,12 +1841,12 @@ const WN_PHASES = [
         '<b>First:</b> Upgrade Grappling Hook (Iron Bar × 3 + Rope × 8) and Glider (Silk × 4 + Iron Bar × 2 + Cloth × 4).',
         '<b>Second:</b> Rescue <b>Hunter (Athalan Skree)</b> — east of Springlands Spire. He unlocks Longbow crafting.',
         '<b>Third:</b> Craft the <b>Longbow</b> at Hunter Workbench (Wood Plank × 8 + String × 8 + Iron Bar × 2).',
-        '<b>Fourth:</b> Activate the <b>Springlands Spire</b> with the group. Fast travel unlocked.',
+        '<b>Fourth:</b> Activate the <b>Springlands Spire</b>. Fast travel unlocked.',
       ],
       gather:['<b>Iron Ore</b> — orange-streaked rock outcrops on Springlands hillsides','<b>Feathers × 40+</b> — you\'ll need a lot more arrows at this level','<b>Silk</b> — kill cave spiders in dark areas and small caves (for Glider upgrade)','<b>Leather</b> — Animal Hide → Tanning Rack (needs Hunter)','<b>String × 20</b> — Plant Fiber × 3 each at Workbench'],
       craft:['<b>Grappling Hook Upgrade</b> → Iron Bar × 3 + Rope × 8','<b>Glider Upgrade</b> → Silk × 4 + Iron Bar × 2 + Cloth × 4','<b>Longbow</b> → Wood Plank × 8 + String × 8 + Iron Bar × 2 at Hunter Workbench','<b>Dagger</b> → Iron Bar × 2 + Leather × 1 at Forge. For stealth openers.','<b>Lockpick × 5</b> → Iron Bar × 1 + String × 1. Opens locked dungeon chests.'],
-      npcs:['<b>Hunter (Athalan Skree)</b> — YOUR top priority. East of Springlands Spire. Unlocks Longbow + Drying Rack + Tanning Station.','<b>Farmer (Emily Fray)</b> — help the group get her. She grows potion ingredients for Healer.','<b>Alchemist (Balthazar)</b> — help rescue. His Alchemy Station unlocks magic weapon crafting later.'],
-      explore:['Activate <b>Springlands Spire</b> — group event, Ranger leads the route with Glider scouting','Every ruin and cave in Springlands — look for locked chests (Lockpick them)','Mark iron ore nodes constantly — group needs them for armor','Find the edge of <b>Revelwood</b> on the map. Don\'t go in yet — just mark the border.'],
+      npcs:['<b>Hunter (Athalan Skree)</b> — YOUR top priority. East of Springlands Spire. Unlocks Longbow + Drying Rack + Tanning Station.','<b>Farmer (Emily Fray)</b> — NE of Springlands Spire. Scout the camp, clear guards, escort her home.','<b>Alchemist (Balthazar)</b> — west of Springlands Spire. His Alchemy Station unlocks magic weapon crafting later.'],
+      explore:['Activate <b>Springlands Spire</b> — use Glider to scout the route and approach from above','Every ruin and cave in Springlands — look for locked chests (Lockpick them)','Mark iron ore nodes on your map — you\'ll need them constantly for gear upgrades','Find the edge of <b>Revelwood</b> on the map. Don\'t go in yet — just mark the border.'],
       side:['Practice stealth opener on every elite: <em>Crouch → approach from behind → attack = 900% damage multiplier</em>','Glider Mushroom Elixir (Alchemist, once rescued) extends glide time. Great for scouting runs.','Kill birds constantly. You burn 20–30 arrows per dungeon run.'],
     },
     barbarian:{
@@ -1789,13 +1855,13 @@ const WN_PHASES = [
         '<b>First:</b> Mine <b>Iron Ore × 25</b> and smelt into Iron Bars at the Forge (needs Charcoal from Kiln).',
         '<b>Second:</b> Craft a complete <b>Iron Armor set</b> at the Forge. All 5 pieces. Upgrade the chest piece first.',
         '<b>Third:</b> Craft an <b>Iron Sword</b> or <b>Iron Axe</b> (upgrade at Forge as soon as possible).',
-        '<b>Fourth:</b> Activate Springlands Spire with the group. Lead every encounter.',
+        '<b>Fourth:</b> Activate Springlands Spire. Lead every encounter aggressively.',
       ],
       gather:['<b>Iron Ore × 30+</b> — hillsides and rocky outcrops throughout Springlands','<b>Charcoal</b> — keep the Kiln stocked with Wood (Wizard manages this)','<b>Leather × 10</b> — Animal Hide × 1 → Leather × 1 at Tanning Rack','<b>Animal Hide</b> — hunt deer, foxes, wolves','<b>Stone</b> — for extra Forge upgrades'],
       craft:['<b>Iron Helmet</b> → Iron Bar × 3 + Leather × 1','<b>Iron Chestplate</b> → Iron Bar × 5 + Leather × 2. <em>Upgrade this first at Forge.</em>','<b>Iron Leggings</b> → Iron Bar × 4 + Leather × 1','<b>Iron Gauntlets + Boots</b> → Iron Bar × 2 + Leather × 1 each','<b>Iron Sword</b> → Iron Bar × 3 + Wood × 2'],
       npcs:['<b>Alchemist (Balthazar)</b> — west of Springlands Spire. You lead the rescue push.','<b>Farmer (Emily Fray)</b> — NE of Springlands Spire. Standard rescue run.','<b>Hunter (Athalan Skree)</b> — east of Springlands Spire. Barbarian tanks the guards.'],
-      explore:['<b>Springlands Spire</b> — group push. Barbarian tanks every floor.','Every enemy camp you see — clear it. Good iron/loot drop source.','<b>Fell Thunderbrute</b> location (Elixir Wells / Ring of Rot) — scout it with the group for Flame Altar L2.'],
-      side:['<b>Fell Thunderbrute</b> is your first real boss — Barbarian tanks melee, others attack from range. Learn the dodge timing here. Low stakes.','<b>Scavenger Matron</b> is farmable (respawns after server restart) — Flame Altar L3 materials drop here.','Invest <b>Heavy Handed</b> (Barbarian path) after skill reset — this is your stun-bar fuel for all future bosses.'],
+      explore:['<b>Springlands Spire</b> — you tank every floor. Enter aggressive, kite when health drops below 40%.','Every enemy camp you see — clear it. Good iron/loot drop source.','<b>Fell Thunderbrute</b> location (Elixir Wells / Ring of Rot) — scout it. Flame Altar L2 awaits.'],
+      side:['<b>Fell Thunderbrute</b> solo: kite aggressively, use heavy attacks to build stun bar. Low-stakes boss — learn the dodge timing here.','<b>Scavenger Matron</b> is farmable (respawns after server restart) — Flame Altar L3 materials drop here.','Invest <b>Heavy Handed</b> (Barbarian path) after skill reset — this is your stun-bar fuel for all future bosses.'],
     },
     wizard:{
       tldr:'Your Alchemy Lab is online. Start mass-producing potions and learn where your AoE hurts most.',
@@ -1803,27 +1869,69 @@ const WN_PHASES = [
         '<b>First:</b> Rescue <b>Alchemist (Balthazar)</b> — west of Springlands Spire. Build his <b>Alchemy Station</b> (Wood × 15 + Stone × 5 + Glass × 3).',
         '<b>Second:</b> Rescue <b>Farmer (Emily Fray)</b> — NE of Springlands Spire. She unlocks the <b>Seedbed</b> for crop farming.',
         '<b>Third:</b> Build a <b>Farming Plot</b> (Wood × 10 + Soil × 5). Plant Indigo Plants and Blue Amaranth for potions.',
-        '<b>Fourth:</b> Activate Springlands Spire with the group. Start marking copper ore for next phase.',
+        '<b>Fourth:</b> Activate Springlands Spire. Start marking copper ore for next phase.',
       ],
       gather:['<b>Stone × 20</b> — for Alchemy Lab construction','<b>Glass × 3</b> — craft: Sand × 3 at Forge. Need sand first from sandy patches.','<b>Resin</b> — for wand upgrades','<b>Iron Ore × 15</b> — for Forge and Smelter upgrades','<b>Crystal</b> — cave formations in Revelwood border areas (mark for later)'],
       craft:['<b>Alchemy Station</b> → Wood × 15 + Stone × 5 + Glass × 3 (needs Balthazar)','<b>Mortar and Pestle</b> → Stone × 5 (needs Balthazar)','<b>Farming Plot</b> → Wood × 10 + Soil × 5 (needs Emily Fray)','<b>Mana Potion × 4</b> → Blue Amaranth × 2 + Water Vial × 1 each','<b>Stamina Potion × 4</b> → Shrubberry × 2 + Water Vial × 1 each'],
       npcs:['<b>Alchemist (Balthazar)</b> — YOUR top priority. Magic weapon crafting and advanced potions.','<b>Farmer (Emily Fray)</b> — passive ingredient supply chain for all potions.','<b>Hunter (Athalan Skree)</b> — help rescue. Unlocks Drying Rack and Tanning Station.'],
-      explore:['Activate <b>Springlands Spire</b> with the group','Find copper ore nodes at the Revelwood border — mark on map','Explore dark caves for Crystal deposits (Arcane Workbench ingredient)','Clear dungeon rooms quickly with wand AoE — let Barbarian pull first, then cast into the pile'],
-      side:['<b>Chain Hit</b> (Wizard path, 3pts) — invest after skill reset. Try it in a room of 4+ enemies and watch the shock jump.','Plant crops in the Farming Plot ASAP — passive ingredient supply starts the moment seeds go in','Mark all Iron Ore nodes you find on the map. Whole group needs them.'],
+      explore:['Activate <b>Springlands Spire</b>','Find copper ore nodes at the Revelwood border — mark on map','Explore dark caves for Crystal deposits (Arcane Workbench ingredient)','Clear dungeon rooms quickly with wand AoE — stand in the doorway and cast Chain Hit into the pack.'],
+      side:['<b>Chain Hit</b> (Wizard path, 3pts) — invest after skill reset. Try it in a room of 4+ enemies and watch the shock jump.','Plant crops in the Farming Plot ASAP — passive ingredient supply starts the moment seeds go in','Mark all Iron Ore nodes you find on the map — you\'ll need a constant supply for gear upgrades.'],
+    },
+    battlemage:{
+      tldr:'Balthazar unlocks elemental wands this phase. Get a Fire or Ice Wand and combine it with iron melee gear — you\'re now dealing two damage types.',
+      priority:[
+        '<b>First:</b> Rescue <b>Alchemist (Balthazar)</b> — west of Springlands Spire. He unlocks magical weapon crafting at his station.',
+        '<b>Second:</b> Craft a <b>Fire Wand</b> (Wood × 4 + Ember Shard × 3) at the Alchemist Station.',
+        '<b>Third:</b> Craft a full <b>Iron Armor set</b> at the Forge. INT gear preferred — check loot for Intelligence perks.',
+        '<b>Fourth:</b> Invest <b>Wand Master</b> (Battlemage path, 3pts) — 30% free projectile proc. Passive DPS that runs constantly.',
+      ],
+      gather:['<b>Iron Ore × 25</b> — for armor and melee weapon','<b>Ember Shard × 6</b> — fire enemies or Kindlewastes border deposits (Fire Wand)','<b>Resin × 5</b> — wand upgrade ingredient','<b>Glass × 3</b> — Sand × 3 at Forge (Alchemy Station requirement)','<b>Stone × 20</b> — Alchemy Station construction'],
+      craft:['<b>Fire Wand</b> → Wood × 4 + Ember Shard × 3 (Balthazar\'s Alchemist Station)','<b>Alchemy Station</b> → Wood × 15 + Stone × 5 + Glass × 3 (needs Balthazar)','<b>Iron Sword or Axe</b> → Iron Bar × 3–5 + Wood/Leather at Forge','<b>Iron Armor set</b> — full 5 pieces. Chest first.','<b>Mana Potion × 4</b> → Blue Amaranth × 2 + Water Vial × 1 each'],
+      npcs:['<b>Alchemist (Balthazar)</b> — top priority. His station unlocks elemental wands, advanced potions, and Archmage armor later.','<b>Farmer (Emily Fray)</b> — plant Blue Amaranth immediately after rescue. Your Mana Potion supply chain.','<b>Hunter (Athalan Skree)</b> — unlocks Tanning Station for Leather (armor component).'],
+      explore:['Activate <b>Springlands Spire</b>','Find Ember Shard deposits (red rocky areas near Kindlewastes border) — mark them','Map Crystal formations in cave areas (Revelwood border) — Arcane Workbench ingredient later','Sweep every dungeon for INT-perk armor drops — battlemage needs INT gear'],
+      side:['Practice the parry → cast rotation this phase: parry a hit → immediately cast wand → melee → parry again. This is the battlemage loop.','<b>Arcane Deflection</b> (Battlemage path, 3pts) is available — invest now if you have points. 20 mana per parry.','Mark all Iron Ore nodes. Constant weapon and armor upgrades = your damage scaling.'],
+    },
+    assassin:{
+      tldr:'Get the Longbow and Dagger this phase. Stealth opener + dagger follow-up is now your full combat loop.',
+      priority:[
+        '<b>First:</b> Rescue <b>Hunter (Athalan Skree)</b> — east of Springlands Spire. He unlocks Longbow and Dagger crafting.',
+        '<b>Second:</b> Craft a <b>Dagger</b> (Iron Bar × 2 + Leather × 1 at Forge). Your primary melee weapon.',
+        '<b>Third:</b> Craft a <b>Longbow</b> (Wood Plank × 8 + String × 8 + Iron Bar × 2 at Hunter Workbench) — ranged backup.',
+        '<b>Fourth:</b> Invest <b>Sneak Attack</b> (Center tree, 3pts) if you haven\'t. +900% damage. Time to one-shot elites.',
+      ],
+      gather:['<b>Iron Ore × 20</b> — for Dagger and basic armor','<b>Feathers × 40+</b> — arrows for Longbow backup','<b>Leather × 5</b> — Animal Hide → Tanning Rack (needs Hunter)','<b>Silk</b> — cave spiders in Springlands dark areas (Glider upgrade)','<b>Lockpick × 5</b> → Iron Bar × 1 + String × 1. Assassin loves locked chests.'],
+      craft:['<b>Dagger</b> → Iron Bar × 2 + Leather × 1 at Forge','<b>Longbow</b> → Wood Plank × 8 + String × 8 + Iron Bar × 2 at Hunter Workbench','<b>Lockpick × 10</b> → Iron Bar + String. Dungeon locked chests = guaranteed loot.','<b>Glider Upgrade</b> → Silk × 4 + Iron Bar × 2 + Cloth × 4','<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each'],
+      npcs:['<b>Hunter (Athalan Skree)</b> — your critical NPC. Dagger + Longbow both require his workbench.','<b>Alchemist (Balthazar)</b> — west of Spire. Glider Mushroom Elixir extends glide = better stealth repositioning.','<b>Farmer (Emily Fray)</b> — NE of Spire. Taro Root Curry food (+21% dagger damage) needs her crops later.'],
+      explore:['Activate <b>Springlands Spire</b>','Practice stealth clearing every dungeon room: crouch at entrance, pick off the farthest enemy first','Every locked chest in Springlands — worth the lockpick. Assassin clears fast enough to find them all.','Find Silk-dropping cave spiders — Glider upgrade prep'],
+      side:['Full stealth loop now online: Crouch → Sneak Attack opener → dagger follow-up → Grapple out if threatened.','Taro Root Curry ingredient (Taro Root) — check if Emily Fray has it growing. Massive dagger damage upgrade.','Lockpicks are cheap to craft (Iron + String). Never not have 10 on you.'],
+    },
+    paladin:{
+      tldr:'Full iron armor this phase. You are now a wall. Nothing kills a properly geared Paladin in Springlands.',
+      priority:[
+        '<b>First:</b> Smelt <b>Iron Ore × 25</b> into Iron Bars at the Forge. Craft a complete <b>Iron Armor set</b> (all 5 pieces).',
+        '<b>Second:</b> Craft an <b>Iron Sword</b> or <b>Iron Axe</b> (Iron Bar × 3 + Wood × 2 at Forge).',
+        '<b>Third:</b> Rescue <b>Alchemist (Balthazar)</b> and <b>Farmer (Emily Fray)</b>. Their crafting unlocks your potion supply.',
+        '<b>Fourth:</b> Invest <b>Battle Heal</b> (Warrior path, 3pts) — 5% max HP on melee crits. This is your sustain core.',
+      ],
+      gather:['<b>Iron Ore × 30+</b> — hillsides throughout Springlands','<b>Charcoal</b> — keep the Charcoal Kiln stocked with Wood','<b>Leather × 10</b> — Animal Hide → Tanning Rack (needs Hunter)','<b>Indigo Plant × 10</b> — Healing Potions ingredient','<b>Animal Hide</b> — hunt deer, foxes, wolves'],
+      craft:['<b>Iron Chestplate</b> → Iron Bar × 5 + Leather × 2. <em>Upgrade at Forge first.</em>','<b>Iron Helmet, Leggings, Gauntlets, Boots</b> — full set priority','<b>Iron Sword</b> → Iron Bar × 3 + Wood × 2','<b>Healing Potion × 8</b> → Indigo Plant × 2 + Water Vial × 1 each','<b>Shield</b> (if craftable at Forge) — Iron Bar × 4 + Leather × 2. Shield bash staggers enemies.'],
+      npcs:['<b>Alchemist (Balthazar)</b> — Healing Potions upgrade, Water Staff for secondary sustain later.','<b>Farmer (Emily Fray)</b> — passive herb supply for potions. Plant Indigo Plants and Yarrow immediately.','<b>Hunter (Athalan Skree)</b> — Tanning Station for Leather (armor component).'],
+      explore:['<b>Springlands Spire</b> — clear every floor. Your iron armor lets you tank through this.','Every enemy camp — clear it. Iron + Battle Heal means you can farm endlessly this phase.','<b>Fell Thunderbrute</b> location — scout it, then fight it. First real test of your sustain build.'],
+      side:['<b>Fell Thunderbrute</b> solo Paladin: Battle Heal triggers on every melee crit. Heavy attack to stagger → light attack crit chain → heal while killing.','Invest <b>Heavy Handed</b> (Barbarian path, 3pts) for stun bar generation — Paladin uses it too.','Upgrade your iron chest piece at Forge as soon as possible. Every upgrade tier adds significant durability.'],
     },
     healer:{
       tldr:'Build the Alchemy Lab and get your potion supply chain running. This is your power spike phase.',
       priority:[
         '<b>First:</b> Rescue <b>Alchemist (Balthazar)</b>. Build his <b>Alchemy Station</b>. This upgrades your potions from "ok" to "actually good".',
         '<b>Second:</b> Rescue <b>Farmer (Emily Fray)</b>. Build a <b>Farming Plot</b> (Wood × 10 + Soil × 5). Plant Indigo Plants immediately.',
-        '<b>Third:</b> Craft <b>Healing Potion × 8</b> (Indigo Plant × 2 + Water Vial × 1 each) for the group. Distribute 2 per player.',
+        '<b>Third:</b> Craft <b>Healing Potion × 8</b> (Indigo Plant × 2 + Water Vial × 1 each). Bank them — carry 4 into every dungeon.',
         '<b>Fourth:</b> Build a <b>Spinning Wheel</b> and <b>Loom</b> — these feed cloth production for armor.',
       ],
       gather:['<b>Indigo Plant × 20+</b> — blue flowers on forest floor in Springlands','<b>Blue Amaranth</b> — blue flowering plants in meadows (Mana Potions for Wizard)','<b>Shrubberry × 15</b> — small berry shrubs near paths (Stamina Potions)','<b>Water Vials × 20</b> — from the Well or scoop from rivers','<b>Plant Fiber × 40</b> — for Thread → Cloth production'],
       craft:['<b>Alchemy Station</b> → Wood × 15 + Stone × 5 + Glass × 3 (needs Balthazar)','<b>Farming Plot</b> → Wood × 10 + Soil × 5 (needs Emily Fray)','<b>Healing Potion × 8</b> → Indigo Plant × 2 + Water Vial × 1 each','<b>Stamina Potion × 4</b> → Shrubberry × 2 + Water Vial × 1 each','<b>Spinning Wheel</b> → Wood × 15 (needs Emily Fray). <b>Loom</b> → Wood × 20 (needs Emily Fray).'],
       npcs:['<b>Alchemist (Balthazar)</b> — your most important NPC. Unlocks real potions.','<b>Farmer (Emily Fray)</b> — passive crop supply chain. Plant crops day one of rescue.','<b>Hunter (Athalan Skree)</b> — helps with Tanning Station for Leather (armor ingredients).'],
       explore:['Map all herb locations in Springlands — you\'ll return to these every session','Find the Seedbed spot in the base — build it near water or a Well so it\'s easy to irrigate','Herbalism run: walk every meadow, harvest everything, identify what grows where'],
-      side:['Restock potions at the start of EVERY session. Make 20+ at a time. Never run out.','Build a dedicated Potion Chest near the Flame Altar. Label it. Everyone knows where to top up.','<b>Water Aura</b> tip: heal output scales with Intelligence. Check your armor for INT perks when looting.'],
+      side:['Restock potions at the start of EVERY session. Make 20+ at a time. Never run out.','Build a dedicated Potion Chest near the Flame Altar. Label it. Quick access before every run.','<b>Water Aura</b> tip: heal output scales with Intelligence. Check your armor for INT perks when looting.'],
     },
   },
 
@@ -1835,27 +1943,27 @@ const WN_PHASES = [
         '<b>First:</b> Invest <b>Sneak Attack</b> (Center tree, 3pts) — +900% damage. This one-shots most elites. Priority after U8 reset.',
         '<b>Second:</b> Invest <b>Updraft</b> (Assassin path, 4pts) — lets you gain height while gliding. Practice until it\'s muscle memory.',
         '<b>Third:</b> Craft a <b>Crossbow</b> (Iron Bar × 4 + String × 6 + Wood × 4) from Athalan Skree\'s workbench.',
-        '<b>Fourth:</b> Activate the <b>Revelwood Spire</b> with the group.',
+        '<b>Fourth:</b> Activate the <b>Revelwood Spire</b>.',
       ],
       gather:['<b>Hardwood</b> — chop trees in Revelwood forest','<b>Copper Ore</b> — Revelwood rocky areas. Smelt into Copper Bars for weapon upgrades.','<b>Silk × 8+</b> — cave spiders in Revelwood dark areas','<b>Leather × 10</b> — animal hide from Revelwood wildlife','<b>Clay</b> — dig riverbank soil in Revelwood'],
       craft:['<b>Crossbow</b> → Iron Bar × 4 + String × 6 + Wood × 4 at Hunter Workbench','<b>Dagger (upgrade)</b> — stealth opener before switching to Crossbow for ranged follow-up','<b>Glider Mushroom Elixir</b> → Glider Mushroom × 3 + Water Vial × 1. Extends glide = better scouting.','<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each'],
       npcs:['<b>Bard (Valory)</b> — Sunken Ancient City, Revelwood/Blackmire border. Triggered via Flame quest ~level 12. She\'s optional but unlocks instruments and cosmetics.','All NPCs from phases 1–2 should be rescued by now. If not, go back and get them.'],
-      explore:['<b>Revelwood Spire</b> — group push. Ranger scouts the path from above first.','<b>Revelwood vault dungeon</b> — multi-room dungeon. Scout every room from the high ground before the group enters.','<b>Steeple Spire</b> — secondary Revelwood spire. Extra fast travel point. Quick to activate.','Explore the Blackmire border — mark it but don\'t go in. You\'ll need Antidotes first.'],
+      explore:['<b>Revelwood Spire</b> — use Glider to scout the approach from above before committing.','<b>Revelwood vault dungeon</b> — multi-room dungeon. Scout every room from high ground before entering.','<b>Steeple Spire</b> — secondary Revelwood spire. Extra fast travel point. Quick to activate.','Explore the Blackmire border — mark it but don\'t go in. You\'ll need Antidotes first.'],
       side:['Practice the full stealth loop: Crouch → Approach → Sneak Attack (+900%) → Updraft to disengage → land, repeat','Taro Root Curry food (+21% ranged + dagger damage) — available if Emily Fray has Taro Root growing. Huge damage boost.','Multi Shot (Ranger path, 3pts) — 20% chance for free arrow burst. Invest now.'],
     },
     barbarian:{
       tldr:'Heavy attack combos are your identity now. Whirlwind Crescendo for crowds, heavy stun for bosses. Never stop swinging.',
       priority:[
         '<b>First:</b> Invest <b>Whirlwind Crescendo</b> (Barbarian path, 5pts) — spinning AoE. Game-changer in dungeons.',
-        '<b>Second:</b> Invest <b>Breach</b> (Barbarian path, 3pts) — use it before EVERY boss pull. Group DPS multiplier.',
+        '<b>Second:</b> Invest <b>Breach</b> (Barbarian path, 3pts) — use it before EVERY boss pull. Your personal DPS multiplier.',
         '<b>Third:</b> Upgrade armor to Revelwood-tier. Upgrade chest piece first. Then legs. Then the rest.',
-        '<b>Fourth:</b> Clear the <b>Revelwood vault</b> with the group. You tank every room.',
+        '<b>Fourth:</b> Clear the <b>Revelwood vault</b>. You tank every room — enter aggressive, kite when below 40% HP.',
       ],
       gather:['<b>Hardwood</b> — weapon upgrades','<b>Copper Ore</b> — smelt for Copper Bars, used in Revelwood-tier weapons','<b>Clay × 20</b> — crafting material for Revelwood structures and Forge upgrades','<b>Leather × 15</b> — all armor needs it'],
       craft:['<b>Two-Handed Sword</b> → Iron Bar × 5 + Leather × 2 at Forge. <em>Heavy attack on 2H fills stun bar fast.</em>','<b>Warhammer</b> → Iron Bar × 6 + Wood × 3. Highest stagger. Best for boss stun cycling.','<b>Armor upgrades at Forge</b> — open Forge → select armor piece → Upgrade tab. Do chest first.'],
       npcs:['<b>Bard (Valory)</b> — Revelwood. YOU force the door on her rescue location.','Make sure all prior NPCs are placed and assigned beds. If Alchemist or Hunter are missing, go back now.'],
-      explore:['<b>Revelwood Spire</b> activation — you lead the climb','<b>Revelwood vault</b> — enter every room first, call "room clear" when safe','<b>Steeple Spire</b> — secondary fast travel in Revelwood. 10-minute detour worth doing.','<b>Fell Wispwyvern</b> at Pikemead\'s Reach — Flame Altar L4. Mark the location for the boss push.'],
-      side:['Learn the <b>Fell Wispwyvern</b> patterns before engaging: Frost breath = dodge sideways through it. Kill adds first or get overwhelmed.','Use <b>Breach</b> + immediate heavy attack chain on bosses. The stun window is your party\'s DPS opportunity.','<b>Blood Rage</b> (Barbarian path, 5pts) is your endgame damage spike. Invest after Whirlwind Crescendo.'],
+      explore:['<b>Revelwood Spire</b> activation — you lead the climb','<b>Revelwood vault</b> — enter every room first, clear it out before pressing deeper','<b>Steeple Spire</b> — secondary fast travel in Revelwood. 10-minute detour worth doing.','<b>Fell Wispwyvern</b> at Pikemead\'s Reach — Flame Altar L4. Mark the location for the boss push.'],
+      side:['Learn the <b>Fell Wispwyvern</b> patterns before engaging: Frost breath = dodge sideways through it. Kill adds first or get overwhelmed.','<b>Breach</b> + heavy attack chain on bosses = massive stun window to dump all cooldowns into.','<b>Blood Rage</b> (Barbarian path, 5pts) is your endgame damage spike. Invest after Whirlwind Crescendo.'],
     },
     wizard:{
       tldr:'Magic weapons unlock via Balthazar this phase. Get a shock wand, invest Chain Hit, and start melting entire rooms.',
@@ -1868,8 +1976,50 @@ const WN_PHASES = [
       gather:['<b>Ember Shard × 10</b> — from fire enemies OR red deposits in Kindlewastes border areas','<b>Ice Crystal × 6</b> — blue veins in cold Nomad Highlands caves (scout now, mine next phase)','<b>Hardwood</b> — wand handles','<b>Crystal × 5</b> — cave formations, used in Alchemist Station and wand crafting'],
       craft:['<b>Fire Wand</b> → Wood × 4 + Ember Shard × 3 (Alchemist Station, Balthazar)','<b>Ice Staff</b> → Wood × 6 + Ice Crystal × 3 (Alchemist Station, Balthazar). <em>Slows enemies.</em>','<b>Water Staff (for Healer)</b> → Wood × 6 + Water Crystal × 2 (Alchemist Station)','<b>Strong Mana Potion × 4</b> → Blue Amaranth × 4 + Water Vial × 1 each'],
       npcs:['<b>Bard (Valory)</b> — Sunken Ancient City. Wizard AoE-clears the area fast.','All Springlands NPCs should be rescued and assigned. If Carpenter (Cade Hawthorn) is missing, go back — Low Meadows.'],
-      explore:['<b>Revelwood Spire</b> activation','<b>Revelwood vault</b> — Wizard hangs in mid-rear position, casts Chain Hit through Barbarian into packs','Mark Ember Shard deposit locations (red rock, Kindlewastes border area)','Find Ice Crystal deposits in cold Nomad Highlands — mark for Phase 4'],
+      explore:['<b>Revelwood Spire</b> activation','<b>Revelwood vault</b> — stand in doorways, Chain Hit into every room. Reposition after each kill.','Mark Ember Shard deposit locations (red rock, Kindlewastes border area)','Find Ice Crystal deposits in cold Nomad Highlands — mark for Phase 4'],
       side:['Learn to parry (block button timed) — each successful parry = 20 mana back (Arcane Deflection). Practice on easy enemies.','<b>Dark Arts</b> (Wizard path, 3pts) — +10% Shroud damage. All future biomes are shroud-heavy. Invest soon.','Archmage armor is crafted via Balthazar using Lapislazuli + Fossilized Bone. Start farming these in Nomad Highlands.'],
+    },
+    battlemage:{
+      tldr:'Magic weapons are fully online. Fire Wand + melee is your loop. Chain Hit in doorways melts entire rooms before they can respond.',
+      priority:[
+        '<b>First:</b> Invest <b>Chain Hit</b> (Wizard path, 3pts) — shock spells jump between targets within 15m. Combined with Fire Wand = massive pack clear.',
+        '<b>Second:</b> Invest <b>Arcane Deflection</b> (Battlemage path, 3pts) — parries restore 20 mana. Your sustain loop is now active.',
+        '<b>Third:</b> Craft a <b>Crossbow</b> or upgrade wand to Revelwood tier via Balthazar.',
+        '<b>Fourth:</b> Activate the <b>Revelwood Spire</b>.',
+      ],
+      gather:['<b>Ember Shard × 8</b> — Fire Wand ammo + fire resistance potion ingredient','<b>Hardwood</b> — Revelwood tree chops. Wand and weapon upgrades.','<b>Copper Ore</b> — Revelwood rocky areas. Copper tier weapon upgrades.','<b>Crystal × 5</b> — cave formations. Arcane Workbench and advanced weapon ingredient.','<b>Leather × 10</b> — all armor tiers require it'],
+      craft:['<b>Wand (Revelwood tier)</b> — upgrade at Alchemist Station or Forge. Check recipe list.','<b>Strong Mana Potion × 6</b> → Blue Amaranth × 4 + Water Vial × 1 each','<b>Fire Resistance Elixir × 4</b> → Ember Moss × 2 + Water Vial × 1 (Kindlewastes prep)','<b>Armor upgrade to Revelwood tier</b> — Forge → select piece → Upgrade tab. Chest first.'],
+      npcs:['<b>Bard (Valory)</b> — Sunken Ancient City, Revelwood/Blackmire border. Optional but gives instruments + cosmetics.','All Springlands NPCs rescued and assigned? If Carpenter (Cade Hawthorn) is missing, go back — Low Meadows.'],
+      explore:['<b>Revelwood Spire</b> activation','<b>Revelwood vault</b> — stand in doorways, Chain Hit into rooms. AoE shock jumps = clear before enemies close in.','Find Ember Shard red deposits at Kindlewastes border — mark for Phase 4','Find Ice Crystal blue veins in cold Nomad Highlands caves — mark for Phase 4'],
+      side:['<b>Fell Wispwyvern</b> Revelwood boss: Frost breath = dodge sideways, not backward. Chain Hit during add spawns.','Arcane Deflection parry loop: in long dungeons you\'re mana-positive with consistent parries.','<b>Dark Arts</b> (Wizard path, 3pts) is worth investing now — +10% Shroud damage applies to all endgame content.'],
+    },
+    assassin:{
+      tldr:'Sneak Attack + Updraft is online. You can one-shot elites, escape to altitude, reset stealth, and repeat. You are unkillable by normal enemies this phase.',
+      priority:[
+        '<b>First:</b> Invest <b>Sneak Attack</b> (Center tree, 3pts) if not done — +900% damage from stealth. Mandatory.',
+        '<b>Second:</b> Invest <b>Updraft</b> (Assassin path, 4pts) — gain altitude while gliding. Escape to height after every opener.',
+        '<b>Third:</b> Craft a <b>Crossbow</b> (Iron Bar × 4 + String × 6 + Wood × 4 at Hunter Workbench) — ranged follow-up after opener.',
+        '<b>Fourth:</b> Activate the <b>Revelwood Spire</b>.',
+      ],
+      gather:['<b>Hardwood</b> — Crossbow crafting','<b>Copper Ore</b> — Copper Bar upgrades for Crossbow and Dagger','<b>Silk × 8+</b> — cave spiders in Revelwood dark areas (Glider upgrade)','<b>Clay × 10</b> — Revelwood crafting material'],
+      craft:['<b>Crossbow</b> → Iron Bar × 4 + String × 6 + Wood × 4 at Hunter Workbench','<b>Dagger (upgrade)</b> — check Forge for Revelwood-tier dagger recipe. Iron → Copper tier.','<b>Glider Mushroom Elixir</b> → Glider Mushroom × 3 + Water Vial × 1. Extends glide = longer repositioning loops.','<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each'],
+      npcs:['<b>Bard (Valory)</b> — Revelwood. Stealth-clear her rescue location before moving in.','All prior NPCs rescued? If Carpenter (Cade Hawthorn) is missing, go back — Low Meadows.'],
+      explore:['<b>Revelwood Spire</b> activation','<b>Revelwood vault</b> — stealth through every floor. Mark patrol patterns before pulling.','<b>Steeple Spire</b> — secondary fast travel. Assassin mobility makes this a 10-minute detour.','<b>Fell Wispwyvern</b> at Pikemead\'s Reach — mark it. Sneak Attack opener on Wispwyvern = massive first phase damage.'],
+      side:['Full Revelwood assassin loop: Sneak Attack opener → Crossbow follow-up → Updraft to roof → reset stealth → repeat.','<b>Taro Root Curry</b> food (+21% dagger/ranged damage) — huge if Emily Fray has Taro Root growing.','Fell Wispwyvern adds: kill adds first. Stealth-one-shot each add before pulling the boss.'],
+    },
+    paladin:{
+      tldr:'Heavy attack combos + Water Aura regen. You hit hard, shrug off hits, and heal while doing it. Revelwood dungeons are the easiest content you\'ll see.',
+      priority:[
+        '<b>First:</b> Invest <b>Water Aura</b> (Healer path, 3pts) — passive self-heal in melee. This is your survival upgrade.',
+        '<b>Second:</b> Invest <b>Battle Heal</b> (Warrior path, 3pts) if not done — 5% max HP on melee crits stacks with Water Aura.',
+        '<b>Third:</b> Invest <b>Whirlwind Crescendo</b> (Barbarian path, 5pts) — AoE spin for room clearing.',
+        '<b>Fourth:</b> Upgrade armor to Revelwood tier and activate the <b>Revelwood Spire</b>.',
+      ],
+      gather:['<b>Hardwood</b> — weapon and armor upgrades','<b>Copper Ore</b> — smelt for weapon upgrades','<b>Clay × 20</b> — Revelwood structures and Forge upgrades','<b>Water Crystal</b> — Veilwater Basin border. Water Staff ingredient (passive healing upgrade later)','<b>Leather × 15</b> — all armor requires it'],
+      craft:['<b>Two-Handed Sword</b> → Iron Bar × 5 + Leather × 2. Heavy attack on 2H fills stun bar fast.','<b>Warhammer option</b> → Iron Bar × 6 + Wood × 3. Highest stagger. Best for boss stun cycling.','<b>Full armor upgrade to Revelwood tier</b> — Forge → Upgrade tab. Chest piece first.','<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each'],
+      npcs:['<b>Bard (Valory)</b> — Revelwood. Clear the rescue location before going in.','<b>Carpenter (Cade Hawthorn)</b> — Low Meadows SE. Unlocks Table Saw for bulk wood production.'],
+      explore:['<b>Revelwood Spire</b> activation — you tank every floor','<b>Revelwood vault</b> — enter rooms first, clear everything before moving to the next','<b>Steeple Spire</b> — secondary fast travel. Quick detour.','<b>Fell Wispwyvern</b> — Paladin strategy: Water Aura + Battle Heal sustain. Heavy attack fills stun bar. Dodge the frost breath.'],
+      side:['<b>Fell Wispwyvern</b>: frost breath = dodge sideways. Kill adds to avoid overwhelm. Your sustain handles the boss DPS.','Heavy attack → stagger → light attack crit chain (Battle Heal triggers) → heavy attack again. This is your boss loop.','<b>Blink</b> (Healer path, 4pts) is worth investing now. I-frame teleport stacks insanely well with the Paladin tankiness.'],
     },
     healer:{
       tldr:'You get Blink this phase. It\'s a teleport with I-frames. Practice it immediately — it changes how you survive boss fights.',
@@ -1877,13 +2027,13 @@ const WN_PHASES = [
         '<b>First:</b> Invest <b>Blink</b> (Healer path, 4pts) — replaces dodge with teleport I-frames. Strictly better than Strategic Maneuver.',
         '<b>Second:</b> Invest <b>Waters of Life</b> (Healer path, 2pts) — doubles your Water Aura healing output.',
         '<b>Third:</b> Build the <b>Dye Station</b> (Wood × 10 + Dye Plant × 3). Do this during downtime between dungeons.',
-        '<b>Fourth:</b> Start stocking <b>Strong Health Potions</b> (Yarrow × 3 + Water Vial × 1 each) for the whole group.',
+        '<b>Fourth:</b> Start stocking <b>Strong Health Potions</b> (Yarrow × 3 + Water Vial × 1 each). Carry at least 6 per dungeon run.',
       ],
       gather:['<b>Yarrow × 20</b> — white/yellow flowers in Revelwood and higher biomes. Best healing ingredient now.','<b>Dye Plant × 5</b> — colored flowers specific to Revelwood forest','<b>Hardwood</b> — for advanced armor crafting','<b>Clay</b> — building material for Revelwood-tier stations'],
       craft:['<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each','<b>Dye Station</b> → Wood × 10 + Dye Plant × 3','<b>Loom</b> → Wood × 20 (Emily Fray) if not built yet. Needed for Cloth + fabric armor.','<b>Chicken Soup</b> (if Emily Fray has chickens) → Raw Chicken + Water + Herbs. +HP regen, frees potion slots.'],
       npcs:['<b>Bard (Valory)</b> — help rescue. Build her a bed immediately.','<b>Carpenter (Cade Hawthorn)</b> — Low Meadows SE. If not rescued yet, go NOW. He unlocks Table Saw + bulk wood production.'],
-      explore:['<b>Revelwood Spire</b> activation — stay inside Water Aura range of Barbarian at all times','Revelwood vault — practice Blink during combat. Teleport through incoming slams.','Find Yarrow patches — they grow throughout Revelwood and Nomad Highlands. Map the clusters.'],
-      side:['Build the Dye Station during session downtime. Give everyone armor colors. It\'s cosmetic but group morale is real.','<b>Emergency Blink</b> (Healer path, 2pts) — breaks stun states. Invest after Blink. You WILL get stunned.','Water Aura healing tip: every point of Intelligence on your gear = more healing. Always check INT values when looting.'],
+      explore:['<b>Revelwood Spire</b> activation — keep Water Aura on and Blink ready at all times','Revelwood vault — practice Blink during combat. Teleport through incoming slams.','Find Yarrow patches — they grow throughout Revelwood and Nomad Highlands. Map the clusters.'],
+      side:['Build the Dye Station during downtime. Customize your look — cosmetics matter when you\'re grinding solo.','<b>Emergency Blink</b> (Healer path, 2pts) — breaks stun states. Invest after Blink. You WILL get stunned.','Water Aura healing tip: every point of Intelligence on your gear = more healing. Always check INT values when looting.'],
     },
   },
 
@@ -1895,16 +2045,16 @@ const WN_PHASES = [
         '<b>First:</b> Craft <b>Antidotes × 8</b> (Swamp Herb × 3 + Water Vial × 1 each). Blackmire = poison everywhere. No antidotes = no Blackmire.',
         '<b>Second:</b> Invest <b>Multi Shot</b> (Ranger path, 3pts) if not done — 20% free arrow burst proc.',
         '<b>Third:</b> Invest <b>Airborne</b> (Assassin path, 2pts) — 30% less stamina for gliding. Scouting runs become much longer.',
-        '<b>Fourth:</b> Activate <b>Nomad Highlands Spire</b> with the group — staging area for endgame.',
+        '<b>Fourth:</b> Activate <b>Nomad Highlands Spire</b> — staging area for endgame.',
       ],
       gather:['<b>Swamp Herb × 30</b> — ground-level plants in Blackmire swamp floor','<b>Ember Shard</b> — for fire wand and resistance potions','<b>Sulfur × 20</b> — Kindlewastes deposits (border area). Flame Altar L6 material later.','<b>Saffron</b> — desert flowers in Nomad Highlands arid zones','<b>Lapislazuli</b> — Nomad Highlands / Kindlewastes mining (Archmage armor ingredient)'],
       craft:['<b>Antidote × 8</b> → Swamp Herb × 3 + Water Vial × 1 each. <em>Carry minimum 4 at all times in Blackmire.</em>','<b>Fire Resistance Elixir × 4</b> → Ember Moss × 2 + Water Vial × 1 (prep for Kindlewastes)','<b>Weapon upgrade</b> — check crafting menu for Blackmire-tier bow/crossbow recipes. Upgrade to max available.'],
       npcs:['No new primary NPCs this phase. Focus on <b>upgrading existing NPC workstations</b>.','Look for <b>Assistant NPCs</b> on the map (Rochelle Anders, Lady LeClair, Galen Yager, etc.) — they increase NPC crafting capacity.'],
-      explore:['<b>Blackmire vault</b> — multi-floor dungeon. Poison hazards. Scout all rooms from above before group enters.','<b>Nomad Highlands Spire</b> — activate for endgame staging','<b>Cradle of Dusk</b> shroud area — Fell Monstrosity is here (Flame Altar L5). Group push.','Farm Lapislazuli from Nomad Highlands mines — needed for Archmage armor'],
+      explore:['<b>Blackmire vault</b> — multi-floor dungeon. Poison hazards. Scout all rooms from above before entering.','<b>Nomad Highlands Spire</b> — activate for endgame staging','<b>Cradle of Dusk</b> shroud area — Fell Monstrosity is here (Flame Altar L5). Stealth-clear the outer area before pulling the boss.','Farm Lapislazuli from Nomad Highlands mines — needed for Archmage armor'],
       side:['Look for Legendary armor drops with <b>Ranged Damage</b> or <b>Dexterity</b> perks. Upgrade immediately at Forge.','Practice stealth clear on Blackmire rooms: crouch outside door, pick off isolated enemies, Sneak Attack the patrol.','Taro Root Curry + Coconana Smoothie food combo = max ranged DPS. Emily Fray should have these crops growing now.'],
     },
     barbarian:{
-      tldr:'Blood Rage spikes your damage at low HP. Trust the Healer to keep you alive while you deal insane damage.',
+      tldr:'Blood Rage spikes your damage at low HP. Actively manage your HP to ride the Blood Rage threshold — drink pots after the spike, not before.',
       priority:[
         '<b>First:</b> Craft <b>Antidote × 8</b>. Blackmire poison will kill you if you skip this.',
         '<b>Second:</b> Invest <b>Blood Rage</b> (Barbarian path, 5pts) — damage scales at low HP. Coordinate with Healer.',
@@ -1915,7 +2065,7 @@ const WN_PHASES = [
       craft:['<b>Antidote × 8</b> → Swamp Herb × 3 + Water Vial × 1 each','<b>Weapon upgrade to Blackmire tier</b> — check Forge for new recipe unlocks after vault clear','<b>Full armor upgrade run</b> — Forge → each piece → Upgrade tab. Do every slot before Blackmire vault.'],
       npcs:['No new main NPCs. Hunt for <b>Assistant NPCs</b> — their map markers appear as you explore new areas.','Make sure <b>Carpenter (Cade Hawthorn)</b> is rescued (Low Meadows) — his Table Saw helps bulk material production.'],
       explore:['<b>Blackmire vault</b> — hardest dungeon so far. All armor upgraded, 8 potions each, antidotes mandatory.','<b>Nomad Highlands</b> — huge biome, sweep for resources and Spire activation','<b>Fell Monstrosity</b> — Cradle of Dusk shroud area. Flame Altar L5 boss. Group push.','<b>Fell Sicklescythe</b> — Kindlewastes, Ridgeback Mine area. Flame Altar L6.'],
-      side:['Blood Rage strategy: signal the Healer when you\'re at <30% HP and feeling good. That\'s your DPS spike window.','Breach → heavy attack → stun → group nukes → Breach again. Drill this loop with the Wizard.','Farm Sulfur in Kindlewastes border area — you\'ll need 40× for Flame Altar L6.'],
+      side:['Blood Rage strategy: at <30% HP your damage spikes. Drink a potion AFTER exploiting the window, not before — maximize uptime.','Breach → heavy attack → stun → dump all cooldowns → Breach again. Drill this loop on every boss.','Farm Sulfur in Kindlewastes border area — you\'ll need 40× for Flame Altar L6.'],
     },
     wizard:{
       tldr:'Dark Arts + Chain Hit in shroud zones = you solo-clear entire rooms while others watch.',
@@ -1923,13 +2073,54 @@ const WN_PHASES = [
         '<b>First:</b> Invest <b>Dark Arts</b> (Wizard path, 3pts) — +10% Shroud damage. All endgame content is shroud-dense. Invest now.',
         '<b>Second:</b> Invest <b>Mass Destruction</b> (Wizard path, 4pts) — magic crits AoE shock everything within 20m.',
         '<b>Third:</b> Craft <b>Antidote × 8</b> and <b>Fire Resistance Elixir × 4</b> (prep for next phase).',
-        '<b>Fourth:</b> Clear <b>Blackmire vault</b> and activate <b>Nomad Highlands Spire</b>.',
+        '<b>Fourth:</b> Clear <b>Blackmire vault</b> solo and activate <b>Nomad Highlands Spire</b>.',
       ],
       gather:['<b>Swamp Herb</b> — Antidote ingredient','<b>Amber × 15</b> — Flame Altar L4 material. Springlands/Revelwood border.','<b>Lapislazuli × 40</b> — Nomad Highlands/Kindlewastes. Flame Altar L6 + Archmage armor.','<b>Fossilized Bones × 20</b> — Archmage armor ingredient. Nomad Highlands drop.','<b>Tin Ore × 20</b> — Flame Altar L5 material'],
       craft:['<b>Antidote × 8</b>','<b>Fire Resistance Elixir × 4</b> → Ember Moss × 2 + Water Vial × 1 (prep for Kindlewastes)','<b>Archmage Armor</b> (Balthazar, Alchemist Station) → Lapislazuli + Fossilized Bone. Farm ingredients now.','<b>Strong Mana Potion × 8</b> → Blue Amaranth × 4 + Water Vial × 1 each'],
       npcs:['Hunt for <b>Lady LeClair</b> (Alchemist assistant, Springlands — Glennwood\'s End). Increases Balthazar\'s crafting capacity.','Upgrade <b>Balthazar\'s Alchemy Station</b> for higher-tier potion and weapon recipes.'],
       explore:['<b>Blackmire vault</b> — Wizard hangs at mid-range, Chain Hit into every room.','<b>Nomad Highlands</b> — mine Lapislazuli deposits. Huge haul here.','<b>Kindlewastes border</b> — scout Ember Shard deposits. Fire Resistance Elixir prep.','Find <b>Albaneve Summits</b> border — mark it. Dragon boss at Howling Peak in Phase 5.'],
       side:['Arcane Deflection in dungeons: every parry = 20 mana back. In long vault runs you\'re mana-positive if you parry reliably.','Mass Destruction + Chain Hit combo: chain shock starts, crits trigger 20m AoE, AoE shocks adjacent enemies, repeat.','<b>Necromancer</b> (Wizard path, 3pts) — 10% Skull Companion on kill. In long dungeons you get 4–5 free companions. Invest now.'],
+    },
+    battlemage:{
+      tldr:'Dark Arts + Chain Hit in Blackmire shroud zones = you clear entire floors before enemies reach melee. Mass Destruction crits now proc 20m AoE shock.',
+      priority:[
+        '<b>First:</b> Craft <b>Antidote × 8</b>. Blackmire poison will kill you if you skip this.',
+        '<b>Second:</b> Invest <b>Dark Arts</b> (Wizard path, 3pts) — +10% Shroud damage. All Blackmire content is shroud.','<b>Third:</b> Invest <b>Mass Destruction</b> (Wizard path, 4pts) — magic crits trigger 20m AoE shock. Devastating in Blackmire packs.',
+        '<b>Fourth:</b> Activate <b>Nomad Highlands Spire</b> solo and clear <b>Blackmire vault</b>.',
+      ],
+      gather:['<b>Swamp Herb × 30</b> — Antidote ingredient. Farm aggressively in Blackmire floor.','<b>Lapislazuli × 40</b> — Nomad Highlands mines. Archmage armor ingredient.','<b>Fossilized Bones × 20</b> — Nomad Highlands rare drop. Archmage armor.','<b>Amber × 15</b> — Flame Altar L4 material. Springlands/Revelwood border.','<b>Tin Ore × 20</b> — Flame Altar L5 material'],
+      craft:['<b>Antidote × 8</b> → Swamp Herb × 3 + Water Vial × 1 each','<b>Fire Resistance Elixir × 4</b> → Ember Moss × 2 + Water Vial × 1 (Kindlewastes prep)','<b>Archmage Armor</b> (Balthazar, Alchemist Station) → Lapislazuli + Fossilized Bone. Farm now, craft next phase.','<b>Strong Mana Potion × 8</b> → Blue Amaranth × 4 + Water Vial × 1 each'],
+      npcs:['Hunt for <b>Lady LeClair</b> (Alchemist assistant, Springlands — Glennwood\'s End). Increases Balthazar\'s crafting capacity.','Upgrade <b>Balthazar\'s Alchemy Station</b> for higher-tier potion and weapon recipes.'],
+      explore:['<b>Blackmire vault</b> — use Chain Hit at every doorway. AoE chain clears packs before they can poison you.','<b>Nomad Highlands</b> — mine Lapislazuli. Huge haul here.','<b>Kindlewastes border</b> — Ember Shard deposits. Fire Resistance Elixir prep.','<b>Fell Monstrosity</b> — Cradle of Dusk. Mass Destruction crits during stun phase = enormous damage windows.'],
+      side:['Arcane Deflection loop in Blackmire vault: parry → cast → parry → cast. You\'re mana-positive in every long dungeon.','Mass Destruction + Chain Hit: chain shock starts → crit triggers 20m AoE → adjacent enemies shocked → chain again.','Archmage armor stat check: every INT point increases wand and Chain Hit damage. Fully commit to INT gear.'],
+    },
+    assassin:{
+      tldr:'Stealth rework makes Blackmire trivial. You clear rooms before the poison clouds ever touch you. Antidotes just in case.',
+      priority:[
+        '<b>First:</b> Craft <b>Antidote × 8</b>. Even with stealth, Blackmire has environmental poison. Non-negotiable.',
+        '<b>Second:</b> Invest <b>Multi Shot</b> (Ranger path, 3pts) if not done — 20% free Crossbow burst proc. Ranged follow-up upgrade.',
+        '<b>Third:</b> Invest <b>Airborne</b> (Assassin path, 2pts) — 30% less stamina for gliding. Scouting runs get much longer.',
+        '<b>Fourth:</b> Activate <b>Nomad Highlands Spire</b>.',
+      ],
+      gather:['<b>Swamp Herb × 30</b> — Antidotes','<b>Saffron</b> — Nomad Highlands arid zones (special potion ingredient)','<b>Lapislazuli</b> — Nomad Highlands mining (armor ingredient)','<b>Sulfur × 20</b> — Kindlewastes deposits. Flame Altar L6 material.','<b>Ember Shard</b> — for resistance potions prep'],
+      craft:['<b>Antidote × 8</b> → Swamp Herb × 3 + Water Vial × 1 each. Carry 4 minimum in Blackmire at all times.','<b>Fire Resistance Elixir × 4</b> → Ember Moss × 2 + Water Vial × 1 (Kindlewastes prep)','<b>Dagger upgrade</b> — check Forge for Blackmire-tier dagger. Upgrade to max available.','<b>Strong Health Potion × 8</b> → Yarrow × 3 + Water Vial × 1 each'],
+      npcs:['No new primary NPCs this phase. Upgrade existing NPC workstations.','Hunt <b>Assistant NPCs</b> on map (Rochelle Anders, Lady LeClair, etc.) — they increase NPC crafting speed.'],
+      explore:['<b>Blackmire vault</b> — stealth-clear every floor. Crouch at each door, Sneak Attack the patrol, repeat.','<b>Nomad Highlands Spire</b> — activate for endgame staging','<b>Fell Monstrosity</b> — Cradle of Dusk. Stealth opener on it for first-phase massive damage.','Farm Lapislazuli in Nomad Highlands — needed for later armor tiers'],
+      side:['Blackmire stealth strategy: crouch outside the dungeon door, pick off the farthest enemy, pull the next one by one.','Taro Root Curry + Coconana Smoothie food combo = max ranged + dagger DPS. Prioritize these crops.','Look for Legendary armor drops with <b>Dexterity</b> perks. Upgrade immediately — dagger damage scales with DEX.'],
+    },
+    paladin:{
+      tldr:'Antidotes first, then push hard. Your sustain carries Blackmire — Blood Rage optional dip here if you want burst, otherwise full tank + Water Aura.',
+      priority:[
+        '<b>First:</b> Craft <b>Antidote × 8</b>. Blackmire poison bypasses even Paladin sustain. Mandatory.',
+        '<b>Second:</b> Invest <b>Blood Rage</b> (Barbarian path, 5pts) if you want a damage spike. Stacks insanely with Battle Heal at low HP.',
+        '<b>Third:</b> Invest <b>Emergency Blink</b> (Healer path, 2pts) — break stuns. Blackmire has frequent CC enemies.',
+        '<b>Fourth:</b> Clear <b>Blackmire vault</b> and activate <b>Nomad Highlands Spire</b>.',
+      ],
+      gather:['<b>Swamp Herb × 20</b> — Antidotes','<b>High-tier ore</b> (Blackmire + Nomad Highlands) — smelt for weapon/armor upgrades','<b>Sulfur × 40</b> — Flame Altar L6 material. Farm now.','<b>Tin Ore</b> — Nomad Highlands. Flame Altar L5 material.','<b>Fossilized Bones × 20</b> — Nomad Highlands rare drop'],
+      craft:['<b>Antidote × 8</b> → Swamp Herb × 3 + Water Vial × 1 each','<b>Armor upgrade to Blackmire tier</b> — Forge → each piece → Upgrade. Every slot before the vault.','<b>Fish Dish</b> (after Fisher rescue, Phase 5) — pre-stage ingredients: build Emily Fray\'s Seafood Grill.'],
+      npcs:['No new main NPCs. Upgrade workstations and find Assistant NPCs on the map.','Make sure <b>Carpenter (Cade Hawthorn)</b> is rescued (Low Meadows) — Table Saw helps bulk material production.'],
+      explore:['<b>Blackmire vault</b> — Water Aura + Battle Heal sustain carries this. Drink pots before 40% HP.','<b>Nomad Highlands</b> — sweep for resources and Spire activation','<b>Fell Monstrosity</b> — Cradle of Dusk. Paladin strat: Water Aura active, Battle Heal crits, drink at 40% HP.','<b>Fell Sicklescythe</b> — Kindlewastes, Ridgeback Mine. Flame Altar L6 boss.'],
+      side:['Blackmire vault Paladin tip: Water Aura patches the poison tick damage. Enter every room with Aura active.','If you took Blood Rage: Breach → Blood Rage + Battle Heal loop at <30% HP → drink pot to reset. Massive DPS window.','Farm Sulfur in Kindlewastes border — 40× needed for Flame Altar L6.'],
     },
     healer:{
       tldr:'Emergency Blink saves lives in Blackmire. Invest it immediately. Stuns here will kill you without it.',
@@ -1958,18 +2149,18 @@ const WN_PHASES = [
       craft:['<b>Fire Resistance Elixir × 8</b> → Ember Moss × 2 + Water Vial × 1 each','<b>Best-in-slot food combo:</b> Taro Root Curry + Coconana Smoothie + Strawberry Milkshake + Coffee','<b>Upgrade bow to Level 45 tier</b> at Forge','<b>Fish Dish</b> (Seafood Grill, Emily Fray) → Fish × 1. +Max oxygen for Veilwater underwater sections.'],
       npcs:['<b>Fisher (Capt. Melville Fontane)</b> — Ol\' Captain\'s Rest, Veilwater Basin. <em>Required gate for Hydrak\'Dal questline.</em>','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Unlocks character appearance customization. Optional but fun.'],
       explore:['Light all <b>8 Albaneve Balefires</b> — Ranger with Glider + Updraft can reach most. Howling Peak = Dragon boss.','<b>Fell Dragon Youngling</b> — YOUR stun mechanic: fill stun bar with Stun Arrows to knock it down = bonus damage phase.','<b>Veilwater Basin</b> — fully map it. Underwater sections need Fish Dish for max oxygen timer.','<b>Drak\'Dal Temple</b> — Hydrak\'Dal final boss location. Flame L8 + Fisher questline required.'],
-      side:['<b>Hydrak\'Dal arena tips:</b> 4 speed pads, mud patches (slows), central pillar, underwater phases. Ranger: use Updraft to avoid rock barrage (yellow glow = dodge away).','Max everything before the final boss: Level 45 gear, all 7 armor slots upgraded, Focus bar nodes maxed.','After the final boss: <b>Adventure Sharing</b> — screenshot the party and export the base via menu → Adventure Sharing.'],
+      side:['<b>Hydrak\'Dal arena tips:</b> 4 speed pads, mud patches (slows), central pillar, underwater phases. Use Updraft to avoid rock barrage (yellow glow = dodge away).','Max everything before the final boss: Level 45 gear, all 7 armor slots upgraded, Focus bar nodes maxed.','After the final boss: <b>Adventure Sharing</b> — export your base via menu → Adventure Sharing. Your save, your achievement.'],
     },
     barbarian:{
       tldr:'Fell Dragon goes down when it\'s stunned. Your job is to stay alive through fire and hit it the instant it drops.',
       priority:[
-        '<b>First:</b> Upgrade ALL armor to Level 45 tier. Every slot. Do not skip any piece.','<b>Second:</b> Craft <b>Fire Resistance Elixir × 8</b>. Albaneve and Kindlewastes bosses = fire damage.','<b>Third:</b> Help the Ranger light all <b>8 Albaneve Balefires</b> for Dragon unlock.','<b>Fourth:</b> Rescue <b>Fisher (Capt. Fontane)</b> with the group — needed for Hydrak\'Dal.',
+        '<b>First:</b> Upgrade ALL armor to Level 45 tier. Every slot. Do not skip any piece.','<b>Second:</b> Craft <b>Fire Resistance Elixir × 8</b>. Albaneve and Kindlewastes bosses = fire damage.','<b>Third:</b> Light all <b>8 Albaneve Balefires</b> to unlock the Fell Dragon Youngling at Howling Peak.','<b>Fourth:</b> Rescue <b>Fisher (Capt. Fontane)</b> — needed for Hydrak\'Dal questline.',
       ],
       gather:['<b>Obsidian</b> — Albaneve Summits. Max-tier armor material.','<b>Silver Ore</b> — Albaneve Summits mining','<b>Gold Ore + Aquamarine</b> — Veilwater Basin. Final gear tier.','<b>Green Vitriol Dust</b> — Flame Altar L9 material. Farm in Veilwater.','<b>Passionflower × 30</b> — Flame Altar L9 material. Veilwater Basin.'],
       craft:['<b>Fire Resistance Elixir × 8</b>','<b>Max-tier 2H weapon</b> at Forge using Albaneve materials','<b>Full armor upgrade to Level 45</b> — Forge → Upgrade every slot','<b>Fish Dish × 8</b> — for Hydrak\'Dal underwater phase oxygen','<b>Cooked Rice</b> (Emily Fray Cooking Station) → Rice × 2 → +21% melee damage. Best-in-slot melee food.'],
       npcs:['<b>Fisher (Capt. Fontane)</b> — Veilwater Basin, Ol\' Captain\'s Rest. YOU clear the guards.','<b>Nameless One</b> — Collector assistant, inside Drak\'Dal Temple itself. Grabs while exploring the final dungeon.'],
-      explore:['<b>Albaneve Summits</b> — 8 Balefires to light. Each one is a mini-encounter. Barbarian leads.','<b>Fell Dragon Youngling</b> at Howling Peak — fire breath = strafe sideways, wing beat = dodge back, ground slam = Barbarian jumps.','<b>Fell Cyclops</b> — Albaneve, Elixir Well dungeon. Flame Altar L7.','<b>Veilwater Basin</b> — fully explore for gear and Hydrak\'Dal prep.'],
-      side:['Fell Dragon stun phase: when Ranger fills stun bar → Dragon drops → <em>Barbarian activates Breach immediately → group dumps everything</em>. Drill this sequence.','Blood Rage + Battle Heal at endgame scale means you can comfortably operate at 30% HP vs Hydrak\'Dal.','Hydrak\'Dal tip: stay near the central pillar to dodge Whirlwind AoE. Use mud patches to bait melee swings.'],
+      explore:['<b>Albaneve Summits</b> — 8 Balefires to light. Each one is a mini-encounter. Clear the camp, light the fire, move on.','<b>Fell Dragon Youngling</b> at Howling Peak — fire breath = strafe sideways, wing beat = dodge back, ground slam = jump.','<b>Fell Cyclops</b> — Albaneve, Elixir Well dungeon. Flame Altar L7.','<b>Veilwater Basin</b> — fully explore for gear and Hydrak\'Dal prep.'],
+      side:['Fell Dragon stun phase: fill stun bar with heavy attacks → Dragon drops → activate Breach immediately → dump all cooldowns.','Blood Rage + Battle Heal at endgame scale means you can comfortably operate at 30% HP vs Hydrak\'Dal.','Hydrak\'Dal tip: stay near the central pillar to dodge Whirlwind AoE. Use mud patches to bait melee swings.'],
     },
     wizard:{
       tldr:'Your best moment: Hydrak\'Dal summons adds. You dump the AoE orb (Focus bar) and wipe them all instantly.',
@@ -1979,19 +2170,52 @@ const WN_PHASES = [
       gather:['<b>Gold Ore</b> — Veilwater Basin. Max-tier gear and Flame Altar L9 material.','<b>Aquamarine + Pearl</b> — underwater deposits in Veilwater','<b>Algae × 15</b> — Veilwater Basin water plants. <em>Best-in-slot magic food ingredient.</em>','<b>Coffee Beans</b> — Veilwater crop (Emily Fray). Stamina management in long boss fights.','<b>Passionflower</b> — Veilwater. Flame Altar L9 material.'],
       craft:['<b>Algae Salad</b> → Algae × 3 at Cooking Station (Emily Fray). +120 Mana +21% magic damage.','<b>Candied Ginger</b> → Ginger × 2 + Honey × 1. +Mana regen. Stack with Algae Salad.','<b>Fish Dish × 8</b> → Fish × 1 at Seafood Grill (Emily Fray). Party-wide max oxygen.','<b>Fire Resistance Elixir × 8</b>','<b>Level 45 wand upgrade</b> at Forge.'],
       npcs:['<b>Fisher (Capt. Fontane)</b> — help rescue. He unlocks the fishing rod which produces Fish for Fish Dish.','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Optional but worth the detour.'],
-      explore:['<b>Veilwater Basin</b> — fully explore. Underwater sections need oxygen management (Fish Dish food).','<b>Albaneve Summits</b> — farm obsidian + silver for gear upgrades. Help Barbarian find all 8 Balefires.','<b>Fell Dragon</b> — Wizard\'s job: AoE orb (Focus bar) on add spawns. Stun Arrows from Ranger fill the stun bar.','<b>Hydrak\'Dal</b> — Chain Hit into add clusters, Mass Destruction crits = 20m AoE shock. Save Focus orb for underwater phase.'],
-      side:['Hydrak\'Dal fight breakdown: yellow glow hands = rock barrage (dodge away fast), Whirlwind = distance + central pillar, underwater = Fish Dish for oxygen.','Necromancer Skull Companions stack in Drak\'Dal Temple dungeon — enter with a full army.','After the final boss: help the group with Adventure Sharing export. Post the code in chat.'],
+      explore:['<b>Veilwater Basin</b> — fully explore. Underwater sections need oxygen management (Fish Dish food).','<b>Albaneve Summits</b> — farm obsidian + silver for gear upgrades. Light all 8 Balefires for Dragon unlock.','<b>Fell Dragon</b> — AoE orb (Focus bar) on add spawns. Fill stun bar with Chain Hit to knock the Dragon down.','<b>Hydrak\'Dal</b> — Chain Hit into add clusters, Mass Destruction crits = 20m AoE shock. Save Focus orb for underwater phase.'],
+      side:['Hydrak\'Dal fight breakdown: yellow glow hands = rock barrage (dodge away fast), Whirlwind = distance + central pillar, underwater = Fish Dish for oxygen.','Necromancer Skull Companions stack in Drak\'Dal Temple dungeon — enter with a full army.','After the final boss: export your base via menu → Adventure Sharing. Solo clear of the full campaign — well earned.'],
+    },
+    battlemage:{
+      tldr:'Endgame Battlemage: Algae Salad makes your Chain Hit + Mass Destruction loop disgusting. Save the Focus orb for Hydrak\'Dal add waves — it one-shots them.',
+      priority:[
+        '<b>First:</b> Invest <b>Necromancer</b> (Wizard path, 3pts) if not done — endgame dungeons give you free undead DPS that you never have to manage.','<b>Second:</b> Farm <b>Algae Salad</b> ingredients (Algae × 3, Veilwater Basin) — +120 Mana +21% magic damage. Best-in-slot.','<b>Third:</b> Upgrade to Level 45 Intelligence wand. All magic damage scales with it.','<b>Fourth:</b> Rescue <b>Fisher (Capt. Fontane)</b> and craft <b>Fish Dish × 2</b> for Hydrak\'Dal underwater phases.',
+      ],
+      gather:['<b>Algae × 15</b> — Veilwater Basin water plants. Best-in-slot magic food.','<b>Gold Ore</b> — Veilwater Basin. Max-tier gear.','<b>Aquamarine + Pearl</b> — underwater deposits. Flame Altar L9 materials.','<b>Obsidian + Silver Ore</b> — Albaneve Summits. Max-tier weapon/armor materials.','<b>Coffee Beans</b> — Veilwater crop. +Stamina regen for long boss fights.'],
+      craft:['<b>Algae Salad</b> → Algae × 3 at Cooking Station. +120 Mana +21% magic damage.','<b>Candied Ginger</b> → Ginger × 2 + Honey × 1. +Mana regen. Stack with Algae Salad.','<b>Fish Dish × 2</b> → Fish × 1 at Seafood Grill. Oxygen for Hydrak\'Dal underwater.','<b>Fire Resistance Elixir × 8</b>','<b>Level 45 wand upgrade</b> at Forge.'],
+      npcs:['<b>Fisher (Capt. Fontane)</b> — Veilwater, Ol\' Captain\'s Rest. Clear guards, rescue, build his bed.','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Optional cosmetics.'],
+      explore:['Light all <b>8 Albaneve Balefires</b> for Dragon unlock. Each is a mini-encounter — Chain Hit through every camp.','<b>Fell Dragon</b> — Focus Bar AoE orb on add spawns. Fill stun bar with Chain Hit. Stun phase = dump Mass Destruction crits.','<b>Veilwater Basin</b> — fully explore. Algae farming requires underwater sections.','<b>Hydrak\'Dal</b> — Chain Hit into add clusters. Mass Destruction crits in 20m range. Focus orb = save for add wave.'],
+      side:['Hydrak\'Dal breakdown: yellow hands = rock barrage (dodge away), Whirlwind = distance + pillar, underwater = Fish Dish.','Necromancer Skull Companions stack in Drak\'Dal Temple — enter with a full undead army.','After the final boss: export base via Adventure Sharing. Solo battlemage clear of the full campaign.'],
+    },
+    assassin:{
+      tldr:'Fell Dragon goes down in two stun phases with a stealth opener each time. Hydrak\'Dal: Blink everything, dagger in gaps. Clearest solo endgame.',
+      priority:[
+        '<b>First:</b> Light all <b>8 Albaneve Balefires</b>. Ranger can fly to most with Glider — Assassin with Updraft can too.','<b>Second:</b> Craft <b>Fire Resistance Elixir × 8</b>. Dragon = fire everywhere.','<b>Third:</b> Upgrade Dagger and Crossbow to Level 45 tier. Damage ceiling depends on weapon tier.','<b>Fourth:</b> Rescue <b>Fisher (Capt. Fontane)</b> and craft <b>Fish Dish × 2</b> for Hydrak\'Dal underwater.',
+      ],
+      gather:['<b>Obsidian</b> — Albaneve Summits volcanic rock. Max-tier weapon component.','<b>Silver Ore</b> — Albaneve mining','<b>Gold Ore</b> — Veilwater Basin. Max-tier gear.','<b>Coffee Beans</b> — Veilwater Basin crop (grow via Emily Fray). +Stamina regen for long fights.','<b>Aquamarine + Pearl</b> — underwater Veilwater. Flame Altar L9.'],
+      craft:['<b>Fire Resistance Elixir × 8</b> → Ember Moss × 2 + Water Vial × 1 each','<b>Best-in-slot food:</b> Taro Root Curry + Coconana Smoothie + Coffee','<b>Dagger + Crossbow upgrade to Level 45</b> at Forge','<b>Fish Dish × 2</b> → Fish × 1 at Seafood Grill (Emily Fray)'],
+      npcs:['<b>Fisher (Capt. Fontane)</b> — Veilwater Basin, Ol\' Captain\'s Rest. Clear guards, rescue, build his bed.','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Optional cosmetics.'],
+      explore:['Light all <b>8 Albaneve Balefires</b> — Assassin with Updraft reaches most by air','<b>Fell Dragon Youngling</b> — Stealth opener for massive first-phase damage. Then Crossbow from range.','<b>Veilwater Basin</b> — fully map it. Underwater needs Fish Dish oxygen.','<b>Drak\'Dal Temple</b> — stealth-clear every floor. Sneak Attack the boss opener.'],
+      side:['Fell Dragon: Stealth opener (max range) → Crossbow burst → Updraft to roof → reload → Crossbow until second stun → repeat.','Hydrak\'Dal: Blink every attack. Mud patches kill your mobility — stay on stone. Speed pads for repositioning.','After the final boss: export base via Adventure Sharing. Solo assassin run — every kill was a one-shot.'],
+    },
+    paladin:{
+      tldr:'Hydrak\'Dal Paladin: Water Aura + Battle Heal + Divine Surge. You can outlast anything. Fell Dragon is slower but safe.',
+      priority:[
+        '<b>First:</b> Upgrade ALL armor to Level 45 tier. Every slot.','<b>Second:</b> Craft <b>Fire Resistance Elixir × 8</b>. Dragon fire breath dealt in two ticks — you still need this.','<b>Third:</b> Light all <b>8 Albaneve Balefires</b> for Dragon unlock.','<b>Fourth:</b> Rescue <b>Fisher (Capt. Fontane)</b> — <b>Fish Dish × 2</b> mandatory for Hydrak\'Dal underwater.',
+      ],
+      gather:['<b>Obsidian</b> — Albaneve Summits. Max-tier armor material.','<b>Silver Ore</b> — Albaneve mining','<b>Gold Ore + Aquamarine</b> — Veilwater Basin. Final gear tier.','<b>Passionflower × 30</b> — Flame Altar L9 material. Veilwater Basin.','<b>Pearl + Green Vitriol Dust</b> — Flame Altar L9 materials. Veilwater.'],
+      craft:['<b>Fire Resistance Elixir × 8</b>','<b>Full armor upgrade to Level 45</b> — Forge → Upgrade every slot','<b>Max-tier 2H weapon</b> at Forge using Albaneve materials','<b>Fish Dish × 2</b> → Fish × 1 at Seafood Grill','<b>Cooked Rice</b> → Rice × 2. +21% melee damage. Best-in-slot melee food.'],
+      npcs:['<b>Fisher (Capt. Fontane)</b> — Veilwater Basin, Ol\' Captain\'s Rest. Clear guards, rescue, build his bed.','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Optional cosmetics.'],
+      explore:['<b>Albaneve Summits</b> — 8 Balefires. Each is a mini-encounter. You tank every one.','<b>Fell Dragon Youngling</b> — Paladin strat: Water Aura active, Heavy attack fills stun bar, Divine Surge if HP drops critical.','<b>Fell Cyclops</b> — Albaneve, Elixir Well dungeon. Flame Altar L7.','<b>Veilwater Basin</b> — fully explore. Farm Gold Ore and endgame materials.'],
+      side:['Fell Dragon stun phase: Dragon drops → Breach → dump Whirlwind Crescendo + all cooldowns.','Hydrak\'Dal Paladin positioning: central pillar for Whirlwind. Water Aura handles ticks. Blink through rock barrage.','Divine Surge at 25% HP or during add wave overlaps. It\'s your emergency panic button.'],
     },
     healer:{
-      tldr:'Fish Dish is your pre-boss checklist item. No Fish Dish = underwater phase is a wipe. You manage this for the whole party.',
+      tldr:'Fish Dish is your pre-boss checklist item. No Fish Dish = underwater phase is a wipe. You manage this for yourself.',
       priority:[
-        '<b>First:</b> Rescue <b>Fisher (Capt. Fontane)</b> — Ol\' Captain\'s Rest, Veilwater Basin. YOU lead this rescue — it\'s a healer-critical gate.','<b>Second:</b> Craft <b>Fish Dish × 8</b> (party-wide) via Emily Fray\'s Seafood Grill. Hydrak\'Dal has underwater sections. No Fish Dish = out of oxygen = wipe.','<b>Third:</b> Invest remaining points in <b>Divine Surge</b> (5pts) — emergency party heal for Hydrak\'Dal enrage.','<b>Fourth:</b> Farm <b>Passionflower × 30</b> and <b>Gold Ore × 60</b> — Flame Altar L9 materials.',
+        '<b>First:</b> Rescue <b>Fisher (Capt. Fontane)</b> — Ol\' Captain\'s Rest, Veilwater Basin. Required gate for the Hydrak\'Dal questline.','<b>Second:</b> Craft <b>Fish Dish × 2</b> via Emily Fray\'s Seafood Grill. Hydrak\'Dal has underwater sections. No Fish Dish = out of oxygen = dead.','<b>Third:</b> Invest remaining points in <b>Divine Surge</b> (5pts) — emergency self-heal for Hydrak\'Dal enrage.','<b>Fourth:</b> Farm <b>Passionflower × 30</b> and <b>Gold Ore × 60</b> — Flame Altar L9 materials.',
       ],
-      gather:['<b>Fish</b> — after rescuing Capt. Fontane, craft a Fishing Rod and catch fish. Every party member needs 1 Fish Dish per boss attempt.','<b>Gold Ore × 60</b> — Flame Altar L9 material. Veilwater Basin.','<b>Passionflower × 30</b> — Flame Altar L9 material. Veilwater Basin flower.','<b>Pearl × 30 + Aquamarine × 60</b> — Flame Altar L9 materials. Underwater farming.','<b>Green Vitriol Dust × 60</b> — Flame Altar L9 material. Veilwater Basin.'],
-      craft:['<b>Fish Dish × 8</b> → Fish × 1 at Seafood Grill (Emily Fray). +Max oxygen. <em>Non-negotiable for Hydrak\'Dal.</em>','<b>Divine Surge investment</b> — most important ability for the final boss enrage phase.','<b>Healing Revive</b> at max level — parties will die to Hydrak\'Dal. Revive mechanics matter.','<b>Berry Compote → Chicken Soup → Rooibos Tea</b> — fill all 4 food slots for max sustain buffs.'],
+      gather:['<b>Fish</b> — after rescuing Capt. Fontane, craft a Fishing Rod and catch fish. Carry 2 Fish Dishes into every Hydrak\'Dal attempt.','<b>Gold Ore × 60</b> — Flame Altar L9 material. Veilwater Basin.','<b>Passionflower × 30</b> — Flame Altar L9 material. Veilwater Basin flower.','<b>Pearl × 30 + Aquamarine × 60</b> — Flame Altar L9 materials. Underwater farming.','<b>Green Vitriol Dust × 60</b> — Flame Altar L9 material. Veilwater Basin.'],
+      craft:['<b>Fish Dish × 2</b> → Fish × 1 at Seafood Grill (Emily Fray). +Max oxygen. <em>Non-negotiable for Hydrak\'Dal.</em>','<b>Divine Surge investment</b> — most important ability for the final boss enrage phase.','<b>Berry Compote → Chicken Soup → Rooibos Tea</b> — fill all 4 food slots for max sustain buffs.'],
       npcs:['<b>Fisher (Capt. Melville Fontane)</b> — absolutely required. Build him a bed before the rescue run.','<b>Barber (Elio Ricci)</b> — Elder\'s Night Sanctum, Veilwater. Unlocks Coloring Station for character appearance. Fun optional.','<b>Nameless One</b> — Collector assistant inside Drak\'Dal Temple. Grab on the way to the final boss.'],
       explore:['<b>Veilwater Basin</b> — fully explore all sections including underwater. Map oxygen routes before Hydrak\'Dal.','Rescue Fisher + explore Ol\' Captain\'s Rest area for materials','<b>Drak\'Dal Temple</b> — approach with Flame L8 + Fisher questline complete','Hydrak\'Dal arena: 4 speed pads (use them to reposition), mud patches (slows — avoid), central pillar (dodge-hide spot)'],
-      side:['Adventure Sharing after final boss: host opens menu → Adventure Sharing → Export. Post code in group chat. Screenshot the party card.','<b>Hydrak\'Dal healer positioning:</b> speed pad → Water Aura central position → Blink through Whirlwind → Divine Surge on rock barrage phase.','1.0 launches Autumn 2026 — floating islands. Keep your save file. Load it when 1.0 drops and continue from here.'],
+      side:['Adventure Sharing after final boss: menu → Adventure Sharing → Export. Your solo clear, fully saved.','<b>Hydrak\'Dal healer positioning:</b> speed pad → Water Aura central position → Blink through Whirlwind → Divine Surge on rock barrage phase.','1.0 launches Autumn 2026 — floating islands. Keep your save file. Load it when 1.0 drops and continue from here.'],
     },
   },
 ];
@@ -2091,6 +2315,99 @@ const SOLO_TIPS = {
       'Plant crops immediately after rescuing Emily Fray — passive ingredient supply.',
     ],
   },
+  battlemage: {
+    tldr: 'U8 hybrid king. Wand Master gives you passive projectile DPS while you melee — you never stop dealing damage. Focus Bar ability shocks everyone in range.',
+    survival: [
+      '<b>Arcane Deflection is your loop.</b> Parry hits → restore 20 mana → cast again. In melee range you\'re mana-positive.',
+      '<b>Heavy attack fills the Focus Bar faster</b> in U8. Stay in melee, heavy attack on cooldown, burst with Focus when full.',
+      'When overwhelmed, blink (take 2pts from Healer tree) to disengage and recast from range. Flexible escape.',
+      '<b>Wand Master proc covers you</b> when mana is low. 30% free projectile = passive DPS while repositioning.',
+      'Archmage armor + melee weapon = stat synergy. INT boosts magic; STR and DEX boost melee. Stack INT and let Wand Master do melee work.',
+    ],
+    bosses: [
+      '<b>Pre-load Focus Bar before boss pulls.</b> Kill trash first, enter the boss room with full Focus already charged.',
+      'Cycle: Heavy attack → parry boss retaliation (Arcane Deflection refills mana) → burst with magic → heavy attack again.',
+      'Fell Dragon: Heavy attacks fill stun bar reliably. Switch to wand during stun phase for max damage burst.',
+      '<b>Mass Destruction</b> combo: land a magic crit during stun phase → 20m AoE shock hits anything near the boss.',
+      "Hydrak'Dal adds: Focus Bar AoE clears the wave. Save it. Do NOT waste it on the boss when adds are incoming.",
+    ],
+    build: [
+      '<b>Priority 1:</b> Wand Master (Battlemage path, 3pts) — 30% free projectile. Passive DPS that never stops.',
+      '<b>Priority 2:</b> Arcane Deflection (Battlemage path, 3pts) — parry = 20 mana back. Your sustain engine.',
+      '<b>Priority 3:</b> Heavy Handed (Barbarian path, 3pts) — heavy attacks fill stun bar. Core U8 mechanic.',
+      '<b>Priority 4:</b> Chain Hit (Wizard path, 3pts) — shock jumps between packs. Insane in melee range.',
+      '<b>Priority 5:</b> Mass Destruction (Wizard path, 4pts) — magic crits trigger 20m AoE shock.',
+      '<b>Priority 6:</b> Dark Arts (Wizard path, 3pts) — +10% Shroud damage. All endgame content is shroud.',
+    ],
+    resources: [
+      'Carry 6 Mana Potions AND 6 Health Potions. You use both constantly.',
+      'Farm Blue Amaranth obsessively. Mana Potions = your stamina bar.',
+      'Archmage armor from Balthazar (Lapislazuli + Fossilized Bone) — max INT for magic scaling.',
+      'Algae Salad (Veilwater Basin) = +120 Mana +21% magic damage. Best-in-slot once you reach Veilwater.',
+    ],
+  },
+  assassin: {
+    tldr: 'U8 Sneak Attack + Dagger hybrid. One-shot elites with 900% openers, I-frame through everything with Blink, finish stragglers with rapid dagger combos.',
+    survival: [
+      '<b>Stealth opener is your kill button.</b> 900% Sneak Attack one-shots most elite enemies before they aggro.',
+      '<b>Blink has I-frames</b> (Healer path, 4pts). You don\'t roll — you teleport through attacks. Once you have this, you\'re nearly untouchable.',
+      'After the opener, switch to rapid light attacks with dagger. Dagger speed + Sneak Attack = the combo.',
+      '<b>Never fight fair.</b> If you\'re taking hits, you made a mistake. Reset to stealth, try again.',
+      'Emergency Blink (2pts) breaks stun. Assassins get CC\'d by mages — this is mandatory insurance.',
+    ],
+    bosses: [
+      '<b>Every boss gets a Sneak Attack opener</b> — even in a marked fight. Sprint in from stealth = free massive damage.',
+      'Fell Dragon: Stealth approach before boss aggros. Sneak Attack + Dagger burst during stun phase.',
+      'Fill stun bar with dagger light attacks — faster than heavy attacks but requires more hits.',
+      '<b>Updraft after the opener</b> — get to high ground, reset stealth, come back for another opener.',
+      "Hydrak'Dal: Blink through every attack. Mud patches kill your speed — stay on stone or speed pads.",
+    ],
+    build: [
+      '<b>Priority 1:</b> Sneak Attack (Center tree, 3pts) — +900% damage. Your identity skill.',
+      '<b>Priority 2:</b> Blink (Healer path, 4pts) — I-frame teleport. Game-changing survival tool.',
+      '<b>Priority 3:</b> Updraft (Assassin path, 4pts) — altitude + escape. Use it after every opener.',
+      '<b>Priority 4:</b> Double Jump (Center tree, 4pts) — pairs with Updraft for full vertical mobility.',
+      '<b>Priority 5:</b> Emergency Blink (Healer path, 2pts) — unstun on demand.',
+      '<b>Priority 6:</b> Multi Shot (Ranger path, 3pts) — optional crossbow swap for ranged clean-up.',
+    ],
+    resources: [
+      'Pre-craft 8 Health Potions per dungeon. No healer, no second chances — drink at 60% HP.',
+      'Lockpicks on hand always. Assassin clears dungeons fast — locked chests = bonus loot.',
+      'Taro Root Curry (+21% dagger/ranged damage) — best-in-slot food once Emily Fray grows Taro Root.',
+      'Dagger tier matters. Upgrade at Forge every phase — damage scales fast with weapon level.',
+    ],
+  },
+  paladin: {
+    tldr: 'U8 tank + sustain hybrid. You hit hard in heavy armor, heal yourself with Water Aura, and Blink through anything you can\'t block. The most forgiving solo build.',
+    survival: [
+      '<b>Water Aura heals you constantly.</b> Keep it on during every fight. You\'re sustaining in melee.',
+      '<b>Heavy armor + Blink</b> = high damage absorption AND I-frame escape. Best of both worlds.',
+      'Shield bash (heavy attack with shield equipped) staggers enemies = free damage window.',
+      '<b>Battle Heal (Warrior path, 3pts)</b> — 5% max HP on melee crits. Stack with Water Aura for insane regen.',
+      'You can take more risks than any other class. Use this aggressively — push fights others would retreat from.',
+    ],
+    bosses: [
+      '<b>Outlast strategy:</b> Water Aura + Battle Heal regen vs. boss DPS. As long as regen > incoming damage, you win.',
+      'Fell Dragon: Heavy armor makes fire breath survivable without dodging. Still dodge — but a mistime won\'t one-shot you.',
+      'Divine Surge (Focus bar burst) is your panic button when both heal sources drop low.',
+      'Shield bash on adds = free stagger window. Staggered enemies can\'t hit you.',
+      "Hydrak'Dal: central pillar positioning. Blink through Whirlwind. Water Aura handles tick damage.",
+    ],
+    build: [
+      '<b>Priority 1:</b> Water Aura (Healer path, 3pts) — passive self-heal in melee.',
+      '<b>Priority 2:</b> Battle Heal (Warrior path, 3pts) — 5% HP on melee crits. Stack with Aura.',
+      '<b>Priority 3:</b> Blink (Healer path, 4pts) — I-frame emergency escape.',
+      '<b>Priority 4:</b> Emergency Blink (Healer path, 2pts) — break stuns.',
+      '<b>Priority 5:</b> Heavy Handed (Barbarian path, 3pts) — stun bar generation.',
+      '<b>Priority 6:</b> Divine Surge (Healer path, 5pts) — big emergency heal burst.',
+    ],
+    resources: [
+      'Heavy armor priority. Upgrade chest piece first, every phase.',
+      'Carry 10 potions into every dungeon. You can survive longer than anyone, so you can push deeper.',
+      'Yarrow + Indigo Plants — grow both via Emily Fray. Two heal sources = double farming.',
+      'Fish Dish for Hydrak\'Dal oxygen. Build Emily Fray\'s Seafood Grill well before Phase 5.',
+    ],
+  },
   healer: {
     tldr: 'Best solo sustain. Water Aura heals you too. Blink makes you nearly immortal if timed right.',
     survival: [
@@ -2122,15 +2439,50 @@ const SOLO_TIPS = {
       'NPC rescues solo: use Water Aura defensively while kiting enemies.',
     ],
   },
+  berserker: {
+    tldr: 'U8 Blood Warrior. Ride the Blood Rage threshold permanently with Battle Heal regen. Focus Bar ability is a massive AoE burst — use it on add waves, not the boss.',
+    survival: [
+      '<b>Blood Rage + Battle Heal = permanent low-HP damage spike.</b> Crit heals keep you alive while Blood Rage fires constantly.',
+      '<b>Heavy attack on cooldown.</b> U8 heavy attacks fill the Focus Bar AND stagger enemies. Never stop swinging.',
+      '<b>Whirlwind Crescendo</b> for rooms. Spin through packs, proc crits, trigger Battle Heal. You heal while killing.',
+      'Blood Rage threshold: at <30% HP your DPS explodes. Drink pots to spike up to 35%, not to 100% — maintain the threshold.',
+      '<b>Thick Skin</b> (Barbarian path) — raw HP buffer to survive the Blood Rage threshold without dying to oneshots.',
+    ],
+    bosses: [
+      '<b>Breach before every boss pull.</b> Breach → heavy attack chain → stun → Focus Bar burst during stun. Commit fully.',
+      'Fell Dragon: fill stun bar with heavy attacks alone. No Ranger to help — slower but fully doable.',
+      'Focus Bar AoE: save it for add waves, NEVER on a solo boss. Boss takes less AoE damage than you think.',
+      "Hydrak'Dal: central pillar for Whirlwind. Blood Rage threshold + Battle Heal = you can outlast the fight.",
+      '<b>Potion discipline:</b> drink at 40% HP, not 15%. Blood Rage is active anyway — don\'t gamble the oneshot.',
+    ],
+    build: [
+      '<b>Priority 1:</b> Heavy Handed (Barbarian path, 3pts) — stun bar fuel. Core U8 mechanic.',
+      '<b>Priority 2:</b> Battle Heal (Warrior path, 3pts) — 5% HP on melee crits. Your sustain loop.',
+      '<b>Priority 3:</b> Whirlwind Crescendo (Barbarian path, 5pts) — spinning AoE room clear + crit trigger.',
+      '<b>Priority 4:</b> Breach (Barbarian path, 3pts) — use before every boss pull. Massive DPS window.',
+      '<b>Priority 5:</b> Blood Rage (Barbarian path, 5pts) — damage spike at low HP. The berserker identity.',
+      '<b>Priority 6:</b> Thick Skin (Barbarian path) — raw HP to safely operate at Blood Rage threshold.',
+    ],
+    resources: [
+      'Carry 12 potions per dungeon minimum. You live at low HP on purpose — pots are your safety net.',
+      'Antidotes in Blackmire — 8 minimum. Poison kills before Battle Heal can regen it.',
+      'Best-in-slot food: Cooked Rice (+21% melee damage) + Chicken Soup (+HP regen). Stack both.',
+      'Keep weapon tier current always. Blood Rage scales with base damage — a weak weapon kills this build.',
+    ],
+  },
 };
 
 // ══ SOLO STATE ═══════════════════════════════════════════════════════
 const STATE_KEY = 'enshrouded-solo-v1';
 const CLASSES = [
-  {id:'ranger',   emoji:'🏹', initials:'RG', role:'Mobility & Burst DPS'},
-  {id:'barbarian',emoji:'⚔️', initials:'BB', role:'Frontline Bruiser'},
-  {id:'wizard',   emoji:'🔮', initials:'WZ', role:'AoE Pack Clear & Boss Burn'},
-  {id:'healer',   emoji:'💧', initials:'HL', role:'Support & Sustain'},
+  {id:'ranger',     emoji:'🏹', initials:'RG', role:'Mobility & Burst DPS'},
+  {id:'barbarian',  emoji:'⚔️', initials:'BB', role:'Frontline Bruiser'},
+  {id:'wizard',     emoji:'🔮', initials:'WZ', role:'AoE Pack Clear & Boss Burn'},
+  {id:'healer',     emoji:'💧', initials:'HL', role:'Support & Sustain'},
+  {id:'battlemage', emoji:'🌩', initials:'BM', role:'Hybrid: Melee + Magic (U8)'},
+  {id:'assassin',   emoji:'🗡', initials:'AS', role:'Hybrid: Stealth + Daggers (U8)'},
+  {id:'paladin',    emoji:'🛡', initials:'PL', role:'Hybrid: Tank + Healer (U8)'},
+  {id:'berserker',  emoji:'🩸', initials:'BK', role:'Hybrid: Warrior + Focus Burst (U8)'},
 ];
 function loadState(){try{return JSON.parse(localStorage.getItem(STATE_KEY))||{};}catch{return {};}}
 function saveState(){localStorage.setItem(STATE_KEY,JSON.stringify(STATE));}
@@ -2514,8 +2866,9 @@ function accToggle(id){
 
 function renderSoloWhatNowPanel(){
   const p=WN_PHASES[WN_PHASE_IDX], cls=STATE.cls;
-  const icons={ranger:'🏹',barbarian:'⚔️',wizard:'🔮',healer:'💧'};
-  const labels={ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'};
+  const clsMeta=CLASSES.find(x=>x.id===cls)||CLASSES[0];
+  const icons=Object.fromEntries(CLASSES.map(c=>[c.id,c.emoji]));
+  const labels=Object.fromEntries(CLASSES.map(c=>[c.id,c.id[0].toUpperCase()+c.id.slice(1)]));
   const sections=[
     {key:'priority',icon:'⚡',label:'Do This Now'},
     {key:'gather',  icon:'🪨',label:'Gather'},
@@ -2529,7 +2882,7 @@ function renderSoloWhatNowPanel(){
     <div><div class="wn-phase-label">Phase ${p.phase} — ${p.label}</div><div class="wn-phase-sub">${p.sub}</div></div>
     <button class="wn-phase-btn" onclick="wnNav(1)" ${WN_PHASE_IDX===WN_PHASES.length-1?'disabled':''}>Next ▶</button>
   </div>`;
-  const d=p[cls];
+  const d=p[cls]||p['ranger']||{};  // fallback to ranger if hybrid not in phase
   const secs=sections.map(s=>{
     const items=d[s.key]||[];
     const sid=`wnx-${cls}-${s.key}-${p.phase}`;
@@ -2564,8 +2917,8 @@ function wnToggle(sid){
 }
 
 function renderSoloTipsPanel(){
-  const cls=STATE.cls, t=SOLO_TIPS[cls];
-  const icons={ranger:'🏹',barbarian:'⚔️',wizard:'🔮',healer:'💧'};
+  const cls=STATE.cls, t=SOLO_TIPS[cls]||SOLO_TIPS['ranger'];
+  const clsMeta=CLASSES.find(x=>x.id===cls)||CLASSES[0];
   const label=cls[0].toUpperCase()+cls.slice(1);
   const sec=(title,icon,items)=>`<div class="guide-accordion" style="margin-bottom:.5rem">
     <div class="guide-acc-header" id="acc-h-solo-${title.replace(/ /g,'-')}" onclick="accToggle('solo-${title.replace(/ /g,'-')}')">
@@ -2576,7 +2929,7 @@ function renderSoloTipsPanel(){
     </div>
   </div>`;
   return `<div style="max-width:600px;margin:0 auto">
-    <div class="guide-summary" style="margin-bottom:1rem">${icons[cls]} ${label} Solo — ${t.tldr}</div>
+    <div class="guide-summary" style="margin-bottom:1rem">${clsMeta.emoji} ${label} Solo — ${t.tldr}</div>
     ${sec('Survival Tips','🛡',t.survival)}
     ${sec('Boss Strategies','💀',t.bosses)}
     ${sec('Skill Build Priority','⭐',t.build)}
@@ -2708,8 +3061,8 @@ let _lastSaveTime = null;
 function syncFromSave(data) {
   if (!data || !data.ok) return;
   let changed = false;
-  if (data.level  && data.level  !== STATE.hero.level)  { STATE.hero.level  = data.level;  changed = true; }
-  if (data.deaths !== undefined && data.deaths !== STATE.hero.deaths) { STATE.hero.deaths = data.deaths; changed = true; }
+  // level/deaths NOT synced — save binary doesn't expose them reliably.
+  // Only sync: player name (SBV block) and flame level (_info file).
   if (data.playerName && !STATE.hero.name)              { STATE.hero.name   = data.playerName; changed = true; }
   if (data.progressLevel > 1 && STATE.flameLevel === 1) { STATE.flameLevel  = data.progressLevel; changed = true; }
   if (changed) { saveState(); renderFlameAltar(); document.getElementById('solo-hero').innerHTML = renderSoloHero(); updateStats(); }
@@ -2717,10 +3070,10 @@ function syncFromSave(data) {
   const el = document.getElementById('save-sync-badge');
   if (el) {
     el.textContent = data.ok
-      ? `💾 ${data.playerName} · Lv${data.level} · ${data.deaths}☠`
+      ? `💾 ${data.playerName} — ${data.worldName}`
       : '💾 watcher offline';
     el.title = data.ok
-      ? `World: ${data.worldName} | Flame Lv${data.progressLevel} | saved ${new Date(data.savedAt).toLocaleTimeString()}`
+      ? `Flame Lv${data.progressLevel} | saved ${new Date(data.savedAt).toLocaleTimeString()}`
       : 'Run: node save-watcher.js';
     el.className = 'save-sync-badge' + (data.ok ? ' ok' : ' off');
   }

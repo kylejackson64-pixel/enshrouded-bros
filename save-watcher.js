@@ -93,13 +93,13 @@ async function parseInfo() {
 }
 
 // ── WORLD SAVE PARSER ─────────────────────────────────────────────────────────
-// Finds the SBV2/SBV1 character block which contains:
-//   [SBV magic 4B][unknown 2B][level uint16LE][deaths uint16LE]...
-// Preceded by a length-prefixed player name string.
+// Finds the SBV2/SBV1 character block to extract the player name.
+// NOTE: The values after SBV2 (e.g. 0x3b, 0x15) are static entity identifiers,
+// NOT level/deaths. Level and deaths live in the 111KB ECS block which requires
+// a full schema to parse. We only extract playerName here.
 async function parseWorld() {
   const buf = fs.readFileSync(WORLD_FILE);
   const offs = findZstdBlocks(buf);
-  // Player block is always in one of the last 2 zstd chunks (small, ~18-44 bytes)
   const candidates = offs.slice(-4);
 
   for (const off of candidates) {
@@ -110,31 +110,11 @@ async function parseWorld() {
     for (let i = 0; i < dec.length - 12; i++) {
       const isSBV = (dec[i] === 0x53 && dec[i+1] === 0x42 && dec[i+2] === 0x56);
       if (!isSBV) continue;
+      if (dec[i+3] !== 0x32 && dec[i+3] !== 0x31) continue;
 
-      // Read values after magic (skip 2 bytes of SBV version)
-      // SBV2: [01 00][level uint16][deaths uint16]
-      // SBV1: [02 00][00 00][01 00][level uint16][deaths uint16]
-      let vOff = i + 4; // skip SBVx
-      if (dec[i+3] === 0x32) {
-        // SBV2: next is [01 00] then level, deaths
-        vOff += 2; // skip 01 00
-      } else if (dec[i+3] === 0x31) {
-        // SBV1: [02 00][00 00][01 00] then level, deaths
-        vOff += 6;
-      } else continue;
-
-      if (vOff + 4 > dec.length) continue;
-      // Layout after SBV version bytes: [deaths uint16][level uint16]
-      const deaths = dec.readUInt16LE(vOff);
-      const level  = dec.readUInt16LE(vOff + 2);
-
-      // Sanity: level 1–45, deaths 0–9999
-      if (level < 1 || level > 45) continue;
-
-      // Extract player name (length-prefixed string before SBV, typically at i-4-nameLen)
+      // Extract player name (uint32LE length-prefixed string before SBV block)
       let playerName = 'Player';
       if (i >= 6) {
-        // Search backward for a uint32 length followed by ASCII name
         for (let back = i - 2; back >= Math.max(0, i - 20); back--) {
           const nlen = dec.readUInt32LE(back);
           if (nlen > 0 && nlen <= 20 && back + 4 + nlen <= dec.length) {
@@ -147,10 +127,10 @@ async function parseWorld() {
         }
       }
 
-      return { playerName, level, deaths };
+      return { playerName };
     }
   }
-  return { playerName: 'Player', level: 1, deaths: 0 };
+  return { playerName: 'Player' };
 }
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -170,12 +150,10 @@ async function refresh(force = false) {
       progressLevel:    info.progressLevel,
       activeAltarCount: info.activeAltarCount,
       playerName:       world.playerName,
-      level:            world.level,
-      deaths:           world.deaths,
       savedAt:          new Date(stat.mtimeMs).toISOString(),
     };
     console.log('[save-watcher]', new Date().toLocaleTimeString(),
-      `${cached.playerName} | Lv${cached.level} | ${cached.deaths} deaths | Flame Lv${cached.progressLevel} | "${cached.worldName}"`);
+      `${cached.playerName} | Flame Lv${cached.progressLevel} | "${cached.worldName}"`);
   } catch (e) {
     cached = { ok: false, error: e.message };
     console.error('[save-watcher] parse error:', e.message);
