@@ -691,6 +691,9 @@ footer a:hover{color:var(--gold)}
 .page-nav-link{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;text-decoration:none;padding:.3rem .9rem;border-radius:3px;border:1px solid var(--border);color:var(--text-dim);transition:all .2s}
 .page-nav-link:hover{border-color:var(--ember);color:var(--ember-bright)}
 .page-nav-link.active{background:rgba(232,97,42,.12);border-color:var(--ember);color:var(--ember-bright)}
+.save-sync-badge{display:inline-block;margin-top:.5rem;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;padding:.2rem .7rem;border-radius:2px;border:1px solid var(--border);cursor:default;transition:all .3s}
+.save-sync-badge.ok{border-color:rgba(56,163,74,.4);color:rgb(56,163,74);background:rgba(56,163,74,.08)}
+.save-sync-badge.off{border-color:var(--border);color:var(--text-dim)}
 .solo-hero-wrap{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
 .solo-cls-selector{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.2rem;flex-wrap:wrap}
 .solo-cls-card{display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.6rem 1.1rem;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.02);cursor:pointer;transition:all .2s;min-width:70px}
@@ -754,6 +757,7 @@ footer a:hover{color:var(--gold)}
     Level cap <span>45</span> &nbsp;·&nbsp; All biomes incl. Veilwater Basin
     <span class="countdown-badge" id="countdown">⚒ Update 8: April 21</span>
   </div>
+  <div id="save-sync-badge" class="save-sync-badge off" title="Run: node save-watcher.js to sync">💾 watcher offline</div>
 </header>
 
 <div class="divider"><span class="divider-icon">⚔</span></div>
@@ -2697,10 +2701,46 @@ function renderAll(){
   renderGuides();renderAchievements();renderActivity();
 }
 
+// ── SAVE SYNC (local watcher at localhost:7788) ───────────────────────
+const WATCHER_URL = 'http://localhost:7788/save';
+let _lastSaveTime = null;
+
+function syncFromSave(data) {
+  if (!data || !data.ok) return;
+  let changed = false;
+  if (data.level  && data.level  !== STATE.hero.level)  { STATE.hero.level  = data.level;  changed = true; }
+  if (data.deaths !== undefined && data.deaths !== STATE.hero.deaths) { STATE.hero.deaths = data.deaths; changed = true; }
+  if (data.playerName && !STATE.hero.name)              { STATE.hero.name   = data.playerName; changed = true; }
+  if (data.progressLevel > 1 && STATE.flameLevel === 1) { STATE.flameLevel  = data.progressLevel; changed = true; }
+  if (changed) { saveState(); renderFlameAltar(); document.getElementById('solo-hero').innerHTML = renderSoloHero(); updateStats(); }
+
+  const el = document.getElementById('save-sync-badge');
+  if (el) {
+    el.textContent = data.ok
+      ? `💾 ${data.playerName} · Lv${data.level} · ${data.deaths}☠`
+      : '💾 watcher offline';
+    el.title = data.ok
+      ? `World: ${data.worldName} | Flame Lv${data.progressLevel} | saved ${new Date(data.savedAt).toLocaleTimeString()}`
+      : 'Run: node save-watcher.js';
+    el.className = 'save-sync-badge' + (data.ok ? ' ok' : ' off');
+  }
+}
+
+async function pollSave() {
+  try {
+    const r = await fetch(WATCHER_URL, { signal: AbortSignal.timeout(1500) });
+    const d = await r.json();
+    if (d.savedAt !== _lastSaveTime) { _lastSaveTime = d.savedAt; syncFromSave(d); }
+    else { const el=document.getElementById('save-sync-badge'); if(el&&!el.classList.contains('ok')){ el.className='save-sync-badge ok'; el.textContent=`💾 ${d.playerName}·Lv${d.level}`;} }
+  } catch { const el=document.getElementById('save-sync-badge'); if(el){ el.textContent='💾 watcher offline'; el.className='save-sync-badge off'; el.title='Run: node save-watcher.js in the repo folder'; } }
+}
+
 // ── INIT ──────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('loading').classList.add('gone');
   renderAll();updateCountdown();initDotNav();initSessionTimer();initReveal();
+  pollSave();
+  setInterval(pollSave, 8000);
 });
 function initReveal(){const els=document.querySelectorAll('.reveal');const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.08});els.forEach(el=>obs.observe(el));}
 function initDotNav(){

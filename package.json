@@ -1,0 +1,24 @@
+{
+  "name": "enshrouded-bros",
+  "version": "1.0.0",
+  "description": "4-player campaign dashboard for [Enshrouded](https://enshrouded.com), built for **Update 8 — Forging the Path** (April 21, 2026).",
+  "main": "generate_solo.js",
+  "scripts": {
+    "watch": "node save-watcher.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylejackson64-pixel/enshrouded-bros.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kylejackson64-pixel/enshrouded-bros/issues"
+  },
+  "homepage": "https://github.com/kylejackson64-pixel/enshrouded-bros#readme",
+  "dependencies": {
+    "@mongodb-js/zstd": "^7.0.0"
+  }
+}

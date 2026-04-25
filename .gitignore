@@ -1,3 +1,11 @@
+# Node
+node_modules/
+package-lock.json
+
+# Build artifacts
+generate_solo.js
+_extracted.json
+
 # Never commit tokens or secrets
 .env
 *.env
