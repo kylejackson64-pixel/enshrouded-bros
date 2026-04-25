@@ -1637,6 +1637,134 @@ const CLASS_GUIDES = {
       'Pre-craft 20+ potions before each session. Waters of Life doubles aura throughput — take it after maxing Water Aura levels.',
       'Build NPC shelter ASAP. Each rescued NPC = critical crafting unlock. You control base progression for the party.',
     ]
+  },
+
+  battlemage:{
+    emoji:'🌩', label:'Battlemage',
+    summary:'Hybrid melee+magic. Wand in one hand, sword in the other. Proc free projectiles on melee hits, parry to restore mana, then combo into AoE spells. Best sustained DPS with zero mana drought. U8 Focus Bar charges fast from mixed combos.',
+    skills:[
+      {node:'Wand Master',       why:'3pts — Battlemage path. Every melee hit has 30% chance to fire a free projectile. Core identity skill — take this first.',                             meta:'Battlemage path'},
+      {node:'Arcane Deflection', why:'3pts — Battlemage path. Successful parry restores 20 mana. Parry loops refund mana for spells. Practice the timing.',                                meta:'Battlemage path'},
+      {node:'Chain Hit',         why:'3pts — Wizard path. Shock damage chains to nearby enemies on hit. Turns single-target wand hits into soft AoE.',                                     meta:'Wizard path'},
+      {node:'Mass Destruction',  why:'4pts — Wizard path. Magic crit triggers a 20m AoE shock pulse. Wand Master procs count — elite packs evaporate.',                                   meta:'Wizard path'},
+      {node:'Heavy Handed',      why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stack with wand procs to stun-lock elites before they react.',                               meta:'Barbarian path'},
+      {node:'Strategic Maneuver',why:'Center — i-frames on dodge. Your only dodge escape as a frontliner. Mandatory. Take immediately after Wand Master.',                                  meta:'Center'},
+      {node:'Dark Arts',         why:'3pts — Wizard path. +10% damage in Shroud. Endgame biomes are Shroud-dense — this scales every hit type (melee and wand).',                         meta:'Wizard path'},
+      {node:'Battle Heal',       why:'3pts — Warrior path. 5% max HP on melee crit. Melee crits are constant for battlemage — this provides passive sustain.',                             meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'Sword + Wand (dual slot)',biome:'Springlands',why:'Keep sword equipped for melee, swap to wand for ranged burst. Use hotkeys — do not open inventory mid-fight.'},
+      {name:'Shock-element wand',biome:'Revelwood',why:'Shock element procs Mass Destruction AoE on crits. Priority element for battlemage. Look for "Crackling" or "Volt" prefix.'},
+      {name:'Intelligence-scaled sword',biome:'Kindlewastes+',why:'Battlemage scales both Strength (melee) and Intelligence (spells). Balanced stat sticks preferred.'},
+    ],
+    armor:[
+      {name:'Mixed Leather/Cloth starter',biome:'Springlands',why:'You need both armor and magic stats. Mixed kits from looted chests work fine early.'},
+      {name:'Battlemage set (INT+STR perks)',biome:'Revelwood+',why:'Look for gear with both Intelligence and Strength bonuses. Avoid pure Warrior or pure Caster sets.'},
+      {name:'High-INT endgame hybrid',biome:'Kindlewastes+',why:'Intelligence wins in endgame — Wand Master procs and Mass Destruction both scale off INT.'},
+    ],
+    tips:[
+      'U8: Wand Master procs fire even during a sword combo animation. Chain sword hits → free projectiles mid-swing.',
+      'Arcane Deflection timing: parry = blue flash. Hit parry right as enemy weapon hits you. Practice on wolves first.',
+      'Mass Destruction AoE range is 20m — trigger it from max melee range to catch the whole pack.',
+      'Heavy Handled + Wand Master means you stun-lock and free-fire simultaneously. Elites die before they act.',
+      'Strategic Maneuver i-frames last ~0.4s. One clean dodge negates boss 1-shot attacks. Practice the window.',
+    ]
+  },
+
+  assassin:{
+    emoji:'🗡', label:'Assassin',
+    summary:'Stealth opener into burst combo. 900% bonus on Sneak Attack. Use Blink for repositioning and i-frames, Updraft + Airborne for vertical play and crossbow angles. Highest single-target burst of any build. Fragile — hits first or dies first.',
+    skills:[
+      {node:'Sneak Attack',      why:'3pts — Center. +900% damage from stealth. This is the entire build identity. Every fight starts crouched.',                                            meta:'Center'},
+      {node:'Blink',             why:'4pts — Healer path. Teleport with i-frames. Reposition behind enemies to set up stealth openers. Also breaks boss tracking.',                         meta:'Healer path'},
+      {node:'Updraft',           why:'4pts — Assassin path. Gain altitude during a glide by pressing jump. Opens vertical angles for crossbow shots mid-air.',                              meta:'Assassin path'},
+      {node:'Double Jump',       why:'4pts — Center. Second jump to reach elevated stealth positions. Core mobility for solo play where no grapple partner exists.',                        meta:'Center'},
+      {node:'Emergency Blink',   why:'2pts — Healer path. Blink while stunned breaks the stun. Assassination attempts go wrong — this is your escape hatch.',                              meta:'Healer path'},
+      {node:'Multi Shot',        why:'3pts — Ranger path. 20% chance crossbow shot fires 3 bolts. Combines with stealth opener for explosive burst round.',                                 meta:'Ranger path'},
+      {node:'Airborne',          why:'2pts — Assassin path. 30% reduced glide stamina drain. Extends aerial angles for crossbow positioning without landing.',                              meta:'Assassin path'},
+      {node:'Marksman',          why:'2pts — Ranger path. +10% ranged damage. Scales every crossbow bolt from Multi Shot. Small cost, scales the entire ranged phase.',                    meta:'Ranger path'},
+    ],
+    weapons:[
+      {name:'Dagger (fast attack)',biome:'Springlands',why:'Fast attack speed = faster stealth opener connection before detection. Use lightest dagger available early.'},
+      {name:'Crossbow',biome:'Revelwood',why:'Mid-range burst after stealth opener. Multi Shot procs triple bolts from Sneak Attack bonus window.'},
+      {name:'Agility-scaled dagger + crossbow',biome:'Kindlewastes+',why:'Assassin scales Agility. Look for Agility perks on all gear. Agility also reduces stealth detection radius.'},
+    ],
+    armor:[
+      {name:'Leather Armor (light)',biome:'Springlands',why:'Light armor = faster movement, quieter footsteps, lower Shroud aggro range. Stealth build needs light kit.'},
+      {name:'Agility/Spirit set',biome:'Revelwood+',why:'Agility on gear improves stealth window duration and crossbow reload. Spirit gives mana for Blink uses.'},
+      {name:'High-Agility endgame set',biome:'Kindlewastes+',why:'Agility scales stealth duration. Longer window = more time to reposition between Sneak Attacks.'},
+    ],
+    tips:[
+      'U8: Sneak Attack window lasts ~1.5s after first hit while still in stealth. Land 2–3 hits inside that window for full 900% on all hits.',
+      'Blink counts as movement — use it to reenter stealth immediately after a burst combo. Reposition, crouch, wait.',
+      'Updraft + Airborne: gain height with one jump, open glider, tap jump again mid-glide to climb. Free altitude, no grapple needed.',
+      'Emergency Blink works while crowd-controlled. Boss slam CC? Blink out instantly. Always save one Blink charge.',
+      'Multi Shot + Sneak Attack opener: the 3 bolts all receive the 900% bonus if fired before stealth breaks.',
+    ]
+  },
+
+  paladin:{
+    emoji:'🛡', label:'Paladin',
+    summary:'Frontline tank with built-in self-sustain. Water Aura heals you and nearby allies passively. Waters of Life doubles that output. Battle Heal + Blink fill the gaps. Endgame: near-unkillable solo. Best class for first-time players hitting hard content.',
+    skills:[
+      {node:'Water Aura',        why:'3pts × 3 levels — Healer path. Passive HP regen aura. 1 HP per 2 Intelligence per tick. Stack 3 levels. This is your heal engine.',                  meta:'Healer path'},
+      {node:'Battle Heal',       why:'3pts — Warrior path. 5% max HP on every melee crit. Paired with Water Aura = near-continuous healing during combat.',                                 meta:'Warrior path'},
+      {node:'Blink',             why:'4pts — Healer path. i-frame teleport. Escape 1-shot attacks and reposition behind tanks. Also resets aggro at range.',                               meta:'Healer path'},
+      {node:'Emergency Blink',   why:'2pts — Healer path. Break stun with Blink. Boss CC chains are dangerous solo — this ends them.',                                                      meta:'Healer path'},
+      {node:'Heavy Handed',      why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stun enemies before they land combos. Reduces incoming damage.',                              meta:'Barbarian path'},
+      {node:'Waters of Life',    why:'2pts — Healer path. Doubles Water Aura healing output. After maxing 3 levels of Water Aura this effectively doubles your HPS.',                       meta:'Healer path'},
+      {node:'Divine Surge',      why:'5pts — Healer path. Emergency burst heal. Use when Water Aura regen can\'t keep up with burst damage windows.',                                       meta:'Healer path'},
+      {node:'Veteran',           why:'4pts — Warrior path. +crit chance. More crits = more Battle Heal procs. Directly scales your sustain throughput.',                                   meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'One-handed sword + shield',biome:'Springlands',why:'Paladin tanks with shield. Block damage, melee crit heal, survive. Use heaviest 1H sword available.'},
+      {name:'Intelligence-scaled sword',biome:'Revelwood',why:'Intelligence scales Water Aura healing (1 HP per 2 INT). Both your offense AND defense scale off INT.'},
+      {name:'High-INT 1H endgame sword',biome:'Kindlewastes+',why:'Endgame INT sword = high healing from Water Aura AND high melee damage. Stat stick priority: INT > Strength.'},
+    ],
+    armor:[
+      {name:'Medium armor (STR+INT mix)',biome:'Springlands',why:'You need physical defense to survive frontline while Water Aura kicks in. Medium plate viable early.'},
+      {name:'Intelligence/Strength set',biome:'Revelwood+',why:'INT scales Water Aura. STR scales melee damage and Battle Heal output. Balance both stats.'},
+      {name:'High-INT plate endgame',biome:'Kindlewastes+',why:'Intelligence wins. More INT = more Water Aura heal = more uptime in Shroud and boss fights.'},
+    ],
+    tips:[
+      'U8: Water Aura ticks every ~1 second. With 3 levels + Waters of Life + 40 INT gear, you regen ~40 HP/s passively.',
+      'Stack Intelligence on every gear piece. INT is a double-dip stat for paladin: it improves spells AND your healing.',
+      'Blink + melee loop: melee until HP drops 30%, Blink away, let Water Aura top you, Blink back in. Sustain loop.',
+      'Divine Surge is a panic button. Save it for moments where you take 3+ hits in quick succession, not for chip damage.',
+      'Heavy Handed synergy: stun enemies faster → they deal less damage → Water Aura covers remaining chip easily.',
+    ]
+  },
+
+  berserker:{
+    emoji:'🩸', label:'Berserker',
+    summary:'Lives at low HP on purpose. Blood Rage triggers at 40% HP for a massive damage spike. Battle Heal keeps you alive inside the spike window. Whirlwind Crescendo for room clearing. U8 Focus Bar: charges from the constant attack spam, dumps into heavy AoE finisher.',
+    skills:[
+      {node:'Blood Rage',           why:'5pts — Barbarian path. Triggers at ~40% HP: massive damage increase. The whole build revolves around staying in this window.',                      meta:'Barbarian path'},
+      {node:'Battle Heal',          why:'3pts — Warrior path. 5% max HP on melee crit. Keeps you alive inside the Blood Rage HP window without going below it.',                           meta:'Warrior path'},
+      {node:'Whirlwind Crescendo',  why:'5pts — Barbarian path. Spinning AoE. Hold attack for 2 full rotations. Clears entire rooms when active under Blood Rage.',                        meta:'Barbarian path'},
+      {node:'Breach',               why:'3pts — Barbarian path. Debuff: amplifies all damage taken by enemy for 8s. Apply before Whirlwind Crescendo for max burst.',                      meta:'Barbarian path'},
+      {node:'Heavy Handed',         why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stun enemies early in Blood Rage window to prevent counter-damage.',                       meta:'Barbarian path'},
+      {node:'Strategic Maneuver',   why:'Center — i-frames on dodge. Living at low HP means one hit can kill you. i-frames are the safety net that makes Blood Rage viable.',               meta:'Center'},
+      {node:'Swift Blades',         why:'5pts — Warrior path. +15% attack speed. More attacks per second = more Blood Rage hits = more Battle Heal procs = more sustain.',                  meta:'Warrior path'},
+      {node:'Veteran',              why:'4pts — Warrior path. +crit chance. More crits = more Battle Heal heals inside Blood Rage window. Direct sustain scaling.',                         meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'Two-handed axe or greatsword',biome:'Springlands',why:'Berserker wants high single-swing damage to proc Blood Rage burst. 2H weapon maximizes each hit.'},
+      {name:'Strength-scaled 2H weapon',biome:'Revelwood',why:'Strength scales 2H damage. Swift Blades + STR weapon = fast heavy hits. Look for "Brutal" or "Ravager" prefixes.'},
+      {name:'Endgame 2H high-Strength weapon',biome:'Kindlewastes+',why:'Endgame Blood Rage + STR-scaled 2H under Breach = highest melee burst in the game.'},
+    ],
+    armor:[
+      {name:'Heavy Fur/Iron plate',biome:'Springlands',why:'You will take hits while building Blood Rage stacks. Heavy armor buys time to reach the 40% HP window safely.'},
+      {name:'Strength-focused heavy set',biome:'Revelwood+',why:'Strength scales 2H damage AND gives armor. Pure melee stat — every STR point matters.'},
+      {name:'High-Strength endgame plate',biome:'Kindlewastes+',why:'Max STR endgame = highest Blood Rage numbers. Pair with Breach debuff for final boss phases.'},
+    ],
+    tips:[
+      'U8: Blood Rage activates below 40% HP. You want to play in the 35–40% HP band permanently. Drop to it intentionally at fight start.',
+      'Battle Heal is your life insurance: melee crits restore 5% HP. With Swift Blades attack speed, you crit constantly. HP stays stable inside Blood Rage band.',
+      'Breach timing: apply it with one hit, then immediately Whirlwind. The 8-second debuff window aligns perfectly with Crescendo duration.',
+      'Strategic Maneuver i-frames: at 35% HP, one unblocked hit can kill you. One clean dodge per threat is mandatory. Never panic-roll twice.',
+      'U8 Focus Bar charges from every hit. Under Swift Blades attack speed, bar fills in ~8–10 hits. Dump Heavy Attack finisher into Breached elites.',
+    ]
   }
 };
 
@@ -1716,6 +1844,62 @@ const SKILL_MAPS = {
     ],
     // Water Aura upgrades, Blink tree, Divine chain
     edges:[[0,1],[0,2],[2,3],[2,4],[0,5],[5,6],[1,6],[5,7]]
+  },
+  // battlemage: [0]WandMaster [1]ArcaneDeflection [2]ChainHit [3]MassDestruction [4]HeavyHanded [5]StrategicManeuver [6]DarkArts [7]BattleHeal
+  battlemage:{
+    nodes:[
+      {x:385, y:75,  ...CLASS_GUIDES.battlemage.skills[0]},  // [0] Wand Master — Battlemage cluster
+      {x:435, y:155, ...CLASS_GUIDES.battlemage.skills[1]},  // [1] Arcane Deflection — Battlemage cluster
+      {x:80,  y:80,  ...CLASS_GUIDES.battlemage.skills[2]},  // [2] Chain Hit — Wizard cluster
+      {x:155, y:155, ...CLASS_GUIDES.battlemage.skills[3]},  // [3] Mass Destruction — Wizard cluster
+      {x:60,  y:200, ...CLASS_GUIDES.battlemage.skills[4]},  // [4] Heavy Handed — Barbarian cluster
+      {x:250, y:130, ...CLASS_GUIDES.battlemage.skills[5]},  // [5] Strategic Maneuver — center
+      {x:100, y:230, ...CLASS_GUIDES.battlemage.skills[6]},  // [6] Dark Arts — Wizard cluster
+      {x:390, y:215, ...CLASS_GUIDES.battlemage.skills[7]},  // [7] Battle Heal — Warrior cluster
+    ],
+    edges:[[2,0],[2,3],[3,4],[3,6],[5,2],[5,0],[0,1],[5,7]]
+  },
+  // assassin: [0]SneakAttack [1]Blink [2]Updraft [3]DoubleJump [4]EmergencyBlink [5]MultiShot [6]Airborne [7]Marksman
+  assassin:{
+    nodes:[
+      {x:145, y:215, ...CLASS_GUIDES.assassin.skills[0]},  // [0] Sneak Attack — lower-center
+      {x:110, y:130, ...CLASS_GUIDES.assassin.skills[1]},  // [1] Blink — Healer cluster
+      {x:75,  y:55,  ...CLASS_GUIDES.assassin.skills[2]},  // [2] Updraft — Assassin cluster
+      {x:200, y:130, ...CLASS_GUIDES.assassin.skills[3]},  // [3] Double Jump — center
+      {x:65,  y:75,  ...CLASS_GUIDES.assassin.skills[4]},  // [4] Emergency Blink — Healer upper
+      {x:385, y:175, ...CLASS_GUIDES.assassin.skills[5]},  // [5] Multi Shot — Ranger cluster
+      {x:175, y:50,  ...CLASS_GUIDES.assassin.skills[6]},  // [6] Airborne — Assassin cluster
+      {x:420, y:110, ...CLASS_GUIDES.assassin.skills[7]},  // [7] Marksman — Ranger cluster
+    ],
+    edges:[[3,0],[3,1],[1,2],[1,4],[3,6],[6,2],[5,7],[3,5]]
+  },
+  // paladin: [0]WaterAura [1]BattleHeal [2]Blink [3]EmergencyBlink [4]HeavyHanded [5]WatersOfLife [6]DivineSurge [7]Veteran
+  paladin:{
+    nodes:[
+      {x:210, y:70,  ...CLASS_GUIDES.paladin.skills[0]},  // [0] Water Aura — center-upper
+      {x:360, y:90,  ...CLASS_GUIDES.paladin.skills[1]},  // [1] Battle Heal — Warrior cluster
+      {x:130, y:130, ...CLASS_GUIDES.paladin.skills[2]},  // [2] Blink — Healer cluster
+      {x:80,  y:80,  ...CLASS_GUIDES.paladin.skills[3]},  // [3] Emergency Blink — Healer upper
+      {x:90,  y:215, ...CLASS_GUIDES.paladin.skills[4]},  // [4] Heavy Handed — Barbarian lower
+      {x:305, y:130, ...CLASS_GUIDES.paladin.skills[5]},  // [5] Waters of Life — right-mid
+      {x:320, y:200, ...CLASS_GUIDES.paladin.skills[6]},  // [6] Divine Surge — right-lower
+      {x:430, y:155, ...CLASS_GUIDES.paladin.skills[7]},  // [7] Veteran — Warrior far-right
+    ],
+    edges:[[0,2],[0,5],[2,3],[5,1],[1,7],[7,6],[0,4],[5,6]]
+  },
+  // berserker: [0]BloodRage [1]BattleHeal [2]WhirlwindCrescendo [3]Breach [4]HeavyHanded [5]StrategicManeuver [6]SwiftBlades [7]Veteran
+  berserker:{
+    nodes:[
+      {x:100, y:225, ...CLASS_GUIDES.berserker.skills[0]},  // [0] Blood Rage — Barbarian lower
+      {x:360, y:85,  ...CLASS_GUIDES.berserker.skills[1]},  // [1] Battle Heal — Warrior cluster
+      {x:210, y:235, ...CLASS_GUIDES.berserker.skills[2]},  // [2] Whirlwind Crescendo — Barbarian lower-right
+      {x:155, y:150, ...CLASS_GUIDES.berserker.skills[3]},  // [3] Breach — Barbarian mid
+      {x:90,  y:85,  ...CLASS_GUIDES.berserker.skills[4]},  // [4] Heavy Handed — Barbarian upper
+      {x:250, y:125, ...CLASS_GUIDES.berserker.skills[5]},  // [5] Strategic Maneuver — center
+      {x:425, y:145, ...CLASS_GUIDES.berserker.skills[6]},  // [6] Swift Blades — Warrior cluster
+      {x:390, y:220, ...CLASS_GUIDES.berserker.skills[7]},  // [7] Veteran — Warrior lower
+    ],
+    edges:[[4,3],[3,0],[0,2],[5,4],[5,1],[1,6],[6,7],[5,3]]
   }
 };
 const SIDE_CONTENT = [

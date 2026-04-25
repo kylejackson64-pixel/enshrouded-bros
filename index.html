@@ -138,14 +138,22 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian::before{background:linear-gradient(90deg,#c0392b,#e74c3c)}
 .hero-card.wizard::before{background:linear-gradient(90deg,var(--purple),#a89bd4)}
 .hero-card.healer::before{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.hero-card.battlemage::before{background:linear-gradient(90deg,#2e6da4,#5ba3d4)}
+.hero-card.assassin::before{background:linear-gradient(90deg,#4a2c6e,#c0a0e0)}
+.hero-card.paladin::before{background:linear-gradient(90deg,#1a5276,#7ec8e3)}
+.hero-card.berserker::before{background:linear-gradient(90deg,#7b241c,#e74c3c)}
 .hero-card:hover{border-color:rgba(232,97,42,.4);transform:translateY(-2px)}
 .hero-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:.7rem}
 .hero-card.ranger .hero-avatar{background:rgba(232,97,42,.15);border:2px solid var(--ember)}
 .hero-card.barbarian .hero-avatar{background:rgba(192,57,43,.15);border:2px solid #e74c3c}
 .hero-card.wizard .hero-avatar{background:rgba(142,109,191,.15);border:2px solid var(--purple)}
 .hero-card.healer .hero-avatar{background:rgba(74,159,212,.15);border:2px solid var(--water)}
+.hero-card.battlemage .hero-avatar{background:rgba(91,163,212,.15);border:2px solid #5ba3d4}
+.hero-card.assassin .hero-avatar{background:rgba(142,109,191,.15);border:2px solid #c0a0e0}
+.hero-card.paladin .hero-avatar{background:rgba(126,200,227,.15);border:2px solid #7ec8e3}
+.hero-card.berserker .hero-avatar{background:rgba(192,57,43,.15);border:2px solid #e74c3c}
 .hero-initials{font-family:'Cinzel',serif;font-size:1rem;font-weight:700}
-.hero-card.ranger .hero-initials{color:var(--ember-bright)}.hero-card.barbarian .hero-initials{color:#e74c3c}.hero-card.wizard .hero-initials{color:#a89bd4}.hero-card.healer .hero-initials{color:var(--water)}
+.hero-card.ranger .hero-initials{color:var(--ember-bright)}.hero-card.barbarian .hero-initials{color:#e74c3c}.hero-card.wizard .hero-initials{color:#a89bd4}.hero-card.healer .hero-initials{color:var(--water)}.hero-card.battlemage .hero-initials{color:#5ba3d4}.hero-card.assassin .hero-initials{color:#c0a0e0}.hero-card.paladin .hero-initials{color:#7ec8e3}.hero-card.berserker .hero-initials{color:#e74c3c}
 .hero-name{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.1em;color:var(--gold-light);margin-bottom:.1rem}
 .hero-role{font-size:.75rem;color:var(--text-dim);font-style:italic;margin-bottom:.7rem}
 .hero-level{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--text);margin-bottom:.4rem}
@@ -159,6 +167,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian .weapon-bar-fill{background:linear-gradient(90deg,#a93226,#e74c3c)}
 .hero-card.wizard .weapon-bar-fill{background:linear-gradient(90deg,#6c3483,#a89bd4)}
 .hero-card.healer .weapon-bar-fill{background:linear-gradient(90deg,var(--water-dim),var(--water))}
+.hero-card.battlemage .weapon-bar-fill{background:linear-gradient(90deg,#2e6da4,#5ba3d4)}
+.hero-card.assassin .weapon-bar-fill{background:linear-gradient(90deg,#4a2c6e,#c0a0e0)}
+.hero-card.paladin .weapon-bar-fill{background:linear-gradient(90deg,#1a5276,#7ec8e3)}
+.hero-card.berserker .weapon-bar-fill{background:linear-gradient(90deg,#7b241c,#e74c3c)}
 .armor-row{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;padding-top:.6rem;border-top:1px solid rgba(255,255,255,.06);font-size:.72rem;color:var(--text-dim)}
 .armor-pips{display:flex;gap:3px}
 .armor-pip{width:8px;height:8px;border-radius:1px;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s}
@@ -166,6 +178,10 @@ h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,6vw,3.5rem);font-w
 .hero-card.barbarian .armor-pip.filled{background:#e74c3c;border-color:#e74c3c}
 .hero-card.wizard .armor-pip.filled{background:var(--purple);border-color:var(--purple)}
 .hero-card.healer .armor-pip.filled{background:var(--water);border-color:var(--water)}
+.hero-card.battlemage .armor-pip.filled{background:#5ba3d4;border-color:#5ba3d4}
+.hero-card.assassin .armor-pip.filled{background:#c0a0e0;border-color:#c0a0e0}
+.hero-card.paladin .armor-pip.filled{background:#7ec8e3;border-color:#7ec8e3}
+.hero-card.berserker .armor-pip.filled{background:#e74c3c;border-color:#e74c3c}
 
 /* Campaign + phase strip */
 .campaign-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;max-width:900px;margin:0 auto 2rem;padding:0 1.5rem}
@@ -382,6 +398,10 @@ footer a:hover{color:var(--gold)}
 .guide-class-tab.barbarian.active{background:rgba(192,57,43,.15);border-color:#e74c3c;color:#e74c3c}
 .guide-class-tab.wizard.active{background:rgba(142,109,191,.15);border-color:var(--purple);color:#a89bd4}
 .guide-class-tab.healer.active{background:rgba(74,159,212,.15);border-color:var(--water);color:var(--water)}
+.guide-class-tab.battlemage.active{background:rgba(91,163,212,.15);border-color:#5ba3d4;color:#5ba3d4}
+.guide-class-tab.assassin.active{background:rgba(142,109,191,.15);border-color:#c0a0e0;color:#c0a0e0}
+.guide-class-tab.paladin.active{background:rgba(74,159,212,.15);border-color:#7ec8e3;color:#7ec8e3}
+.guide-class-tab.berserker.active{background:rgba(192,57,43,.15);border-color:#c0392b;color:#e74c3c}
 .guide-accordion{border:1px solid var(--border);border-radius:5px;margin-bottom:.5rem;overflow:hidden}
 .guide-acc-header{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;cursor:pointer;transition:background .2s;user-select:none;font-family:'Cinzel',serif;font-size:.72rem;color:var(--ash)}
 .guide-acc-header:hover{background:rgba(255,255,255,.04)}
@@ -1623,23 +1643,43 @@ const phasePct = id => {
 const overallPct = () => Math.round(checkedCount()/totalObjs()*100);
 const currentPhase = () => { for(let i=PHASES.length;i>=1;i--) if(phasePct(i)>0) return i; return 1; };
 const avgLevel = () => { const v=HEROES.map(h=>+STATE.heroes[h.id].level||1); return Math.round(v.reduce((a,b)=>a+b,0)/v.length); };
-const tcls = t=>({group:'tag-group',ranger:'tag-ranger',barbarian:'tag-barb',wizard:'tag-wiz',healer:'tag-heal'}[t]||'tag-group');
-const tlbl = t=>({group:'GROUP',ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'}[t]||t);
+const tcls = t=>({group:'tag-group',ranger:'tag-ranger',barbarian:'tag-barb',wizard:'tag-wiz',healer:'tag-heal',battlemage:'tag-ranger',assassin:'tag-barb',paladin:'tag-heal',berserker:'tag-barb'}[t]||'tag-group');
+const tlbl = t=>({group:'GROUP',ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer',battlemage:'Battlemage',assassin:'Assassin',paladin:'Paladin',berserker:'Berserker'}[t]||t);
+const ALL_CLASSES = [
+  {id:'ranger',    emoji:'🏹', label:'Ranger',    initials:'RG', role:'Mobility & Burst DPS'},
+  {id:'barbarian', emoji:'⚔️', label:'Barbarian', initials:'BB', role:'Frontline Bruiser'},
+  {id:'wizard',    emoji:'🔮', label:'Wizard',    initials:'WZ', role:'AoE Pack Clear & Boss Burn'},
+  {id:'healer',    emoji:'💧', label:'Healer',    initials:'HL', role:'Support & Water Aura'},
+  {id:'battlemage',emoji:'🌩', label:'Battlemage',initials:'BM', role:'Hybrid: Melee + Magic (U8)'},
+  {id:'assassin',  emoji:'🗡', label:'Assassin',  initials:'AS', role:'Hybrid: Stealth + Daggers (U8)'},
+  {id:'paladin',   emoji:'🛡', label:'Paladin',   initials:'PL', role:'Hybrid: Tank + Healer (U8)'},
+  {id:'berserker', emoji:'🩸', label:'Berserker', initials:'BK', role:'Hybrid: Warrior + Focus Burst (U8)'},
+];
+function setHeroCls(id, cls) {
+  const c = ALL_CLASSES.find(x=>x.id===cls)||ALL_CLASSES[0];
+  STATE.heroes[id].cls = cls;
+  saveState();
+  renderParty();
+}
 
 // ── RENDER PARTY ─────────────────────────────────────────────────────
 function renderParty() {
   document.getElementById('party-grid').innerHTML = HEROES.map(h => {
     const hs=STATE.heroes[h.id];
+    const activeCls = hs.cls || h.cls;
+    const clsMeta = ALL_CLASSES.find(c=>c.id===activeCls)||ALL_CLASSES.find(c=>c.id===h.cls)||ALL_CLASSES[0];
     const wBar=Math.min(100,hs.weaponBar||0);
     const armor=hs.armorUpgrades||0;
     const pips=Array.from({length:5},(_,i)=>`<div class="armor-pip${i<armor?' filled':''}" onclick="toggleArmor('${h.id}',${i})" title="Armor upgrade ${i+1}/5"></div>`).join('');
     const deaths=hs.deaths||0;
     const playerName=hs.name||'';
-    return `<div class="hero-card ${h.cls}">
-      <div class="hero-avatar"><span class="hero-initials">${h.initials}</span></div>
+    const clsOpts=ALL_CLASSES.map(c=>`<option value="${c.id}"${c.id===activeCls?' selected':''}>${c.emoji} ${c.label}</option>`).join('');
+    return `<div class="hero-card ${activeCls}">
+      <div class="hero-avatar"><span class="hero-initials">${clsMeta.initials}</span></div>
+      <select style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--ash);font-family:'Cinzel',serif;font-size:.62rem;padding:.3rem .4rem;border-radius:4px;margin-bottom:.4rem;cursor:pointer" onchange="setHeroCls('${h.id}',this.value)">${clsOpts}</select>
       <input class="hero-player-name" value="${playerName}" placeholder="Player name…" oninput="setHeroName('${h.id}',this.value)" onclick="event.stopPropagation()" title="Click to set player name">
-      <div class="hero-name">${h.emoji} ${h.id[0].toUpperCase()+h.id.slice(1)}</div>
-      <div class="hero-role">${h.role}</div>
+      <div class="hero-name">${clsMeta.emoji} Player ${HEROES.indexOf(h)+1}</div>
+      <div class="hero-role">${clsMeta.role}</div>
       <div class="hero-level">Lv <span id="lv-${h.id}">${hs.level}</span></div>
       <input type="range" min="1" max="45" value="${hs.level}" style="width:100%;accent-color:var(--gold);margin:.3rem 0 .7rem;cursor:pointer" oninput="setLevel('${h.id}',this.value)">
       <div class="skill-badge${hs.skillReset?' done':''}" onclick="toggleSkillReset('${h.id}')">
@@ -2420,6 +2460,134 @@ const CLASS_GUIDES = {
       'Pre-craft 20+ potions before each session. Waters of Life doubles aura throughput — take it after maxing Water Aura levels.',
       'Build NPC shelter ASAP. Each rescued NPC = critical crafting unlock. You control base progression for the party.',
     ]
+  },
+
+  battlemage:{
+    emoji:'🌩', label:'Battlemage',
+    summary:'Hybrid melee+magic. Wand in one hand, sword in the other. Proc free projectiles on melee hits, parry to restore mana, then combo into AoE spells. Best sustained DPS with zero mana drought. U8 Focus Bar charges fast from mixed combos.',
+    skills:[
+      {node:'Wand Master',       why:'3pts — Battlemage path. Every melee hit has 30% chance to fire a free projectile. Core identity skill — take this first.',                             meta:'Battlemage path'},
+      {node:'Arcane Deflection', why:'3pts — Battlemage path. Successful parry restores 20 mana. Parry loops refund mana for spells. Practice the timing.',                                meta:'Battlemage path'},
+      {node:'Chain Hit',         why:'3pts — Wizard path. Shock damage chains to nearby enemies on hit. Turns single-target wand hits into soft AoE.',                                     meta:'Wizard path'},
+      {node:'Mass Destruction',  why:'4pts — Wizard path. Magic crit triggers a 20m AoE shock pulse. Wand Master procs count — elite packs evaporate.',                                   meta:'Wizard path'},
+      {node:'Heavy Handed',      why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stack with wand procs to stun-lock elites before they react.',                               meta:'Barbarian path'},
+      {node:'Strategic Maneuver',why:'Center — i-frames on dodge. Your only dodge escape as a frontliner. Mandatory. Take immediately after Wand Master.',                                  meta:'Center'},
+      {node:'Dark Arts',         why:'3pts — Wizard path. +10% damage in Shroud. Endgame biomes are Shroud-dense — this scales every hit type (melee and wand).',                         meta:'Wizard path'},
+      {node:'Battle Heal',       why:'3pts — Warrior path. 5% max HP on melee crit. Melee crits are constant for battlemage — this provides passive sustain.',                             meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'Sword + Wand (dual slot)',biome:'Springlands',why:'Keep sword equipped for melee, swap to wand for ranged burst. Use hotkeys — do not open inventory mid-fight.'},
+      {name:'Shock-element wand',biome:'Revelwood',why:'Shock element procs Mass Destruction AoE on crits. Priority element for battlemage. Look for "Crackling" or "Volt" prefix.'},
+      {name:'Intelligence-scaled sword',biome:'Kindlewastes+',why:'Battlemage scales both Strength (melee) and Intelligence (spells). Balanced stat sticks preferred.'},
+    ],
+    armor:[
+      {name:'Mixed Leather/Cloth starter',biome:'Springlands',why:'You need both armor and magic stats. Mixed kits from looted chests work fine early.'},
+      {name:'Battlemage set (INT+STR perks)',biome:'Revelwood+',why:'Look for gear with both Intelligence and Strength bonuses. Avoid pure Warrior or pure Caster sets.'},
+      {name:'High-INT endgame hybrid',biome:'Kindlewastes+',why:'Intelligence wins in endgame — Wand Master procs and Mass Destruction both scale off INT.'},
+    ],
+    tips:[
+      'U8: Wand Master procs fire even during a sword combo animation. Chain sword hits → free projectiles mid-swing.',
+      'Arcane Deflection timing: parry = blue flash. Hit parry right as enemy weapon hits you. Practice on wolves first.',
+      'Mass Destruction AoE range is 20m — trigger it from max melee range to catch the whole pack.',
+      'Heavy Handled + Wand Master means you stun-lock and free-fire simultaneously. Elites die before they act.',
+      'Strategic Maneuver i-frames last ~0.4s. One clean dodge negates boss 1-shot attacks. Practice the window.',
+    ]
+  },
+
+  assassin:{
+    emoji:'🗡', label:'Assassin',
+    summary:'Stealth opener into burst combo. 900% bonus on Sneak Attack. Use Blink for repositioning and i-frames, Updraft + Airborne for vertical play and crossbow angles. Highest single-target burst of any build. Fragile — hits first or dies first.',
+    skills:[
+      {node:'Sneak Attack',      why:'3pts — Center. +900% damage from stealth. This is the entire build identity. Every fight starts crouched.',                                            meta:'Center'},
+      {node:'Blink',             why:'4pts — Healer path. Teleport with i-frames. Reposition behind enemies to set up stealth openers. Also breaks boss tracking.',                         meta:'Healer path'},
+      {node:'Updraft',           why:'4pts — Assassin path. Gain altitude during a glide by pressing jump. Opens vertical angles for crossbow shots mid-air.',                              meta:'Assassin path'},
+      {node:'Double Jump',       why:'4pts — Center. Second jump to reach elevated stealth positions. Core mobility for solo play where no grapple partner exists.',                        meta:'Center'},
+      {node:'Emergency Blink',   why:'2pts — Healer path. Blink while stunned breaks the stun. Assassination attempts go wrong — this is your escape hatch.',                              meta:'Healer path'},
+      {node:'Multi Shot',        why:'3pts — Ranger path. 20% chance crossbow shot fires 3 bolts. Combines with stealth opener for explosive burst round.',                                 meta:'Ranger path'},
+      {node:'Airborne',          why:'2pts — Assassin path. 30% reduced glide stamina drain. Extends aerial angles for crossbow positioning without landing.',                              meta:'Assassin path'},
+      {node:'Marksman',          why:'2pts — Ranger path. +10% ranged damage. Scales every crossbow bolt from Multi Shot. Small cost, scales the entire ranged phase.',                    meta:'Ranger path'},
+    ],
+    weapons:[
+      {name:'Dagger (fast attack)',biome:'Springlands',why:'Fast attack speed = faster stealth opener connection before detection. Use lightest dagger available early.'},
+      {name:'Crossbow',biome:'Revelwood',why:'Mid-range burst after stealth opener. Multi Shot procs triple bolts from Sneak Attack bonus window.'},
+      {name:'Agility-scaled dagger + crossbow',biome:'Kindlewastes+',why:'Assassin scales Agility. Look for Agility perks on all gear. Agility also reduces stealth detection radius.'},
+    ],
+    armor:[
+      {name:'Leather Armor (light)',biome:'Springlands',why:'Light armor = faster movement, quieter footsteps, lower Shroud aggro range. Stealth build needs light kit.'},
+      {name:'Agility/Spirit set',biome:'Revelwood+',why:'Agility on gear improves stealth window duration and crossbow reload. Spirit gives mana for Blink uses.'},
+      {name:'High-Agility endgame set',biome:'Kindlewastes+',why:'Agility scales stealth duration. Longer window = more time to reposition between Sneak Attacks.'},
+    ],
+    tips:[
+      'U8: Sneak Attack window lasts ~1.5s after first hit while still in stealth. Land 2–3 hits inside that window for full 900% on all hits.',
+      'Blink counts as movement — use it to reenter stealth immediately after a burst combo. Reposition, crouch, wait.',
+      'Updraft + Airborne: gain height with one jump, open glider, tap jump again mid-glide to climb. Free altitude, no grapple needed.',
+      'Emergency Blink works while crowd-controlled. Boss slam CC? Blink out instantly. Always save one Blink charge.',
+      'Multi Shot + Sneak Attack opener: the 3 bolts all receive the 900% bonus if fired before stealth breaks.',
+    ]
+  },
+
+  paladin:{
+    emoji:'🛡', label:'Paladin',
+    summary:'Frontline tank with built-in self-sustain. Water Aura heals you and nearby allies passively. Waters of Life doubles that output. Battle Heal + Blink fill the gaps. Endgame: near-unkillable solo. Best class for first-time players hitting hard content.',
+    skills:[
+      {node:'Water Aura',        why:'3pts × 3 levels — Healer path. Passive HP regen aura. 1 HP per 2 Intelligence per tick. Stack 3 levels. This is your heal engine.',                  meta:'Healer path'},
+      {node:'Battle Heal',       why:'3pts — Warrior path. 5% max HP on every melee crit. Paired with Water Aura = near-continuous healing during combat.',                                 meta:'Warrior path'},
+      {node:'Blink',             why:'4pts — Healer path. i-frame teleport. Escape 1-shot attacks and reposition behind tanks. Also resets aggro at range.',                               meta:'Healer path'},
+      {node:'Emergency Blink',   why:'2pts — Healer path. Break stun with Blink. Boss CC chains are dangerous solo — this ends them.',                                                      meta:'Healer path'},
+      {node:'Heavy Handed',      why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stun enemies before they land combos. Reduces incoming damage.',                              meta:'Barbarian path'},
+      {node:'Waters of Life',    why:'2pts — Healer path. Doubles Water Aura healing output. After maxing 3 levels of Water Aura this effectively doubles your HPS.',                       meta:'Healer path'},
+      {node:'Divine Surge',      why:'5pts — Healer path. Emergency burst heal. Use when Water Aura regen cannot keep up with burst damage windows.',                                       meta:'Healer path'},
+      {node:'Veteran',           why:'4pts — Warrior path. +crit chance. More crits = more Battle Heal procs. Directly scales your sustain throughput.',                                   meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'One-handed sword + shield',biome:'Springlands',why:'Paladin tanks with shield. Block damage, melee crit heal, survive. Use heaviest 1H sword available.'},
+      {name:'Intelligence-scaled sword',biome:'Revelwood',why:'Intelligence scales Water Aura healing (1 HP per 2 INT). Both your offense AND defense scale off INT.'},
+      {name:'High-INT 1H endgame sword',biome:'Kindlewastes+',why:'Endgame INT sword = high healing from Water Aura AND high melee damage. Stat stick priority: INT > Strength.'},
+    ],
+    armor:[
+      {name:'Medium armor (STR+INT mix)',biome:'Springlands',why:'You need physical defense to survive frontline while Water Aura kicks in. Medium plate viable early.'},
+      {name:'Intelligence/Strength set',biome:'Revelwood+',why:'INT scales Water Aura. STR scales melee damage and Battle Heal output. Balance both stats.'},
+      {name:'High-INT plate endgame',biome:'Kindlewastes+',why:'Intelligence wins. More INT = more Water Aura heal = more uptime in Shroud and boss fights.'},
+    ],
+    tips:[
+      'U8: Water Aura ticks every ~1 second. With 3 levels + Waters of Life + 40 INT gear, you regen ~40 HP/s passively.',
+      'Stack Intelligence on every gear piece. INT is a double-dip stat for paladin: it improves spells AND your healing.',
+      'Blink + melee loop: melee until HP drops 30%, Blink away, let Water Aura top you, Blink back in. Sustain loop.',
+      'Divine Surge is a panic button. Save it for moments where you take 3+ hits in quick succession, not for chip damage.',
+      'Heavy Handed synergy: stun enemies faster → they deal less damage → Water Aura covers remaining chip easily.',
+    ]
+  },
+
+  berserker:{
+    emoji:'🩸', label:'Berserker',
+    summary:'Lives at low HP on purpose. Blood Rage triggers at 40% HP for a massive damage spike. Battle Heal keeps you alive inside the spike window. Whirlwind Crescendo for room clearing. U8 Focus Bar: charges from the constant attack spam, dumps into heavy AoE finisher.',
+    skills:[
+      {node:'Blood Rage',           why:'5pts — Barbarian path. Triggers at ~40% HP: massive damage increase. The whole build revolves around staying in this window.',                      meta:'Barbarian path'},
+      {node:'Battle Heal',          why:'3pts — Warrior path. 5% max HP on melee crit. Keeps you alive inside the Blood Rage HP window without going below it.',                           meta:'Warrior path'},
+      {node:'Whirlwind Crescendo',  why:'5pts — Barbarian path. Spinning AoE. Hold attack for 2 full rotations. Clears entire rooms when active under Blood Rage.',                        meta:'Barbarian path'},
+      {node:'Breach',               why:'3pts — Barbarian path. Debuff: amplifies all damage taken by enemy for 8s. Apply before Whirlwind Crescendo for max burst.',                      meta:'Barbarian path'},
+      {node:'Heavy Handed',         why:'2pts — Barbarian path. Melee hits fill stun bar faster. Stun enemies early in Blood Rage window to prevent counter-damage.',                       meta:'Barbarian path'},
+      {node:'Strategic Maneuver',   why:'Center — i-frames on dodge. Living at low HP means one hit can kill you. i-frames are the safety net that makes Blood Rage viable.',               meta:'Center'},
+      {node:'Swift Blades',         why:'5pts — Warrior path. +15% attack speed. More attacks per second = more Blood Rage hits = more Battle Heal procs = more sustain.',                  meta:'Warrior path'},
+      {node:'Veteran',              why:'4pts — Warrior path. +crit chance. More crits = more Battle Heal heals inside Blood Rage window. Direct sustain scaling.',                         meta:'Warrior path'},
+    ],
+    weapons:[
+      {name:'Two-handed axe or greatsword',biome:'Springlands',why:'Berserker wants high single-swing damage to proc Blood Rage burst. 2H weapon maximizes each hit.'},
+      {name:'Strength-scaled 2H weapon',biome:'Revelwood',why:'Strength scales 2H damage. Swift Blades + STR weapon = fast heavy hits. Look for "Brutal" or "Ravager" prefixes.'},
+      {name:'Endgame 2H high-Strength weapon',biome:'Kindlewastes+',why:'Endgame Blood Rage + STR-scaled 2H under Breach = highest melee burst in the game.'},
+    ],
+    armor:[
+      {name:'Heavy Fur/Iron plate',biome:'Springlands',why:'You will take hits while building Blood Rage stacks. Heavy armor buys time to reach the 40% HP window safely.'},
+      {name:'Strength-focused heavy set',biome:'Revelwood+',why:'Strength scales 2H damage AND gives armor. Pure melee stat — every STR point matters.'},
+      {name:'High-Strength endgame plate',biome:'Kindlewastes+',why:'Max STR endgame = highest Blood Rage numbers. Pair with Breach debuff for final boss phases.'},
+    ],
+    tips:[
+      'U8: Blood Rage activates below 40% HP. You want to play in the 35–40% HP band permanently. Drop to it intentionally at fight start.',
+      'Battle Heal is your life insurance: melee crits restore 5% HP. With Swift Blades attack speed, you crit constantly. HP stays stable inside Blood Rage band.',
+      'Breach timing: apply it with one hit, then immediately Whirlwind. The 8-second debuff window aligns perfectly with Crescendo duration.',
+      'Strategic Maneuver i-frames: at 35% HP, one unblocked hit can kill you. One clean dodge per threat is mandatory. Never panic-roll twice.',
+      'U8 Focus Bar charges from every hit. Under Swift Blades attack speed, bar fills in ~8–10 hits. Dump Heavy Attack finisher into Breached elites.',
+    ]
   }
 };
 
@@ -2499,6 +2667,58 @@ const SKILL_MAPS = {
     ],
     // Water Aura upgrades, Blink tree, Divine chain
     edges:[[0,1],[0,2],[2,3],[2,4],[0,5],[5,6],[1,6],[5,7]]
+  },
+  battlemage:{
+    nodes:[
+      {x:385, y:75,  ...CLASS_GUIDES.battlemage.skills[0]},
+      {x:435, y:155, ...CLASS_GUIDES.battlemage.skills[1]},
+      {x:80,  y:80,  ...CLASS_GUIDES.battlemage.skills[2]},
+      {x:155, y:155, ...CLASS_GUIDES.battlemage.skills[3]},
+      {x:60,  y:200, ...CLASS_GUIDES.battlemage.skills[4]},
+      {x:250, y:130, ...CLASS_GUIDES.battlemage.skills[5]},
+      {x:100, y:230, ...CLASS_GUIDES.battlemage.skills[6]},
+      {x:390, y:215, ...CLASS_GUIDES.battlemage.skills[7]},
+    ],
+    edges:[[2,0],[2,3],[3,4],[3,6],[5,2],[5,0],[0,1],[5,7]]
+  },
+  assassin:{
+    nodes:[
+      {x:145, y:215, ...CLASS_GUIDES.assassin.skills[0]},
+      {x:110, y:130, ...CLASS_GUIDES.assassin.skills[1]},
+      {x:75,  y:55,  ...CLASS_GUIDES.assassin.skills[2]},
+      {x:200, y:130, ...CLASS_GUIDES.assassin.skills[3]},
+      {x:65,  y:75,  ...CLASS_GUIDES.assassin.skills[4]},
+      {x:385, y:175, ...CLASS_GUIDES.assassin.skills[5]},
+      {x:175, y:50,  ...CLASS_GUIDES.assassin.skills[6]},
+      {x:420, y:110, ...CLASS_GUIDES.assassin.skills[7]},
+    ],
+    edges:[[3,0],[3,1],[1,2],[1,4],[3,6],[6,2],[5,7],[3,5]]
+  },
+  paladin:{
+    nodes:[
+      {x:210, y:70,  ...CLASS_GUIDES.paladin.skills[0]},
+      {x:360, y:90,  ...CLASS_GUIDES.paladin.skills[1]},
+      {x:130, y:130, ...CLASS_GUIDES.paladin.skills[2]},
+      {x:80,  y:80,  ...CLASS_GUIDES.paladin.skills[3]},
+      {x:90,  y:215, ...CLASS_GUIDES.paladin.skills[4]},
+      {x:305, y:130, ...CLASS_GUIDES.paladin.skills[5]},
+      {x:320, y:200, ...CLASS_GUIDES.paladin.skills[6]},
+      {x:430, y:155, ...CLASS_GUIDES.paladin.skills[7]},
+    ],
+    edges:[[0,2],[0,5],[2,3],[5,1],[1,7],[7,6],[0,4],[5,6]]
+  },
+  berserker:{
+    nodes:[
+      {x:100, y:225, ...CLASS_GUIDES.berserker.skills[0]},
+      {x:360, y:85,  ...CLASS_GUIDES.berserker.skills[1]},
+      {x:210, y:235, ...CLASS_GUIDES.berserker.skills[2]},
+      {x:155, y:150, ...CLASS_GUIDES.berserker.skills[3]},
+      {x:90,  y:85,  ...CLASS_GUIDES.berserker.skills[4]},
+      {x:250, y:125, ...CLASS_GUIDES.berserker.skills[5]},
+      {x:425, y:145, ...CLASS_GUIDES.berserker.skills[6]},
+      {x:390, y:220, ...CLASS_GUIDES.berserker.skills[7]},
+    ],
+    edges:[[4,3],[3,0],[0,2],[5,4],[5,1],[1,6],[6,7],[5,3]]
   }
 };
 
