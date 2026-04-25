@@ -1678,10 +1678,13 @@ const ALL_CLASSES = [
   {id:'berserker', emoji:'🩸', label:'Berserker', initials:'BK', role:'Hybrid: Warrior + Focus Burst (U8)'},
 ];
 function setHeroCls(id, cls) {
-  const c = ALL_CLASSES.find(x=>x.id===cls)||ALL_CLASSES[0];
   STATE.heroes[id].cls = cls;
   saveState();
   renderParty();
+  // Sync guide panel to show the selected class immediately
+  GUIDE_STATE.cls = cls;
+  GUIDE_STATE.main = 'class';
+  renderGuides();
 }
 
 // ── RENDER PARTY ─────────────────────────────────────────────────────
