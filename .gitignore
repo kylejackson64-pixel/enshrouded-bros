@@ -6,6 +6,10 @@ package-lock.json
 generate_solo.js
 _extracted.json
 
+# Local-only solo dashboard
+solo.html
+save-watcher.js
+
 # Never commit tokens or secrets
 .env
 *.env
