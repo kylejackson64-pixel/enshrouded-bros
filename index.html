@@ -468,6 +468,10 @@ footer a:hover{color:var(--gold)}
 .wn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.8rem}
 .wn-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .wn-card.ranger{border-top:2px solid var(--ember)}.wn-card.barbarian{border-top:2px solid #e74c3c}.wn-card.wizard{border-top:2px solid #a89bd4}.wn-card.healer{border-top:2px solid var(--water)}
+.wn-card.battlemage{border-top:2px solid #5ba3d4}.wn-card.assassin{border-top:2px solid #c0a0e0}.wn-card.paladin{border-top:2px solid #7ec8e3}.wn-card.berserker{border-top:2px solid #e74c3c}
+.wn-card.wn-selected{box-shadow:0 0 0 2px var(--gold);border-color:var(--gold);transform:translateY(-2px);transition:all .25s}
+.wn-card.wn-dimmed{opacity:.45;transition:opacity .25s}
+.wn-card-badge{font-size:.58rem;font-family:'Cinzel',serif;background:rgba(212,168,75,.2);border:1px solid var(--gold);border-radius:3px;padding:.1rem .4rem;color:var(--gold-light);margin-left:auto}
 .wn-card-head{padding:.75rem 1rem .5rem;display:flex;align-items:center;gap:.5rem}
 .wn-card-emoji{font-size:1.3rem;line-height:1}
 .wn-card-title{font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-light);letter-spacing:.08em}
@@ -1681,10 +1685,15 @@ function setHeroCls(id, cls) {
   STATE.heroes[id].cls = cls;
   saveState();
   renderParty();
-  // Sync guide panel to show the selected class immediately
+  // Sync guide to selected class — stay on current tab, update content
   GUIDE_STATE.cls = cls;
-  GUIDE_STATE.main = 'class';
-  renderGuides();
+  if (GUIDE_STATE.main === 'whatnow') {
+    const panel = document.getElementById('guide-panel');
+    if (panel) panel.innerHTML = renderWhatNowPanel();
+  } else {
+    GUIDE_STATE.main = 'class';
+    renderGuides();
+  }
 }
 
 // ── RENDER PARTY ─────────────────────────────────────────────────────
@@ -3256,10 +3265,12 @@ const WN_PHASES = [
 
 let WN_PHASE_IDX = 0;  // 0-based index into WN_PHASES
 
+// Hybrid → base class fallback for WN_PHASES lookup
+const WN_FALLBACK = {battlemage:'wizard',assassin:'ranger',paladin:'healer',berserker:'barbarian'};
+function wnBaseClass(cls){ return WN_FALLBACK[cls]||cls; }
+
 function renderWhatNowPanel(){
   const p=WN_PHASES[WN_PHASE_IDX];
-  const icons={ranger:'🏹',barbarian:'⚔️',wizard:'🔮',healer:'💧'};
-  const labels={ranger:'Ranger',barbarian:'Barbarian',wizard:'Wizard',healer:'Healer'};
   const sections=[
     {key:'priority',icon:'⚡',label:'Do This Now'},
     {key:'gather',  icon:'🪨',label:'Gather'},
@@ -3273,25 +3284,47 @@ function renderWhatNowPanel(){
     <div><div class="wn-phase-label">Phase ${p.phase} — ${p.label}</div><div class="wn-phase-sub">${p.sub}</div></div>
     <button class="wn-phase-btn" onclick="wnNav(1)" ${WN_PHASE_IDX===WN_PHASES.length-1?'disabled':''}>Next ▶</button>
   </div>`;
-  const cards=['ranger','barbarian','wizard','healer'].map(cls=>{
-    const d=p[cls];
+
+  // Derive card list from current hero selections (deduped by base class)
+  const seen = new Set();
+  const cardClasses = [];
+  HEROES.forEach(h => {
+    const activeCls = STATE.heroes[h.id]?.cls || h.cls;
+    const base = wnBaseClass(activeCls);
+    if (!seen.has(base)) { seen.add(base); cardClasses.push({cls:activeCls, base}); }
+  });
+  // Always show at least the 4 base classes if nothing selected yet
+  if (!cardClasses.length) ['ranger','barbarian','wizard','healer'].forEach(c=>cardClasses.push({cls:c,base:c}));
+
+  const selectedCls = GUIDE_STATE.cls;
+  const selectedBase = wnBaseClass(selectedCls);
+
+  const cards = cardClasses.map(({cls, base})=>{
+    const d = p[base] || p['ranger'];
+    const clsMeta = ALL_CLASSES.find(c=>c.id===cls) || ALL_CLASSES.find(c=>c.id===base) || ALL_CLASSES[0];
+    const isSelected = (base === selectedBase);
+    const isDimmed = cardClasses.length > 1 && !isSelected;
+    const isHybrid = (cls !== base);
+    const badge = isHybrid ? `<span class="wn-card-badge">${clsMeta.label} (${ALL_CLASSES.find(c=>c.id===base)?.label||base} guide)</span>` : '';
+    const selectedBadge = isSelected ? `<span class="wn-card-badge">▶ Selected</span>` : '';
     const secs=sections.map(s=>{
       const items=d[s.key]||[];
-      const sid=`wn-${cls}-${s.key}-${p.phase}`;
+      const sid=`wn-${base}-${s.key}-${p.phase}`;
       const body=items.map(i=>`<div class="wn-step">${i}</div>`).join('');
       return `<div class="wn-sec">
-        <div class="wn-sec-head" id="wnh-${sid}" onclick="wnToggle('${sid}')">
+        <div class="wn-sec-head${isSelected?' open':''}" id="wnh-${sid}" onclick="wnToggle('${sid}')">
           <span class="wn-sec-icon">${s.icon}</span>
           <span class="wn-sec-label">${s.label}</span>
           <span class="wn-sec-chev">▼</span>
         </div>
-        <div class="wn-sec-body" id="wnb-${sid}">${body}</div>
+        <div class="wn-sec-body${isSelected?' open':''}" id="wnb-${sid}">${body}</div>
       </div>`;
     }).join('');
-    return `<div class="wn-card ${cls}">
+    return `<div class="wn-card ${cls}${isSelected?' wn-selected':''}${isDimmed?' wn-dimmed':''}">
       <div class="wn-card-head">
-        <span class="wn-card-emoji">${icons[cls]}</span>
-        <span class="wn-card-title">${labels[cls]}</span>
+        <span class="wn-card-emoji">${clsMeta.emoji}</span>
+        <span class="wn-card-title">${clsMeta.label}</span>
+        ${badge}${selectedBadge}
       </div>
       <div class="wn-tldr">${d.tldr}</div>
       <div class="wn-sections">${secs}</div>
