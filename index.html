@@ -411,6 +411,28 @@ footer a:hover{color:var(--gold)}
 .guide-acc-body{display:none;padding:.8rem 1rem 1rem;border-top:1px solid var(--border)}
 .guide-acc-body.open{display:block}
 .guide-summary{font-size:.83rem;color:var(--ash);line-height:1.6;margin-bottom:.8rem;padding:.7rem .9rem;background:rgba(255,255,255,.02);border-radius:4px;border-left:3px solid var(--ember)}
+/* ── CLASS OVERVIEW GRID ── */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem}
+.ov-card{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem;transition:border-color .2s}
+.ov-card:hover{border-color:rgba(212,168,75,.3)}
+.ov-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.ov-emoji{font-size:1.5rem}
+.ov-name{font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;color:var(--gold-light)}
+.ov-role{font-size:.72rem;color:var(--text-dim);font-style:italic;margin-left:auto}
+.ov-desc{font-size:.8rem;color:var(--ash);line-height:1.55;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.ov-cols{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.75rem}
+.ov-col-head{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;margin-bottom:.35rem}
+.ov-pros .ov-col-head{color:var(--green)}
+.ov-cons .ov-col-head{color:var(--red-bright)}
+.ov-list{list-style:none;padding:0;margin:0}
+.ov-list li{font-size:.75rem;color:var(--ash);line-height:1.45;padding:.2rem 0;padding-left:.9rem;position:relative}
+.ov-pros .ov-list li::before{content:'✓';position:absolute;left:0;color:var(--green);font-size:.7rem}
+.ov-cons .ov-list li::before{content:'✗';position:absolute;left:0;color:var(--red-bright);font-size:.7rem}
+.ov-path-head{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.12em;color:var(--gold);margin-bottom:.35rem}
+.ov-path{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem}
+.ov-path-node{font-size:.68rem;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:3px;padding:.2rem .5rem;color:var(--ash);white-space:nowrap}
+.ov-path-node.first{border-color:var(--gold);color:var(--gold-light)}
+.ov-path-arrow{color:var(--text-dim);font-size:.65rem}
 /* ── STAR MAP ── */
 .star-map-wrap{position:relative;margin-bottom:.8rem}
 .star-svg{width:100%;height:auto;display:block;border-radius:6px;background:radial-gradient(ellipse 80% 70% at 50% 50%,rgba(20,27,38,.98) 0%,rgba(10,15,24,1) 100%);overflow:visible}
@@ -2330,6 +2352,51 @@ function renderActivity(){
 // ── CAMPAIGN GUIDE DATA ──────────────────────────────────────────────
 const GUIDE_STATE = {main:'whatnow', cls:'ranger', acc:{}};
 
+// ── CLASS OVERVIEW: explanation + pros/cons for all 8 classes ─────────
+const CLASS_OVERVIEW = {
+  ranger:{
+    desc:'Mobility specialist and burst sniper. Opens every fight with a 900% Sneak Attack from stealth, then repositions with grapple and glider to stay out of danger. Best scout and single-target DPS. Your job is to hit first, hit hard, and never stand still.',
+    pros:['Best mobility — grapple + glider makes you effectively unkillable if you keep moving','Sneak Attack opener one-shots most elites before they can act','Eagle Eye + Multi Shot = consistent safe ranged DPS from distance','Best group scout — reach any chest, vantage point, or NPC the team needs'],
+    cons:['Fragile in melee — if enemies close in and you have no escape, you die fast','Ammo consumption is constant — carry 60+ arrows minimum per session','Updraft costs mana mid-air — poor mana management grounds you at the worst moments','Weakest sustained AoE — relies on positioning and procs, not raw coverage'],
+  },
+  barbarian:{
+    desc:'Frontline bruiser built for sustained melee pressure. Heavy Handed fills the stun bar fast, Heavy Attacks hit for 2× damage, and Whirlwind Crescendo clears entire rooms. Your job is to hold aggro, soak hits, and keep the group\'s squishier members alive by being the loudest target.',
+    pros:['Highest melee burst in close range — no class hits harder up close','Heavy Handed stun-locks elites and interrupts boss attack chains','Whirlwind Crescendo is the best group area denial and room-clear','Natural frontliner — pulls aggro so ranged classes can work safely'],
+    cons:['Zero ranged options — ranged enemies chip you down from angles you can\'t reach','Needs healer or Battle Heal investment for Phase 3+ sustain','Slow movement compared to ranger and assassin — repositioning is harder','No escape tool by default — committing to a bad fight is punishable'],
+  },
+  wizard:{
+    desc:'AoE elemental specialist. Chain Hit and Mass Destruction turn every wand hit into a chain reaction — one magic crit triggers a 20m shock pulse that can wipe entire rooms. Also the strongest boss burn at range. Your job is to stay back, manage mana, and incinerate packs before they reach the frontline.',
+    pros:['Mass Destruction AoE shock on magic crit — best pack clearing in the game','Chain Hit makes every hit splash to nearby enemies automatically','High burst boss DPS when positioned at safe distance','Dark Arts +10% Shroud damage scales in every late-game biome'],
+    cons:['Most mana-dependent class — run out and you\'re throwing a stick','Fragile — lowest effective HP, punished heavily by any melee contact','Requires strict positioning discipline — step into a crowd and you die','Weaker in tight corridors where AoE bounce range doesn\'t matter'],
+  },
+  healer:{
+    desc:'Sustain and support anchor. Water Aura passively heals nearby allies every second, scaling with Intelligence. Waters of Life doubles that output. Blink provides i-frame mobility and Emergency Blink breaks CC. Your job is to keep the group alive, manage the base and NPCs, and control the party\'s crafting unlock pace.',
+    pros:['Water Aura heals nearby party passively — no button presses required','Blink + Emergency Blink makes you near-unkillable once skilled up','Waters of Life doubles HPS — endgame party healing is enormous','Best base management — you control which NPCs get rescued and when'],
+    cons:['Lowest damage output of any class by a wide margin','Water Aura scales on Intelligence — wrong gear means weak heals','Early game (Phases 1–2) feels weak before Water Aura is fully leveled','Party must stay close to benefit — your heals don\'t work at range'],
+  },
+  battlemage:{
+    desc:'Hybrid melee-magic damage dealer. Wand Master fires a free projectile on 30% of melee hits. Arcane Deflection refills mana on every successful parry. Mass Destruction AoE shock procs from wand hits mid-combo. No mana drought, no positioning weakness — the most self-sufficient DPS build in U8.',
+    pros:['No mana drought — Arcane Deflection parry refills mana continuously','Wand Master procs fire during sword combos — free bonus damage always','Mass Destruction AoE from wand procs clears packs while you\'re in melee','Most flexible effective range — strong at both melee and ranged distances'],
+    cons:['Parry timing is a hard skill — poor parry = no mana refund = dry spells','Scales both INT and STR — gear optimization is more complex than pure classes','Slower to come online than ranger or barbarian in Phase 1','Requires constant weapon-swapping (sword ↔ wand hotkeys) — muscle memory needed'],
+  },
+  assassin:{
+    desc:'Glass cannon stealth burst. 900% damage on Sneak Attack when undetected. Blink repositions behind enemies for setup or escapes. Updraft + Airborne gives free altitude any time for crossbow angles. The highest single-target opener burst in the game — but you live and die by the setup.',
+    pros:['900% Sneak Attack = highest burst opener, one-shots elites and phases bosses','Blink gives i-frame escape AND repositioning tool in one skill','Updraft + Airborne = free vertical mobility anytime, no grapple partner needed','Multi Shot + Sneak Attack = explosive burst round with triple bolts at 900%'],
+    cons:['Most fragile class — one unblocked hit at wrong HP is often lethal','Stealth setup takes time — inefficient against large simultaneous groups','Emergency Blink is mandatory or boss CC chains end you immediately','Reactive play is punishing — this build rewards deliberate setups, not improvisation'],
+  },
+  paladin:{
+    desc:'Unkillable frontline hybrid. Water Aura heals you passively every second, Battle Heal tops you up on melee crits, and Blink provides an escape. Veteran increases crit rate so Battle Heal fires constantly. Nearly impossible to kill in extended fights. The best class for players learning hard content.',
+    pros:['Near-unkillable sustain — Water Aura + Battle Heal covers nearly all incoming damage','Best class for first-timers hitting hard bosses — passive heals cover mistakes','Blink sustain loop (melee → Blink away → regen → Blink back) is extremely durable','INT double-dip: scales both spell damage and Water Aura healing simultaneously'],
+    cons:['Lowest DPS of any build — fights take significantly longer to end','Fully stat-dependent on Intelligence — wrong gear makes your heals negligible','Divine Surge is a finite panic button — runs out in extended attrition fights','Party must stay close to benefit from Water Aura passive healing range'],
+  },
+  berserker:{
+    desc:'High-risk high-reward melee berserker. Blood Rage activates a massive damage spike below 40% HP. Battle Heal keeps you alive inside that window via melee crits. Swift Blades cranks attack speed so you crit constantly. Breach + Whirlwind Crescendo is the highest burst room-clear combo in the game.',
+    pros:['Highest melee DPS ceiling in the game when Blood Rage is active','Breach + Whirlwind Crescendo = instant room-clear burst combo','Battle Heal self-sustain + Swift Blades attack speed = deceptively durable inside Blood Rage','U8 Focus Bar fills in 8–10 hits — constant heavy AoE finishers on demand'],
+    cons:['Requires intentionally staying at 35–40% HP — one mistake is lethal','Most punishing to play incorrectly — missed dodge at low HP = instant death','Slower opener than assassin or ranger — needs positioning setup to reach Blood Rage band','Less versatile at range — zero ranged tools, exposed to kiting enemies'],
+  },
+};
+
+
 const CLASS_GUIDES = {
   ranger: {
     emoji:'🏹', label:'Ranger',
@@ -3250,6 +3317,7 @@ function renderGuides(){
   if(main==='whatnow') WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,(STATE.activePhase||1)-1));
   const mainTabs=[
     {id:'whatnow', label:'🔥 What Now?'},
+    {id:'overview',label:'⚔️ Classes'},
     {id:'class',label:'Class Walkthroughs'},
     {id:'duo',label:'Duo Synergies'},
     {id:'group',label:'Group Tactics'},
@@ -3260,6 +3328,7 @@ function renderGuides(){
   ).join('');
   const panel=document.getElementById('guide-panel');
   if(main==='whatnow') panel.innerHTML=renderWhatNowPanel();
+  else if(main==='overview') panel.innerHTML=renderOverviewPanel();
   else if(main==='class') panel.innerHTML=renderClassPanel();
   else if(main==='duo') panel.innerHTML=renderDuoPanel();
   else if(main==='group') panel.innerHTML=renderGroupPanel();
@@ -3291,6 +3360,34 @@ function acc(id,title,body){
     <div class="guide-acc-body" id="acc-b-${id}">${body}</div>
   </div>`;
 }
+function renderOverviewPanel(){
+  const cards = Object.entries(CLASS_OVERVIEW).map(([id, ov]) => {
+    const g = CLASS_GUIDES[id];
+    if (!g) return '';
+    // Skill path: first 4 nodes in priority order
+    const path = g.skills.slice(0, 4).map((s, i) =>
+      `<span class="ov-path-node${i===0?' first':''}">${s.node}</span>${i<3?'<span class="ov-path-arrow">→</span>':''}`
+    ).join('');
+    const pros = ov.pros.map(p=>`<li>${p}</li>`).join('');
+    const cons = ov.cons.map(c=>`<li>${c}</li>`).join('');
+    return `<div class="ov-card">
+      <div class="ov-header">
+        <span class="ov-emoji">${g.emoji}</span>
+        <span class="ov-name">${g.label}</span>
+        <span class="ov-role">${ALL_CLASSES.find(c=>c.id===id)?.role||''}</span>
+      </div>
+      <div class="ov-desc">${ov.desc}</div>
+      <div class="ov-cols">
+        <div class="ov-pros"><div class="ov-col-head">PROS</div><ul class="ov-list">${pros}</ul></div>
+        <div class="ov-cons"><div class="ov-col-head">CONS</div><ul class="ov-list">${cons}</ul></div>
+      </div>
+      <div class="ov-path-head">SKILL PATH (Priority Order)</div>
+      <div class="ov-path">${path}</div>
+    </div>`;
+  }).join('');
+  return `<div class="overview-grid">${cards}</div>`;
+}
+
 function renderClassPanel(){
   const cls=GUIDE_STATE.cls;
   const g=CLASS_GUIDES[cls];
