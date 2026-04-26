@@ -311,6 +311,16 @@ footer a:hover{color:var(--gold)}
 .craft-notes{font-size:.7rem;color:var(--ash);margin-top:.3rem;line-height:1.4}
 .craft-disclaimer{margin-top:.8rem;font-size:.7rem;color:var(--text-dim);font-style:italic}
 
+/* Craft Recommendations (What Now panel) */
+.crec-section{margin-bottom:1.2rem}
+.crec-title{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.1em;color:var(--gold);margin-bottom:.5rem;text-transform:uppercase}
+.crec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.45rem}
+.crec-card{background:rgba(212,168,75,.05);border:1px solid rgba(212,168,75,.15);border-radius:5px;padding:.5rem .7rem}
+.crec-name{font-family:'Cinzel',serif;font-size:.68rem;color:var(--gold-light);margin-bottom:.18rem}
+.crec-ing{font-size:.72rem;color:var(--text)}
+.crec-sta{font-size:.63rem;color:var(--text-dim);margin-top:.12rem}
+.crec-note{font-size:.63rem;color:var(--ember);margin-top:.12rem;font-style:italic;line-height:1.35}
+
 /* Flame Altar Tracker */
 .flame-section{max-width:900px;margin:0 auto 2.5rem;padding:0 1.5rem}
 .flame-track{display:flex;gap:.4rem;margin-bottom:1rem;overflow-x:auto;padding-bottom:.3rem}
@@ -1486,6 +1496,7 @@ const INGREDIENT_SOURCES = {
 // ── CRAFTING DATA ────────────────────────────────────────────────────
 const CRAFT_CATS = [
   {id:'all',label:'All'},
+  {id:'kiln',label:'Kiln & Materials'},
   {id:'potion',label:'Potions'},
   {id:'weapon',label:'Weapons'},
   {id:'armor',label:'Armor'},
@@ -1607,6 +1618,32 @@ const CRAFTING = [
   {name:'Fish Dish',cat:'food',role:'group',level:40,station:'Seafood Grill (Emily Fray)',ingredients:['Fish ×1'],notes:'+Max oxygen for underwater exploration. Required for Veilwater Basin deep dives and Hydrak\'Dal arena.'},
   {name:'Berry Compote',cat:'food',role:'healer',level:1,station:'Cooking Station (Emily Fray)',ingredients:['Berry ×3'],notes:'+Health regen. Easiest to make from session 1. Upgrade to Chicken Soup when possible.'},
   {name:'Rooibos Tea',cat:'food',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'+Stamina + stamina regen. Nomad Highlands ingredient. Good liquid slot item.'},
+  // ── KILN & MATERIAL PROCESSING ───────────────────────────────────────
+  // Charcoal Kiln
+  {name:'Charcoal',cat:'kiln',role:'group',level:1,station:'Charcoal Kiln (Blacksmith required)',ingredients:['Wood ×4'],notes:'Fuel for Forge and Smelter. Load Kiln passively — always keep it running.'},
+  // Forge — smelting
+  {name:'Copper Bar',cat:'kiln',role:'group',level:5,station:'Forge (Blacksmith required)',ingredients:['Copper Ore ×2','Charcoal ×1'],notes:'Early crafting metal. Springlands copper nodes (green-streaked rock).'},
+  {name:'Tin Bar',cat:'kiln',role:'group',level:10,station:'Forge (Blacksmith required)',ingredients:['Tin Ore ×2','Charcoal ×1'],notes:'Paired with Copper for Bronze. Revelwood ore nodes.'},
+  {name:'Iron Bar',cat:'kiln',role:'group',level:8,station:'Forge (Blacksmith required)',ingredients:['Iron Ore ×2','Charcoal ×1'],notes:'Core crafting metal — weapons, armor, tools. Smelt in bulk constantly.'},
+  {name:'Bronze Bar',cat:'kiln',role:'group',level:10,station:'Forge (Blacksmith required)',ingredients:['Copper Bar ×1','Tin Bar ×1'],notes:'Stronger than Iron. Required for Revelwood-tier armor sets.'},
+  {name:'Nails',cat:'kiln',role:'group',level:8,station:'Forge (Blacksmith required)',ingredients:['Iron Bar ×1'],notes:'×4 output per bar. Required for Carpenter Workbench, Saw Mill, and structural upgrades.'},
+  {name:'Steel Bar',cat:'kiln',role:'group',level:20,station:'Smelter (Blacksmith required)',ingredients:['Iron Bar ×2','Coal ×1','Charcoal ×1'],notes:'Late-game metal. Required for Nomad Highlands armor and T3+ weapons.'},
+  {name:'Glass',cat:'kiln',role:'group',level:5,station:'Furnace / Smelter (Alchemist or Blacksmith)',ingredients:['Sand ×3','Charcoal ×1'],notes:'Needed for Alchemy Lab, windows, Water Vials. Sand from riverbanks.'},
+  // Tanning Rack
+  {name:'Leather',cat:'kiln',role:'group',level:5,station:'Tanning Rack (Hunter required)',ingredients:['Animal Hide ×3'],notes:'Required for Iron armor set, weapon hilts, many mid-tier recipes. Hunt wolves and boars.'},
+  // Drying Rack
+  {name:'Dried Meat',cat:'kiln',role:'group',level:1,station:'Drying Rack (Hunter required)',ingredients:['Raw Meat ×2'],notes:'Preserved food. Better than raw — survives inventory longer.'},
+  {name:'Dried Mushroom',cat:'kiln',role:'group',level:10,station:'Drying Rack (Hunter required)',ingredients:['Mushroom ×3'],notes:'Potion ingredient and advanced food component. Stack in storage.'},
+  // Spinning Wheel / Loom
+  {name:'Thread',cat:'kiln',role:'group',level:5,station:'Spinning Wheel (Farmer required)',ingredients:['Plant Fiber ×3'],notes:'Base textile. Used in cloth, armor padding, string. Always keep large supply.'},
+  {name:'Cloth',cat:'kiln',role:'group',level:10,station:'Loom (Farmer required)',ingredients:['Thread ×4'],notes:'Required for Glider, beds, cloth armor. Build Loom immediately after Spinning Wheel.'},
+  {name:'Silk',cat:'kiln',role:'group',level:20,station:'Loom (Farmer required)',ingredients:['Silk Fiber ×3','Thread ×2'],notes:'Glider Upgrade and high-tier cloth armor. Silk Fiber harvested in Revelwood forest.'},
+  // Hand craft / Workbench — base materials
+  {name:'Wood Plank',cat:'kiln',role:'group',level:1,station:'Workbench',ingredients:['Wood ×2'],notes:'Structural component used everywhere. Craft in large batches.'},
+  {name:'Rope',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×5'],notes:'Grappling Hook, ladders, Tanning Rack construction. Keep 20+ in base storage.'},
+  {name:'String',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×3'],notes:'Bow strings, lockpicks, armor padding. Stock up — used in dozens of recipes.'},
+  {name:'Water Vial',cat:'kiln',role:'group',level:1,station:'Hand Craft / Well',ingredients:['Water ×1'],notes:'Potion base. Build Well early — generates Water Vials passively without farming.'},
+  {name:'Resin',cat:'kiln',role:'group',level:1,station:'Harvested (Tree Nodes)',ingredients:['Tree Node ×1'],notes:'Harvested from glowing amber tree nodes. Used in torches, wands, building items.'},
 ];
 
 // ── SYNC MAP — objective key ↔ survivor id ───────────────────────────
@@ -2105,7 +2142,7 @@ function renderCrafting() {
   const {cat,role}=CRAFT_STATE;
   const items=CRAFTING.filter(i=>{
     if(cat!=='all'&&i.cat!==cat) return false;
-    if(role!=='all'&&i.role!==role&&i.role!=='group') return false;
+    if(role!=='all'&&i.role!==role&&i.role!=='group'&&i.role!=='all') return false;
     if(search&&!i.name.toLowerCase().includes(search)&&!i.ingredients.join(' ').toLowerCase().includes(search)&&!(i.station||'').toLowerCase().includes(search)) return false;
     return true;
   });
@@ -3269,6 +3306,21 @@ let WN_PHASE_IDX = 0;  // 0-based index into WN_PHASES
 const WN_FALLBACK = {battlemage:'wizard',assassin:'ranger',paladin:'healer',berserker:'barbarian'};
 function wnBaseClass(cls){ return WN_FALLBACK[cls]||cls; }
 
+function craftRecs(cls, phaseIdx){
+  const PHASE_LVL=[[1,6],[7,13],[14,21],[22,29],[30,50]];
+  const [lo,hi]=PHASE_LVL[Math.min(phaseIdx,PHASE_LVL.length-1)]||[1,50];
+  const base={battlemage:'wizard',assassin:'ranger',paladin:'healer',berserker:'barbarian'}[cls]||cls;
+  const recs=CRAFTING.filter(c=>c.level>=lo&&c.level<=hi&&(c.role==='all'||c.role==='group'||c.role===base));
+  if(!recs.length) return '';
+  const cards=recs.slice(0,9).map(c=>`<div class="crec-card">
+    <div class="crec-name">${c.name}</div>
+    <div class="crec-ing">${c.ingredients.join(' · ')}</div>
+    <div class="crec-sta">@ ${c.station}</div>
+    ${c.notes?`<div class="crec-note">${c.notes}</div>`:''}
+  </div>`).join('');
+  return `<div class="crec-section"><div class="crec-title">🔨 Recommended Crafts — Phase ${phaseIdx+1}</div><div class="crec-grid">${cards}</div></div>`;
+}
+
 function renderWhatNowPanel(){
   const p=WN_PHASES[WN_PHASE_IDX];
   const sections=[
@@ -3330,7 +3382,7 @@ function renderWhatNowPanel(){
       <div class="wn-sections">${secs}</div>
     </div>`;
   }).join('');
-  return nav+`<div class="wn-grid">${cards}</div>`;
+  return nav+craftRecs(GUIDE_STATE.cls,WN_PHASE_IDX)+`<div class="wn-grid">${cards}</div>`;
 }
 function wnNav(dir){
   WN_PHASE_IDX=Math.max(0,Math.min(WN_PHASES.length-1,WN_PHASE_IDX+dir));
