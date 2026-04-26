@@ -310,6 +310,7 @@ footer a:hover{color:var(--gold)}
 .craft-station{font-size:.68rem;color:var(--text-dim);font-style:italic;border-top:1px solid rgba(255,255,255,.05);padding-top:.4rem;margin-top:.3rem}
 .craft-notes{font-size:.7rem;color:var(--ash);margin-top:.3rem;line-height:1.4}
 .craft-disclaimer{margin-top:.8rem;font-size:.7rem;color:var(--text-dim);font-style:italic}
+.food-type-badge{font-size:.58rem;background:rgba(80,160,80,.15);border:1px solid rgba(80,160,80,.35);color:#7ec87e;border-radius:2px;padding:.1rem .35rem;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
 
 /* Craft Recommendations (What Now panel) */
 .crec-section{margin-bottom:1.2rem}
@@ -1504,6 +1505,7 @@ const CRAFT_CATS = [
   {id:'station',label:'Workstations'},
   {id:'building',label:'Buildings'},
   {id:'food',label:'Food'},
+  {id:'spell',label:'Spells'},
 ];
 const CRAFT_ROLES = [
   {id:'all',label:'All'},
@@ -1605,45 +1607,101 @@ const CRAFTING = [
   {name:'Shelf',cat:'building',role:'group',level:5,station:'Workbench',ingredients:['Wood ×6'],notes:'Display and storage. Use to organize crafting materials near stations.'},
   {name:'Workbench',cat:'building',role:'group',level:1,station:'Hand Craft',ingredients:['Wood ×20','Stone ×10'],notes:'Build this first — unlocks all other crafting. Place centrally in base.'},
   // ── FOOD ─────────────────────────────────────────────────────────
-  {name:'Cooked Meat',cat:'food',role:'barbarian',level:1,station:'Campfire',ingredients:['Raw Meat ×1'],notes:'+Bonus HP pool. Hunt any animal. Stack with grain dish for melee builds.'},
-  {name:'Cooked Rice',cat:'food',role:'barbarian',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Rice ×2'],notes:'+21% melee damage, 50 min. Best-in-slot melee food. Grain = Barbarian/Warrior slot.'},
-  {name:'Algae Salad',cat:'food',role:'wizard',level:35,station:'Cooking Station (Emily Fray)',ingredients:['Algae ×3'],notes:'+120 Mana +21% magic damage. Best-in-slot magic food. Veilwater ingredient.'},
-  {name:'Taro Root Curry',cat:'food',role:'ranger',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Taro Root ×2','Spice ×1'],notes:'+21% ranged + dagger damage. Best-in-slot Ranger/Assassin food.'},
-  {name:'Creamy Mushroom Spaetzle',cat:'food',role:'group',level:25,station:'Oven (Emily Fray)',ingredients:['Mushroom ×2','Grain ×1','Egg ×1'],notes:'Melee boost + stamina + frost resistance. Strong all-purpose option for Albaneve Summits.'},
-  {name:'Chicken Soup',cat:'food',role:'healer',level:15,station:'Cooking Station (Emily Fray)',ingredients:['Raw Chicken ×1','Water ×1','Herbs ×1'],notes:'+HP regen. Good healer support food to free up potion slots.'},
-  {name:'Strawberry Milkshake',cat:'food',role:'ranger',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Strawberry ×2','Milk ×1'],notes:'+Stamina regen. Part of optimal Ranger 4-slot combo with Taro Root Curry.'},
-  {name:'Coconana Smoothie',cat:'food',role:'ranger',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coconut ×1','Banana ×1'],notes:'+Stamina. Veilwater ingredient. Final slot in Ranger 4-food combo for max output.'},
-  {name:'Coffee',cat:'food',role:'group',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coffee Bean ×2'],notes:'+Stamina regen. Useful in long dungeon runs. Veilwater Basin crop.'},
-  {name:'Candied Ginger',cat:'food',role:'wizard',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Ginger ×2','Honey ×1'],notes:'+Mana regen. Unusual: sweet type that gives mana instead of stamina. Good Wizard side slot.'},
-  {name:'Fish Dish',cat:'food',role:'group',level:40,station:'Seafood Grill (Emily Fray)',ingredients:['Fish ×1'],notes:'+Max oxygen for underwater exploration. Required for Veilwater Basin deep dives and Hydrak\'Dal arena.'},
-  {name:'Berry Compote',cat:'food',role:'healer',level:1,station:'Cooking Station (Emily Fray)',ingredients:['Berry ×3'],notes:'+Health regen. Easiest to make from session 1. Upgrade to Chicken Soup when possible.'},
-  {name:'Rooibos Tea',cat:'food',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'+Stamina + stamina regen. Nomad Highlands ingredient. Good liquid slot item.'},
+  // 4 active food slots: one per type. 4th slot requires Dessert Stomach skill.
+  // Types: meat / grain / herb / vegetable / mushroom / liquid / fruit / sweet / fish / nightplant
+  {name:'Cooked Meat',cat:'food',type:'meat',role:'barbarian',level:1,station:'Campfire',ingredients:['Raw Meat ×1'],notes:'[meat] +HP pool. First meat food. Replace with Beef Stew mid-game.'},
+  {name:'Beef Stew',cat:'food',type:'meat',role:'barbarian',level:25,station:'Cooking Station (Emily Fray)',ingredients:['Raw Beef ×2','Potato ×1','Water ×1'],notes:'[meat] Best-in-slot meat dish. +Max HP + melee damage bonus.'},
+  {name:'Chicken Soup',cat:'food',type:'meat',role:'healer',level:15,station:'Cooking Station (Emily Fray)',ingredients:['Raw Chicken ×1','Water ×1','Herbs ×1'],notes:'[meat] +HP regen. Healer food — frees potion slots for combat healing.'},
+  {name:'Cooked Rice',cat:'food',type:'grain',role:'barbarian',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Rice ×2'],notes:'[grain] +21% melee damage, 50 min duration. Best-in-slot grain for Barbarian/Warrior.'},
+  {name:'Flat Bread',cat:'food',type:'grain',role:'group',level:5,station:'Cooking Station (Emily Fray)',ingredients:['Flour ×2'],notes:'[grain] Early grain food until Cooked Rice is available. Flour from Grinding Stones.'},
+  {name:'Algae Salad',cat:'food',type:'herb',role:'wizard',level:35,station:'Cooking Station (Emily Fray)',ingredients:['Algae ×3'],notes:'[herb] +120 Mana +21% magic damage. Best-in-slot herb. Algae from Veilwater Basin.'},
+  {name:'Herbal Mountain Tea',cat:'food',type:'herb',role:'healer',level:10,station:'Cooking Station (Emily Fray)',ingredients:['Chamomile ×2','Water ×1'],notes:'[herb] +HP regen + stamina. Early herb slot. Replace with Algae Salad late game.'},
+  {name:'Taro Root Curry',cat:'food',type:'vegetable',role:'ranger',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Taro Root ×2','Spice ×1'],notes:'[vegetable] +21% ranged + dagger damage. Best-in-slot Ranger/Assassin food.'},
+  {name:'Creamy Mushroom Spaetzle',cat:'food',type:'mushroom',role:'group',level:25,station:'Oven (Emily Fray)',ingredients:['Mushroom ×2','Grain ×1','Egg ×1'],notes:'[mushroom] Melee + stamina + frost resistance. Strong all-purpose pick for Albaneve Summits.'},
+  {name:'Roasted Shiitake',cat:'food',type:'mushroom',role:'group',level:15,station:'Cooking Station (Emily Fray)',ingredients:['Shiitake ×2'],notes:'[mushroom] +Stamina. Mid-tier mushroom food. Replace with Creamy Mushroom Spaetzle late.'},
+  {name:'Frizzy Goat Milk',cat:'food',type:'liquid',role:'group',level:10,station:'Cooking Station (Emily Fray)',ingredients:['Goat Milk ×1','Herbs ×1'],notes:'[liquid] +Stamina regen. Best-in-slot liquid slot for most builds.'},
+  {name:'Rooibos Tea',cat:'food',type:'liquid',role:'group',level:18,station:'Cooking Station (Emily Fray)',ingredients:['Rooibos ×2','Water ×1'],notes:'[liquid] +Stamina + stamina regen. Nomad Highlands ingredient.'},
+  {name:'Coffee',cat:'food',type:'liquid',role:'group',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coffee Bean ×2'],notes:'[liquid] +Stamina regen. Long dungeon runs. Coffee Bean from Veilwater Basin.'},
+  {name:'Strawberry Milkshake',cat:'food',type:'fruit',role:'ranger',level:20,station:'Cooking Station (Emily Fray)',ingredients:['Strawberry ×2','Milk ×1'],notes:'[fruit] +Stamina regen. Part of Ranger 4-slot combo with Taro Root Curry.'},
+  {name:'Coconana Smoothie',cat:'food',type:'fruit',role:'ranger',level:35,station:'Coffee Brewery (Emily Fray)',ingredients:['Coconut ×1','Banana ×1'],notes:'[fruit] +Stamina. Veilwater ingredient. Final Ranger food slot.'},
+  {name:'Berry Compote',cat:'food',type:'fruit',role:'healer',level:1,station:'Cooking Station (Emily Fray)',ingredients:['Berry ×3'],notes:'[fruit] +Health regen. Day-1 food. Upgrade to Chicken Soup when possible.'},
+  {name:'Candied Ginger',cat:'food',type:'sweet',role:'wizard',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Ginger ×2','Honey ×1'],notes:'[sweet] +Mana regen. Sweet type that gives mana — good Wizard side slot.'},
+  {name:'Honey Baked Banana',cat:'food',type:'sweet',role:'group',level:20,station:'Oven (Emily Fray)',ingredients:['Banana ×2','Honey ×1'],notes:'[sweet] +Stamina + stamina regen. Best-in-slot sweet slot for most builds.'},
+  {name:'Fish Dish',cat:'food',type:'fish',role:'group',level:40,station:'Seafood Grill (Emily Fray)',ingredients:['Fish ×1'],notes:'[fish] +Max oxygen for underwater. Required for Veilwater deep dives and Hydrak\'Dal.'},
+  {name:'Shadowbloom Wrap',cat:'food',type:'nightplant',role:'wizard',level:30,station:'Cooking Station (Emily Fray)',ingredients:['Shadowbloom ×2','Flat Bread ×1'],notes:'[nightplant] +Shroud resistance + mana. Best-in-slot nightplant for Shroud delvers.'},
   // ── KILN & MATERIAL PROCESSING ───────────────────────────────────────
-  // Charcoal Kiln
-  {name:'Charcoal',cat:'kiln',role:'group',level:1,station:'Charcoal Kiln (Blacksmith required)',ingredients:['Wood ×4'],notes:'Fuel for Forge and Smelter. Load Kiln passively — always keep it running.'},
+  // Charcoal Kiln — batch recipes (passive production, Blacksmith required)
+  {name:'Charcoal',cat:'kiln',role:'group',level:1,station:'Charcoal Kiln',ingredients:['Wood ×17','Dirt ×3'],notes:'→ ×15 Charcoal (5 min). Primary Forge/Smelter fuel. Keep Kiln loaded — runs passively offline.'},
+  {name:'Tar',cat:'kiln',role:'group',level:5,station:'Charcoal Kiln',ingredients:['Wood ×30','Dirt ×6'],notes:'→ ×20 Tar (6 min). Waterproofing and alchemy chain ingredient. Batch when Kiln is idle.'},
+  {name:'Wood Acid',cat:'kiln',role:'group',level:10,station:'Charcoal Kiln',ingredients:['Wood ×15','Dirt ×3'],notes:'→ ×10 Wood Acid (7 min). Alchemy and tanning chain ingredient (Alchemical Base, Nitrate).'},
+  // Fired Brick — Carpenter Kiln (Carpenter NPC required)
+  {name:'Fired Brick',cat:'kiln',role:'group',level:10,station:'Carpenter Kiln',ingredients:['Wood Log ×1','Lump of Clay ×1'],notes:'→ ×1 Fired Brick. Mass-produce: need ×50 for Smelter build, ×20 for Blast Furnace build.'},
   // Forge — smelting
-  {name:'Copper Bar',cat:'kiln',role:'group',level:5,station:'Forge (Blacksmith required)',ingredients:['Copper Ore ×2','Charcoal ×1'],notes:'Early crafting metal. Springlands copper nodes (green-streaked rock).'},
-  {name:'Tin Bar',cat:'kiln',role:'group',level:10,station:'Forge (Blacksmith required)',ingredients:['Tin Ore ×2','Charcoal ×1'],notes:'Paired with Copper for Bronze. Revelwood ore nodes.'},
-  {name:'Iron Bar',cat:'kiln',role:'group',level:8,station:'Forge (Blacksmith required)',ingredients:['Iron Ore ×2','Charcoal ×1'],notes:'Core crafting metal — weapons, armor, tools. Smelt in bulk constantly.'},
-  {name:'Bronze Bar',cat:'kiln',role:'group',level:10,station:'Forge (Blacksmith required)',ingredients:['Copper Bar ×1','Tin Bar ×1'],notes:'Stronger than Iron. Required for Revelwood-tier armor sets.'},
-  {name:'Nails',cat:'kiln',role:'group',level:8,station:'Forge (Blacksmith required)',ingredients:['Iron Bar ×1'],notes:'×4 output per bar. Required for Carpenter Workbench, Saw Mill, and structural upgrades.'},
-  {name:'Steel Bar',cat:'kiln',role:'group',level:20,station:'Smelter (Blacksmith required)',ingredients:['Iron Bar ×2','Coal ×1','Charcoal ×1'],notes:'Late-game metal. Required for Nomad Highlands armor and T3+ weapons.'},
-  {name:'Glass',cat:'kiln',role:'group',level:5,station:'Furnace / Smelter (Alchemist or Blacksmith)',ingredients:['Sand ×3','Charcoal ×1'],notes:'Needed for Alchemy Lab, windows, Water Vials. Sand from riverbanks.'},
-  // Tanning Rack
-  {name:'Leather',cat:'kiln',role:'group',level:5,station:'Tanning Rack (Hunter required)',ingredients:['Animal Hide ×3'],notes:'Required for Iron armor set, weapon hilts, many mid-tier recipes. Hunt wolves and boars.'},
-  // Drying Rack
-  {name:'Dried Meat',cat:'kiln',role:'group',level:1,station:'Drying Rack (Hunter required)',ingredients:['Raw Meat ×2'],notes:'Preserved food. Better than raw — survives inventory longer.'},
-  {name:'Dried Mushroom',cat:'kiln',role:'group',level:10,station:'Drying Rack (Hunter required)',ingredients:['Mushroom ×3'],notes:'Potion ingredient and advanced food component. Stack in storage.'},
-  // Spinning Wheel / Loom
-  {name:'Thread',cat:'kiln',role:'group',level:5,station:'Spinning Wheel (Farmer required)',ingredients:['Plant Fiber ×3'],notes:'Base textile. Used in cloth, armor padding, string. Always keep large supply.'},
-  {name:'Cloth',cat:'kiln',role:'group',level:10,station:'Loom (Farmer required)',ingredients:['Thread ×4'],notes:'Required for Glider, beds, cloth armor. Build Loom immediately after Spinning Wheel.'},
-  {name:'Silk',cat:'kiln',role:'group',level:20,station:'Loom (Farmer required)',ingredients:['Silk Fiber ×3','Thread ×2'],notes:'Glider Upgrade and high-tier cloth armor. Silk Fiber harvested in Revelwood forest.'},
-  // Hand craft / Workbench — base materials
-  {name:'Wood Plank',cat:'kiln',role:'group',level:1,station:'Workbench',ingredients:['Wood ×2'],notes:'Structural component used everywhere. Craft in large batches.'},
-  {name:'Rope',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×5'],notes:'Grappling Hook, ladders, Tanning Rack construction. Keep 20+ in base storage.'},
-  {name:'String',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×3'],notes:'Bow strings, lockpicks, armor padding. Stock up — used in dozens of recipes.'},
-  {name:'Water Vial',cat:'kiln',role:'group',level:1,station:'Hand Craft / Well',ingredients:['Water ×1'],notes:'Potion base. Build Well early — generates Water Vials passively without farming.'},
-  {name:'Resin',cat:'kiln',role:'group',level:1,station:'Harvested (Tree Nodes)',ingredients:['Tree Node ×1'],notes:'Harvested from glowing amber tree nodes. Used in torches, wands, building items.'},
+  {name:'Copper Bar',cat:'kiln',role:'group',level:5,station:'Forge',ingredients:['Copper Ore ×5','Charcoal ×5'],notes:'→ ×5 Copper Bars. Early metal. Springlands copper nodes (green-streaked rock outcrops).'},
+  {name:'Tin Bar',cat:'kiln',role:'group',level:10,station:'Forge',ingredients:['Tin Ore ×5','Charcoal ×5'],notes:'→ ×5 Tin Bars. Paired with Copper for Bronze alloy. Revelwood ore nodes.'},
+  {name:'Bronze Bar',cat:'kiln',role:'group',level:10,station:'Forge',ingredients:['Copper Bar ×1','Tin Bar ×1'],notes:'→ ×2 Bronze Bars. Revelwood-tier armor + Athanor alchemy station components.'},
+  {name:'Iron Bar (Smelter)',cat:'kiln',role:'group',level:8,station:'Smelter',ingredients:['Iron Ore ×10','Charcoal ×25'],notes:'→ ×10 Iron Bars (10 min). Build Smelter ASAP — far more efficient than Forge alone.'},
+  {name:'Iron Bar (Blast Furnace)',cat:'kiln',role:'group',level:15,station:'Blast Furnace',ingredients:['Iron Ore ×20','Coal ×40'],notes:'→ ×20 Iron Bars (9 min). 2× throughput vs Smelter. Uses Coal not Charcoal — free up Kiln.'},
+  {name:'Steel Bar',cat:'kiln',role:'group',level:20,station:'Blast Furnace',ingredients:['Iron Bar ×5','Coal ×5'],notes:'→ ×5 Steel Bars. BLAST FURNACE ONLY — no Smelter path. Nomad Highlands armor + T3 weapons.'},
+  {name:'Glass',cat:'kiln',role:'group',level:5,station:'Forge / Smelter',ingredients:['Sand ×3','Charcoal ×1'],notes:'→ ×1 Glass. Alchemy Lab, windows, Water Vials. Sand from riverbanks and beaches.'},
+  {name:'Nails',cat:'kiln',role:'group',level:8,station:'Forge',ingredients:['Iron Bar ×1'],notes:'→ ×4 Nails. Carpenter Workbench, Saw Mill, structural upgrades. Batch constantly.'},
+  // Station build chain — Crucible → Smelter
+  {name:'Crucible',cat:'kiln',role:'group',level:10,station:'Forge (build component)',ingredients:['Sand ×5','Clay ×3','Dirt ×3'],notes:'Build component for Smelter. Craft at Forge after Blacksmith rescued.'},
+  {name:'Smelter (build)',cat:'kiln',role:'group',level:10,station:'Build',ingredients:['Fired Brick ×50','Crucible ×1'],notes:'STATION BUILD. Unlocks proper iron ratios + is prerequisite for Blast Furnace chain.'},
+  // Station build chain — Bellows → Blast Furnace
+  {name:'Bellows',cat:'kiln',role:'group',level:15,station:'Workbench',ingredients:['Conifer Log ×10','Leather ×10','Linen ×5','Iron Bar ×1'],notes:'Build component for Blast Furnace. Craft at Workbench once Iron Bars and Linen available.'},
+  {name:'Blast Furnace (build)',cat:'kiln',role:'group',level:15,station:'Build',ingredients:['Sand ×30','Fired Brick ×20','Bellows ×1','Clay ×10','Iron Bar ×10'],notes:'STATION BUILD. Enables Steel + 2× iron throughput. End-game metal production.'},
+  // Leather / Tanning chain (Hunter NPC required)
+  {name:'Dried Fur',cat:'kiln',role:'group',level:5,station:'Drying Rack',ingredients:['Animal Hide ×1','Salt ×3'],notes:'→ ×1 Dried Fur. Preprocessing step before Leather tanning. Keep Drying Rack stocked.'},
+  {name:'Leather',cat:'kiln',role:'group',level:8,station:'Tanning Rack',ingredients:['Dried Fur ×10','Salt ×20','Ammonia Gland ×2'],notes:'→ ×10 Leather (15 min). Iron armor, weapon hilts, Bellows. Ammonia Gland from cave beetles.'},
+  {name:'Dried Meat',cat:'kiln',role:'group',level:1,station:'Drying Rack',ingredients:['Raw Meat ×2'],notes:'Preserved food and Dried Mushroom for advanced cooking.'},
+  {name:'Dried Mushroom',cat:'kiln',role:'group',level:10,station:'Drying Rack',ingredients:['Mushroom ×3'],notes:'Potion ingredient and advanced food component. Stock in dedicated chest.'},
+  // Alchemy chain (Alchemist / Balthazar required)
+  {name:'Athanor',cat:'kiln',role:'wizard',level:15,station:'Alchemist Workbench',ingredients:['Glass ×10','Bronze Bar ×10','Clay ×5'],notes:'Build component for Laboratory. Craft after rescuing Balthazar.'},
+  {name:'Scientific Instruments',cat:'kiln',role:'wizard',level:15,station:'Forge',ingredients:['Bronze Bar ×5','Glass ×3','Iron Bar ×2'],notes:'Build component for Laboratory. Craft at Forge.'},
+  {name:'Laboratory (build)',cat:'kiln',role:'wizard',level:20,station:'Build',ingredients:['Athanor ×1','Scientific Instruments ×1'],notes:'STATION BUILD. Unlocks spell crafting, advanced potions, Alchemical Base production.'},
+  {name:'Alchemical Base',cat:'kiln',role:'wizard',level:20,station:'Laboratory',ingredients:['Wood Acid ×5','Tar ×3'],notes:'Core spell and potion ingredient. Feeds all Laboratory recipes.'},
+  {name:'Nitrate',cat:'kiln',role:'wizard',level:20,station:'Laboratory',ingredients:['Bonemeal ×5','Wood Acid ×3'],notes:'Black Powder and explosives ingredient. Bones from skeletons.'},
+  {name:'Black Powder',cat:'kiln',role:'ranger',level:20,station:'Laboratory',ingredients:['Nitrate ×3','Coal Powder ×2'],notes:'Explosive arrows and grenade ingredient. Ranger utility craft.'},
+  {name:'Enshrouded Oil',cat:'kiln',role:'wizard',level:20,station:'Laboratory',ingredients:['Alchemical Base ×3','Shroud Liquid ×2'],notes:'Advanced magic + potion ingredient. Required for top-tier spells.'},
+  // Grinding Stones (Carpenter NPC required)
+  {name:'Bonemeal',cat:'kiln',role:'all',level:10,station:'Grinding Stones',ingredients:['Bones ×3'],notes:'Fertilizer + Nitrate chain. Bones from skeleton enemies throughout Springlands+.'},
+  {name:'Flour',cat:'kiln',role:'all',level:10,station:'Grinding Stones',ingredients:['Grain ×2'],notes:'Flat Bread and baked goods. Grain from Farmer Emily Fray crop plots.'},
+  {name:'Coal Powder',cat:'kiln',role:'all',level:15,station:'Grinding Stones',ingredients:['Coal ×2'],notes:'Black Powder ingredient. Coal from Revelwood and Nomad Highlands mines.'},
+  {name:'Chitin Powder',cat:'kiln',role:'all',level:15,station:'Grinding Stones',ingredients:['Chitin ×2'],notes:'Advanced armor coating. Chitin from giant insects in Revelwood+.'},
+  {name:'Silver Dust',cat:'kiln',role:'all',level:25,station:'Grinding Stones',ingredients:['Silver Ore ×2'],notes:'Late-game alchemy ingredient. Silver from Nomad Highlands mines.'},
+  // Textile chain (Farmer NPC required)
+  {name:'Thread',cat:'kiln',role:'group',level:5,station:'Spinning Wheel',ingredients:['Plant Fiber ×3'],notes:'Base textile. Used in cloth, armor padding, string. Always keep large supply.'},
+  {name:'Cloth',cat:'kiln',role:'group',level:10,station:'Loom',ingredients:['Thread ×4'],notes:'Glider, beds, cloth armor. Build Loom immediately after Spinning Wheel.'},
+  {name:'Linen',cat:'kiln',role:'group',level:10,station:'Loom',ingredients:['Flax ×3','Thread ×2'],notes:'Mid-tier fabric. Bellows build, mage armor, padding. Flax grows in Revelwood.'},
+  {name:'Silk',cat:'kiln',role:'group',level:20,station:'Loom',ingredients:['Silk Fiber ×3','Thread ×2'],notes:'Glider Upgrade, high-tier cloth armor. Silk Fiber from Revelwood forest spiders.'},
+  {name:'Padding',cat:'kiln',role:'group',level:10,station:'Workbench',ingredients:['Cloth ×3','Thread ×2'],notes:'Armor lining. Required for cloth and leather armor sets.'},
+  {name:'Wool',cat:'kiln',role:'group',level:15,station:'Animal Pen',ingredients:['Sheep (shear) ×1'],notes:'From Farmer sheep pens. Unlock after rescuing Emily Fray.'},
+  {name:'Warm Padding',cat:'kiln',role:'group',level:20,station:'Workbench',ingredients:['Wool ×3','Padding ×1'],notes:'Cold resistance armor component. Required for Albaneve Summits gear.'},
+  // Base materials — Workbench / Hand craft
+  {name:'Wood Plank',cat:'kiln',role:'group',level:1,station:'Workbench',ingredients:['Wood ×2'],notes:'Structural component used everywhere. Craft in large batches preemptively.'},
+  {name:'Rope',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×5'],notes:'Grappling Hook, ladders, Tanning Rack. Keep 20+ stocked at all times.'},
+  {name:'String',cat:'kiln',role:'group',level:1,station:'Hand Craft',ingredients:['Plant Fiber ×3'],notes:'Bow strings, lockpicks, armor padding. Used in dozens of recipes — always stock.'},
+  {name:'Water Vial',cat:'kiln',role:'group',level:1,station:'Hand Craft / Well',ingredients:['Water ×1'],notes:'Potion base. Build Well early — generates Water Vials passively.'},
+  {name:'Resin',cat:'kiln',role:'group',level:1,station:'Harvested (Tree Nodes)',ingredients:['Tree Node ×1'],notes:'Amber tree nodes. Torches, wands, building items.'},
+  // ── SPELLS ───────────────────────────────────────────────────────────
+  // Spell crafting requires Alchemist (Balthazar) + Laboratory or Alchemy Station
+  {name:'Fireball I',cat:'spell',role:'wizard',level:10,station:'Alchemy Station',ingredients:['Alchemical Base ×5','Burning Shroud Sap ×3','Fire Crystal ×2'],notes:'Starter fire AoE. Replace with Fireball II at level 20.'},
+  {name:'Fireball II',cat:'spell',role:'wizard',level:20,station:'Laboratory',ingredients:['Alchemical Base ×10','Burning Shroud Sap ×5','Fire Crystal ×5'],notes:'Larger AoE, more damage. Mid-game standard fire spell.'},
+  {name:'Fireball IV',cat:'spell',role:'wizard',level:30,station:'Laboratory',ingredients:['Alchemical Base ×15','Burning Shroud Sap ×8','Fire Crystal ×10','Enshrouded Oil ×3'],notes:'Endgame fireball. Max AoE + chain ignite on hit.'},
+  {name:'Eternal Fireball',cat:'spell',role:'wizard',level:35,station:'Laboratory',ingredients:['Fireball IV ×1','Shroud Essence ×5','Ember Shard ×10'],notes:'Continuous flame stream version. No ammo drain.'},
+  {name:'Ice Bolt I',cat:'spell',role:'wizard',level:10,station:'Alchemy Station',ingredients:['Alchemical Base ×5','Water Crystal ×3','Ice Shard ×2'],notes:'Slowing projectile. Great opener — freeze enemies before melee charges in.'},
+  {name:'Eternal Ice Bolt',cat:'spell',role:'wizard',level:30,station:'Laboratory',ingredients:['Ice Bolt I ×1','Shroud Essence ×5','Water Crystal ×8'],notes:'Continuous freeze beam. Crowd control specialist for packed shroud zones.'},
+  {name:'Chain Lightning',cat:'spell',role:'wizard',level:20,station:'Laboratory',ingredients:['Alchemical Base ×10','Lightning Stone ×5','Bronze Bar ×3'],notes:'Jumps between enemies. Best group-clear spell — scales with target count.'},
+  {name:'Eternal Chain Lightning',cat:'spell',role:'wizard',level:35,station:'Laboratory',ingredients:['Chain Lightning ×1','Shroud Essence ×5','Lightning Stone ×10'],notes:'Continuous lightning channel through multiple enemies.'},
+  {name:'Lightning Channel',cat:'spell',role:'wizard',level:25,station:'Laboratory',ingredients:['Alchemical Base ×10','Lightning Stone ×8','Iron Bar ×2'],notes:'Channeled lightning stream. High single-target DPS while stationary.'},
+  {name:'Shroud Meteor',cat:'spell',role:'wizard',level:35,station:'Laboratory',ingredients:['Alchemical Base ×15','Shroud Liquid ×10','Fire Crystal ×5','Enshrouded Oil ×5'],notes:'Massive AoE meteor. Long cooldown. Use as boss opener.'},
+  {name:'Heal Channel',cat:'spell',role:'healer',level:15,station:'Alchemy Station',ingredients:['Alchemical Base ×5','Yarrow ×5','Silver Dust ×2'],notes:'Channeled single-target heal. Primary healer tool in dungeon runs.'},
+  {name:'Chain Heal I',cat:'spell',role:'healer',level:20,station:'Laboratory',ingredients:['Alchemical Base ×8','Yarrow ×8','Silver Dust ×3'],notes:'Bounces to 2 nearby allies. Core group heal spell.'},
+  {name:'Chain Heal II',cat:'spell',role:'healer',level:30,station:'Laboratory',ingredients:['Alchemical Base ×12','Yarrow ×12','Silver Dust ×5'],notes:'Bounces 4 targets. Full 4-player group coverage.'},
+  {name:'Eternal Chain Heal',cat:'spell',role:'healer',level:35,station:'Laboratory',ingredients:['Chain Heal II ×1','Shroud Essence ×5','Yarrow ×15'],notes:'Continuous bouncing heal channel. Sustain through extended Shroud runs.'},
+  {name:'Bone Channel I',cat:'spell',role:'healer',level:15,station:'Alchemy Station',ingredients:['Alchemical Base ×5','Bones ×8','Shroud Liquid ×2'],notes:'Healer off-DPS beam. Deals damage while healing caster.'},
+  {name:'Heal Beam Channel',cat:'spell',role:'healer',level:25,station:'Laboratory',ingredients:['Alchemical Base ×10','Yarrow ×10','Silver Dust ×4'],notes:'Directed constant heal beam. High HPS for boss fights.'},
 ];
 
 // ── SYNC MAP — objective key ↔ survivor id ───────────────────────────
@@ -2159,12 +2217,13 @@ function renderCrafting() {
       return src?`<li><span class="ing-tip" data-tip="${src}">${ing}</span></li>`:`<li>${ing}</li>`;
     }).join('');
     const roleTag=`<span class="tag ${tcls(item.role)}">${tlbl(item.role)}</span>`;
+    const typeTag=item.type?`<span class="food-type-badge">${item.type}</span>`:'';
     return `<div class="craft-card">
       <div class="craft-card-header">
         <div class="craft-card-name">${item.name}</div>
         <span class="craft-level">Lv ${item.level}</span>
       </div>
-      <div class="craft-card-tags">${roleTag}</div>
+      <div class="craft-card-tags">${roleTag}${typeTag}</div>
       <ul class="craft-ingredients">${ingreds}</ul>
       <div class="craft-station">${item.station}</div>
       ${item.notes?`<div class="craft-notes">${item.notes}</div>`:''}
@@ -3595,6 +3654,30 @@ const TIPS_TRICKS = [
     'Call dungeon rooms on comms — "clear left" before others push.',
     'Loot priority: whoever\'s class needs the item gets it. Agree before dungeons.',
     'Keep one player back during boss fights for revive duty — don\'t all-in phase one.',
+  ]},
+  {id:'forge',icon:'⚒️',title:'Forge & Production Chain',tips:[
+    '<b>Priority chain:</b> Blacksmith → Charcoal Kiln → Forge → Smelter → Blast Furnace. Each unlocks the next tier.',
+    '<b>Kiln math:</b> Smelter needs Iron Ore ×10 + Charcoal ×25 per ×10 bars. Pre-load Kiln with Wood ×17 + Dirt ×3 before each smelting session.',
+    'Blast Furnace uses <b>Coal</b> (not Charcoal) — Iron Ore ×20 + Coal ×40 → ×20 bars in 9 min. Mine coal in Revelwood to free up your Kiln.',
+    '<b>Steel is Blast Furnace ONLY.</b> No Smelter path exists. Build Blast Furnace before pushing Nomad Highlands.',
+    'Blast Furnace build requires: Sand ×30 + Fired Brick ×20 + Bellows ×1 + Clay ×10 + Iron Bar ×10. Prep all materials before placing.',
+    '<b>Bellows</b> needs Leather ×10 — which needs Dried Fur ×10 + Salt ×20 + Ammonia Gland ×2. Start the tanning chain early.',
+    '<b>Fired Brick</b> at Carpenter Kiln (Wood Log ×1 + Clay ×1). Need ×50 for Smelter + ×20 for Blast Furnace = ×70 minimum.',
+    'Set up <b>three chest zones</b> near Forge: one for raw ore, one for charcoal, one for finished bars. Avoids mix-ups.',
+    '<b>Tar and Wood Acid</b> from Charcoal Kiln are gated alchemy ingredients — run a batch any time Kiln is idle.',
+    'Laboratory build needs Athanor (Glass ×10 + Bronze Bar ×10 + Clay ×5) + Scientific Instruments (Bronze Bar ×5 + Glass ×3 + Iron Bar ×2). Plan Bronze production early.',
+  ]},
+  {id:'foodbis',icon:'🍖',title:'Food Best-in-Slot Guide',tips:[
+    '<b>4 food slots active at once</b> — one per type. 4th slot requires Dessert Stomach skill. Stack types, never duplicate.',
+    '<b>Slot types:</b> meat · grain · herb · vegetable · mushroom · liquid · fruit · sweet · fish · nightplant.',
+    '<b>Barbarian BiS:</b> Beef Stew [meat] + Cooked Rice [grain] + Honey Baked Banana [sweet] + Frizzy Goat Milk [liquid].',
+    '<b>Ranger BiS:</b> Taro Root Curry [vegetable] + Strawberry Milkshake [fruit] + Cooked Rice [grain] + Frizzy Goat Milk [liquid].',
+    '<b>Wizard BiS:</b> Algae Salad [herb] + Candied Ginger [sweet] + Shadowbloom Wrap [nightplant] + Frizzy Goat Milk [liquid].',
+    '<b>Healer BiS:</b> Chicken Soup [meat] + Herbal Mountain Tea [herb] + Berry Compote [fruit] + Frizzy Goat Milk [liquid].',
+    'Food buffs <b>persist through death</b> and do not reset on respawn. Always eat before boss attempts.',
+    'Fish Dish [fish] gives +max oxygen — mandatory for Veilwater Basin deep areas and Hydrak\'Dal arena.',
+    'Shadowbloom Wrap [nightplant] gives Shroud resistance — swap in before extended Shroud runs.',
+    '<b>Emily Fray (Farmer)</b> is your food supply chain. Rescue her in Revelwood. Plant crops the moment she\'s rescued.',
   ]},
 ];
 function renderTipsPanel(){
